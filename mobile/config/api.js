@@ -1,0 +1,26 @@
+// API Base URL - change this based on environment
+export const API_URL = process.env.EXPO_PUBLIC_API_URL || 'http://localhost:5000';
+
+// API endpoints
+export const endpoints = {
+  auth: {
+    signup: `${API_URL}/api/auth/signup`,
+    login: `${API_URL}/api/auth/login`,
+    me: `${API_URL}/api/auth/me`
+  },
+  content: {
+    themes: `${API_URL}/api/content/themes`,
+    topics: (themeId) => `${API_URL}/api/content/themes/${themeId}/topics`,
+    topicDetails: (topicId) => `${API_URL}/api/content/topics/${topicId}`,
+    progress: (themeId) => `${API_URL}/api/content/themes/${themeId}/progress`
+  },
+  progress: {
+    stats: `${API_URL}/api/progress`,
+    updateTopic: (topicId) => `${API_URL}/api/progress/topics/${topicId}`,
+    getTopic: (topicId) => `${API_URL}/api/progress/topics/${topicId}`
+  },
+  agents: {
+    chat: `${API_URL}/api/agents/chat`,
+    history: `${API_URL}/api/agents/history`
+  }
+};
