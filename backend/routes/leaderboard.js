@@ -43,8 +43,9 @@ router.get('/global', async (req, res) => {
 
     res.json(leaderboard);
   } catch (error) {
-    console.error('Error fetching global leaderboard:', error);
-    res.status(500).json({ error: 'Error fetching leaderboard' });
+    console.error('Error fetching global leaderboard:', error.message);
+    console.error('Full error:', error);
+    res.status(500).json({ error: 'Error fetching leaderboard', details: error.message });
   }
 });
 

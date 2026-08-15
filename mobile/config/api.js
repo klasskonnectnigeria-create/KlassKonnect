@@ -1,5 +1,5 @@
 // API Base URL - change this based on environment
-export const API_URL = process.env.EXPO_PUBLIC_API_URL || 'http://localhost:5000';
+export const API_URL = 'https://pacific-growth-production-d82a.up.railway.app';
 
 // API endpoints
 export const endpoints = {
