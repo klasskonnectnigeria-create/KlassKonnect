@@ -8,6 +8,7 @@ import progressRoutes from './routes/progress.js';
 import agentRoutes from './routes/agents.js';
 import leaderboardRoutes from './routes/leaderboard.js';
 import gamificationRoutes from './routes/gamification.js';
+import seedRoutes from './routes/seed.js';
 
 dotenv.config();
 
@@ -30,6 +31,7 @@ app.use('/api/progress', progressRoutes);
 app.use('/api/agents', agentRoutes);
 app.use('/api/leaderboard', leaderboardRoutes);
 app.use('/api/gamification', gamificationRoutes);
+app.use('/api', seedRoutes);
 
 // Health check
 app.get('/api/health', (req, res) => {
