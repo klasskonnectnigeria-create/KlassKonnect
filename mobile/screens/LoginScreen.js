@@ -1,48 +1,79 @@
-import React, { useState } from 'react';
-import { View, StyleSheet, ScrollView, Text, TouchableOpacity } from 'react-native';
+import React, { useState, useEffect, useRef } from 'react';
+import { useRouter, Link } from 'expo-router';
+import {
+  View,
+  StyleSheet,
+  ScrollView,
+  Text,
+  TouchableOpacity,
+  Pressable,
+  KeyboardAvoidingView,
+  Platform
+} from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { useAuthStore } from '../store/authStore';
 import { Input } from '../components/Input';
 import { Button } from '../components/Button';
 import { colors, spacing, typography, borderRadius } from '../constants/colors';
 import { API_URL } from '../config/api';
 
-export function LoginScreen({ navigation }) {
+export function LoginScreen({ navigation, onGoToSignup }) {
+  const router = useRouter();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const isMountedRef = useRef(true);
 
   const { login } = useAuthStore();
 
+
+  useEffect(() => {
+    return () => {
+      isMountedRef.current = false;
+    };
+  }, []);
+
   const handleLogin = async () => {
     if (!email || !password) {
-      setError('Please fill in all fields');
+      if (isMountedRef.current) setError('Please fill in all fields');
       return;
     }
 
-    setLoading(true);
-    setError('');
+    if (isMountedRef.current) setLoading(true);
+    if (isMountedRef.current) setError('');
 
     const success = await login(email, password, API_URL);
 
-    if (success) {
-      // Navigation handled by root layout based on auth state
-    } else {
-      setError('Login failed. Please check your credentials.');
+    if (isMountedRef.current) {
+      if (success) {
+        console.log('Login successful - navigating to Home');
+        router.replace('/(app)/home');
+      } else {
+        setError('Login failed. Please check your credentials.');
+      }
+      setLoading(false);
     }
-
-    setLoading(false);
   };
 
   return (
-    <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
+    <SafeAreaView style={styles.safeArea} edges={['top', 'bottom']}>
+      <KeyboardAvoidingView
+        style={styles.keyboardView}
+        behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+      >
+        <ScrollView
+          style={styles.container}
+          contentContainerStyle={styles.contentContainer}
+          keyboardShouldPersistTaps="handled"
+        >
       {/* Header */}
       <View style={styles.header}>
         <Text style={[styles.title, typography.h1]}>
-          NERDC AI Tutor
+          KLASSKONNECT
         </Text>
         <Text style={[styles.subtitle, typography.body1]}>
-          Your Personal Math Guide
+          Your Personal AI Tutor
         </Text>
       </View>
 
@@ -80,24 +111,47 @@ export function LoginScreen({ navigation }) {
           loading={loading}
           style={styles.loginButton}
         />
-      </View>
 
-      {/* Sign Up Link */}
-      <View style={styles.footer}>
-        <Text style={[styles.footerText, typography.body2]}>
-          Don't have an account?{' '}
-        </Text>
-        <TouchableOpacity onPress={() => navigation.navigate('signup')}>
-          <Text style={[styles.signUpLink, typography.body2]}>
-            Sign Up
+        <TouchableOpacity
+          onPress={() => router.push('/(auth)/forgot-password')}
+          style={styles.forgotPasswordButton}
+          activeOpacity={0.7}
+        >
+          <Text style={[styles.forgotPasswordText, typography.body2]}>
+            Forgot Password?
           </Text>
         </TouchableOpacity>
       </View>
-    </ScrollView>
+
+      {/* Sign Up Link */}
+      <Pressable
+        style={({ pressed }) => [
+          styles.footer,
+          pressed && { opacity: 0.7 }
+        ]}
+        onPress={onGoToSignup}
+      >
+        <Text style={[styles.footerText, typography.body2]}>
+          Don't have an account?{' '}
+        </Text>
+        <Text style={[styles.signUpLink, typography.body2]}>
+          Sign Up
+        </Text>
+      </Pressable>
+        </ScrollView>
+      </KeyboardAvoidingView>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
+  safeArea: {
+    flex: 1,
+    backgroundColor: colors.background
+  },
+  keyboardView: {
+    flex: 1
+  },
   container: {
     flex: 1,
     backgroundColor: colors.background
@@ -134,6 +188,17 @@ const styles = StyleSheet.create({
   loginButton: {
     marginTop: spacing.md
   },
+  forgotPasswordButton: {
+    alignItems: 'center',
+    marginTop: spacing.md,
+    paddingVertical: spacing.sm
+  },
+
+  forgotPasswordText: {
+    color: colors.primary,
+    fontWeight: '600'
+  },
+
   footer: {
     flexDirection: 'row',
     justifyContent: 'center',

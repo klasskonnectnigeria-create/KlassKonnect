@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { View, StyleSheet, ScrollView, Text, TouchableOpacity, ActivityIndicator } from 'react-native';
+import { View, StyleSheet, ScrollView, Text, TouchableOpacity, ActivityIndicator, Alert } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { useRouter } from 'expo-router';
 import { useAuthStore } from '../store/authStore';
 import { useContentStore } from '../store/contentStore';
 import { useGamificationStore } from '../store/gamificationStore';
@@ -11,7 +13,8 @@ import { API_URL } from '../config/api';
 import { gamificationService } from '../services/gamificationService';
 import { gamificationSyncService } from '../services/gamificationSyncService';
 
-export function HomeScreen({ navigation }) {
+export function HomeScreen({ onLogout }) {
+  const router = useRouter();
   const { student, token, logout } = useAuthStore();
   const { themes, setThemes, fetchThemes } = useContentStore();
   const { loadGamificationData, totalPoints, level, currentStreak, longestStreak, badges } = useGamificationStore();
@@ -19,44 +22,94 @@ export function HomeScreen({ navigation }) {
   const [stats, setStats] = useState({ completedTopics: 0, totalTopics: 0, avgUnderstanding: 0 });
 
   useEffect(() => {
-    loadData();
-  }, []);
+    let mounted = true;
+    let abortController = new AbortController();
 
-  const loadData = async () => {
-    setLoading(true);
-    try {
-      // Fetch themes
-      await fetchThemes(API_URL, token);
+    const load = async () => {
+      try {
+        if (!token || !student?.id) {
+          if (mounted) {
+            setLoading(false);
+          }
+          return;
+        }
 
-      // Fetch progress stats
-      const response = await fetch(`${API_URL}/api/progress`, {
-        headers: { Authorization: `Bearer ${token}` }
-      });
-      const data = await response.json();
-      setStats(data);
+        if (mounted) {
+          setLoading(true);
+        }
 
-      // Initialize and load gamification data
-      if (student?.id) {
+        // Fetch themes
+        await fetchThemes(API_URL, token);
+
+        if (!mounted) return;
+
+        // Fetch progress stats
+        const response = await fetch(`${API_URL}/api/progress`, {
+          headers: { Authorization: `Bearer ${token}` },
+          signal: abortController.signal
+        });
+
+        if (!response.ok) {
+          throw new Error(`Progress request failed: ${response.status}`);
+        }
+
+        const data = await response.json();
+
+        if (!mounted) return;
+        setStats(data);
+
+        // Initialize and load gamification data
         await gamificationService.initializeForStudent(student.id);
+
+        if (!mounted) return;
+
         await loadGamificationData(student.id);
+
+        if (!mounted) return;
 
         // Sync gamification stats to backend
         try {
           await gamificationSyncService.syncToBackend(student.id, token);
         } catch (syncError) {
           console.warn('Failed to sync gamification stats:', syncError);
-          // Don't fail the whole load if sync fails
+        }
+      } catch (error) {
+        if (mounted && error.name !== 'AbortError') {
+          console.error('Error loading data:', error);
+        }
+      } finally {
+        if (mounted) {
+          setLoading(false);
+        }
+      }
+    };
+
+    load();
+
+    return () => {
+      mounted = false;
+      abortController.abort();
+    };
+  }, [token, student?.id, fetchThemes, loadGamificationData]);
+
+  const handleLogout = async () => {
+    try {
+      setLoading(true);
+
+      const success = await logout();
+
+      if (success) {
+        if (onLogout) {
+          onLogout();
+        } else {
+          router.replace('/(auth)/login');
         }
       }
     } catch (error) {
-      console.error('Error loading data:', error);
+      console.error('Logout error:', error);
     } finally {
       setLoading(false);
     }
-  };
-
-  const handleLogout = async () => {
-    await logout();
   };
 
   if (loading) {
@@ -68,7 +121,8 @@ export function HomeScreen({ navigation }) {
   }
 
   return (
-    <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
+    <SafeAreaView style={styles.safeArea} edges={['top', 'bottom']}>
+      <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
       {/* Header */}
       <View style={styles.header}>
         <View style={styles.headerContent}>
@@ -80,10 +134,10 @@ export function HomeScreen({ navigation }) {
           </Text>
         </View>
         <View style={styles.headerButtons}>
-          <TouchableOpacity onPress={() => navigation.navigate('leaderboard')} style={styles.leaderboardButton}>
+          <TouchableOpacity activeOpacity={0.7} onPress={() => router.push('/(app)/leaderboard')} style={styles.leaderboardButton}>
             <Text style={[styles.buttonText, typography.body2]}>🏆</Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={handleLogout} style={styles.logoutButton}>
+          <TouchableOpacity activeOpacity={0.7} onPress={handleLogout} style={styles.logoutButton}>
             <Text style={[styles.logoutText, typography.body2]}>Logout</Text>
           </TouchableOpacity>
         </View>
@@ -134,7 +188,7 @@ export function HomeScreen({ navigation }) {
         <Card
           key={theme.id}
           variant="elevated"
-          onPress={() => navigation.navigate('themes', { themeId: theme.id, themeName: theme.name })}
+          onPress={() => router.push({ pathname: '/(app)/themes', params: { themeId: theme.id, themeName: theme.name } })}
           style={styles.themeCard}
         >
           <Text style={[styles.themeName, typography.subtitle2]}>
@@ -158,11 +212,16 @@ export function HomeScreen({ navigation }) {
           Select a topic above to start learning with your personal AI tutor
         </Text>
       </Card>
-    </ScrollView>
+      </ScrollView>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
+  safeArea: {
+    flex: 1,
+    backgroundColor: colors.background
+  },
   container: {
     flex: 1,
     backgroundColor: colors.background
@@ -177,46 +236,57 @@ const styles = StyleSheet.create({
   },
   header: {
     flexDirection: 'row',
+    alignItems: 'flex-start',
     justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: spacing.lg
+    marginBottom: spacing.xl,
+    paddingTop: spacing.sm,
+    gap: spacing.md
   },
   headerContent: {
-    flex: 1
+    flex: 1,
+    minWidth: 0,
+    paddingRight: spacing.sm
   },
   greeting: {
     color: colors.primary,
     fontWeight: 'bold',
-    marginBottom: spacing.xs
+    marginBottom: spacing.xs,
+    fontSize: 30,
+    lineHeight: 38
   },
   headerSubtitle: {
-    color: colors.text.secondary
+    color: colors.text.secondary,
+    fontSize: 18,
+    lineHeight: 24
   },
   headerButtons: {
     flexDirection: 'row',
+    alignItems: 'center',
     gap: spacing.sm,
-    alignItems: 'center'
+    flexShrink: 0
   },
   leaderboardButton: {
-    paddingHorizontal: spacing.sm,
-    paddingVertical: spacing.sm,
-    borderRadius: 8,
+    width: 58,
+    height: 58,
+    borderRadius: 14,
     backgroundColor: colors.surface,
     borderWidth: 1,
     borderColor: colors.border,
-    minWidth: 40,
-    alignItems: 'center'
+    alignItems: 'center',
+    justifyContent: 'center'
   },
   buttonText: {
-    fontSize: 18
+    fontSize: 25
   },
   logoutButton: {
+    height: 58,
     paddingHorizontal: spacing.md,
-    paddingVertical: spacing.sm,
-    borderRadius: 8,
+    borderRadius: 14,
     backgroundColor: colors.surface,
     borderWidth: 1,
-    borderColor: colors.border
+    borderColor: colors.border,
+    alignItems: 'center',
+    justifyContent: 'center'
   },
   logoutText: {
     color: colors.text.primary,

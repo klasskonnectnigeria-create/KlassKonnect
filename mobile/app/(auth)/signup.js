@@ -1,5 +1,11 @@
 import { SignupScreen } from '../../screens/SignupScreen';
+import { router } from 'expo-router';
 
 export default function SignupPage() {
-  return <SignupScreen navigation={require('expo-router').useNavigation()} />;
+  return (
+    <SignupScreen
+      onSignupSuccess={() => router.replace('/(app)/home')}
+      onLogin={() => router.replace('/(auth)/login')}
+    />
+  );
 }

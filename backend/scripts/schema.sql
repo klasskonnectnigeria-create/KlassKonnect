@@ -6,7 +6,9 @@ CREATE TABLE IF NOT EXISTS students (
   full_name VARCHAR(255) NOT NULL,
   grade VARCHAR(50) NOT NULL,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  password_reset_token TEXT,
+  password_reset_expires TIMESTAMP
 );
 
 -- Themes (e.g., NUMBER NUMERATION, BASIC OPERATIONS)

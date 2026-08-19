@@ -116,33 +116,30 @@ class NotificationService {
   // Schedule daily reminder at specific time
   async scheduleDailyReminder(hour = 16, minute = 0) {
     try {
-      // Cancel any existing daily reminders
+      // Cancel any existing scheduled notifications
       await Notifications.cancelAllScheduledNotificationsAsync();
 
-      // Schedule for every day at specified time
-      for (let i = 0; i < 365; i++) {
-        const date = new Date();
-        date.setDate(date.getDate() + i);
-        date.setHours(hour, minute, 0);
-
-        await Notifications.scheduleNotificationAsync({
-          content: {
-            title: '📚 Time to study!',
-            body: 'Ready to earn points with KlassKonnect?',
-            sound: true,
-            badge: 1,
-            data: { type: 'reminder', priority: 'high' },
-          },
-          trigger: {
-            hour,
-            minute,
-            repeats: true,
-          },
-        });
-      }
+      // Schedule one notification that repeats every day
+      await Notifications.scheduleNotificationAsync({
+        content: {
+          title: '📚 Time to study!',
+          body: 'Ready to earn points with KlassKonnect?',
+          sound: true,
+          badge: 1,
+          data: { type: 'reminder', priority: 'high' },
+        },
+        trigger: {
+          type: Notifications.SchedulableTriggerInputTypes.DAILY,
+          hour,
+          minute,
+        },
+      });
 
       console.log(`Daily reminder scheduled for ${hour}:${minute}`);
-      await AsyncStorage.setItem('dailyReminderTime', `${hour}:${minute}`);
+      await AsyncStorage.setItem(
+        'dailyReminderTime',
+        `${hour}:${minute}`
+      );
     } catch (error) {
       console.error('Error scheduling daily reminder:', error);
     }

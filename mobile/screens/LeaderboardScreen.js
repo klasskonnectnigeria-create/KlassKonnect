@@ -8,8 +8,13 @@ import { useLeaderboardStore } from '../store/leaderboardStore';
 import { LeaderboardEntry } from '../components/LeaderboardEntry';
 import { Card } from '../components/Card';
 import { colors, spacing, typography, borderRadius } from '../constants/colors';
+import { useRouter } from 'expo-router';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 export function LeaderboardScreen() {
+  const router = useRouter();
+  console.log('🔎 LEADERBOARD ROUTE:', router);
+
   const { student, token } = useAuthStore();
   const {
     globalLeaderboard,
@@ -89,9 +94,21 @@ export function LeaderboardScreen() {
   return (
     <View style={styles.container}>
       {/* Header */}
-      <View style={styles.header}>
+      <SafeAreaView edges={['top']} style={styles.headerSafeArea}>
+        <View style={styles.header}>
+        <TouchableOpacity
+          onPress={() => router.replace('/(app)/home')}
+          style={styles.backButton}
+          activeOpacity={0.7}
+        >
+          <Text style={styles.backButtonText}>‹</Text>
+        </TouchableOpacity>
+
         <Text style={[styles.title, typography.h2]}>🏆 Leaderboard</Text>
-      </View>
+
+        <View style={styles.headerSpacer} />
+        </View>
+      </SafeAreaView>
 
       {/* Your Rank Card */}
       {studentRank && (
@@ -209,16 +226,41 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.background
   },
+  headerSafeArea: {
+    backgroundColor: colors.surface
+  },
+
   header: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
     paddingHorizontal: spacing.md,
-    paddingVertical: spacing.md,
+    paddingVertical: spacing.sm,
     backgroundColor: colors.surface,
     borderBottomWidth: 1,
     borderBottomColor: colors.border
   },
+  backButton: {
+    width: 44,
+    height: 44,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 22
+  },
+  backButtonText: {
+    fontSize: 36,
+    lineHeight: 40,
+    color: colors.primary,
+    fontWeight: '300'
+  },
   title: {
     color: colors.primary,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    flex: 1,
+    textAlign: 'center'
+  },
+  headerSpacer: {
+    width: 44
   },
   rankCard: {
     marginHorizontal: spacing.md,

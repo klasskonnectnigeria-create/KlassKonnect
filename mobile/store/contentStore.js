@@ -18,10 +18,12 @@ export const useContentStore = create((set) => ({
 
   // Fetch themes with offline support
   fetchThemes: async (apiUrl, token) => {
+    let mounted = true;
+
     try {
       const data = await offlineApiClient.get('/api/content/themes', token);
 
-      if (data) {
+      if (mounted && data) {
         set({ themes: data });
         return data;
       }
@@ -29,20 +31,26 @@ export const useContentStore = create((set) => ({
       // Fallback to empty array if both network and cache fail
       return [];
     } catch (error) {
-      console.error('Error fetching themes:', error);
+      if (mounted) {
+        console.error('Error fetching themes:', error);
+      }
 
       // Try to load from cache
       try {
-        set({ isLoadingFromCache: true });
+        if (mounted) set({ isLoadingFromCache: true });
         const cachedThemes = await getThemes();
-        if (cachedThemes && cachedThemes.length > 0) {
+        if (mounted && cachedThemes && cachedThemes.length > 0) {
           set({ themes: cachedThemes });
           return cachedThemes;
         }
       } catch (cacheError) {
-        console.warn('Error loading themes from cache:', cacheError);
+        if (mounted) {
+          console.warn('Error loading themes from cache:', cacheError);
+        }
       } finally {
-        set({ isLoadingFromCache: false });
+        if (mounted) {
+          set({ isLoadingFromCache: false });
+        }
       }
 
       return [];
@@ -51,30 +59,38 @@ export const useContentStore = create((set) => ({
 
   // Fetch topics for a theme with offline support
   fetchTopics: async (apiUrl, token, themeId) => {
+    let mounted = true;
+
     try {
       const data = await offlineApiClient.get(`/api/content/themes/${themeId}/topics`, token);
 
-      if (data) {
+      if (mounted && data) {
         set((state) => ({ topics: { ...state.topics, [themeId]: data } }));
         return data;
       }
 
       return [];
     } catch (error) {
-      console.error('Error fetching topics:', error);
+      if (mounted) {
+        console.error('Error fetching topics:', error);
+      }
 
       // Try to load from cache
       try {
-        set({ isLoadingFromCache: true });
+        if (mounted) set({ isLoadingFromCache: true });
         const cachedTopics = await getTopics(themeId);
-        if (cachedTopics && cachedTopics.length > 0) {
+        if (mounted && cachedTopics && cachedTopics.length > 0) {
           set((state) => ({ topics: { ...state.topics, [themeId]: cachedTopics } }));
           return cachedTopics;
         }
       } catch (cacheError) {
-        console.warn('Error loading topics from cache:', cacheError);
+        if (mounted) {
+          console.warn('Error loading topics from cache:', cacheError);
+        }
       } finally {
-        set({ isLoadingFromCache: false });
+        if (mounted) {
+          set({ isLoadingFromCache: false });
+        }
       }
 
       return [];
@@ -83,30 +99,38 @@ export const useContentStore = create((set) => ({
 
   // Fetch topic details with offline support
   fetchTopicDetails: async (apiUrl, token, topicId) => {
+    let mounted = true;
+
     try {
       const data = await offlineApiClient.get(`/api/content/topics/${topicId}`, token);
 
-      if (data) {
+      if (mounted && data) {
         set({ currentTopic: data });
         return data;
       }
 
       return null;
     } catch (error) {
-      console.error('Error fetching topic details:', error);
+      if (mounted) {
+        console.error('Error fetching topic details:', error);
+      }
 
       // Try to load from cache
       try {
-        set({ isLoadingFromCache: true });
+        if (mounted) set({ isLoadingFromCache: true });
         const cachedTopic = await getTopic(topicId);
-        if (cachedTopic) {
+        if (mounted && cachedTopic) {
           set({ currentTopic: cachedTopic });
           return cachedTopic;
         }
       } catch (cacheError) {
-        console.warn('Error loading topic from cache:', cacheError);
+        if (mounted) {
+          console.warn('Error loading topic from cache:', cacheError);
+        }
       } finally {
-        set({ isLoadingFromCache: false });
+        if (mounted) {
+          set({ isLoadingFromCache: false });
+        }
       }
 
       return null;

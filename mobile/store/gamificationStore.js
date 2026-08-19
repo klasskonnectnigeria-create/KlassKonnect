@@ -26,12 +26,14 @@ export const useGamificationStore = create((set, get) => ({
 
   // Load gamification data
   loadGamificationData: async (studentId) => {
+    let mounted = true;
+
     try {
-      set({ isLoading: true });
+      if (mounted) set({ isLoading: true });
 
       // Load stats
       const stats = await getGamificationStats(studentId);
-      if (stats) {
+      if (mounted && stats) {
         set({
           totalPoints: stats.total_points || 0,
           level: stats.level || 1,
@@ -42,18 +44,33 @@ export const useGamificationStore = create((set, get) => ({
 
       // Load badges
       const badges = await getBadges(studentId);
-      set({ badges });
+      if (mounted) {
+        set({ badges });
+      }
 
       // Load daily activity
       const dailyActivity = await getDailyActivityLog(studentId, 30);
-      set({ dailyActivity });
+      if (mounted) {
+        set({ dailyActivity });
+      }
 
-      console.log(`Loaded gamification data for student ${studentId}`);
+      if (mounted) {
+        console.log(`Loaded gamification data for student ${studentId}`);
+      }
     } catch (error) {
-      console.error('Error loading gamification data:', error);
+      if (mounted) {
+        console.error('Error loading gamification data:', error);
+      }
     } finally {
-      set({ isLoading: false });
+      if (mounted) {
+        set({ isLoading: false });
+      }
     }
+
+    // Cleanup - prevent future state updates
+    return () => {
+      mounted = false;
+    };
   },
 
   // Update after earning points

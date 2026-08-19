@@ -25,42 +25,57 @@ export const useNotificationStore = create((set, get) => ({
 
   // Initialize notifications
   initializeNotifications: async () => {
+    let mounted = true;
+
     try {
-      set({ isLoading: true });
+      if (mounted) set({ isLoading: true });
 
       // Register for push notifications
       const token = await notificationService.registerForPushNotifications();
-      if (token) {
+      if (mounted && token) {
         set({ expoPushToken: token });
       }
 
       // Load saved settings
       const settings = await notificationService.getNotificationSettings();
-      set({
-        dailyReminders: settings.dailyReminders,
-        reminderTime: settings.reminderTime,
-        streakNotifications: settings.streakNotifications,
-        achievementNotifications: settings.achievementNotifications,
-        pointsNotifications: settings.pointsNotifications,
-        quietHoursStart: settings.quietHoursStart,
-        quietHoursEnd: settings.quietHoursEnd,
-      });
+      if (mounted) {
+        set({
+          dailyReminders: settings.dailyReminders,
+          reminderTime: settings.reminderTime,
+          streakNotifications: settings.streakNotifications,
+          achievementNotifications: settings.achievementNotifications,
+          pointsNotifications: settings.pointsNotifications,
+          quietHoursStart: settings.quietHoursStart,
+          quietHoursEnd: settings.quietHoursEnd,
+        });
+      }
 
       // Start listening for notifications
       notificationService.startListening();
 
       // Schedule daily reminders if enabled
-      if (settings.dailyReminders) {
+      if (mounted && settings.dailyReminders) {
         const [hours, minutes] = settings.reminderTime.split(':');
         await notificationService.scheduleDailyReminder(parseInt(hours), parseInt(minutes));
       }
 
-      console.log('Notifications initialized');
+      if (mounted) {
+        console.log('Notifications initialized');
+      }
     } catch (error) {
-      console.error('Error initializing notifications:', error);
+      if (mounted) {
+        console.error('Error initializing notifications:', error);
+      }
     } finally {
-      set({ isLoading: false });
+      if (mounted) {
+        set({ isLoading: false });
+      }
     }
+
+    // Return cleanup function
+    return () => {
+      mounted = false;
+    };
   },
 
   // Update settings and save

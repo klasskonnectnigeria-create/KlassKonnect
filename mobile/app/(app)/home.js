@@ -1,5 +1,10 @@
 import { HomeScreen } from '../../screens/HomeScreen';
+import { router } from 'expo-router';
 
 export default function HomePage() {
-  return <HomeScreen navigation={require('expo-router').useNavigation()} />;
+  return (
+    <HomeScreen
+      onLogout={() => router.replace('/(auth)/login')}
+    />
+  );
 }

@@ -1,39 +1,30 @@
 {
   "expo": {
-    "name": "NERDC AI Tutor",
-    "slug": "nerdc-ai-tutor",
+    "name": "KlassKonnect",
+    "slug": "klasskonnect",
     "version": "0.1.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
-    "splash": {
-      "image": "./assets/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
-    },
     "assetBundlePatterns": [
       "**/*"
     ],
     "ios": {
-      "supportsTabletMode": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.anonymous.klasskonnect"
     },
     "android": {
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
-      }
+      "package": "com.anonymous.klasskonnect"
     },
-    "web": {
-      "favicon": "./assets/favicon.png"
-    },
+    "web": {},
     "plugins": [
       [
         "expo-router",
         {
-          "origin": false,
-          "asyncRoutes": true
+          "origin": false
         }
-      ]
-    ]
+      ],
+      "expo-notifications"
+    ],
+    "scheme": "klasskonnect"
   }
 }

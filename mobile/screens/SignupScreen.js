@@ -8,7 +8,7 @@ import { API_URL } from '../config/api';
 
 const GRADES = ['Primary 4', 'Primary 5', 'Primary 6', 'JSS 1', 'JSS 2', 'JSS 3', 'SS 1', 'SS 2', 'SS 3'];
 
-export function SignupScreen({ navigation }) {
+export function SignupScreen({ onSignupSuccess, onLogin }) {
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -43,7 +43,8 @@ export function SignupScreen({ navigation }) {
     const success = await signup(email, password, fullName, grade, API_URL);
 
     if (success) {
-      // Navigation handled by root layout based on auth state
+      onSignupSuccess?.();
+      return;
     } else {
       setError('Signup failed. Email may already be in use.');
     }
@@ -59,7 +60,7 @@ export function SignupScreen({ navigation }) {
           Create Account
         </Text>
         <Text style={[styles.subtitle, typography.body2]}>
-          Join NERDC AI Tutor today
+          Join KlassKonnect today
         </Text>
       </View>
 
@@ -82,14 +83,30 @@ export function SignupScreen({ navigation }) {
           style={styles.input}
         />
 
-        <Input
-          label="Grade"
-          placeholder={grade || 'Select your grade'}
-          value={grade}
-          editable={false}
-          style={[styles.input, styles.gradeInput]}
-          onPress={() => setShowGradeDropdown(!showGradeDropdown)}
-        />
+        <View style={styles.gradeContainer}>
+          <Text style={[styles.gradeLabel, typography.subtitle2]}>
+            Grade
+          </Text>
+
+          <TouchableOpacity
+            activeOpacity={0.7}
+            style={styles.gradeSelector}
+            onPress={() => setShowGradeDropdown(!showGradeDropdown)}
+          >
+            <Text
+              style={[
+                typography.body1,
+                grade ? styles.gradeText : styles.gradePlaceholder
+              ]}
+            >
+              {grade || 'Select your grade'}
+            </Text>
+
+            <Text style={styles.chevron}>
+              {showGradeDropdown ? '▲' : '▼'}
+            </Text>
+          </TouchableOpacity>
+        </View>
 
         {showGradeDropdown && (
           <View style={styles.dropdown}>
@@ -147,7 +164,7 @@ export function SignupScreen({ navigation }) {
         <Text style={[styles.footerText, typography.body2]}>
           Already have an account?{' '}
         </Text>
-        <TouchableOpacity onPress={() => navigation.navigate('login')}>
+        <TouchableOpacity onPress={onLogin}>
           <Text style={[styles.loginLink, typography.body2]}>
             Login
           </Text>
@@ -186,8 +203,35 @@ const styles = StyleSheet.create({
   input: {
     marginBottom: spacing.lg
   },
-  gradeInput: {
-    cursor: 'pointer'
+  gradeContainer: {
+    marginBottom: spacing.lg
+  },
+  gradeLabel: {
+    marginBottom: spacing.xs,
+    color: colors.text.primary,
+    fontWeight: '500'
+  },
+  gradeSelector: {
+    minHeight: 48,
+    borderWidth: 1,
+    borderColor: colors.border,
+    borderRadius: 8,
+    paddingHorizontal: spacing.md,
+    paddingVertical: spacing.sm,
+    backgroundColor: colors.background,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between'
+  },
+  gradeText: {
+    color: colors.text.primary
+  },
+  gradePlaceholder: {
+    color: colors.text.light
+  },
+  chevron: {
+    color: colors.text.secondary,
+    fontSize: 12
   },
   dropdown: {
     backgroundColor: colors.surface,

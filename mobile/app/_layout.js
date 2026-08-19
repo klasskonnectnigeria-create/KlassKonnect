@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
-import { Stack } from 'expo-router';
+import { Slot } from 'expo-router';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { useAuthStore } from '../store/authStore';
 import { useOfflineStore } from '../store/offlineStore';
 import { useNotificationStore } from '../store/notificationStore';
@@ -16,76 +17,74 @@ export default function RootLayout() {
   const { initializeNotifications, cleanup } = useNotificationStore();
 
   useEffect(() => {
+    let mounted = true;
+
     const initializeApp = async () => {
       try {
-        // Initialize database
         await initializeDatabase();
         console.log('Database initialized');
 
-        // Start connection monitoring
         connectionManager.startMonitoring();
         initializeConnectionListener();
         console.log('Connection monitoring started');
 
-        // Initialize notifications
         await initializeNotifications();
         console.log('Notifications initialized');
 
-        // Restore auth session
         await restoreSession();
       } catch (error) {
         console.error('Error initializing app:', error);
       } finally {
-        SplashScreen.hideAsync();
+        if (mounted) {
+          await SplashScreen.hideAsync();
+        }
       }
     };
 
     initializeApp();
 
-    // Cleanup on app close
     return () => {
-      cleanup();
+      mounted = false;
+
+      try {
+        cleanup();
+      } catch (error) {
+        console.warn('Notification cleanup error:', error);
+      }
     };
   }, []);
 
-  // Set up auto-sync when user is authenticated and connection is restored
   useEffect(() => {
-    if (token && student?.id) {
-      connectionManager.setSyncCallback(async () => {
-        await syncManager.checkAndSyncIfNeeded(token, student.id);
-      });
-
-      // Listen for connection restore and trigger sync
-      connectionManager.addEventListener('onOnline', async () => {
-        await syncManager.checkAndSyncIfNeeded(token, student.id);
-      });
-
-      console.log('Auto-sync configured for student', student.id);
+    if (!token || !student?.id) {
+      return;
     }
-  }, [token, student]);
+
+    const sync = async () => {
+      try {
+        await syncManager.checkAndSyncIfNeeded(token, student.id);
+      } catch (error) {
+        console.warn('Sync error:', error);
+      }
+    };
+
+    connectionManager.setSyncCallback(sync);
+    connectionManager.addEventListener('onOnline', sync);
+
+    console.log('Auto-sync configured for student', student.id);
+
+    return () => {
+      // Clear the sync callback when the authenticated session changes.
+      connectionManager.setSyncCallback(null);
+    };
+  }, [token, student?.id]);
 
   if (isLoading) {
     return null;
   }
 
   return (
-    <Stack
-      screenOptions={{
-        headerShown: false,
-        animationEnabled: true
-      }}
-    >
-      {token ? (
-        // Authenticated stack
-        <>
-          <Stack.Screen name="(app)" />
-        </>
-      ) : (
-        // Auth stack
-        <>
-          <Stack.Screen name="(auth)" />
-        </>
-      )}
-    </Stack>
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <Slot />
+    </GestureHandlerRootView>
   );
 }

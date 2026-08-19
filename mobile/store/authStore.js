@@ -74,9 +74,16 @@ export const useAuthStore = create((set, get) => ({
         body: JSON.stringify({ email, password, fullName, grade })
       });
 
-      if (!response.ok) throw new Error('Signup failed');
+      const responseText = await response.text();
 
-      const data = await response.json();
+      console.log('Signup API status:', response.status);
+      console.log('Signup API response:', responseText);
+
+      if (!response.ok) {
+        throw new Error(`Signup failed (${response.status}): ${responseText}`);
+      }
+
+      const data = JSON.parse(responseText);
       await AsyncStorage.setItem('authToken', data.token);
       await AsyncStorage.setItem('student', JSON.stringify(data.student));
 
@@ -97,13 +104,19 @@ export const useAuthStore = create((set, get) => ({
   // Logout
   logout: async () => {
     try {
-      await AsyncStorage.removeItem('authToken');
-      await AsyncStorage.removeItem('student');
+      // Clear the in-memory session immediately.
       set({ token: null, student: null });
+
+      // Remove persisted session in the background.
+      await AsyncStorage.multiRemove(['authToken', 'student']);
+
+      console.log('Logout completed successfully');
       return true;
     } catch (error) {
-      console.error('Logout error:', error);
-      return false;
+      console.error('Logout storage cleanup error:', error);
+
+      // The in-memory session is already cleared, so logout still succeeds.
+      return true;
     }
   }
 }));
