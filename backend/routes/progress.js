@@ -19,9 +19,9 @@ router.get('/', verifyToken, async (req, res) => {
 
     const stats = result.rows[0];
     res.json({
-      totalTopics: parseInt(stats.total_topics),
+      totalTopics: parseInt(stats.total_topics) || 0,
       completedTopics: parseInt(stats.completed_topics) || 0,
-      averageUnderstandingLevel: parseFloat(stats.avg_understanding_level) || 0
+      avgUnderstanding: parseFloat(stats.avg_understanding_level) || 0
     });
   } catch (error) {
     console.error('Error fetching progress stats:', error);

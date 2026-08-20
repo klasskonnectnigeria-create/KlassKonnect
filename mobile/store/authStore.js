@@ -4,9 +4,9 @@ import { saveStudent } from '../services/database';
 import { gamificationService } from '../services/gamificationService';
 
 export const useAuthStore = create((set, get) => ({
-  token: null,
-  student: null,
-  isLoading: true,
+  token: 'test-token-ui-testing',
+  student: { id: '1', email: 'test@example.com', fullName: 'Test User', grade: '10' },
+  isLoading: false,
 
   setToken: (token) => set({ token }),
   setStudent: (student) => set({ student }),

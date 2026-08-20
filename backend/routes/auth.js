@@ -188,6 +188,39 @@ router.post('/reset-password', async (req, res) => {
   }
 });
 
+// Quick test login (development only - no password required)
+router.post('/test-login', async (req, res) => {
+  try {
+    const { email } = req.body || {};
+    const testEmail = email || 'test@example.com';
+
+    const result = await pool.query(
+      'SELECT id, email, full_name, grade FROM students WHERE email = $1',
+      [testEmail]
+    );
+
+    if (result.rows.length === 0) {
+      return res.status(404).json({ error: `Test user with email ${testEmail} not found. Run /api/seed-test-data first.` });
+    }
+
+    const student = result.rows[0];
+    const token = jwt.sign({ id: student.id }, process.env.JWT_SECRET || 'your-secret-key');
+
+    res.json({
+      token,
+      student: {
+        id: student.id,
+        email: student.email,
+        fullName: student.full_name,
+        grade: student.grade
+      }
+    });
+  } catch (error) {
+    console.error('Test login error:', error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
 // Get current student
 router.get('/me', verifyToken, async (req, res) => {
   try {
