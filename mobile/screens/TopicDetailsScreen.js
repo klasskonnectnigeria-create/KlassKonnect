@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import {
-  View, StyleSheet, ScrollView, Text, TouchableOpacity, ActivityIndicator,
+  View, StyleSheet, ScrollView, Text, TouchableOpacity, ActivityIndicator, SafeAreaView,
   KeyboardAvoidingView, Platform, FlatList
 } from 'react-native';
+import { useRouter } from 'expo-router';
 import { useAuthStore } from '../store/authStore';
 import { useContentStore } from '../store/contentStore';
 import { useOfflineStore } from '../store/offlineStore';
@@ -17,6 +18,7 @@ import { offlineApiClient } from '../services/offlineApiClient';
 import { gamificationService } from '../services/gamificationService';
 
 export function TopicDetailsScreen({ route, navigation }) {
+  const router = useRouter();
   const { topicId, topicName } = route.params;
   const { token, student } = useAuthStore();
   const { currentTopic, fetchTopicDetails } = useContentStore();
@@ -158,19 +160,23 @@ export function TopicDetailsScreen({ route, navigation }) {
   return (
     <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={styles.container}>
       {/* Header */}
-      <View style={styles.header}>
-        <TouchableOpacity onPress={() => navigation.goBack()}>
-          <Text style={[styles.backArrow, typography.h3]}>←</Text>
-        </TouchableOpacity>
-        <Text style={[styles.title, typography.h2]} numberOfLines={2}>
-          {topicName}
-        </Text>
-        {!isOnline && (
-          <View style={styles.offlineBadge}>
-            <Text style={[styles.offlineBadgeText, typography.caption]}>📴</Text>
-          </View>
-        )}
-      </View>
+      <SafeAreaView edges={['top']} style={styles.headerSafeArea}>
+        <View style={styles.header}>
+          <TouchableOpacity onPress={() => router.back()}>
+            <Text style={[styles.backArrow, typography.h3]}>←</Text>
+          </TouchableOpacity>
+
+          <Text style={[styles.title, typography.h2]} numberOfLines={1}>
+            {topicName}
+          </Text>
+
+          {!isOnline && (
+            <View style={styles.offlineBadge}>
+              <Text style={[styles.offlineBadgeText, typography.caption]}>📴</Text>
+            </View>
+          )}
+        </View>
+      </SafeAreaView>
 
       {/* Tab Navigation */}
       <View style={styles.tabBar}>
@@ -340,6 +346,10 @@ export function TopicDetailsScreen({ route, navigation }) {
 }
 
 const styles = StyleSheet.create({
+  headerSafeArea: {
+    backgroundColor: colors.background
+  },
+
   container: {
     flex: 1,
     backgroundColor: colors.background

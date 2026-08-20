@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { View, StyleSheet, ScrollView, Text, TouchableOpacity, ActivityIndicator } from 'react-native';
+import { View, StyleSheet, ScrollView, Text, TouchableOpacity, ActivityIndicator, SafeAreaView } from 'react-native';
+import { useRouter } from 'expo-router';
 import { useAuthStore } from '../store/authStore';
 import { useContentStore } from '../store/contentStore';
 import { Card } from '../components/Card';
@@ -8,6 +9,7 @@ import { colors, spacing, typography } from '../constants/colors';
 import { API_URL } from '../config/api';
 
 export function ThemesScreen({ route, navigation }) {
+  const router = useRouter();
   const { themeId, themeName } = route.params;
   const { token } = useAuthStore();
   const { topics, fetchTopics } = useContentStore();
@@ -73,19 +75,26 @@ export function ThemesScreen({ route, navigation }) {
   return (
     <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
       {/* Header with back button */}
-      <View style={styles.header}>
-        <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backButton}>
-          <Text style={[styles.backArrow, typography.h3]}>←</Text>
-        </TouchableOpacity>
-        <View style={styles.headerContent}>
-          <Text style={[styles.title, typography.h2]}>
-            {themeName}
-          </Text>
-          <Text style={[styles.subtitle, typography.body2]}>
-            {themeTopics.length} topics
-          </Text>
+      <SafeAreaView edges={['top']} style={styles.headerSafeArea}>
+        <View style={styles.header}>
+          <TouchableOpacity
+            onPress={() => router.back()}
+            style={styles.backButton}
+          >
+            <Text style={[styles.backArrow, typography.h3]}>←</Text>
+          </TouchableOpacity>
+
+          <View style={styles.headerContent}>
+            <Text style={[styles.title, typography.h2]} numberOfLines={1}>
+              {themeName}
+            </Text>
+
+            <Text style={[styles.subtitle, typography.body2]}>
+              {themeTopics.length} topics
+            </Text>
+          </View>
         </View>
-      </View>
+      </SafeAreaView>
 
       {/* Progress Card */}
       <Card variant="elevated" style={styles.progressCard}>
@@ -103,10 +112,7 @@ export function ThemesScreen({ route, navigation }) {
       {themeTopics.map((topic, index) => (
         <TouchableOpacity
           key={topic.id}
-          onPress={() => navigation.navigate('topic-details', {
-            topicId: topic.id,
-            topicName: topic.name
-          })}
+          onPress={() => router.push({ pathname: '/(app)/topic-details', params: { topicId: topic.id, topicName: topic.name } })}
         >
           <Card variant="elevated" style={styles.topicCard}>
             <View style={styles.topicHeader}>
@@ -151,6 +157,10 @@ export function ThemesScreen({ route, navigation }) {
 }
 
 const styles = StyleSheet.create({
+  headerSafeArea: {
+    backgroundColor: colors.background
+  },
+
   container: {
     flex: 1,
     backgroundColor: colors.background
