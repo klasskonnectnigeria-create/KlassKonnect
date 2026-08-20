@@ -35,7 +35,7 @@ export async function callClaude(systemPrompt, userMessage, studentId) {
 
   try {
     const response = await client.messages.create({
-      model: 'claude-3-5-sonnet-20241022',
+      model: 'claude-3-sonnet-20240229',
       max_tokens: 1024,
       system: systemPrompt,
       messages: history

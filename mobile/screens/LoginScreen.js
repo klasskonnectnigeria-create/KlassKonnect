@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useRouter, Link } from 'expo-router';
+import { useRouter } from 'expo-router';
 import {
   View,
   StyleSheet,
@@ -8,25 +8,34 @@ import {
   TouchableOpacity,
   Pressable,
   KeyboardAvoidingView,
-  Platform
+  Platform,
+  Alert
 } from 'react-native';
+
 import { SafeAreaView } from 'react-native-safe-area-context';
+
 import { useAuthStore } from '../store/authStore';
 import { Input } from '../components/Input';
 import { Button } from '../components/Button';
-import { colors, spacing, typography, borderRadius } from '../constants/colors';
+import {
+  colors,
+  spacing,
+  typography,
+  borderRadius
+} from '../constants/colors';
 import { API_URL } from '../config/api';
 
 export function LoginScreen({ navigation, onGoToSignup }) {
   const router = useRouter();
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+
   const isMountedRef = useRef(true);
-
   const { login } = useAuthStore();
-
 
   useEffect(() => {
     return () => {
@@ -35,29 +44,60 @@ export function LoginScreen({ navigation, onGoToSignup }) {
   }, []);
 
   const handleLogin = async () => {
-    if (!email || !password) {
-      if (isMountedRef.current) setError('Please fill in all fields');
+    if (!email.trim() || !password) {
+      setError('Please fill in all fields');
       return;
     }
 
-    if (isMountedRef.current) setLoading(true);
-    if (isMountedRef.current) setError('');
+    setLoading(true);
+    setError('');
 
-    const success = await login(email, password, API_URL);
+    try {
+      const success = await login(
+        email.trim().toLowerCase(),
+        password,
+        API_URL
+      );
 
-    if (isMountedRef.current) {
-      if (success) {
-        console.log('Login successful - navigating to Home');
-        router.replace('/(app)/home');
-      } else {
-        setError('Login failed. Please check your credentials.');
+      if (isMountedRef.current) {
+        if (success) {
+          router.replace('/(app)/home');
+        } else {
+          setError('Login failed. Please check your credentials.');
+        }
       }
-      setLoading(false);
+    } catch (err) {
+      console.error('Login error:', err);
+
+      if (isMountedRef.current) {
+        setError('Unable to connect. Please try again.');
+      }
+    } finally {
+      if (isMountedRef.current) {
+        setLoading(false);
+      }
     }
   };
 
+  const handleGoogleLogin = () => {
+    Alert.alert(
+      'Google Sign-In',
+      'Google authentication will be connected next.'
+    );
+  };
+
+  const handleAppleLogin = () => {
+    Alert.alert(
+      'Apple Sign-In',
+      'Apple authentication will be connected next.'
+    );
+  };
+
   return (
-    <SafeAreaView style={styles.safeArea} edges={['top', 'bottom']}>
+    <SafeAreaView
+      style={styles.safeArea}
+      edges={['top', 'bottom']}
+    >
       <KeyboardAvoidingView
         style={styles.keyboardView}
         behavior={Platform.OS === 'ios' ? 'padding' : undefined}
@@ -66,78 +106,136 @@ export function LoginScreen({ navigation, onGoToSignup }) {
           style={styles.container}
           contentContainerStyle={styles.contentContainer}
           keyboardShouldPersistTaps="handled"
+          showsVerticalScrollIndicator={false}
         >
-      {/* Header */}
-      <View style={styles.header}>
-        <Text style={[styles.title, typography.h1]}>
-          KLASSKONNECT
-        </Text>
-        <Text style={[styles.subtitle, typography.body1]}>
-          Your Personal AI Tutor
-        </Text>
-      </View>
+          <View>
+            {/* Branding */}
+            <View style={styles.header}>
+              <Text style={styles.title}>
+                KLASSKONNECT
+              </Text>
 
-      {/* Form */}
-      <View style={styles.form}>
-        <Input
-          label="Email"
-          placeholder="Enter your email"
-          value={email}
-          onChangeText={setEmail}
-          keyboardType="email-address"
-          error={error && !email ? 'Email is required' : ''}
-          style={styles.input}
-        />
+              <Text style={styles.subtitle}>
+                Your Personal AI Tutor
+              </Text>
+            </View>
 
-        <Input
-          label="Password"
-          placeholder="Enter your password"
-          value={password}
-          onChangeText={setPassword}
-          secureTextEntry
-          error={error && !password ? 'Password is required' : ''}
-          style={styles.input}
-        />
+            {/* Login Form */}
+            <View style={styles.form}>
+              <Input
+                label="Email"
+                placeholder="Enter your email"
+                value={email}
+                onChangeText={setEmail}
+                keyboardType="email-address"
+                autoCapitalize="none"
+                autoCorrect={false}
+                leftIcon={<Text style={{ fontSize: 18 }}>✉️</Text>}
+                error={error && !email ? 'Email is required' : ''}
+                style={styles.input}
+              />
 
-        {error && (
-          <Text style={[styles.errorMessage, typography.body2]}>
-            {error}
-          </Text>
-        )}
+              <Input
+                label="Password"
+                placeholder="Enter your password"
+                value={password}
+                onChangeText={setPassword}
+                secureTextEntry={!showPassword}
+                autoCapitalize="none"
+                autoCorrect={false}
+                leftIcon={<Text style={{ fontSize: 18 }}>🔒</Text>}
+                rightIcon={<Text style={{ fontSize: 18 }}>{showPassword ? '🙈' : '👁️'}</Text>}
+                onRightIconPress={() =>
+                  setShowPassword(prev => !prev)
+                }
+                error={
+                  error && !password
+                    ? 'Password is required'
+                    : ''
+                }
+                style={styles.input}
+              />
 
-        <Button
-          label="Login"
-          onPress={handleLogin}
-          loading={loading}
-          style={styles.loginButton}
-        />
+              {error ? (
+                <Text style={styles.errorMessage}>
+                  {error}
+                </Text>
+              ) : null}
 
-        <TouchableOpacity
-          onPress={() => router.push('/(auth)/forgot-password')}
-          style={styles.forgotPasswordButton}
-          activeOpacity={0.7}
-        >
-          <Text style={[styles.forgotPasswordText, typography.body2]}>
-            Forgot Password?
-          </Text>
-        </TouchableOpacity>
-      </View>
+              <Button
+                label="Login"
+                onPress={handleLogin}
+                loading={loading}
+                style={styles.loginButton}
+              />
 
-      {/* Sign Up Link */}
-      <Pressable
-        style={({ pressed }) => [
-          styles.footer,
-          pressed && { opacity: 0.7 }
-        ]}
-        onPress={onGoToSignup}
-      >
-        <Text style={[styles.footerText, typography.body2]}>
-          Don't have an account?{' '}
-        </Text>
-        <Text style={[styles.signUpLink, typography.body2]}>
-          Sign Up
-        </Text>
-      </Pressable>
+              <TouchableOpacity
+                onPress={() =>
+                  router.push('/(auth)/forgot-password')
+                }
+                style={styles.forgotPasswordButton}
+                activeOpacity={0.7}
+              >
+                <Text style={styles.forgotPasswordText}>
+                  Forgot Password?
+                </Text>
+              </TouchableOpacity>
+            </View>
+
+            {/* Divider */}
+            <View style={styles.dividerContainer}>
+              <View style={styles.divider} />
+              <Text style={styles.orText}>OR</Text>
+              <View style={styles.divider} />
+            </View>
+
+            {/* Social Login */}
+            <View style={styles.socialContainer}>
+              <TouchableOpacity
+                style={styles.socialButton}
+                onPress={handleGoogleLogin}
+                activeOpacity={0.8}
+              >
+                <Text style={styles.googleIcon}>G</Text>
+                <Text style={styles.socialText}>
+                  Continue with Google
+                </Text>
+              </TouchableOpacity>
+
+              <TouchableOpacity
+                style={styles.socialButton}
+                onPress={handleAppleLogin}
+                activeOpacity={0.8}
+              >
+                <Text style={styles.appleIcon}></Text>
+                <Text style={styles.socialText}>
+                  Continue with Apple
+                </Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+
+          {/* Footer */}
+          <TouchableOpacity
+            style={styles.footer}
+            onPress={() => {
+              console.log('Sign Up pressed, onGoToSignup:', !!onGoToSignup);
+              if (onGoToSignup) {
+                onGoToSignup();
+              } else {
+                router.push('/(auth)/signup');
+              }
+            }}
+            activeOpacity={0.7}
+          >
+            <Text style={styles.footerText}>
+              Don't have an account?{' '}
+            </Text>
+
+            <Text style={styles.signUpLink}>
+              Sign Up
+            </Text>
+          </TouchableOpacity>
         </ScrollView>
       </KeyboardAvoidingView>
     </SafeAreaView>
@@ -149,45 +247,63 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.background
   },
+
   keyboardView: {
     flex: 1
   },
+
   container: {
     flex: 1,
     backgroundColor: colors.background
   },
+
   contentContainer: {
-    flexGrow: 1,
-    justifyContent: 'space-between',
-    padding: spacing.lg
+    paddingHorizontal: spacing.lg,
+    paddingTop: spacing.lg,
+    paddingBottom: spacing.xxl
   },
+
   header: {
     alignItems: 'center',
-    marginTop: spacing.xl,
-    marginBottom: spacing.xl
+    marginTop: spacing.lg,
+    marginBottom: spacing.xxl
   },
+
   title: {
     color: colors.primary,
-    fontWeight: 'bold',
-    marginBottom: spacing.sm
+    fontSize: 32,
+    lineHeight: 40,
+    fontWeight: '800',
+    letterSpacing: -0.5
   },
+
   subtitle: {
-    color: colors.text.secondary
+    marginTop: spacing.sm,
+    color: colors.text.secondary,
+    fontSize: 18,
+    lineHeight: 26
   },
+
   form: {
     width: '100%'
   },
+
   input: {
     marginBottom: spacing.lg
   },
+
   errorMessage: {
     color: colors.error,
+    textAlign: 'center',
+    marginTop: -spacing.sm,
     marginBottom: spacing.md,
-    textAlign: 'center'
+    fontSize: 14
   },
+
   loginButton: {
-    marginTop: spacing.md
+    marginTop: spacing.sm
   },
+
   forgotPasswordButton: {
     alignItems: 'center',
     marginTop: spacing.md,
@@ -196,20 +312,77 @@ const styles = StyleSheet.create({
 
   forgotPasswordText: {
     color: colors.primary,
-    fontWeight: '600'
+    fontSize: 16,
+    fontWeight: '500'
+  },
+
+  dividerContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: spacing.xl,
+    marginBottom: spacing.lg
+  },
+
+  divider: {
+    flex: 1,
+    height: 1,
+    backgroundColor: colors.divider
+  },
+
+  orText: {
+    color: colors.text.secondary,
+    fontSize: 15,
+    marginHorizontal: spacing.md
+  },
+
+  socialContainer: {
+    gap: spacing.md
+  },
+
+  socialButton: {
+    minHeight: 56,
+    borderWidth: 1,
+    borderColor: colors.border,
+    borderRadius: borderRadius.lg,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: colors.background
+  },
+
+  googleIcon: {
+    fontSize: 22,
+    fontWeight: '700',
+    marginRight: spacing.md
+  },
+
+  appleIcon: {
+    fontSize: 23,
+    marginRight: spacing.md
+  },
+
+  socialText: {
+    color: colors.text.primary,
+    fontSize: 16,
+    fontWeight: '500'
   },
 
   footer: {
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    marginBottom: spacing.lg
+    marginTop: spacing.xl,
+    paddingVertical: spacing.md
   },
+
   footerText: {
-    color: colors.text.secondary
+    color: colors.text.secondary,
+    fontSize: 16
   },
+
   signUpLink: {
     color: colors.primary,
+    fontSize: 16,
     fontWeight: '600'
   }
 });

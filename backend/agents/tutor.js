@@ -32,6 +32,9 @@ Important guidelines:
     return response.content;
   } catch (error) {
     console.error('Tutor agent error:', error);
+    console.error('Error message:', error.message);
+    console.error('Error type:', error.type);
+    console.error('Full error:', JSON.stringify(error));
     return `I apologize, I'm having trouble connecting right now. Please try again in a moment. In the meantime, remember: start with the basics, break problems into smaller steps, and don't hesitate to ask for clarification!`;
   }
 }

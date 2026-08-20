@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, StyleSheet, ScrollView, Text, TouchableOpacity, ActivityIndicator, Alert } from 'react-native';
+import { View, StyleSheet, ScrollView, Text, TouchableOpacity, ActivityIndicator, Alert, Pressable } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
 import { useAuthStore } from '../store/authStore';
@@ -134,15 +134,14 @@ export function HomeScreen({ onLogout }) {
           </Text>
         </View>
         <View style={styles.headerButtons}>
-          <TouchableOpacity activeOpacity={0.7} onPress={() => router.push('/(app)/leaderboard')} style={styles.leaderboardButton}>
+          <Pressable onPress={() => router.push('/(app)/leaderboard')} style={styles.leaderboardButton}>
             <Text style={[styles.buttonText, typography.body2]}>🏆</Text>
-          </TouchableOpacity>
-          <TouchableOpacity activeOpacity={0.7} onPress={handleLogout} style={styles.logoutButton}>
+          </Pressable>
+          <Pressable onPress={handleLogout} style={styles.logoutButton}>
             <Text style={[styles.logoutText, typography.body2]}>Logout</Text>
-          </TouchableOpacity>
+          </Pressable>
         </View>
       </View>
-
       {/* Progress Stats */}
       <Card variant="elevated" style={styles.statsCard}>
         <Text style={[styles.statsTitle, typography.subtitle1]}>

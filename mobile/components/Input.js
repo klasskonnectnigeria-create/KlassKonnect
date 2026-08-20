@@ -1,6 +1,17 @@
 import React, { useState } from 'react';
-import { View, TextInput, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import { colors, spacing, typography, borderRadius } from '../constants/colors';
+import {
+  View,
+  TextInput,
+  Text,
+  StyleSheet,
+  TouchableOpacity
+} from 'react-native';
+import {
+  colors,
+  spacing,
+  typography,
+  borderRadius
+} from '../constants/colors';
 
 export function Input({
   label,
@@ -9,8 +20,13 @@ export function Input({
   onChangeText,
   secureTextEntry = false,
   keyboardType = 'default',
+  autoCapitalize = 'none',
+  autoCorrect = false,
   error,
   disabled = false,
+  leftIcon,
+  rightIcon,
+  onRightIconPress,
   style
 }) {
   const [isFocused, setIsFocused] = useState(false);
@@ -22,24 +38,51 @@ export function Input({
           {label}
         </Text>
       )}
-      <TextInput
+
+      <View
         style={[
-          styles.input,
-          typography.body1,
+          styles.inputWrapper,
           isFocused && styles.inputFocused,
           error && styles.inputError,
           disabled && styles.inputDisabled
         ]}
-        placeholder={placeholder}
-        placeholderTextColor={colors.text.light}
-        value={value}
-        onChangeText={onChangeText}
-        secureTextEntry={secureTextEntry}
-        keyboardType={keyboardType}
-        editable={!disabled}
-        onFocus={() => setIsFocused(true)}
-        onBlur={() => setIsFocused(false)}
-      />
+      >
+        {leftIcon ? (
+          <View style={styles.leftIcon}>
+            {leftIcon}
+          </View>
+        ) : null}
+
+        <TextInput
+          style={[styles.input, typography.body1]}
+          placeholder={placeholder}
+          placeholderTextColor={colors.text.light}
+          value={value}
+          onChangeText={onChangeText}
+          secureTextEntry={secureTextEntry}
+          keyboardType={keyboardType}
+          autoCapitalize={autoCapitalize}
+          autoCorrect={autoCorrect}
+          editable={!disabled}
+          onFocus={() => setIsFocused(true)}
+          onBlur={() => setIsFocused(false)}
+        />
+
+        {rightIcon && onRightIconPress ? (
+          <TouchableOpacity
+            onPress={onRightIconPress}
+            style={styles.rightButton}
+            activeOpacity={0.7}
+          >
+            {rightIcon}
+          </TouchableOpacity>
+        ) : rightIcon ? (
+          <View style={styles.rightButton}>
+            {rightIcon}
+          </View>
+        ) : null}
+      </View>
+
       {error && (
         <Text style={[styles.error, typography.caption]}>
           {error}
@@ -51,31 +94,57 @@ export function Input({
 
 const styles = StyleSheet.create({
   label: {
-    marginBottom: spacing.xs,
+    marginBottom: spacing.sm,
     color: colors.text.primary,
     fontWeight: '500'
   },
-  input: {
+
+  inputWrapper: {
+    flexDirection: 'row',
+    alignItems: 'center',
     borderWidth: 1,
     borderColor: colors.border,
-    borderRadius: borderRadius.md,
+    borderRadius: borderRadius.lg,
     paddingHorizontal: spacing.md,
-    paddingVertical: spacing.sm,
     backgroundColor: colors.background,
-    color: colors.text.primary,
-    minHeight: 48
+    minHeight: 54
   },
+
+  input: {
+    flex: 1,
+    minHeight: 52,
+    paddingVertical: 0,
+    color: colors.text.primary
+  },
+
   inputFocused: {
     borderColor: colors.primary,
     borderWidth: 2
   },
+
   inputError: {
     borderColor: colors.error
   },
+
   inputDisabled: {
     backgroundColor: colors.surface,
     opacity: 0.6
   },
+
+  leftIcon: {
+    width: 30,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginRight: spacing.sm
+  },
+
+  rightButton: {
+    width: 36,
+    height: 44,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+
   error: {
     marginTop: spacing.xs,
     color: colors.error
