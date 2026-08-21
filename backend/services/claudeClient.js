@@ -67,12 +67,29 @@ export async function callClaude(systemPrompt, userMessage, studentId) {
   }
 
   try {
+    console.log('[callClaude] Attempting to initialize Anthropic client...');
     const anthropicClient = getClient();
+    console.log('[callClaude] Client initialized, preparing API call...');
+
+    console.log('[callClaude] Calling Claude API with:', {
+      model: 'claude-opus-5',
+      max_tokens: 1024,
+      systemPrompt: systemPrompt ? `${systemPrompt.substring(0, 50)}...` : 'NONE',
+      historyLength: history.length,
+      userMessage: userMessage.substring(0, 50)
+    });
+
     const response = await anthropicClient.messages.create({
       model: 'claude-opus-5',
       max_tokens: 1024,
       system: systemPrompt,
       messages: history
+    });
+
+    console.log('[callClaude] API call successful:', {
+      contentBlocks: response.content.length,
+      usageInputTokens: response.usage.input_tokens,
+      usageOutputTokens: response.usage.output_tokens
     });
 
     // Extract text from response (handle thinking blocks in newer models)
@@ -89,6 +106,7 @@ export async function callClaude(systemPrompt, userMessage, studentId) {
       throw new Error('No text content in Claude response');
     }
 
+    console.log('[callClaude] Successfully extracted message, adding to history');
     addToHistory(studentId, 'assistant', assistantMessage);
 
     return {
@@ -99,15 +117,23 @@ export async function callClaude(systemPrompt, userMessage, studentId) {
       }
     };
   } catch (error) {
-    console.error('Claude API error:', error.message);
+    console.error('[callClaude] API error caught:', {
+      message: error.message,
+      name: error.name,
+      status: error.status || 'N/A',
+      type: error.type || 'UNKNOWN',
+      fullError: JSON.stringify(error, null, 2)
+    });
 
     // Fallback to demo mode on API errors
-    if (error.message.includes('authentication') || error.message.includes('401')) {
+    if (error.message.includes('authentication') || error.message.includes('401') || error.status === 401) {
       console.log('⚠️  Claude API auth failed, using demo responses');
       return getDemoResponse(userMessage, studentId, history);
     }
 
-    throw new Error(`Claude API call failed: ${error.message}`);
+    // Log all errors for debugging, but still fail gracefully
+    console.error('[callClaude] Non-auth error, but falling back to demo mode for graceful degradation');
+    return getDemoResponse(userMessage, studentId, history);
   }
 }
 
