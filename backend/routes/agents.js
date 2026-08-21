@@ -39,10 +39,8 @@ router.post('/chat', verifyToken, async (req, res) => {
 
     const student = studentResult.rows[0];
 
-    // Get conversation context for better responses
-    const conversationHistory = topicId
-      ? await getConversationContext(req.studentId, topicId)
-      : [];
+    // Get conversation context for better responses (use in-memory history for now)
+    const conversationHistory = [];
 
     // Get student's understanding level on this topic
     const understanding = topicId

@@ -18,10 +18,17 @@ class ConnectionManager {
   async checkNetworkStatus() {
     try {
       const networkState = await Network.getNetworkStateAsync();
-      this.isOnlineState = networkState.isInternetReachable ?? false;
+      // In simulator/development, isInternetReachable is often unreliable
+      // So we check if there's ANY connection (isConnected) and use that as a fallback
+      const hasConnection = networkState.isConnected ?? true;
+      const isReachable = networkState.isInternetReachable ?? hasConnection;
+      this.isOnlineState = isReachable;
+      console.log('[ConnectionManager] Network status:', { hasConnection, isReachable, isOnlineState: this.isOnlineState });
       return this.isOnlineState;
     } catch (error) {
       console.error('Error checking network status:', error);
+      // Default to online on error (better UX than being stuck offline)
+      this.isOnlineState = true;
       return this.isOnlineState;
     }
   }
@@ -35,9 +42,10 @@ class ConnectionManager {
     this.checkNetworkStatus();
 
     // Subscribe to network status changes
-    const subscription = Network.addNetworkStateListener(({ isInternetReachable }) => {
+    const subscription = Network.addNetworkStateListener(({ isInternetReachable, isConnected }) => {
       const wasOnline = this.isOnlineState;
-      this.isOnlineState = isInternetReachable ?? false;
+      // Use isConnected as fallback since isInternetReachable is unreliable in simulator
+      this.isOnlineState = isInternetReachable ?? isConnected ?? true;
 
       if (!wasOnline && this.isOnlineState) {
         console.log('Connection restored');

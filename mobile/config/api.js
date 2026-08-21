@@ -1,6 +1,10 @@
 // API Base URL - change this based on environment
+// Use local development URL for testing, production URL as fallback
+const isDevelopment = __DEV__;
 
-export const API_URL = 'https://pacific-growth-production-d82a.up.railway.app';
+export const API_URL = isDevelopment
+  ? 'http://localhost:5000'  // Local development backend (simulator)
+  : 'https://pacific-growth-production-d82a.up.railway.app';  // Production Railway URL
 
 export const endpoints = {
   auth: {
