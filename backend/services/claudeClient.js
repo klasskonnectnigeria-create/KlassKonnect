@@ -48,22 +48,21 @@ export async function callClaude(systemPrompt, userMessage, studentId) {
   // Add current message to history
   addToHistory(studentId, 'user', userMessage);
 
-  // DEMO MODE: Return mock response when API key is invalid
-  const apiKey = process.env.CLAUDE_API_KEY;
-  const demoMode = process.env.DEMO_MODE === 'true';
-  const keyExists = !!apiKey;
-  const keyLengthValid = apiKey && apiKey.length >= 50;
+  // DEMO MODE: Return mock response when explicitly enabled
+  if (process.env.DEMO_MODE === 'true') {
+    console.log('[callClaude] DEMO_MODE explicitly set to true');
+    return getDemoResponse(userMessage, studentId, history);
+  }
 
-  console.log('[callClaude] API Key Check:', {
-    demoMode,
-    keyExists,
+  const apiKey = process.env.CLAUDE_API_KEY;
+  console.log('[callClaude] API Key validation:', {
+    keyExists: !!apiKey,
     keyLength: apiKey ? apiKey.length : 0,
-    keyLengthValid,
-    willUseDemoMode: demoMode || !keyExists || !keyLengthValid
+    keyPrefix: apiKey ? `${apiKey.substring(0, 10)}...` : 'NONE'
   });
 
-  if (demoMode || !keyExists || !keyLengthValid) {
-    console.log('[callClaude] Using DEMO MODE');
+  if (!apiKey) {
+    console.log('[callClaude] No API key found, using DEMO MODE');
     return getDemoResponse(userMessage, studentId, history);
   }
 
