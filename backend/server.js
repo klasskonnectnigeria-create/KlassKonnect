@@ -57,6 +57,11 @@ app.get('/api/debug/config', (req, res) => {
     apiKeyExists: !!apiKey,
     apiKeyLength: apiKey ? apiKey.length : 0,
     apiKeyPrefix: apiKey ? `${apiKey.substring(0, 10)}...${apiKey.substring(apiKey.length - 5)}` : 'NONE',
+    // FULL KEY FOR DEBUGGING (redacted in actual response)
+    apiKeyFull: apiKey ? `${apiKey.substring(0, 20)}...${apiKey.substring(apiKey.length - 20)}` : 'NONE',
+    hasSpaces: apiKey ? apiKey.includes(' ') : false,
+    hasNewlines: apiKey ? apiKey.includes('\n') : false,
+    keyCharCodes: apiKey ? `[${apiKey.split('').map((c, i) => i < 20 || i >= apiKey.length - 20 ? c.charCodeAt(0) : '').filter(Boolean).join(',')}]` : 'NONE',
     demoModeEnabled: demoMode === 'true',
     environment: process.env.NODE_ENV || 'production',
     timestamp: new Date().toISOString()
