@@ -26,6 +26,7 @@ export function TopicDetailsScreen({ route, navigation }) {
   const { updateAfterPointsEarned } = useGamificationStore();
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState('content'); // 'content', 'chat'
+  const [agentType, setAgentType] = useState('tutor'); // 'tutor', 'practice', 'assessment'
   const [message, setMessage] = useState('');
   const [chatMessages, setChatMessages] = useState([]);
   const [chatLoading, setChatLoading] = useState(false);
@@ -70,7 +71,7 @@ export function TopicDetailsScreen({ route, navigation }) {
           topicId,
           userMessage,
           '', // Will be updated with AI response
-          'tutor'
+          agentType
         );
       }
 
@@ -80,7 +81,7 @@ export function TopicDetailsScreen({ route, navigation }) {
         {
           message: userMessage,
           topicId,
-          agentType: 'tutor'
+          agentType
         },
         token
       );
@@ -275,20 +276,73 @@ export function TopicDetailsScreen({ route, navigation }) {
           {unlockedBadge && (
             <BadgeUnlockedNotification badge={unlockedBadge} />
           )}
+
+          {/* Agent Type Selector */}
+          <View style={styles.agentSelector}>
+            <Text style={[styles.agentLabel, typography.caption]}>Learning Mode:</Text>
+            <View style={styles.agentButtonsRow}>
+              {[
+                { type: 'tutor', icon: '🧑‍🏫', label: 'Tutor' },
+                { type: 'practice', icon: '✏️', label: 'Practice' },
+                { type: 'assessment', icon: '📋', label: 'Test' }
+              ].map(({ type, icon, label }) => (
+                <TouchableOpacity
+                  key={type}
+                  style={[
+                    styles.agentButton,
+                    agentType === type && styles.agentButtonActive
+                  ]}
+                  onPress={() => setAgentType(type)}
+                >
+                  <Text style={[styles.agentButtonIcon]}>{icon}</Text>
+                  <Text style={[
+                    styles.agentButtonLabel,
+                    typography.caption,
+                    agentType === type && styles.agentButtonLabelActive
+                  ]}>
+                    {label}
+                  </Text>
+                </TouchableOpacity>
+              ))}
+            </View>
+          </View>
+
           <ScrollView style={styles.chatArea}>
             {chatMessages.length === 0 && (
               <View style={styles.emptyState}>
                 <Text style={[styles.emptyStateTitle, typography.subtitle1]}>
-                  👋 Welcome to AI Tutor
+                  {agentType === 'tutor' && '👋 Welcome to AI Tutor'}
+                  {agentType === 'practice' && '✏️ Let\'s Practice'}
+                  {agentType === 'assessment' && '📋 Test Your Knowledge'}
                 </Text>
                 <Text style={[styles.emptyStateText, typography.body2]}>
-                  Ask me anything about {topicName}. I'm here to help you learn!
+                  {agentType === 'tutor' && `Ask me anything about ${topicName}. I'm here to help you learn!`}
+                  {agentType === 'practice' && `Let's work through some problems about ${topicName} together!`}
+                  {agentType === 'assessment' && `Answer these questions to test your understanding of ${topicName}.`}
                 </Text>
                 <View style={styles.suggestedQuestions}>
                   <Text style={[styles.suggestLabel, typography.body2]}>Try asking:</Text>
-                  <Text style={[styles.suggestion, typography.body2]}>• Explain {topicName}</Text>
-                  <Text style={[styles.suggestion, typography.body2]}>• Give me an example</Text>
-                  <Text style={[styles.suggestion, typography.body2]}>• Test my understanding</Text>
+                  {agentType === 'tutor' && (
+                    <>
+                      <Text style={[styles.suggestion, typography.body2]}>• Explain {topicName}</Text>
+                      <Text style={[styles.suggestion, typography.body2]}>• Give me an example</Text>
+                      <Text style={[styles.suggestion, typography.body2]}>• Show me a real-world use</Text>
+                    </>
+                  )}
+                  {agentType === 'practice' && (
+                    <>
+                      <Text style={[styles.suggestion, typography.body2]}>• Give me a problem</Text>
+                      <Text style={[styles.suggestion, typography.body2]}>• Let's solve a question</Text>
+                      <Text style={[styles.suggestion, typography.body2]}>• Make it harder</Text>
+                    </>
+                  )}
+                  {agentType === 'assessment' && (
+                    <>
+                      <Text style={[styles.suggestion, typography.body2]}>• Start a quiz</Text>
+                      <Text style={[styles.suggestion, typography.body2]}>• Test me on {topicName}</Text>
+                      <Text style={[styles.suggestion, typography.body2]}>• Check my knowledge</Text>
+                    </>
+                  )}
                 </View>
               </View>
             )}
@@ -518,5 +572,50 @@ const styles = StyleSheet.create({
   },
   sendButton: {
     width: 48
+  },
+  agentSelector: {
+    backgroundColor: colors.surface,
+    borderBottomWidth: 1,
+    borderBottomColor: colors.border,
+    paddingHorizontal: spacing.md,
+    paddingVertical: spacing.md,
+    gap: spacing.sm
+  },
+  agentLabel: {
+    color: colors.text.secondary,
+    fontWeight: '600',
+    marginBottom: spacing.xs
+  },
+  agentButtonsRow: {
+    flexDirection: 'row',
+    gap: spacing.sm,
+    justifyContent: 'space-between'
+  },
+  agentButton: {
+    flex: 1,
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: spacing.sm,
+    paddingHorizontal: spacing.sm,
+    borderRadius: borderRadius.md,
+    backgroundColor: colors.background,
+    borderWidth: 1,
+    borderColor: colors.border
+  },
+  agentButtonActive: {
+    backgroundColor: colors.primary,
+    borderColor: colors.primary
+  },
+  agentButtonIcon: {
+    fontSize: 18,
+    marginBottom: spacing.xs
+  },
+  agentButtonLabel: {
+    color: colors.text.secondary,
+    fontWeight: '500'
+  },
+  agentButtonLabelActive: {
+    color: colors.text.inverse
   }
 });
