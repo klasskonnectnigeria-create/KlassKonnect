@@ -48,6 +48,21 @@ app.get('/api/health', (req, res) => {
   res.json({ status: 'Server is running' });
 });
 
+// Debug endpoint - check API key configuration
+app.get('/api/debug/config', (req, res) => {
+  const apiKey = process.env.CLAUDE_API_KEY;
+  const demoMode = process.env.DEMO_MODE;
+
+  res.json({
+    apiKeyExists: !!apiKey,
+    apiKeyLength: apiKey ? apiKey.length : 0,
+    apiKeyPrefix: apiKey ? `${apiKey.substring(0, 10)}...${apiKey.substring(apiKey.length - 5)}` : 'NONE',
+    demoModeEnabled: demoMode === 'true',
+    environment: process.env.NODE_ENV || 'production',
+    timestamp: new Date().toISOString()
+  });
+});
+
 // Start server
 app.listen(PORT, () => {
   console.log(`✓ Backend server running on http://localhost:${PORT}`);
