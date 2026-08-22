@@ -72,7 +72,7 @@ export async function callClaude(systemPrompt, userMessage, studentId) {
     console.log('[callClaude] Client initialized, preparing API call...');
 
     console.log('[callClaude] Calling Claude API with:', {
-      model: 'claude-opus-5',
+      model: 'claude-sonnet-5',
       max_tokens: 1024,
       systemPrompt: systemPrompt ? `${systemPrompt.substring(0, 50)}...` : 'NONE',
       historyLength: history.length,
@@ -80,7 +80,7 @@ export async function callClaude(systemPrompt, userMessage, studentId) {
     });
 
     const response = await anthropicClient.messages.create({
-      model: 'claude-opus-5',
+      model: 'claude-sonnet-5',
       max_tokens: 1024,
       system: systemPrompt,
       messages: history
