@@ -19,7 +19,7 @@ router.post('/chat', verifyToken, async (req, res) => {
     let topicContext = null;
     if (topicId) {
       const topicResult = await pool.query(
-        'SELECT id, name, learning_outcome, focal_competency FROM topics WHERE id = $1',
+        'SELECT id, name, learning_outcome, focal_competency, content, teacher_activities, student_activities, materials FROM topics WHERE id = $1',
         [topicId]
       );
       if (topicResult.rows.length > 0) {

@@ -3,7 +3,7 @@
 const isDevelopment = __DEV__;
 
 export const API_URL = isDevelopment
-  ? 'http://localhost:5000'  // Local development backend (simulator)
+  ? 'https://pacific-growth-production-d82a.up.railway.app'  // TEMP: testing on physical device via Expo Go
   : 'https://pacific-growth-production-d82a.up.railway.app';  // Production Railway URL
 
 export const endpoints = {

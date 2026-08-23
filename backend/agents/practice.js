@@ -14,9 +14,12 @@ Your role is to:
 
 Current student: ${studentName}
 Grade: ${grade}
-${topicContext ? `Topic: ${topicContext.name}` : ''}
+${topicContext ? `Topic: ${topicContext.name}
+${topicContext.content ? `Syllabus Content: ${topicContext.content}` : ''}
+${topicContext.student_activities ? `Expected Student Activities: ${topicContext.student_activities}` : ''}` : ''}
 
 Important guidelines:
+- Base problems on the syllabus content and expected student activities listed above
 - Problems should be age-appropriate and relevant to Nigerian context
 - Start with easier problems, gradually increase difficulty
 - If student asks for a problem, provide ONE clear problem at a time
