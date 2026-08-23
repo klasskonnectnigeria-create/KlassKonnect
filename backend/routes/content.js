@@ -4,11 +4,23 @@ import { verifyToken } from '../middleware/auth.js';
 
 const router = express.Router();
 
-// Get all themes
-router.get('/themes', async (req, res) => {
+// Get themes for the logged-in student's grade
+router.get('/themes', verifyToken, async (req, res) => {
   try {
+    const studentResult = await pool.query(
+      'SELECT grade FROM students WHERE id = $1',
+      [req.studentId]
+    );
+
+    if (studentResult.rows.length === 0) {
+      return res.status(404).json({ error: 'Student not found' });
+    }
+
+    const { grade } = studentResult.rows[0];
+
     const result = await pool.query(
-      'SELECT id, name, description FROM themes ORDER BY id ASC'
+      'SELECT id, name, description FROM themes WHERE grade = $1 ORDER BY id ASC',
+      [grade]
     );
     res.json(result.rows);
   } catch (error) {
@@ -17,11 +29,31 @@ router.get('/themes', async (req, res) => {
   }
 });
 
-// Get topics for a theme
-router.get('/themes/:themeId/topics', async (req, res) => {
+// Get topics for a theme (scoped to the requesting student's grade)
+router.get('/themes/:themeId/topics', verifyToken, async (req, res) => {
   const { themeId } = req.params;
 
   try {
+    const studentResult = await pool.query(
+      'SELECT grade FROM students WHERE id = $1',
+      [req.studentId]
+    );
+
+    if (studentResult.rows.length === 0) {
+      return res.status(404).json({ error: 'Student not found' });
+    }
+
+    const { grade } = studentResult.rows[0];
+
+    const themeResult = await pool.query(
+      'SELECT id FROM themes WHERE id = $1 AND grade = $2',
+      [themeId, grade]
+    );
+
+    if (themeResult.rows.length === 0) {
+      return res.status(403).json({ error: 'Theme not available for your grade' });
+    }
+
     const result = await pool.query(
       'SELECT id, name, learning_outcome, focal_competency FROM topics WHERE theme_id = $1 ORDER BY sequence_order ASC',
       [themeId]
@@ -34,7 +66,7 @@ router.get('/themes/:themeId/topics', async (req, res) => {
 });
 
 // Get full topic details with content, activities, and evaluations
-router.get('/topics/:topicId', async (req, res) => {
+router.get('/topics/:topicId', verifyToken, async (req, res) => {
   const { topicId } = req.params;
 
   try {
