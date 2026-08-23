@@ -4,7 +4,7 @@ import { practiceAgent } from './practice.js';
 
 // Orchestrator - routes queries to appropriate agents based on intent
 export async function orchestrateQuery(context) {
-  const { message, topicContext, preferredAgentType, studentName, grade, studentId } = context;
+  const { message, topicContext, topicId, preferredAgentType, studentName, grade, studentId } = context;
 
   // Determine intent from message
   const intent = detectIntent(message);
@@ -30,10 +30,10 @@ export async function orchestrateQuery(context) {
   const response = await agentFunction({
     message,
     topicContext,
+    topicId,
     studentName,
     grade,
-    studentId,
-    context
+    studentId
   });
 
   return {

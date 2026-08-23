@@ -2,7 +2,7 @@ import { callClaude } from '../services/claudeClient.js';
 
 // Assessment Agent - Tests student understanding and identifies gaps
 export async function assessmentAgent(context) {
-  const { message, topicContext, studentName, grade, studentId } = context;
+  const { message, topicContext, topicId, studentName, grade, studentId } = context;
 
   const systemPrompt = `You are an expert assessment specialist for ${grade} mathematics in Nigeria.
 Your role is to:
@@ -32,7 +32,7 @@ Important guidelines:
 - Use emojis sparingly (✅, ❌, 💡, 🤔)`;
 
   try {
-    const response = await callClaude(systemPrompt, message, studentId);
+    const response = await callClaude(systemPrompt, message, studentId, topicId);
     return response.content;
   } catch (error) {
     console.error('Assessment agent error:', error);

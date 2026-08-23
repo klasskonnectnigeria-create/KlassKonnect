@@ -1,6 +1,6 @@
 import Anthropic from '@anthropic-ai/sdk';
 
-// Conversation history for context management
+// Conversation history for context management, keyed by "studentId:topicId"
 const conversationHistories = new Map();
 
 // Lazy initialization of Anthropic client
@@ -22,15 +22,15 @@ function getClient() {
   return client;
 }
 
-export function getConversationHistory(studentId) {
-  if (!conversationHistories.has(studentId)) {
-    conversationHistories.set(studentId, []);
+export function getConversationHistory(historyKey) {
+  if (!conversationHistories.has(historyKey)) {
+    conversationHistories.set(historyKey, []);
   }
-  return conversationHistories.get(studentId);
+  return conversationHistories.get(historyKey);
 }
 
-export function addToHistory(studentId, role, content) {
-  const history = getConversationHistory(studentId);
+export function addToHistory(historyKey, role, content) {
+  const history = getConversationHistory(historyKey);
   history.push({ role, content });
   // Keep last 20 messages for context
   if (history.length > 20) {
@@ -38,20 +38,21 @@ export function addToHistory(studentId, role, content) {
   }
 }
 
-export function clearHistory(studentId) {
-  conversationHistories.delete(studentId);
+export function clearHistory(historyKey) {
+  conversationHistories.delete(historyKey);
 }
 
-export async function callClaude(systemPrompt, userMessage, studentId) {
-  const history = getConversationHistory(studentId);
+export async function callClaude(systemPrompt, userMessage, studentId, topicId) {
+  const historyKey = topicId ? `${studentId}:${topicId}` : String(studentId);
+  const history = getConversationHistory(historyKey);
 
   // Add current message to history
-  addToHistory(studentId, 'user', userMessage);
+  addToHistory(historyKey, 'user', userMessage);
 
   // DEMO MODE: Return mock response when explicitly enabled
   if (process.env.DEMO_MODE === 'true') {
     console.log('[callClaude] DEMO_MODE explicitly set to true');
-    return getDemoResponse(userMessage, studentId, history);
+    return getDemoResponse(userMessage, historyKey, history);
   }
 
   const apiKey = process.env.CLAUDE_API_KEY;
@@ -63,7 +64,7 @@ export async function callClaude(systemPrompt, userMessage, studentId) {
 
   if (!apiKey) {
     console.log('[callClaude] No API key found, using DEMO MODE');
-    return getDemoResponse(userMessage, studentId, history);
+    return getDemoResponse(userMessage, historyKey, history);
   }
 
   try {
@@ -107,7 +108,7 @@ export async function callClaude(systemPrompt, userMessage, studentId) {
     }
 
     console.log('[callClaude] Successfully extracted message, adding to history');
-    addToHistory(studentId, 'assistant', assistantMessage);
+    addToHistory(historyKey, 'assistant', assistantMessage);
 
     return {
       content: assistantMessage,
@@ -128,16 +129,16 @@ export async function callClaude(systemPrompt, userMessage, studentId) {
     // Fallback to demo mode on API errors
     if (error.message.includes('authentication') || error.message.includes('401') || error.status === 401) {
       console.log('⚠️  Claude API auth failed, using demo responses');
-      return getDemoResponse(userMessage, studentId, history);
+      return getDemoResponse(userMessage, historyKey, history);
     }
 
     // Log all errors for debugging, but still fail gracefully
     console.error('[callClaude] Non-auth error, but falling back to demo mode for graceful degradation');
-    return getDemoResponse(userMessage, studentId, history);
+    return getDemoResponse(userMessage, historyKey, history);
   }
 }
 
-function getDemoResponse(userMessage, studentId, history) {
+function getDemoResponse(userMessage, historyKey, history) {
   const demoResponses = {
     'fractions': `Great question! Let me explain fractions step by step.
 
@@ -184,7 +185,7 @@ What would you like to learn about today?`
                      'default';
 
   const demoContent = demoResponses[messageKey];
-  addToHistory(studentId, 'assistant', demoContent);
+  addToHistory(historyKey, 'assistant', demoContent);
 
   return {
     content: demoContent,

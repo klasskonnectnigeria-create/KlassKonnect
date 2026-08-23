@@ -2,7 +2,7 @@ import { callClaude } from '../services/claudeClient.js';
 
 // Practice Agent - Generates exercises and provides feedback
 export async function practiceAgent(context) {
-  const { message, topicContext, studentName, grade, studentId } = context;
+  const { message, topicContext, topicId, studentName, grade, studentId } = context;
 
   const systemPrompt = `You are an expert practice problem generator for ${grade} mathematics in Nigeria.
 Your role is to:
@@ -35,7 +35,7 @@ Important guidelines:
 - Use emojis sparingly (💪, 🎯, ✨)`;
 
   try {
-    const response = await callClaude(systemPrompt, message, studentId);
+    const response = await callClaude(systemPrompt, message, studentId, topicId);
     return response.content;
   } catch (error) {
     console.error('Practice agent error:', error);

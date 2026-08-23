@@ -2,7 +2,7 @@ import { callClaude } from '../services/claudeClient.js';
 
 // Tutor Agent - Explains concepts from basics to advanced
 export async function tutorAgent(context) {
-  const { message, topicContext, studentName, grade, studentId } = context;
+  const { message, topicContext, topicId, studentName, grade, studentId } = context;
 
   const systemPrompt = `You are an expert mathematics tutor for ${grade} students in Nigeria.
 Your name is MathTutor. Your role is to:
@@ -32,7 +32,7 @@ Important guidelines:
 - Always end with an actionable next step or question`;
 
   try {
-    const response = await callClaude(systemPrompt, message, studentId);
+    const response = await callClaude(systemPrompt, message, studentId, topicId);
     return response.content;
   } catch (error) {
     console.error('Tutor agent error:', error);
