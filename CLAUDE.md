@@ -2,7 +2,7 @@
 
 ## What it is
 
-An AI-powered tutoring app for Nigerian students, built around the NERDC curriculum. Currently active: **Primary 4 Mathematics** and **SS3** across 9 subjects. Provides three modes of AI-assisted learning: tutoring, practice questions, and assessments.
+An AI-powered tutoring app for Nigerian students, built around the NERDC curriculum. Currently active: **Primary 4 Mathematics**, **SS2** across 9 subjects, and **SS3** across 9 subjects. Provides three modes of AI-assisted learning: tutoring, practice questions, and assessments.
 
 ## Repository
 
@@ -17,6 +17,7 @@ An AI-powered tutoring app for Nigerian students, built around the NERDC curricu
 - Local SQLite database (`expo-sqlite`) for offline caching — stores themes, topics, and conversation history locally
 - Zustand for state management
 - Connects to the backend via a configurable `API_URL` (dev vs. production, set in `mobile/config/api.js`)
+- Grade dropdown on signup (`SignupScreen.js`, `GRADES` constant): `Primary 4`, `Primary 5`, `Primary 6`, `JSS1`, `JSS2`, `JSS3`, `SS1`, `SS2`, `SS3` — no space before the number for JSS/SS grades, matching the format stored in `themes.grade` in the database. This must stay in sync; see Known Gaps.
 
 ### Backend (`backend/`)
 - Node.js/Express, deployed on Railway (service: `pacific-growth`, project `poetic-flexibility`)
@@ -55,17 +56,37 @@ An AI-powered tutoring app for Nigerian students, built around the NERDC curricu
 | Economics | 10 | `legacy` | First only |
 | Literature-in-English | 14 | `legacy` | First & Second |
 
+Full source-by-source provenance for SS3 (exact URLs, dates, known quirks in each source) is documented separately in `SS3_Subject_Sourcing.md` at the repo root.
+
+### SS2 — 9 subjects, 292 topics total
+
+| Subject | Topics | Curriculum Version | Terms Covered |
+|---|---|---|---|
+| Mathematics | 31 | `legacy` | All 3 |
+| English Language | 33 | `legacy` | All 3 |
+| Government | 33 | `legacy` | All 3 |
+| Chemistry | 33 | `legacy` | All 3 |
+| Physics | 32 | `legacy` | All 3 |
+| Biology | 33 | `legacy` | All 3 |
+| Geography | 32 | `legacy` | All 3 |
+| Economics | 34 | `legacy` | All 3 |
+| Literature-in-English | 31 | `legacy` | All 3 |
+
+All 9 SS2 subjects were sourced from `schemeofwork.com`'s Federal SS2 scheme-of-work pages, all tagged `legacy` since none of those source pages claim NESRI compliance — consistent with the fact that current real SS2 students started SS1 before the reform existed. Unlike several SS3 subjects, every SS2 subject has full three-term coverage.
+
+### `curriculum_version` system
+
 **`themes.curriculum_version`** distinguishes two curriculum generations:
-- **`legacy`** — the pre-reform WAEC-era curriculum (in use for years; well-documented by third-party sites)
-- **`nesri_2025`** — the new National Education Sector Reform Initiatives curriculum, approved by NERDC on September 8, 2025. Sourced from a page (schemeofwork.com's "SS3 Scheme of Work Unified") that self-describes as NESRI-compliant.
+- **`legacy`** — the pre-reform WAEC-era curriculum (in use for years; well-documented by third-party sites). This is what every actual current SS2 and SS3 student is on.
+- **`nesri_2025`** — the new National Education Sector Reform Initiatives curriculum, approved by NERDC on September 8, 2025. Sourced only for a subset of SS3 subjects, from a page that self-describes as NESRI-compliant.
 
-**Important caveat on the reform's actual applicability**: NESRI implementation is phased by entry cohort, starting at SS1 in the 2025/2026 session — meaning students who were *already* in SS3 when the reform launched are finishing under the **legacy** curriculum, not NESRI. The first cohort to experience NESRI at SS3 won't arrive until roughly 2027/2028. Both versions are stored so the app can serve the correct one depending on which cohort a student belongs to, but this cohort-matching logic is **not yet implemented** in the app itself — see Known Gaps.
+**Important caveat on the reform's actual applicability**: NESRI implementation is phased by entry cohort, starting at SS1 in the 2025/2026 session — meaning students who were *already* in SS2/SS3 when the reform launched are finishing under the **legacy** curriculum, not NESRI. The first cohort to experience NESRI at SS3 won't arrive until roughly 2027/2028. Both versions are stored so the app can serve the correct one depending on which cohort a student belongs to, but this cohort-matching logic is **not yet implemented** in the app itself — see Known Gaps.
 
-**Sourcing**: All curriculum content (Primary 4, and every SS3 subject) comes from third-party aggregator sites (primarily schemeofwork.com, also ecolebooks.com for Economics), not the official NERDC portal directly. The official portals (`lmis.nerdcportals.com.ng`, `nerdc.org.ng/eCurriculum`) are login-gated and/or block automated access (`robots.txt` disallow) — this is a structural limitation of the source material, not something this project failed to check.
+**Sourcing**: All curriculum content (Primary 4, and every SS2/SS3 subject) comes from third-party aggregator sites (primarily schemeofwork.com, also ecolebooks.com for one SS3 subject), not the official NERDC portal directly. The official portals (`lmis.nerdcportals.com.ng`, `nerdc.org.ng/eCurriculum`) are login-gated and/or block automated access (`robots.txt` disallow) — this is a structural limitation of the source material, not something this project failed to check.
 
 Each topic carries: `name`, `learning_outcome`, `focal_competency`, `sequence_order`, plus normalized child records in `content` (syllabus content, tagged by `section_type`), `learning_activities` (teacher and student activities, with resources/materials), and `evaluation_guides` (currently empty for all subjects/grades).
 
-**Note**: Primary 5, Primary 6, and JSS 1 exist as grade values on some (test/seed) student accounts, but have no curriculum content populated yet — students at those grades currently see an empty theme list.
+**Note**: Primary 5, Primary 6, and JSS1–JSS3 exist as grade values on some (test/seed) student accounts, but have no curriculum content populated yet — students at those grades currently see an empty theme list.
 
 ## Offline Support
 
@@ -106,22 +127,26 @@ DATABASE_URL="postgresql://postgres:<password>@localhost:<PORT>/railway" node sc
 
 1. **Fixed invalid Claude model name** — `claudeClient.js` was calling a non-existent model (`claude-opus-5`), silently falling back to canned demo responses on every request. Fixed to `claude-sonnet-5`.
 2. **Removed public debug endpoints** — `/api/debug/config` and `/api/debug/test-claude` were exposed on the public production URL; `/api/debug/config` was leaking large portions of the live `CLAUDE_API_KEY`. Both endpoints removed and confirmed returning 404.
-3. **Added SS3 Mathematics curriculum** — the first SS3 subject added, 15 topics.
+3. **Added SS3 curriculum across 9 subjects** — 115 topics total. See SS3 table above.
 4. **Extended `topics` schema, then migrated to the app's real schema** — initially added flat columns directly on `topics`; subsequently migrated that data into the app's proper normalized tables (`content`, `learning_activities`) to match what `/api/content/topics/:topicId` already expected.
 5. **Wired syllabus content into AI agent prompts** — `tutor.js`, `practice.js`, and `assessment.js` previously only used the topic name (and sometimes learning outcome). Now they pull in syllabus content, focal competency, and student activities.
 6. **Fixed grade-based content isolation** — `/api/content/themes` and `/api/content/themes/:themeId/topics` previously had no grade filtering (and `/themes` had no auth requirement at all). Now themes/topics are scoped to the requesting student's grade, with cross-grade access returning 403.
 7. **Fixed cross-topic conversation bleed** — in-memory conversation history was keyed only by `studentId`, causing sessions on different topics to leak into each other. History is now keyed by `studentId:topicId`.
-8. **Built a reusable, non-destructive curriculum import tool** (`importCurriculum.js`) and used it to add 8 more SS3 subjects (English Language, Government, Physics, Chemistry, Biology, Geography, Economics, Literature-in-English) — 100 additional topics, bringing SS3 to 9 subjects and 115 topics total.
+8. **Built a reusable, non-destructive curriculum import tool** (`importCurriculum.js`), used to add all SS3 and SS2 curriculum content described above.
 9. **Added `curriculum_version` tracking** — `themes.curriculum_version` (`legacy` or `nesri_2025`) added to distinguish pre- and post-reform curricula, anticipating the NESRI rollout without disrupting existing legacy content.
+10. **Added SS2 curriculum across all 9 subjects** — 292 topics total, all three terms for every subject. See SS2 table above.
+11. **Fixed a real production bug: SS3 grade string mismatch causing empty subject lists.** A student's account had `grade = "SS 3"` (with a space) while all SS3 themes are stored as `"SS3"` (no space); the exact-match grade filter (see fix #6) meant this student saw zero subjects, with no visible error. Root cause: `SignupScreen.js`'s `GRADES` dropdown offered spaced values (`'SS 1'`, `'SS 2'`, `'SS 3'`, `'JSS 1'`, etc.) inconsistent with the backend's unspaced convention. Fixed the dropdown to use unspaced values matching the database (`SS1`, `SS2`, `SS3`, `JSS1`, `JSS2`, `JSS3`), and corrected the one affected student's existing database record. Verified fixed via live logout/login test.
+12. **Fixed a hardcoded home-screen heading** — `HomeScreen.js` displayed a literal "📚 Mathematics Topics" label regardless of the student's actual grade or subjects. Changed to dynamically read `{student.grade} Subjects`.
 
 ## Known Gaps
 
 - `evaluation_guides` table is empty for all topics across every subject and grade
 - Duplicate theme rows exist for some Primary-grade themes (same names, different `description` values) — pre-existing, not yet cleaned up
-- Several SS3 subjects (Physics, Biology, Geography) only have First Term content — Second/Third Term wasn't available from the sources found
+- Several SS3 subjects (Physics, Biology, Geography) only have First Term content — Second/Third Term wasn't available from the sources found. SS2 does not have this gap — all 9 SS2 subjects have full three-term coverage.
 - SS3 Mathematics Third Term is not populated — believed to be WAEC/NECO revision of prior material, not new content, but this hasn't been verified against an official source
-- No curriculum content exists yet for Primary 5, Primary 6, or JSS 1, despite those grade values appearing on some student accounts
+- No curriculum content exists yet for Primary 5, Primary 6, or JSS1–JSS3, despite those grade values appearing on some student accounts
 - **No cohort-aware curriculum-version selection**: the app doesn't yet determine whether a given student should see `legacy` or `nesri_2025` content based on when they started SS1 — both versions exist in the database, but nothing currently picks between them (worth resolving before `nesri_2025` content is actually relevant to any real student, likely not urgent until ~2027/2028)
+- **Grade-string consistency is fragile**: the grade value is free-form text stored per student and compared by exact string match against `themes.grade`. The signup dropdown and database now agree (`SS3` not `SS 3`), but any future change to one side without the other will silently break that grade's content for every affected student, with no error surfaced anywhere. Worth considering a stricter approach (e.g. an enum/lookup table) if this class of bug recurs.
 - In-memory conversation history (used for live AI context, separate from the permanent `conversation_logs` database table) resets on every backend redeploy/restart — expected behavior, not a bug
 
 ---
@@ -195,3 +220,7 @@ curl -s -X POST https://pacific-growth-production-d82a.up.railway.app/api/agents
   -H "Authorization: Bearer <TOKEN>" \
   -d '{"message":"Explain this topic","topicId":25,"agentType":"tutor"}'
 ```
+
+### If working on this repo from multiple sessions/tools at once
+
+If more than one Claude session (or another collaborator) might be working on this repo concurrently, check `git status` for uncommitted changes and untracked files before starting new work — a parallel session may have left local changes that haven't been reviewed or committed. Don't assume the working directory only contains your own changes.
