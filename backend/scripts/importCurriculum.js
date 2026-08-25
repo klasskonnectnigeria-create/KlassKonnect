@@ -19,6 +19,7 @@
  *   export const curriculumData = {
  *     subject: 'Physics',
  *     grade: 'SS3',
+ *     curriculumVersion: 'legacy',   // optional, defaults to 'legacy'. Use 'nesri_2025' for the post-reform curriculum.
  *     themes: [
  *       {
  *         name: 'Theme name',
@@ -73,7 +74,7 @@ if (!curriculumData) {
   process.exit(1);
 }
 
-const { subject, grade, themes } = curriculumData;
+const { subject, grade, themes, curriculumVersion = 'legacy' } = curriculumData;
 
 if (!subject || !grade || !Array.isArray(themes) || themes.length === 0) {
   console.error('Error: curriculumData must have "subject", "grade", and a non-empty "themes" array');
@@ -98,7 +99,7 @@ for (const [ti, theme] of themes.entries()) {
 }
 
 const totalTopics = themes.reduce((sum, t) => sum + t.topics.length, 0);
-console.log(`Parsed: ${subject} / ${grade} — ${themes.length} theme(s), ${totalTopics} topic(s) total.`);
+console.log(`Parsed: ${subject} / ${grade} (${curriculumVersion}) — ${themes.length} theme(s), ${totalTopics} topic(s) total.`);
 
 if (dryRun) {
   for (const theme of themes) {
@@ -118,11 +119,11 @@ async function run() {
   try {
     if (!force) {
       const existing = await client.query(
-        `SELECT name FROM themes WHERE subject = $1 AND grade = $2`,
-        [subject, grade]
+        `SELECT name FROM themes WHERE subject = $1 AND grade = $2 AND curriculum_version = $3`,
+        [subject, grade, curriculumVersion]
       );
       if (existing.rows.length > 0) {
-        console.error(`Error: ${existing.rows.length} theme(s) already exist for ${subject}/${grade}:`);
+        console.error(`Error: ${existing.rows.length} theme(s) already exist for ${subject}/${grade} (${curriculumVersion}):`);
         existing.rows.forEach(r => console.error(`  - ${r.name}`));
         console.error('Re-run with --force to insert anyway (this will NOT delete the existing rows, just add more).');
         process.exit(1);
@@ -135,8 +136,8 @@ async function run() {
 
     for (const theme of themes) {
       const themeResult = await client.query(
-        'INSERT INTO themes (name, subject, grade) VALUES ($1, $2, $3) RETURNING id',
-        [theme.name, subject, grade]
+        'INSERT INTO themes (name, subject, grade, curriculum_version) VALUES ($1, $2, $3, $4) RETURNING id',
+        [theme.name, subject, grade, curriculumVersion]
       );
       const themeId = themeResult.rows[0].id;
       console.log(`✓ Theme: ${theme.name} (id ${themeId})`);
