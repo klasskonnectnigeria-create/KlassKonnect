@@ -2,7 +2,7 @@
 
 ## What it is
 
-An AI-powered tutoring app for Nigerian students, built around the NERDC curriculum. Currently active: **Primary 4 Mathematics** and **SS3 Mathematics** (General Mathematics, First & Second Term). Provides three modes of AI-assisted learning: tutoring, practice questions, and assessments.
+An AI-powered tutoring app for Nigerian students, built around the NERDC curriculum. Currently active: **Primary 4 Mathematics** and **SS3** across 9 subjects. Provides three modes of AI-assisted learning: tutoring, practice questions, and assessments.
 
 ## Repository
 
@@ -38,10 +38,34 @@ An AI-powered tutoring app for Nigerian students, built around the NERDC curricu
 
 ## Curriculum Data
 
-- **Primary 4 Mathematics**: 5 themes (Number Numeration, Basic Operations, Mensuration, Geometry, Everyday Statistics), 14 topics
-- **SS3 Mathematics**: 1 theme, 15 topics covering First Term (Matrices I & II, Arithmetic of Finance I & II, Application of Linear/Quadratic Equations, Trigonometry, Surface Area & Volume of a Sphere, The Earth as a Sphere, Coordinate Geometry I & II, Differentiation I & II) and Second Term (Integration I & II, Logarithms). Sourced from schemeofwork.com (Federal SS3 Mathematics scheme of work); not verified against the official NERDC portal, which is login-gated and blocks automated access.
-- Each topic carries: `name`, `learning_outcome`, `focal_competency`, `sequence_order`, plus normalized child records in `content` (syllabus content), `learning_activities` (teacher and student activities, with resources/materials), and `evaluation_guides` (currently empty for both grades)
-- **Note**: Primary 5, Primary 6, and JSS 1 exist as grade values on some (test/seed) student accounts, but have no curriculum content populated yet — students at those grades currently see an empty theme list
+### Primary 4 Mathematics
+5 themes (Number Numeration, Basic Operations, Mensuration, Geometry, Everyday Statistics), 14 topics.
+
+### SS3 — 9 subjects, 115 topics total
+
+| Subject | Topics | Curriculum Version | Terms Covered |
+|---|---|---|---|
+| Mathematics | 15 | `legacy` | First & Second |
+| English Language | 18 | `nesri_2025` | First & Second |
+| Government | 13 | `nesri_2025` | First & Second |
+| Physics | 8 | `nesri_2025` | First only |
+| Chemistry | 20 | `nesri_2025` | First, Second & Third |
+| Biology | 8 | `nesri_2025` | First only |
+| Geography | 9 | `nesri_2025` | First only |
+| Economics | 10 | `legacy` | First only |
+| Literature-in-English | 14 | `legacy` | First & Second |
+
+**`themes.curriculum_version`** distinguishes two curriculum generations:
+- **`legacy`** — the pre-reform WAEC-era curriculum (in use for years; well-documented by third-party sites)
+- **`nesri_2025`** — the new National Education Sector Reform Initiatives curriculum, approved by NERDC on September 8, 2025. Sourced from a page (schemeofwork.com's "SS3 Scheme of Work Unified") that self-describes as NESRI-compliant.
+
+**Important caveat on the reform's actual applicability**: NESRI implementation is phased by entry cohort, starting at SS1 in the 2025/2026 session — meaning students who were *already* in SS3 when the reform launched are finishing under the **legacy** curriculum, not NESRI. The first cohort to experience NESRI at SS3 won't arrive until roughly 2027/2028. Both versions are stored so the app can serve the correct one depending on which cohort a student belongs to, but this cohort-matching logic is **not yet implemented** in the app itself — see Known Gaps.
+
+**Sourcing**: All curriculum content (Primary 4, and every SS3 subject) comes from third-party aggregator sites (primarily schemeofwork.com, also ecolebooks.com for Economics), not the official NERDC portal directly. The official portals (`lmis.nerdcportals.com.ng`, `nerdc.org.ng/eCurriculum`) are login-gated and/or block automated access (`robots.txt` disallow) — this is a structural limitation of the source material, not something this project failed to check.
+
+Each topic carries: `name`, `learning_outcome`, `focal_competency`, `sequence_order`, plus normalized child records in `content` (syllabus content, tagged by `section_type`), `learning_activities` (teacher and student activities, with resources/materials), and `evaluation_guides` (currently empty for all subjects/grades).
+
+**Note**: Primary 5, Primary 6, and JSS 1 exist as grade values on some (test/seed) student accounts, but have no curriculum content populated yet — students at those grades currently see an empty theme list.
 
 ## Offline Support
 
@@ -52,8 +76,8 @@ An AI-powered tutoring app for Nigerian students, built around the NERDC curricu
 ## AI Behavior
 
 - Responses are personalized (address the student by name), contextually grounded in the curriculum topic's actual syllabus content, and localized to Nigerian settings and examples
-- Conversation history is scoped **per student per topic** (not just per student), so a student's Matrices tutoring session, Trigonometry practice session, and Coordinate Geometry assessment session each maintain independent, non-bleeding context — while still correctly remembering earlier turns within the same topic
-- Verified end-to-end in production via direct API testing: tutor, practice, and assessment agents all produce responses correctly grounded in the specific syllabus content for their topic (e.g. a Coordinate Geometry assessment used the actual distance formula and progressed correctly after a correct answer; a Trigonometry practice question referenced sine/cosine table-of-values content directly from the syllabus)
+- Conversation history is scoped **per student per topic** (not just per student), so a student's tutoring session on one topic, practice session on another, and assessment session on a third each maintain independent, non-bleeding context — while still correctly remembering earlier turns within the same topic
+- Verified end-to-end in production via direct API testing across multiple subjects and topics: tutor, practice, and assessment agents all produce responses correctly grounded in the specific syllabus content for their topic
 
 ## Infrastructure
 
@@ -61,25 +85,44 @@ An AI-powered tutoring app for Nigerian students, built around the NERDC curricu
 - **Database**: managed Postgres on Railway, same project
 - **Production backend URL**: `https://pacific-growth-production-d82a.up.railway.app`
 
----
+## Reusable Curriculum Import Tool
+
+`backend/scripts/importCurriculum.js` — a safe, additive script for adding new subjects or grades without destructive reseeding (unlike the original `seedDb.js`, which wipes all curriculum data before reseeding from `parsePdf.js` — **do not run `seedDb.js`** unless you intend to destroy all existing themes/topics/content).
+
+- Matches the field structure of `parsePdf.js`/`seedDb.js`: `knowledge`, `skills`, `competencies`, `values`, `learningActivities`, `resources`, `evaluationGuide`
+- Input is a JS module exporting `curriculumData` (see files in `backend/scripts/curriculum-data/` for examples)
+- Supports `--dry-run` (validate and preview without writing) and `--force` (insert even if a theme already exists for that subject/grade/version)
+- Checks for existing subject+grade+`curriculum_version` combinations before inserting, to avoid accidental duplicates
+- Runs as a single transaction — fails clean, no partial imports
+
+Usage:
+```bash
+railway connect Postgres &   # open SSH tunnel, note the local port it prints
+sleep 3
+DATABASE_URL="postgresql://postgres:<password>@localhost:<PORT>/railway" node scripts/importCurriculum.js scripts/curriculum-data/<file>.js [--dry-run] [--force]
+```
 
 ## Recent Fixes & Additions (August 2026)
 
-1. **Fixed invalid Claude model name** — `claudeClient.js` was calling a non-existent model (`claude-opus-5`), silently falling back to canned demo responses on every request. Fixed to `claude-sonnet-5`. Verified via direct API test and live conversation logs.
+1. **Fixed invalid Claude model name** — `claudeClient.js` was calling a non-existent model (`claude-opus-5`), silently falling back to canned demo responses on every request. Fixed to `claude-sonnet-5`.
 2. **Removed public debug endpoints** — `/api/debug/config` and `/api/debug/test-claude` were exposed on the public production URL; `/api/debug/config` was leaking large portions of the live `CLAUDE_API_KEY`. Both endpoints removed and confirmed returning 404.
-3. **Added SS3 Mathematics curriculum** — 15 topics across First and Second Term, added as a new theme with full NERDC-style detail (content, teacher/student activities, materials), matching the format of the existing Primary curriculum documents.
-4. **Extended `topics` schema, then migrated to the app's real schema** — initially added `content`, `teacher_activities`, `student_activities`, `materials` columns directly on `topics`; subsequently migrated that data into the app's proper normalized tables (`content`, `learning_activities`) to match what `/api/content/topics/:topicId` already expected.
-5. **Wired syllabus content into AI agent prompts** — `tutor.js`, `practice.js`, and `assessment.js` previously only used the topic name (and sometimes learning outcome) in their system prompts. Now they pull in syllabus content, focal competency, and student activities so responses are grounded in the actual curriculum rather than the model's general knowledge.
-6. **Fixed grade-based content isolation** — `/api/content/themes` and `/api/content/themes/:themeId/topics` previously had no grade filtering (and `/themes` had no auth requirement at all), meaning any student could see every grade's content. Now themes/topics are scoped to the requesting student's grade, with cross-grade access returning 403. Confirmed safe to deploy — no real student accounts had any activity outside Primary 4 and SS3 (the only grades with populated content).
-7. **Fixed cross-topic conversation bleed** — in-memory conversation history in `claudeClient.js` was keyed only by `studentId`, so a student's tutor session on one topic would leak into their practice/assessment sessions on a completely different topic (the AI would visibly say things like "I notice we drifted into matrices" mid-Trigonometry-question). History is now keyed by `studentId:topicId`, matching how `conversation_logs` is already scoped in the database. Verified: topics now maintain independent, non-bleeding context while still correctly remembering prior turns within the same topic.
+3. **Added SS3 Mathematics curriculum** — the first SS3 subject added, 15 topics.
+4. **Extended `topics` schema, then migrated to the app's real schema** — initially added flat columns directly on `topics`; subsequently migrated that data into the app's proper normalized tables (`content`, `learning_activities`) to match what `/api/content/topics/:topicId` already expected.
+5. **Wired syllabus content into AI agent prompts** — `tutor.js`, `practice.js`, and `assessment.js` previously only used the topic name (and sometimes learning outcome). Now they pull in syllabus content, focal competency, and student activities.
+6. **Fixed grade-based content isolation** — `/api/content/themes` and `/api/content/themes/:themeId/topics` previously had no grade filtering (and `/themes` had no auth requirement at all). Now themes/topics are scoped to the requesting student's grade, with cross-grade access returning 403.
+7. **Fixed cross-topic conversation bleed** — in-memory conversation history was keyed only by `studentId`, causing sessions on different topics to leak into each other. History is now keyed by `studentId:topicId`.
+8. **Built a reusable, non-destructive curriculum import tool** (`importCurriculum.js`) and used it to add 8 more SS3 subjects (English Language, Government, Physics, Chemistry, Biology, Geography, Economics, Literature-in-English) — 100 additional topics, bringing SS3 to 9 subjects and 115 topics total.
+9. **Added `curriculum_version` tracking** — `themes.curriculum_version` (`legacy` or `nesri_2025`) added to distinguish pre- and post-reform curricula, anticipating the NESRI rollout without disrupting existing legacy content.
 
 ## Known Gaps
 
-- `evaluation_guides` table is empty for all topics (Primary 4/5 and SS3) — the `/api/content/topics/:topicId` route expects data there but none has been populated
+- `evaluation_guides` table is empty for all topics across every subject and grade
 - Duplicate theme rows exist for some Primary-grade themes (same names, different `description` values) — pre-existing, not yet cleaned up
-- SS3 Third Term is not populated — sources agree it's WAEC/NECO revision of prior material rather than new content, but this hasn't been verified against an official source
+- Several SS3 subjects (Physics, Biology, Geography) only have First Term content — Second/Third Term wasn't available from the sources found
+- SS3 Mathematics Third Term is not populated — believed to be WAEC/NECO revision of prior material, not new content, but this hasn't been verified against an official source
 - No curriculum content exists yet for Primary 5, Primary 6, or JSS 1, despite those grade values appearing on some student accounts
-- In-memory conversation history (used for live AI context, separate from the permanent `conversation_logs` database table) resets on every backend redeploy/restart — this is expected behavior, not a bug, but worth knowing if a conversation seems to "forget" itself after a deploy
+- **No cohort-aware curriculum-version selection**: the app doesn't yet determine whether a given student should see `legacy` or `nesri_2025` content based on when they started SS1 — both versions exist in the database, but nothing currently picks between them (worth resolving before `nesri_2025` content is actually relevant to any real student, likely not urgent until ~2027/2028)
+- In-memory conversation history (used for live AI context, separate from the permanent `conversation_logs` database table) resets on every backend redeploy/restart — expected behavior, not a bug
 
 ---
 
@@ -133,6 +176,8 @@ railway connect Postgres
 Drops into a live `psql` session against the production database.
 
 Prefer writing SQL to a file and loading it with `\i /path/to/file.sql` over pasting large blocks directly into the interactive prompt — long pastes can get truncated by the terminal and leave `psql` in a broken state (use `Ctrl+D` to force-exit if that happens).
+
+For adding new curriculum data, prefer `backend/scripts/importCurriculum.js` (see above) over raw SQL — it's safer, reusable, and matches the app's actual schema.
 
 ### Testing the backend directly (without the mobile app)
 
