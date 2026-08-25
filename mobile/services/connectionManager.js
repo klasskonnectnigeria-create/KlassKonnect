@@ -8,11 +8,6 @@ class ConnectionManager {
       onOffline: []
     };
     this.unsubscribe = null;
-    this.syncCallback = null;
-  }
-
-  setSyncCallback(callback) {
-    this.syncCallback = callback;
   }
 
   async checkNetworkStatus() {

@@ -100,7 +100,7 @@ export function ThemesScreen({ route, navigation }) {
       <Card variant="elevated" style={styles.progressCard}>
         <ProgressBar
           progress={overallProgress}
-          label="Theme Progress"
+          label="Subject Progress"
           style={styles.progressBar}
         />
         <Text style={[styles.progressStats, typography.body2]}>

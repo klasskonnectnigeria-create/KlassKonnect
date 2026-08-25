@@ -95,6 +95,17 @@ export default function RootLayout() {
     const syncStart = Date.now();
     const sync = async () => {
       try {
+        // The 'onOnline' event can fire on a stale/flickering network-state
+        // report (expo-network's simulator reachability reporting is known
+        // to be unreliable). Re-check real connectivity right before the
+        // actual sync request, rather than trusting the event alone, so we
+        // don't attempt (and log a scary error for) a doomed request.
+        const isActuallyOnline = await connectionManager.checkNetworkStatus();
+        if (!isActuallyOnline) {
+          console.log('Sync skipped: onOnline fired but connection re-check failed');
+          return;
+        }
+
         const checkStart = Date.now();
         await syncManager.checkAndSyncIfNeeded(token, student.id);
         const checkTime = Date.now() - checkStart;
@@ -104,17 +115,16 @@ export default function RootLayout() {
       }
     };
 
-    // Set up callback for future syncs, and re-sync automatically when the
-    // connection is restored after being offline (registering this listener
-    // is cheap/synchronous and does not block UI startup).
-    connectionManager.setSyncCallback(sync);
+    // Re-sync automatically when the connection is restored after being
+    // offline (registering this listener is cheap/synchronous and does not
+    // block UI startup).
     connectionManager.addEventListener('onOnline', sync);
 
     const setupTime = Date.now() - syncStart;
     console.log(`✅ Sync callback configured for student ${student.id} (${setupTime}ms)`);
 
     return () => {
-      connectionManager.setSyncCallback(null);
+      connectionManager.removeEventListener('onOnline', sync);
     };
   }, [token, student?.id]);
 
