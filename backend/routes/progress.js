@@ -29,6 +29,53 @@ router.get('/', verifyToken, async (req, res) => {
   }
 });
 
+// Get student's progress broken down by subject (theme)
+router.get('/by-subject', verifyToken, async (req, res) => {
+  try {
+    const studentResult = await pool.query(
+      'SELECT grade FROM students WHERE id = $1',
+      [req.studentId]
+    );
+
+    if (studentResult.rows.length === 0) {
+      return res.status(404).json({ error: 'Student not found' });
+    }
+
+    const { grade } = studentResult.rows[0];
+
+    const result = await pool.query(
+      `SELECT
+        th.id AS theme_id,
+        th.name AS theme_name,
+        th.subject,
+        COUNT(t.id) AS total_topics,
+        COUNT(CASE WHEN sp.status = 'completed' THEN 1 END) AS completed_topics,
+        ROUND(AVG(sp.understanding_level)::numeric, 2) AS avg_understanding
+      FROM themes th
+      JOIN topics t ON t.theme_id = th.id
+      LEFT JOIN student_progress sp ON sp.topic_id = t.id AND sp.student_id = $1
+      WHERE th.grade = $2
+      GROUP BY th.id, th.name, th.subject
+      ORDER BY th.subject`,
+      [req.studentId, grade]
+    );
+
+    const bySubject = result.rows.map(row => ({
+      themeId: row.theme_id,
+      themeName: row.theme_name,
+      subject: row.subject,
+      totalTopics: parseInt(row.total_topics) || 0,
+      completedTopics: parseInt(row.completed_topics) || 0,
+      avgUnderstanding: parseFloat(row.avg_understanding) || 0
+    }));
+
+    res.json({ grade, subjects: bySubject });
+  } catch (error) {
+    console.error('Error fetching progress by subject:', error);
+    res.status(500).json({ error: 'Error fetching progress by subject' });
+  }
+});
+
 // Update progress for a topic
 router.post('/topics/:topicId', verifyToken, async (req, res) => {
   const { topicId } = req.params;
