@@ -180,7 +180,7 @@ export function HomeScreen({ onLogout }) {
 
       {/* Themes */}
       <Text style={[styles.sectionTitle, typography.subtitle1]}>
-        📚 Mathematics Topics
+        📚 {student?.grade ? `${student.grade} Subjects` : 'Your Subjects'}
       </Text>
 
       {themes.map((theme) => (
