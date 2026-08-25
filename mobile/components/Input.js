@@ -27,6 +27,7 @@ export function Input({
   leftIcon,
   rightIcon,
   onRightIconPress,
+  multiline = false,
   style
 }) {
   const [isFocused, setIsFocused] = useState(false);
@@ -54,7 +55,7 @@ export function Input({
         ) : null}
 
         <TextInput
-          style={[styles.input, typography.body1]}
+          style={[styles.input, typography.body1, multiline && styles.inputMultiline]}
           placeholder={placeholder}
           placeholderTextColor={colors.text.light}
           value={value}
@@ -64,6 +65,8 @@ export function Input({
           autoCapitalize={autoCapitalize}
           autoCorrect={autoCorrect}
           editable={!disabled}
+          multiline={multiline}
+          textAlignVertical={multiline ? 'top' : 'center'}
           onFocus={() => setIsFocused(true)}
           onBlur={() => setIsFocused(false)}
         />
@@ -115,6 +118,12 @@ const styles = StyleSheet.create({
     minHeight: 52,
     paddingVertical: 0,
     color: colors.text.primary
+  },
+
+  inputMultiline: {
+    minHeight: 44,
+    maxHeight: 100,
+    paddingVertical: spacing.sm
   },
 
   inputFocused: {

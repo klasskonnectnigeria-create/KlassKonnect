@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import {
-  View, StyleSheet, ScrollView, Text, TouchableOpacity, ActivityIndicator, SafeAreaView,
+  View, StyleSheet, ScrollView, Text, TouchableOpacity, ActivityIndicator,
   KeyboardAvoidingView, Platform, FlatList
 } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
 import { useAuthStore } from '../store/authStore';
 import { useContentStore } from '../store/contentStore';
@@ -380,22 +381,25 @@ export function TopicDetailsScreen({ route, navigation }) {
           </ScrollView>
 
           {/* Input Area */}
-          <View style={styles.inputArea}>
-            <Input
-              placeholder="Ask your question..."
-              value={message}
-              onChangeText={setMessage}
-              style={styles.chatInput}
-            />
-            <Button
-              label="Send"
-              onPress={handleSendMessage}
-              loading={chatLoading}
-              disabled={!message.trim() || chatLoading}
-              size="sm"
-              style={styles.sendButton}
-            />
-          </View>
+          <SafeAreaView edges={['bottom']} style={styles.inputSafeArea}>
+            <View style={styles.inputArea}>
+              <Input
+                placeholder="Ask your question..."
+                value={message}
+                onChangeText={setMessage}
+                style={styles.chatInput}
+                multiline
+              />
+              <Button
+                label="Send"
+                onPress={handleSendMessage}
+                loading={chatLoading}
+                disabled={!message.trim() || chatLoading}
+                size="sm"
+                style={styles.sendButton}
+              />
+            </View>
+          </SafeAreaView>
         </>
       )}
     </KeyboardAvoidingView>
@@ -559,14 +563,17 @@ const styles = StyleSheet.create({
   assistantText: {
     color: colors.text.primary
   },
+  inputSafeArea: {
+    backgroundColor: colors.surface,
+    borderTopWidth: 1,
+    borderTopColor: colors.border
+  },
   inputArea: {
     flexDirection: 'row',
-    alignItems: 'flex-end',
+    alignItems: 'center',
     paddingHorizontal: spacing.md,
     paddingVertical: spacing.md,
     backgroundColor: colors.surface,
-    borderTopWidth: 1,
-    borderTopColor: colors.border,
     gap: spacing.sm
   },
   chatInput: {
