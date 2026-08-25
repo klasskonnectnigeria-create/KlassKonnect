@@ -25,6 +25,19 @@ class NotificationService {
         return null;
       }
 
+      // Try to use cached token first (fast path on subsequent launches)
+      try {
+        const cachedToken = await AsyncStorage.getItem('expoPushToken');
+        if (cachedToken) {
+          console.log('Using cached push token (skipping permission check)');
+          this.expoPushToken = cachedToken;
+          return cachedToken;
+        }
+      } catch (cacheError) {
+        console.warn('Error reading cached push token:', cacheError);
+        // Continue with full registration if cache read fails
+      }
+
       // Check if already have permission
       const { status: existingStatus } = await Notifications.getPermissionsAsync();
       let finalStatus = existingStatus;
@@ -43,9 +56,9 @@ class NotificationService {
       try {
         const token = await Notifications.getExpoPushTokenAsync();
         this.expoPushToken = token.data;
-        console.log('Expo push token:', this.expoPushToken);
+        console.log('Expo push token generated:', this.expoPushToken);
 
-        // Save token for backend
+        // Save token for backend and caching
         await AsyncStorage.setItem('expoPushToken', this.expoPushToken);
 
         return this.expoPushToken;

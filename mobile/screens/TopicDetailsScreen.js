@@ -76,6 +76,7 @@ export function TopicDetailsScreen({ route, navigation }) {
       }
 
       // Use offline-aware API client for chat
+      const requestStart = Date.now();
       const data = await offlineApiClient.post(
         '/api/agents/chat',
         {
@@ -85,6 +86,8 @@ export function TopicDetailsScreen({ route, navigation }) {
         },
         token
       );
+      const requestTime = Date.now() - requestStart;
+      console.log(`⏱️ Chat API response time: ${requestTime}ms (${(requestTime/1000).toFixed(2)}s)`);
 
       if (data && data.response) {
         setChatMessages((prev) => [...prev, {
@@ -571,7 +574,8 @@ const styles = StyleSheet.create({
     marginBottom: 0
   },
   sendButton: {
-    width: 48
+    minWidth: 50,
+    paddingHorizontal: 8
   },
   agentSelector: {
     backgroundColor: colors.surface,
