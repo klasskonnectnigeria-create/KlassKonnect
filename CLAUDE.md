@@ -1,5 +1,7 @@
 # NERDC AI Tutor — Project Overview
 
+**Last updated:** 25 August 2026
+
 ## What it is
 
 An AI-powered tutoring app for Nigerian students, built around the NERDC curriculum. Currently active: **Primary 4 Mathematics**, **SS2** across 9 subjects, and **SS3** across 9 subjects. Provides three modes of AI-assisted learning: tutoring, practice questions, and assessments.
@@ -18,6 +20,7 @@ An AI-powered tutoring app for Nigerian students, built around the NERDC curricu
 - Zustand for state management
 - Connects to the backend via a configurable `API_URL` (dev vs. production, set in `mobile/config/api.js`)
 - Grade dropdown on signup (`SignupScreen.js`, `GRADES` constant): `Primary 4`, `Primary 5`, `Primary 6`, `JSS1`, `JSS2`, `JSS3`, `SS1`, `SS2`, `SS3` — no space before the number for JSS/SS grades, matching the format stored in `themes.grade` in the database. This must stay in sync; see Known Gaps.
+- Shared `Input` component (`components/Input.js`) supports a `multiline` prop (forwards to the underlying `TextInput`, applies `inputMultiline` style with `maxHeight: 100`); pass `multiline` explicitly wherever a growable text field is needed — it defaults to `false`.
 
 ### Backend (`backend/`)
 - Node.js/Express, deployed on Railway (service: `pacific-growth`, project `poetic-flexibility`)
@@ -90,15 +93,17 @@ Each topic carries: `name`, `learning_outcome`, `focal_competency`, `sequence_or
 
 ## Offline Support
 
-- The app detects connectivity and, when offline, reads from and writes to a local SQLite cache instead of the network
-- Actions taken offline (chat messages, progress updates) are queued locally and synced to the backend once the connection is restored
-- This is by design — the app is meant to function in low-connectivity environments common across Nigeria
+- The app detects connectivity via a `connectionManager` service and, when offline, reads from and writes to a local SQLite cache instead of the network.
+- **Progress/gamification data** is designed to queue locally and sync automatically once the connection is restored, via a `sync()` callback registered with `connectionManager.setSyncCallback()` and triggered by an `onOnline` event listener (`mobile/app/_layout.js`).
+- **Chat messages behave differently**: when offline, sending a chat message fails immediately with a visible "Unable to send message. Please check your connection" error — it is **not** queued for later delivery. This makes sense given a chat message needs a live AI-generated reply, which can't be produced until the connection returns; there's nothing meaningful to queue. Confirmed via live testing (see Known Gaps for what wasn't confirmed).
+- This offline-first design is intended for the low-connectivity environments common across Nigeria.
 
 ## AI Behavior
 
 - Responses are personalized (address the student by name), contextually grounded in the curriculum topic's actual syllabus content, and localized to Nigerian settings and examples
 - Conversation history is scoped **per student per topic** (not just per student), so a student's tutoring session on one topic, practice session on another, and assessment session on a third each maintain independent, non-bleeding context — while still correctly remembering earlier turns within the same topic
 - Verified end-to-end in production via direct API testing across multiple subjects and topics: tutor, practice, and assessment agents all produce responses correctly grounded in the specific syllabus content for their topic
+- **Known display bug**: AI responses that use markdown formatting (headers with `#`, bold with `**`) are rendered as raw markdown text in the chat bubble rather than being parsed/styled — e.g. a response literally shows `# What is ECOWAS?` and `**ECOWAS**` instead of a styled heading and bold text. Confirmed via live testing. Needs a markdown renderer (e.g. `react-native-markdown-display`) wired into the chat message bubble component.
 
 ## Infrastructure
 
@@ -137,6 +142,14 @@ DATABASE_URL="postgresql://postgres:<password>@localhost:<PORT>/railway" node sc
 10. **Added SS2 curriculum across all 9 subjects** — 292 topics total, all three terms for every subject. See SS2 table above.
 11. **Fixed a real production bug: SS3 grade string mismatch causing empty subject lists.** A student's account had `grade = "SS 3"` (with a space) while all SS3 themes are stored as `"SS3"` (no space); the exact-match grade filter (see fix #6) meant this student saw zero subjects, with no visible error. Root cause: `SignupScreen.js`'s `GRADES` dropdown offered spaced values (`'SS 1'`, `'SS 2'`, `'SS 3'`, `'JSS 1'`, etc.) inconsistent with the backend's unspaced convention. Fixed the dropdown to use unspaced values matching the database (`SS1`, `SS2`, `SS3`, `JSS1`, `JSS2`, `JSS3`), and corrected the one affected student's existing database record. Verified fixed via live logout/login test.
 12. **Fixed a hardcoded home-screen heading** — `HomeScreen.js` displayed a literal "📚 Mathematics Topics" label regardless of the student's actual grade or subjects. Changed to dynamically read `{student.grade} Subjects`.
+13. **Removed hardcoded test login credentials from `authStore.js`.** Git history shows this file has repeatedly flip-flopped between safe `null`/`null` defaults and various hardcoded test tokens/students (`alice@test.com`, `test@example.com`, etc.) — a recurring pattern from quick local UI testing that wasn't reverted before other commits landed on top. Removed again as of this fix; worth being deliberate about not reintroducing this during future quick-testing sessions.
+14. **Reviewed and integrated a batch of app-startup and chat performance work** found sitting uncommitted in the working tree (from a separate, earlier debugging pass): added timing instrumentation across app init steps and the chat API call, made push-notification registration non-blocking and cache the Expo push token, fixed a `GestureHandlerRootView` mounting bug (was conditionally un-mounted during loading, which can break gesture handler attachment), and fixed a Send-button sizing issue. One part of that batch — deferring automatic sync until the user next navigates, instead of syncing immediately on reconnect — was deliberately **reverted**, since it silently disabled a documented offline feature (auto-sync-on-reconnect) without actually addressing its stated goal (the sync listener registration itself was not the blocking operation; `await initializeNotifications()` was, and that was fixed separately in the same batch).
+15. **Deleted a set of unreviewed, unverified SS2 curriculum import files** found in the working tree (`SS2_IMPORT_INSTRUCTIONS.md`, `IMPORT_SS2.sh`, `deploy-and-import-ss2.js`, `ss2-literature-in-english.js`, and two SQL dump files), left over from what appears to have been a separate, parallel session attempting the same SS2 rollout independently. These were never actually run against the database (no data conflicts existed), and one of the SQL files used **hardcoded primary key IDs** that would have collided with and potentially corrupted real data already in the live database had it ever been executed. Our own SS2 work (see fix #10) fully supersedes this.
+16. **Fixed the chat input box's bottom safe-area and multiline support.** The chat screen's `SafeAreaView` was imported from core `react-native` rather than `react-native-safe-area-context`; core RN's version silently ignores the `edges` prop, and critically, the input row at the bottom of the chat screen wasn't wrapped in any safe-area-aware container at all (only the header was). This caused typed text to sit flush against the very bottom edge of the screen with no padding. Separately, the shared `Input` component didn't accept or forward a `multiline` prop, so passing one had no effect. Fixed both: `TopicDetailsScreen.js` now imports the correct `SafeAreaView` and wraps the input row in one with `edges={['bottom']}`; `Input.js` now properly supports `multiline` (with a capped `maxHeight`) and centers its content correctly at any height. Verified via live multi-line message testing.
+
+## Testing Notes — Offline Sync (25 August 2026, inconclusive)
+
+Attempted to verify auto-sync-on-reconnect (see fix #14 revert) by toggling the Mac's WiFi off/on while the iOS Simulator was running and watching for `[ConnectionManager] Network status:` and `⏱️ Sync operation took:` log lines to appear automatically. The test was inconclusive: toggling WiFi produced **no new log output at all** in one attempt, suggesting the simulator's network-change detection (likely via `NetInfo` or similar) may not reliably catch connectivity changes made this way, or requires a longer state change than was tested. This needs re-testing — ideally on a **physical device** via Expo Go, where WiFi/cellular toggling is more representative of a real network transition, or with a longer off-duration. Until re-verified, don't assume auto-sync-on-reconnect is confirmed working in practice, even though the code path (`connectionManager.addEventListener('onOnline', sync)`) is correctly wired.
 
 ## Known Gaps
 
@@ -147,6 +160,10 @@ DATABASE_URL="postgresql://postgres:<password>@localhost:<PORT>/railway" node sc
 - No curriculum content exists yet for Primary 5, Primary 6, or JSS1–JSS3, despite those grade values appearing on some student accounts
 - **No cohort-aware curriculum-version selection**: the app doesn't yet determine whether a given student should see `legacy` or `nesri_2025` content based on when they started SS1 — both versions exist in the database, but nothing currently picks between them (worth resolving before `nesri_2025` content is actually relevant to any real student, likely not urgent until ~2027/2028)
 - **Grade-string consistency is fragile**: the grade value is free-form text stored per student and compared by exact string match against `themes.grade`. The signup dropdown and database now agree (`SS3` not `SS 3`), but any future change to one side without the other will silently break that grade's content for every affected student, with no error surfaced anywhere. Worth considering a stricter approach (e.g. an enum/lookup table) if this class of bug recurs.
+- **Auto-sync-on-reconnect is not yet confirmed working in practice** — see Testing Notes above. The code is correctly wired, but a live test to prove it fires on real connectivity restoration was inconclusive and needs a retry, ideally on a physical device.
+- **Chat messages are not queued for offline sending** — unlike progress/gamification data, a chat message sent while offline fails immediately with a visible error rather than being queued for later delivery. This may well be the correct/intended design (there's no AI reply to produce until reconnected), but it means the app's offline story is narrower than earlier documentation implied — it covers offline *reading* and *progress tracking*, not offline *chat composition*.
+- **Chat responses don't render markdown** — AI replies that use `#` headers or `**bold**` show the raw markdown syntax in the chat bubble instead of styled text. Needs a markdown renderer wired into the message display component.
+- **Unexplained app-initialization timeout warning**: `App initialization timeout - showing UI anyway (critical path took >20s)` fires on essentially every app launch/reload in testing, but the app's own instrumented `TOTAL INITIALIZATION TIME` log consistently shows only 25–86ms for the same launch. This suggests either the 20-second timeout warning's trigger condition doesn't actually reflect the instrumented init steps (e.g. it's tied to a different, unmeasured operation), or the log message itself is stale/miswired. Worth investigating — right now it's a confusing, seemingly-false warning appearing on every launch.
 - In-memory conversation history (used for live AI context, separate from the permanent `conversation_logs` database table) resets on every backend redeploy/restart — expected behavior, not a bug
 
 ---
@@ -190,6 +207,8 @@ npx expo start --android   # Android emulator
 - Right now, dev mode talks to the **live production backend** regardless of simulator or physical device.
 - If you want to test against a **local backend** instead (e.g. on iOS Simulator, which *can* reach `localhost`), you'd need to start the backend locally (`npm start` in `backend/`) and change `mobile/config/api.js` back to point `isDevelopment` at `http://localhost:5000`.
 
+**Note on testing network/connectivity behavior specifically**: toggling the Mac's WiFi while the iOS Simulator is running does not reliably trigger a detectable connectivity change in testing so far (see Testing Notes above). For offline/reconnect testing, prefer a physical device via Expo Go where toggling WiFi or cellular data is more representative of a real transition.
+
 ### Database access (for checking data directly)
 
 ```bash
@@ -223,4 +242,4 @@ curl -s -X POST https://pacific-growth-production-d82a.up.railway.app/api/agents
 
 ### If working on this repo from multiple sessions/tools at once
 
-If more than one Claude session (or another collaborator) might be working on this repo concurrently, check `git status` for uncommitted changes and untracked files before starting new work — a parallel session may have left local changes that haven't been reviewed or committed. Don't assume the working directory only contains your own changes.
+If more than one Claude session (or another collaborator) might be working on this repo concurrently, check `git status` for uncommitted changes and untracked files before starting new work — a parallel session may have left local changes that haven't been reviewed or committed. Don't assume the working directory only contains your own changes. See fix #15 above for a real example of this happening.
