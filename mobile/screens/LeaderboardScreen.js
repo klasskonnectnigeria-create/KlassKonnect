@@ -1,205 +1,88 @@
 import React, { useEffect, useState } from 'react';
-import {
-  View, StyleSheet, ScrollView, Text, TouchableOpacity,
-  ActivityIndicator, RefreshControl, FlatList
-} from 'react-native';
+import { View, StyleSheet, ScrollView, Text, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { useAuthStore } from '../store/authStore';
-import { useLeaderboardStore } from '../store/leaderboardStore';
-import { LeaderboardEntry } from '../components/LeaderboardEntry';
+import { useGamificationStore } from '../store/gamificationStore';
+import { PointsDisplay, StreakDisplay, BadgesDisplay } from '../components/GamificationDisplay';
+import { ProgressBar } from '../components/ProgressBar';
 import { Card } from '../components/Card';
-import { colors, spacing, typography, borderRadius } from '../constants/colors';
+import { colors, spacing, typography } from '../constants/colors';
+import { API_URL } from '../config/api';
 import { useRouter } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { gamificationService } from '../services/gamificationService';
 
 export function LeaderboardScreen() {
   const router = useRouter();
-  console.log('🔎 LEADERBOARD ROUTE:', router);
-
   const { student, token } = useAuthStore();
   const {
-    globalLeaderboard,
-    gradeLeaderboard,
-    weeklyLeaderboard,
-    studentRank,
-    surroundingPlayers,
-    isLoading,
-    fetchGlobalLeaderboard,
-    fetchGradeLeaderboard,
-    fetchWeeklyLeaderboard,
-    fetchStudentRank,
-    refreshAll
-  } = useLeaderboardStore();
+    loadGamificationData,
+    totalPoints,
+    level,
+    currentStreak,
+    longestStreak,
+    badges
+  } = useGamificationStore();
 
-  const [activeTab, setActiveTab] = useState('global'); // 'global', 'grade', 'weekly'
-  const [refreshing, setRefreshing] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [subjectProgress, setSubjectProgress] = useState([]);
 
   useEffect(() => {
-    loadLeaderboards();
-  }, []);
+    let mounted = true;
 
-  const loadLeaderboards = async () => {
-    if (!token || !student) return;
-    await refreshAll(token, student.grade);
-  };
+    const load = async () => {
+      if (!student?.id || !token) {
+        if (mounted) setIsLoading(false);
+        return;
+      }
 
-  const onRefresh = async () => {
-    setRefreshing(true);
-    await loadLeaderboards();
-    setRefreshing(false);
-  };
+      try {
+        await gamificationService.initializeForStudent(student.id);
+        if (!mounted) return;
+        await loadGamificationData(student.id);
 
-  const renderLeaderboard = () => {
-    let data = [];
+        const response = await fetch(`${API_URL}/api/progress/by-subject`, {
+          headers: { Authorization: `Bearer ${token}` }
+        });
 
-    switch (activeTab) {
-      case 'global':
-        data = globalLeaderboard;
-        break;
-      case 'grade':
-        data = gradeLeaderboard;
-        break;
-      case 'weekly':
-        data = weeklyLeaderboard;
-        break;
-      default:
-        data = globalLeaderboard;
-    }
+        if (response.ok) {
+          const data = await response.json();
+          if (mounted) setSubjectProgress(data.subjects || []);
+        } else {
+          console.warn('Failed to fetch subject progress:', response.status);
+        }
+      } catch (error) {
+        console.warn('Error loading progress data:', error);
+      } finally {
+        if (mounted) setIsLoading(false);
+      }
+    };
 
-    if (data.length === 0 && !isLoading) {
-      return (
-        <View style={styles.emptyState}>
-          <Text style={[styles.emptyStateText, typography.body2]}>
-            No data available yet
-          </Text>
-        </View>
-      );
-    }
+    load();
 
-    return (
-      <FlatList
-        data={data}
-        keyExtractor={(item) => `${item.studentId}-${item.rank}`}
-        renderItem={({ item }) => (
-          <LeaderboardEntry
-            entry={item}
-            isCurrentUser={item.studentId === student?.id}
-          />
-        )}
-        scrollEnabled={false}
-        contentContainerStyle={styles.listContent}
-      />
-    );
-  };
+    return () => {
+      mounted = false;
+    };
+  }, [student?.id, token]);
 
   return (
     <View style={styles.container}>
       {/* Header */}
       <SafeAreaView edges={['top']} style={styles.headerSafeArea}>
         <View style={styles.header}>
-        <TouchableOpacity
-          onPress={() => router.replace('/(app)/home')}
-          style={styles.backButton}
-          activeOpacity={0.7}
-        >
-          <Text style={styles.backButtonText}>‹</Text>
-        </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => router.replace('/(app)/home')}
+            style={styles.backButton}
+            activeOpacity={0.7}
+          >
+            <Text style={styles.backButtonText}>‹</Text>
+          </TouchableOpacity>
 
-        <Text style={[styles.title, typography.h2]}>🏆 Leaderboard</Text>
+          <Text style={[styles.title, typography.h2]}>🏆 Your Achievements</Text>
 
-        <View style={styles.headerSpacer} />
+          <View style={styles.headerSpacer} />
         </View>
       </SafeAreaView>
 
-      {/* Your Rank Card */}
-      {studentRank && (
-        <Card style={styles.rankCard}>
-          <View style={styles.rankCardContent}>
-            <View style={styles.rankCardLeft}>
-              <Text style={[styles.yourRankLabel, typography.caption]}>
-                YOUR RANK
-              </Text>
-              <Text style={[styles.yourRank, typography.h1]}>
-                #{studentRank}
-              </Text>
-            </View>
-
-            <View style={styles.rankCardDivider} />
-
-            <View style={styles.rankCardRight}>
-              <View style={styles.rankCardStat}>
-                <Text style={[styles.rankCardStatValue, typography.subtitle1]}>
-                  {surroundingPlayers.find(p => p.isCurrentUser)?.points || 0}
-                </Text>
-                <Text style={[styles.rankCardStatLabel, typography.caption]}>
-                  Points
-                </Text>
-              </View>
-
-              <View style={styles.rankCardStat}>
-                <Text style={[styles.rankCardStatValue, typography.subtitle1]}>
-                  {surroundingPlayers.find(p => p.isCurrentUser)?.currentStreak || 0}
-                </Text>
-                <Text style={[styles.rankCardStatLabel, typography.caption]}>
-                  Streak
-                </Text>
-              </View>
-
-              <View style={styles.rankCardStat}>
-                <Text style={[styles.rankCardStatValue, typography.subtitle1]}>
-                  {surroundingPlayers.find(p => p.isCurrentUser)?.badgeCount || 0}
-                </Text>
-                <Text style={[styles.rankCardStatLabel, typography.caption]}>
-                  Badges
-                </Text>
-              </View>
-            </View>
-          </View>
-        </Card>
-      )}
-
-      {/* Tab Navigation */}
-      <View style={styles.tabBar}>
-        <TouchableOpacity
-          style={[styles.tab, activeTab === 'global' && styles.activeTab]}
-          onPress={() => setActiveTab('global')}
-        >
-          <Text style={[
-            styles.tabLabel,
-            typography.subtitle2,
-            activeTab === 'global' && styles.activeTabLabel
-          ]}>
-            🌍 Global
-          </Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={[styles.tab, activeTab === 'grade' && styles.activeTab]}
-          onPress={() => setActiveTab('grade')}
-        >
-          <Text style={[
-            styles.tabLabel,
-            typography.subtitle2,
-            activeTab === 'grade' && styles.activeTabLabel
-          ]}>
-            🎓 Grade {student?.grade}
-          </Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={[styles.tab, activeTab === 'weekly' && styles.activeTab]}
-          onPress={() => setActiveTab('weekly')}
-        >
-          <Text style={[
-            styles.tabLabel,
-            typography.subtitle2,
-            activeTab === 'weekly' && styles.activeTabLabel
-          ]}>
-            🔥 Hot Streaks
-          </Text>
-        </TouchableOpacity>
-      </View>
-
-      {/* Leaderboard List */}
       {isLoading && (
         <View style={styles.loadingContainer}>
           <ActivityIndicator size="large" color={colors.primary} />
@@ -210,11 +93,58 @@ export function LeaderboardScreen() {
         <ScrollView
           style={styles.scrollView}
           contentContainerStyle={styles.scrollContent}
-          refreshControl={
-            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-          }
         >
-          {renderLeaderboard()}
+          <Text style={[styles.introText, typography.body2]}>
+            Your points, streak, badges, and progress by subject.
+          </Text>
+
+          <PointsDisplay points={totalPoints} level={level} />
+          <StreakDisplay currentStreak={currentStreak} longestStreak={longestStreak} />
+          {badges.length > 0 ? (
+            <BadgesDisplay badges={badges} limit={12} />
+          ) : (
+            <View style={styles.emptyBadges}>
+              <Text style={[styles.emptyBadgesText, typography.body2]}>
+                No badges yet — complete topics and keep your streak going to earn your first one!
+              </Text>
+            </View>
+          )}
+
+          <Text style={[styles.sectionTitle, typography.subtitle1]}>
+            📚 Progress by Subject
+          </Text>
+
+          {subjectProgress.length === 0 && (
+            <View style={styles.emptyBadges}>
+              <Text style={[styles.emptyBadgesText, typography.body2]}>
+                No subject progress yet — start exploring a topic to begin tracking!
+              </Text>
+            </View>
+          )}
+
+          {subjectProgress.map((subj) => {
+            const percent = subj.totalTopics > 0
+              ? (subj.completedTopics / subj.totalTopics) * 100
+              : 0;
+
+            return (
+              <Card key={subj.themeId} variant="elevated" style={styles.subjectCard}>
+                <Text style={[styles.subjectName, typography.subtitle2]}>
+                  {subj.subject}
+                </Text>
+                <ProgressBar
+                  progress={percent}
+                  label={`${subj.completedTopics} of ${subj.totalTopics} topics`}
+                  style={styles.subjectProgressBar}
+                />
+                {subj.avgUnderstanding > 0 && (
+                  <Text style={[styles.understandingText, typography.caption]}>
+                    Avg. understanding: {Math.round(subj.avgUnderstanding)}%
+                  </Text>
+                )}
+              </Card>
+            );
+          })}
         </ScrollView>
       )}
     </View>
@@ -229,7 +159,6 @@ const styles = StyleSheet.create({
   headerSafeArea: {
     backgroundColor: colors.surface
   },
-
   header: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -262,102 +191,54 @@ const styles = StyleSheet.create({
   headerSpacer: {
     width: 44
   },
-  rankCard: {
-    marginHorizontal: spacing.md,
-    marginVertical: spacing.md,
-    backgroundColor: colors.surface,
-    borderLeftWidth: 4,
-    borderLeftColor: colors.primary
-  },
-  rankCardContent: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between'
-  },
-  rankCardLeft: {
-    flex: 1,
-    alignItems: 'center'
-  },
-  rankCardDivider: {
-    width: 1,
-    height: 60,
-    backgroundColor: colors.border,
-    marginHorizontal: spacing.md
-  },
-  rankCardRight: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'space-around'
-  },
-  yourRankLabel: {
-    color: colors.text.secondary,
-    fontWeight: '600',
-    marginBottom: spacing.xs
-  },
-  yourRank: {
-    color: colors.primary,
-    fontWeight: '700'
-  },
-  rankCardStat: {
-    alignItems: 'center'
-  },
-  rankCardStatValue: {
-    color: colors.text.primary,
-    fontWeight: '600',
-    marginBottom: spacing.xs
-  },
-  rankCardStatLabel: {
-    color: colors.text.secondary
-  },
-  tabBar: {
-    flexDirection: 'row',
-    borderBottomWidth: 1,
-    borderBottomColor: colors.border,
-    backgroundColor: colors.surface,
-    paddingHorizontal: spacing.sm
-  },
-  tab: {
-    flex: 1,
-    paddingVertical: spacing.md,
-    paddingHorizontal: spacing.sm,
-    borderBottomWidth: 3,
-    borderBottomColor: 'transparent',
-    alignItems: 'center'
-  },
-  activeTab: {
-    borderBottomColor: colors.primary
-  },
-  tabLabel: {
-    textAlign: 'center',
-    color: colors.text.secondary,
-    fontWeight: '500'
-  },
-  activeTabLabel: {
-    color: colors.primary,
-    fontWeight: '600'
-  },
-  scrollView: {
-    flex: 1
-  },
-  scrollContent: {
-    padding: spacing.md
-  },
-  listContent: {
-    gap: spacing.sm
-  },
   loadingContainer: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center'
   },
-  emptyState: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingVertical: spacing.xl
+  scrollView: {
+    flex: 1
   },
-  emptyStateText: {
+  scrollContent: {
+    paddingBottom: spacing.xl
+  },
+  introText: {
+    color: colors.text.secondary,
+    textAlign: 'center',
+    marginTop: spacing.md,
+    marginHorizontal: spacing.md
+  },
+  emptyBadges: {
+    marginHorizontal: spacing.md,
+    marginVertical: spacing.md,
+    padding: spacing.lg,
+    alignItems: 'center'
+  },
+  emptyBadgesText: {
     color: colors.text.secondary,
     textAlign: 'center'
+  },
+  sectionTitle: {
+    color: colors.text.primary,
+    fontWeight: '600',
+    marginHorizontal: spacing.md,
+    marginTop: spacing.lg,
+    marginBottom: spacing.sm
+  },
+  subjectCard: {
+    marginHorizontal: spacing.md,
+    marginBottom: spacing.sm
+  },
+  subjectName: {
+    color: colors.primary,
+    fontWeight: '600',
+    marginBottom: spacing.sm
+  },
+  subjectProgressBar: {
+    marginBottom: spacing.xs
+  },
+  understandingText: {
+    color: colors.text.secondary,
+    marginTop: spacing.xs
   }
 });
