@@ -63,7 +63,16 @@ class NotificationService {
 
         return this.expoPushToken;
       } catch (error) {
-        console.error('Error getting Expo push token:', error);
+        // This project has no EAS project configured (no extra.eas.projectId
+        // in app.json) — expected during Expo Go testing, since real push
+        // notifications aren't needed until closer to a production build.
+        // Log it plainly instead of an error/stack trace so it doesn't look
+        // like an unexpected crash on every launch.
+        if (error?.message?.includes('projectId')) {
+          console.log('Push token unavailable: no EAS project configured (expected during testing)');
+        } else {
+          console.error('Error getting Expo push token:', error);
+        }
         return null;
       }
     } catch (error) {
