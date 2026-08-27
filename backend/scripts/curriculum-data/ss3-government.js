@@ -1,11 +1,15 @@
-// SS3 Government — First & Second Term
+// SS3 Government — Complete (First and Second Term)
 // Source: schemeofwork.com "SS3 Scheme of Work Unified" (published 2025-11-29, updated 2025-12-19)
 // This page self-describes as compliant with the new NERDC/NESRI curriculum (Sept 2025 reform).
 // Not verified against the official NERDC portal (login-gated / robots-disallowed).
 // Administrative weeks (Resumption/Midterm Test, Break, Revision, Examination) are excluded.
-// Second term weeks 8-11 were listed by the source as open-ended ("Continuation / Practical
-// Applications... depending on state/unified curriculum adjustments") rather than a defined
-// topic, so that block is omitted here rather than invented.
+// Second term weeks 8-11 were listed by the source as open-ended and omitted rather than invented.
+// NOTE: Cross-checked against an independent Lagos State unified SS3 Government source, whose
+// described content (peace, conflict resolution, e-government, leadership/followership,
+// interdependence/globalization, international organisations) matches these 13 topics closely.
+// This, combined with the source title explicitly saying "First term and Second term" (no Third
+// Term listed), indicates SS3 Government has no separate Third Term content under NESRI 2025 —
+// consistent with the WASSCE-prep pattern also confirmed for SS3 Mathematics. Treated as complete.
 
 export const curriculumData = {
   subject: 'Government',
