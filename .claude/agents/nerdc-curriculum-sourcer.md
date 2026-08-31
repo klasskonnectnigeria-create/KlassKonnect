@@ -152,6 +152,16 @@ wrong (count mismatch, garbled names), fix the file and re-run — don't proceed
 
 You have full local bash access, so do this yourself rather than handing commands to the user:
 
+**A note on `RAILWAY_TOKEN`**: this environment sets a project-scoped Railway token globally.
+A project token intentionally has no associated user identity, so `railway whoami` and
+`railway list` will correctly return `Unauthorized` — that is expected behavior for this kind of
+token, not a sign it's broken, expired, or misconfigured. Never use `whoami`/`list` as a health
+check for it, and never respond to a `whoami` failure by unsetting `RAILWAY_TOKEN` or falling
+back to a cached interactive/browser-login session — that silently switches which account and
+credentials the rest of the pipeline runs under. If you need to sanity-check the token, use
+`railway status` or `railway variables --service Postgres` instead — both are project-scoped
+and will succeed with a valid project token.
+
 ```bash
 railway connect Postgres &
 sleep 3
