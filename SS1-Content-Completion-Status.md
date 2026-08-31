@@ -9,15 +9,16 @@ additional Science-track subject. Agriculture was added the same day as the firs
 Trade-track subject at this grade, and Technical Drawing followed as the second. Christian
 Religious Studies was added the same day as the first Humanities & Arts-track subject at this
 grade, and Islamic Studies followed the same day as the second Humanities & Arts-track subject.
-Nigerian History followed as the third Humanities & Arts-track subject.
-SS1 now has 19 live subjects. DB-verified 2026-08-31.
+Nigerian History followed as the third Humanities & Arts-track subject. French was added
+2026-08-31 as the fourth Humanities & Arts-track subject.
+SS1 now has 20 live subjects. DB-verified 2026-08-31.
 
 No SS3-style five-category structure applies here — SS1's catalogue is limited to the
 science/humanities core plus this new Compulsory Core tier and a newly-started Vocational &
 Trade tier; the wider Vocational & Trade and Business & Commercial catalogues have not yet been
 attempted at this grade.
 
-## Subjects (19 live)
+## Subjects (20 live)
 
 Original 9 (`legacy`): Biology, Chemistry, Economics, English Language, Geography, Government,
 Literature-in-English, Mathematics, Physics.
@@ -33,8 +34,8 @@ Vocational & Trade-track subjects (2026-08-31): Agriculture (`legacy`, 33 topics
 terms) and Technical Drawing (`legacy`, 30 topics, all three terms).
 
 Humanities & Arts-track subjects (2026-08-31): Christian Religious Studies (`legacy`, 30 topics,
-all three terms), Islamic Studies (`legacy`, 33 topics, all three terms), and Nigerian History
-(`legacy`, 34 topics, all three terms).
+all three terms), Islamic Studies (`legacy`, 33 topics, all three terms), Nigerian History
+(`legacy`, 34 topics, all three terms), and French (`legacy`, 28 topics, all three terms).
 
 Commit `b28990e4` explicitly marks the original 9-subject set "9/9 subjects" complete; each
 subject also has its own individual "3 terms, legacy" commit. Each Phase 1 addition, each
@@ -43,7 +44,7 @@ commit via the nerdc-curriculum-sourcer agent.
 
 ## Known gaps
 
-None found in commit history or the live DB aggregate for the 19 live subjects. The rest of the
+None found in commit history or the live DB aggregate for the 20 live subjects. The rest of the
 Vocational & Trade catalogue, plus Business & Commercial and remaining Humanities & Arts/
 Science-track subjects beyond the Compulsory Core, are not yet attempted at this grade (planned
 for later phases).
