@@ -4,13 +4,14 @@
 subjects remain complete, each with full three-term coverage. A Phase 1 sourcing pass
 (2026-08-31) additionally added the 4 "Compulsory Core" subjects that were already live at
 SS3 but missing at SS1/SS2 (a sourcing backlog, not a designed curriculum boundary — see
-`CLAUDE.md`). SS2 now has 14 live subjects. DB-verified 2026-08-31.
+`CLAUDE.md`). SS2 now has 15 live subjects. DB-verified 2026-08-31.
 
 No SS3-style five-category structure applies here — SS2's catalogue is limited to the
-science/humanities core plus this new Compulsory Core tier; Vocational & Trade and Business &
-Commercial tiers have not yet been attempted at this grade.
+science/humanities core plus this new Compulsory Core tier, plus one initial Vocational &
+Trade addition (Agriculture); the rest of the Vocational & Trade and Business & Commercial
+tiers have not yet been attempted at this grade.
 
-## Subjects (14 live)
+## Subjects (15 live)
 
 Original 9 (`legacy`): Biology, Chemistry, Economics, English Language, Geography, Government,
 Literature-in-English, Mathematics, Physics.
@@ -21,6 +22,9 @@ topics), Health Education (`legacy`, 22 topics — First/Second Term plus a part
 see the curriculum-data file header for the excluded thin-source weeks).
 
 Additional addition (2026-08-31): Further Mathematics (`legacy`, 31 topics — full
+First/Second/Third Term coverage).
+
+Vocational & Trade addition (2026-08-31): Agriculture (`legacy`, 35 topics — full
 First/Second/Third Term coverage).
 
 Each addition has its own individual commit via the nerdc-curriculum-sourcer agent.
