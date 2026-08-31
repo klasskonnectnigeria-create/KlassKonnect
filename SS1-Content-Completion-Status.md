@@ -8,14 +8,15 @@ designed curriculum boundary — see `CLAUDE.md`). Further Mathematics was added
 additional Science-track subject. Agriculture was added the same day as the first Vocational &
 Trade-track subject at this grade, and Technical Drawing followed as the second. Christian
 Religious Studies was added the same day as the first Humanities & Arts-track subject at this
-grade. SS1 now has 17 live subjects. DB-verified 2026-08-31.
+grade, and Islamic Studies followed the same day as the second Humanities & Arts-track subject.
+SS1 now has 18 live subjects. DB-verified 2026-08-31.
 
 No SS3-style five-category structure applies here — SS1's catalogue is limited to the
 science/humanities core plus this new Compulsory Core tier and a newly-started Vocational &
 Trade tier; the wider Vocational & Trade and Business & Commercial catalogues have not yet been
 attempted at this grade.
 
-## Subjects (17 live)
+## Subjects (18 live)
 
 Original 9 (`legacy`): Biology, Chemistry, Economics, English Language, Geography, Government,
 Literature-in-English, Mathematics, Physics.
@@ -30,17 +31,17 @@ three terms).
 Vocational & Trade-track subjects (2026-08-31): Agriculture (`legacy`, 33 topics, all three
 terms) and Technical Drawing (`legacy`, 30 topics, all three terms).
 
-Humanities & Arts-track subject (2026-08-31): Christian Religious Studies (`legacy`, 30 topics,
-all three terms).
+Humanities & Arts-track subjects (2026-08-31): Christian Religious Studies (`legacy`, 30 topics,
+all three terms) and Islamic Studies (`legacy`, 33 topics, all three terms).
 
 Commit `b28990e4` explicitly marks the original 9-subject set "9/9 subjects" complete; each
 subject also has its own individual "3 terms, legacy" commit. Each Phase 1 addition, each
-Vocational & Trade addition, and the Humanities & Arts addition also has its own individual
+Vocational & Trade addition, and each Humanities & Arts addition also has its own individual
 commit via the nerdc-curriculum-sourcer agent.
 
 ## Known gaps
 
-None found in commit history or the live DB aggregate for the 17 live subjects. The rest of the
+None found in commit history or the live DB aggregate for the 18 live subjects. The rest of the
 Vocational & Trade catalogue, plus Business & Commercial and remaining Humanities & Arts/
 Science-track subjects beyond the Compulsory Core, are not yet attempted at this grade (planned
 for later phases).
