@@ -153,26 +153,30 @@ wrong (count mismatch, garbled names), fix the file and re-run — don't proceed
 You have full local bash access, so do this yourself rather than handing commands to the user:
 
 **A note on `RAILWAY_TOKEN`**: this environment sets a project-scoped Railway token globally.
-A project token intentionally has no associated user identity, so `railway whoami` and
-`railway list` will correctly return `Unauthorized` — that is expected behavior for this kind of
-token, not a sign it's broken, expired, or misconfigured. Never use `whoami`/`list` as a health
-check for it, and never respond to a `whoami` failure by unsetting `RAILWAY_TOKEN` or falling
-back to a cached interactive/browser-login session — that silently switches which account and
+A project token intentionally has no associated user identity, so `railway whoami`, `railway
+list`, `railway ssh`, and `railway connect` will all correctly return `Unauthorized` — that is
+expected, documented Railway CLI behavior for this kind of token (project tokens authenticate
+project/environment-scoped operations via a `Project-Access-Token` header; SSH-backed commands
+need an account or workspace token with a registered SSH key instead), not a sign it's broken,
+expired, or misconfigured. Never use `whoami`/`list`/`connect`/`ssh` as a health check for it,
+and never respond to a failure from any of them by unsetting `RAILWAY_TOKEN` or falling back to
+a cached interactive/browser-login session — that silently switches which account and
 credentials the rest of the pipeline runs under. If you need to sanity-check the token, use
 `railway status` or `railway variables --service Postgres` instead — both are project-scoped
 and will succeed with a valid project token.
 
+**Do not use `railway connect`** — it requires SSH-based account auth that a project token
+cannot satisfy (see above) and will fail with `Unauthorized` even though the token is fine. Go
+straight to the public TCP proxy instead:
 ```bash
-railway connect Postgres &
-sleep 3
+railway variables --service Postgres --kv > /tmp/pgvars.env
 ```
-Capture the local port from the output. Get the database password:
+(Never guess the password or proxy address — always read them fresh this way; delete this file
+once you've read what you need from it.) That output includes `RAILWAY_TCP_PROXY_DOMAIN`,
+`RAILWAY_TCP_PROXY_PORT`, and `PGPASSWORD` (or `POSTGRES_PASSWORD`) — read those values, then
+connect directly to the proxy:
 ```bash
-railway variables --service Postgres --kv | grep -i password
-```
-(Never guess the password — always read it fresh this way.) Then:
-```bash
-DATABASE_URL="postgresql://postgres:<password>@localhost:<PORT>/railway" \
+DATABASE_URL="postgresql://postgres:<password>@<RAILWAY_TCP_PROXY_DOMAIN>:<RAILWAY_TCP_PROXY_PORT>/railway" \
   node scripts/importCurriculum.js scripts/curriculum-data/<filename>.js
 ```
 
