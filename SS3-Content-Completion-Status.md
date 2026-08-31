@@ -15,8 +15,11 @@ usable real source and refused to fabricate content.
 
 ## Humanities & Arts
 
-- **11 live, no target set**
-- Unresolved (no usable source found): Arabic, Home Management
+- **13 live, no target set**
+- Arabic and Home Management, previously unresolved, were resolved on a second sourcing
+  pass: Arabic (SS3, First Term, 12 topics) via SchemeofWork.com's Federal SS3 page;
+  Home Management (SS3, First Term + Second Term weeks 1-5, 17 topics) via
+  SchemeofWork.com's Federal SS3 page.
 
 ## Business & Commercial
 
@@ -30,6 +33,22 @@ usable real source and refused to fabricate content.
   Insurance and Solar Photovoltaic Installation, which are **not** part of the strict
   WAEC trade list — so the two counts are not directly comparable.
 - Unresolved (no usable source found): Shorthand, Stenography, Keyboarding
+- Second-attempt sourcing pass (2026-08-31) additionally checked, for all three: the
+  NERDC portal (nerdc.gov.ng — reachable, but its curriculum-offerings document lists
+  only the narrower NESRI-2025 subject set and doesn't include these three at all, and
+  no scheme-of-work-style content for them was found there); WAEC's own syllabus
+  documents (waecsyllabus.com/waeconline.org.ng) — a real WAEC Shorthand syllabus exists
+  but contains only exam-format/dictation-mechanics text (scheme of examination, notes
+  on the exam, reading list), not a teachable topic breakdown, so it was judged too thin
+  to compile as curriculum; no distinct WAEC syllabus document exists for "Stenography"
+  as its own subject (WAEC's "Stenography" exam papers bundle Shorthand + Word
+  Processing rather than naming a separate syllabus); Keyboarding was found only as a
+  JSS-level sub-topic within Business Studies/Information Technology schemes (e.g.
+  Delta State JSS2, Lagos/Osun JSS1 Information Technology), never as its own SS3
+  subject with a scheme of work. State Ministry of Education sites (Lagos, Osun, Kano,
+  Kaduna) and teacher-resource sites (ecolebooks.com, passnownow, ecolebooks/mycsn-style
+  aggregators) were also checked for all three and had nothing further. All three remain
+  unresolved.
 
 ## Open scope question
 
