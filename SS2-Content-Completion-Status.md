@@ -1,17 +1,26 @@
 # SS2 Content Completion Status
 
-**Status: COMPLETE** — 9/9 catalogued SS2 subjects are live in the database, each with full
-three-term coverage. DB-verified 2026-08-31 (grade-level aggregate: 9 subjects, 292 topics —
-matches the count inferred from commit history exactly, no discrepancy).
+**Status: Core tier expanded** — the original 9/9 catalogued science/humanities-core SS2
+subjects remain complete, each with full three-term coverage. A Phase 1 sourcing pass
+(2026-08-31) additionally added the 4 "Compulsory Core" subjects that were already live at
+SS3 but missing at SS1/SS2 (a sourcing backlog, not a designed curriculum boundary — see
+`CLAUDE.md`). SS2 now has 13 live subjects. DB-verified 2026-08-31.
 
 No SS3-style five-category structure applies here — SS2's catalogue is limited to the
-science/humanities core, with no Vocational & Trade or Business & Commercial tier yet
-attempted at this grade, so subjects are tracked as a flat list.
+science/humanities core plus this new Compulsory Core tier; Vocational & Trade and Business &
+Commercial tiers have not yet been attempted at this grade.
 
-## Subjects (9 live)
+## Subjects (13 live)
 
-Biology, Chemistry, Economics, English Language, Geography, Government,
-Literature-in-English, Mathematics, Physics — all tagged `legacy`.
+Original 9 (`legacy`): Biology, Chemistry, Economics, English Language, Geography, Government,
+Literature-in-English, Mathematics, Physics.
+
+Phase 1 Compulsory Core additions (2026-08-31): Citizenship and Heritage Studies (`nesri_2025`,
+24 topics), Digital Technologies (`nesri_2025`, 24 topics), Physical Education (`legacy`, 31
+topics), Health Education (`legacy`, 22 topics — First/Second Term plus a partial Third Term;
+see the curriculum-data file header for the excluded thin-source weeks).
+
+Each Phase 1 addition has its own individual commit via the nerdc-curriculum-sourcer agent.
 
 ## Known gaps / incidents
 
