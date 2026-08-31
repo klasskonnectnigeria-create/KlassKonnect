@@ -227,6 +227,19 @@ Lagos, Osun variants), syllabus.ng, and ecolebooks.com." List the sources you ac
   the real import.
 - Never invent, guess, or reuse a stale database password — always read it fresh via
   `railway variables`.
+- Never write a database password or a `DATABASE_URL` containing one to disk, in plaintext, even
+  temporarily or during exploration of an approach you later abandon. Read the credential via
+  `process.env` inside the same process that uses it (e.g. `railway run --service Postgres node
+  -e "..."`, or a shell one-liner where the variable is exported and consumed in the same
+  command) and never `fs.writeFileSync`/shell-redirect it to a file, `echo` it, or otherwise let
+  it land somewhere that has to be separately cleaned up afterward.
+- If the standard DB-access path from Step 6 (`railway variables --service Postgres --kv`, then
+  connecting to the TCP proxy) is blocked — by a permission classifier, a CLI error, or anything
+  else — stop and report exactly what was blocked and what error it gave. Do not silently switch
+  to a different connection method (`railway run`, a different CLI subcommand, a workaround
+  script, etc.) and do not fall back to a cached/interactive login. Ask before proceeding
+  differently; this applies even if the alternate method seems obviously safe or uses the same
+  underlying credentials.
 - Grade string must exactly match the app's existing convention.
 - One agent invocation = one grade+subject combination. If given a list of several, work through
   them sequentially and report each result, rather than batching them into a single git commit —
