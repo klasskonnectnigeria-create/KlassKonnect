@@ -16,8 +16,8 @@ across SS1/SS2, with Tourism at SS2 as the final combination — **Phase 3 is no
 (2026-09-01) began adding Animal Husbandry / Livestock Farming, Auto Body Repairs, Auto
 Electrical Work, Auto Mechanical Work, Automobile Parts Merchandising, and
 Blocklaying/Bricklaying and Concreting across SS1/SS2 (12 combinations); Animal Husbandry /
-Livestock Farming and Auto Body Repairs are the first two of these sourced at SS2. SS2 now has
-37 live subjects. DB-verified 2026-09-01.
+Livestock Farming, Auto Body Repairs, and Auto Electrical Work are the first three of these
+sourced at SS2. SS2 now has 38 live subjects. DB-verified 2026-09-01.
 
 No SS3-style five-category structure applies here — SS2's catalogue is limited to the
 science/humanities core plus this new Compulsory Core tier, plus a Humanities & Arts addition
@@ -26,7 +26,7 @@ science/humanities core plus this new Compulsory Core tier, plus a Humanities & 
 Vocational & Trade tier (Phase 4a, in progress) and further Business & Commercial subjects
 have not yet been attempted at this grade.
 
-## Subjects (36 live)
+## Subjects (38 live)
 
 Original 9 (`legacy`): Biology, Chemistry, Economics, English Language, Geography, Government,
 Literature-in-English, Mathematics, Physics.
@@ -133,9 +133,20 @@ verified against raw fetched HTML; Third Term weeks 10-11 share one set of learn
 under "Techniques involved in Body preparation for painting" and were kept as a single combined
 topic matching the source's own week boundaries). SS1 Auto Body Repairs was already sourced
 previously (commit `9c853bf7`, 26 topics). This subject already exists at SS3 (commit
-`350c1a20`). 2 of 6 Phase 4a subjects sourced at SS2 so far (Auto Electrical Work, Auto
-Mechanical Work, Automobile Parts Merchandising, and Blocklaying/Bricklaying and Concreting
-remain).
+`350c1a20`). Auto Electrical Work (`legacy`, 24 topics — full First/Second/Third Term
+coverage; source: AseiClass "Recent Scheme of Work on Auto Electrical Works — Syllabus for
+Senior Secondary", a three-column SSS1/SSS2/SSS3 grade-differentiated scheme; only the SSS2
+column was used. schemeofwork.com (Federal/Lagos/Osun), syllabus.ng, and ecolebooks.com had
+no scheme of work specific to this subject for SS2, matching the SS1 finding; several
+consecutive weeks share one topic under a "(Cont.)" label and were kept as separate per-week
+topics per the sourcing convention). SS1 Auto Electrical Work was left **unresolved** (commit
+`974b912c`) — the only content found there was an undifferentiated 3-year WAEC exam syllabus
+already used for the live SS3 entry (commit `89ac16fc`), correctly not reused to avoid
+misattributing terminal exam content as SS1-specific material; a fresh SS2-specific search
+found the AseiClass source above, which does provide genuine grade-specific breakdown, so SS2
+was sourced independently of the SS1 outcome. 3 of 6 Phase 4a subjects sourced at SS2 so far
+(Auto Mechanical Work, Automobile Parts Merchandising, and Blocklaying/Bricklaying and
+Concreting remain).
 
 Each addition has its own individual commit via the nerdc-curriculum-sourcer agent.
 
