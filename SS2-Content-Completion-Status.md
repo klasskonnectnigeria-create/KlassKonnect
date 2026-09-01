@@ -11,8 +11,8 @@ Foods and Nutrition was added 2026-09-01 as the sixth and final subject of Phase
 completing the full Phase 2b-iii set (Hausa, Arabic, Music, Visual Arts, Home Management,
 Foods and Nutrition) at both SS1 and SS2. A Phase 3 Business & Commercial pass (2026-09-01,
 in progress) is adding Accounting, Commerce, Bookkeeping, Marketing, Insurance, Salesmanship,
-and Tourism across SS1/SS2; Accounting, Commerce, Bookkeeping, and Marketing have now been
-added at SS2. SS2 now has 32 live subjects. DB-verified 2026-09-01.
+and Tourism across SS1/SS2; Accounting, Commerce, Bookkeeping, Marketing, and Insurance have
+now been added at SS2. SS2 now has 33 live subjects. DB-verified 2026-09-01.
 
 No SS3-style five-category structure applies here — SS2's catalogue is limited to the
 science/humanities core plus this new Compulsory Core tier, plus a Humanities & Arts addition
@@ -20,7 +20,7 @@ science/humanities core plus this new Compulsory Core tier, plus a Humanities & 
 (Agriculture, Technical Drawing); the rest of the Vocational & Trade and Business & Commercial
 tiers have not yet been attempted at this grade.
 
-## Subjects (32 live)
+## Subjects (33 live)
 
 Original 9 (`legacy`): Biology, Chemistry, Economics, English Language, Geography, Government,
 Literature-in-English, Mathematics, Physics.
@@ -91,9 +91,16 @@ source: SchemeofWork.com "Marketing Scheme of Work for SS 2 Federal", federal pa
 directly via search and verified against raw fetched HTML; First Term weeks 1-2 and 3-8, Second
 Term weeks 1-2, 3-4, 6-7, 9-10, and Third Term weeks 1-3, 4-5, 6-8 each share umbrella topics
 and were kept as separate per-week topics per the sourcing convention). SS1 Marketing was
-already sourced previously. These are the first 4 of 14 planned Phase 3 combinations
-(Accounting, Commerce, Bookkeeping, Marketing, Insurance, Salesmanship, Tourism across
-SS1/SS2); the remaining 10 are still pending.
+already sourced previously. Insurance (`legacy`, 27 topics — full First/Second/Third Term
+coverage; source: SchemeofWork.com "Insurance Scheme of Work SSS2 Lagos State", found directly
+via search and verified against raw fetched HTML; First Term weeks covering Fire Insurance,
+Money Insurance, and Fidelity Guarantee Insurance, Second Term weeks covering Marine Insurance,
+Aviation Insurance, Liability Insurance, and Engineering Insurance, and Third Term weeks
+covering Personal Accident/Group Insurance, Business Interruption, Risk Management, and
+Brokerage each span consecutive weeks under one shared topic label and were kept as separate
+per-week topics per the sourcing convention). SS1 Insurance was already sourced previously.
+These are the first 5 of 14 planned Phase 3 combinations (Accounting, Commerce, Bookkeeping,
+Marketing, Insurance, Salesmanship, Tourism across SS1/SS2); the remaining 9 are still pending.
 
 Each addition has its own individual commit via the nerdc-curriculum-sourcer agent.
 
