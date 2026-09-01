@@ -44,14 +44,16 @@ Vocational & Trade-track subject, the third subject of Phase 4a — this correct
 same-day "unresolved" report for this exact grade+subject (commit 974b912c): a re-attempt
 found that AseiClass publishes a genuine SSS1/SSS2/SSS3-differentiated scheme of work for this
 subject, the same source already used successfully for the SS2 entry, which the original
-search had missed. SS1 now has 38 live subjects. DB-verified 2026-09-01.
+search had missed. Auto Mechanical Work was added 2026-09-01 as the eighth Vocational &
+Trade-track subject, the fourth subject of Phase 4a. SS1 now has 39 live subjects.
+DB-verified 2026-09-01.
 
 No SS3-style five-category structure applies here — SS1's catalogue is limited to the
 science/humanities core plus this new Compulsory Core tier and a newly-started Vocational &
 Trade tier plus a newly-started Business & Commercial tier; the wider Vocational & Trade and
 Business & Commercial catalogues have not yet been fully attempted at this grade.
 
-## Subjects (38 live)
+## Subjects (39 live)
 
 Original 9 (`legacy`): Biology, Chemistry, Economics, English Language, Geography, Government,
 Literature-in-English, Mathematics, Physics.
@@ -76,7 +78,9 @@ SS1/SS2 — 12 combinations total). Auto Body Repairs (`legacy`, 26 topics, all 
 added 2026-09-01 as the sixth Vocational & Trade-track subject, the second of Phase 4a. Auto
 Electrical Work (`legacy`, 24 topics, all three terms; source: AseiClass) was added 2026-09-01
 as the seventh Vocational & Trade-track subject, the third of Phase 4a, correcting an earlier
-same-day unresolved report for this subject.
+same-day unresolved report for this subject. Auto Mechanical Work (`legacy`, 33 topics, all
+three terms; source: SchemeofWork.com Federal) was added 2026-09-01 as the eighth Vocational &
+Trade-track subject, the fourth of Phase 4a.
 
 Humanities & Arts-track subjects (2026-08-31): Christian Religious Studies (`legacy`, 30 topics,
 all three terms), Islamic Studies (`legacy`, 33 topics, all three terms), Nigerian History
@@ -114,7 +118,7 @@ commit via the nerdc-curriculum-sourcer agent.
 
 ## Known gaps
 
-None found in commit history or the live DB aggregate for the 38 live subjects. The rest of the
+None found in commit history or the live DB aggregate for the 39 live subjects. The rest of the
 Vocational & Trade catalogue, plus remaining Humanities & Arts/Science-track subjects beyond the
 Compulsory Core, are not yet attempted at this grade (planned for later phases).
 The SS1/SS2 language-subject gap (French, Yoruba, Igbo) is now fully closed at SS1.
@@ -126,8 +130,9 @@ subjects sourced); only the SS2 side of Tourism remains to close out the phase o
 Phase 3 combinations complete). Phase 4a (Animal Husbandry/Livestock Farming, Auto Body Repairs,
 Auto Electrical Work, Auto Mechanical Work, Automobile Parts Merchandising, and
 Blocklaying/Bricklaying and Concreting across SS1/SS2 — 12 combinations total) has started with
-Animal Husbandry / Livestock Farming, Auto Body Repairs, and Auto Electrical Work sourced at
-SS1 (3 of 12 Phase 4a combinations complete). Auto Electrical Work at SS1 was initially attempted
+Animal Husbandry / Livestock Farming, Auto Body Repairs, Auto Electrical Work, and Auto
+Mechanical Work sourced at SS1 (4 of 12 Phase 4a combinations complete). Auto Electrical Work at
+SS1 was initially attempted
 2026-09-01 and reported unresolved after schemeofwork.com (Federal, Lagos, Osun variants),
 syllabus.ng, and ecolebooks.com all turned up no scheme of work for this subject name at any SS
 level (only the related but distinct Auto Mechanical Work, Automobile Parts Merchandising, and
