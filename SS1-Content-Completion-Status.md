@@ -119,4 +119,13 @@ Phase 3 combinations complete). Phase 4a (Animal Husbandry/Livestock Farming, Au
 Auto Electrical Work, Auto Mechanical Work, Automobile Parts Merchandising, and
 Blocklaying/Bricklaying and Concreting across SS1/SS2 — 12 combinations total) has started with
 Animal Husbandry / Livestock Farming and Auto Body Repairs sourced at SS1 (2 of 12 Phase 4a
-combinations complete).
+combinations complete). Auto Electrical Work at SS1 was attempted 2026-09-01 and left
+**unresolved**: schemeofwork.com (Federal, Lagos, Osun variants), syllabus.ng, and
+ecolebooks.com have no scheme of work at all for this subject name at any SS level (only the
+related but distinct Auto Mechanical Work, Automobile Parts Merchandising, and Electrical
+Installation and Maintenance Work), and the only real source found anywhere — the WAEC exam
+syllabus (waecsyllabus.com, already used for the existing SS3 entry) — is explicitly a single
+undifferentiated 3-year trade-curriculum syllabus with no SS1/SS2/SS3 breakdown, so reusing it
+verbatim as "SS1 content" would misattribute terminal WASSCE-exam material to the first year.
+No SS1 file was written and no DB row was created; this stays a gap until a genuinely
+year-differentiated source turns up.
