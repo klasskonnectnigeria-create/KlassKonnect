@@ -17,14 +17,15 @@ completing the SS1/SS2 language-subject set. Hausa was added 2026-09-01 as the s
 Humanities & Arts-track subject, the first subject of Phase 2b-iii (Hausa, Arabic, Music,
 Visual Arts, Home Management, and Foods and Nutrition across SS1/SS2). Arabic was added
 2026-09-01 as the eighth Humanities & Arts-track subject, the second subject of Phase 2b-iii.
-SS1 now has 24 live subjects. DB-verified 2026-09-01.
+Music was added 2026-09-01 as the ninth Humanities & Arts-track subject, the third subject of
+Phase 2b-iii. SS1 now has 25 live subjects. DB-verified 2026-09-01.
 
 No SS3-style five-category structure applies here — SS1's catalogue is limited to the
 science/humanities core plus this new Compulsory Core tier and a newly-started Vocational &
 Trade tier; the wider Vocational & Trade and Business & Commercial catalogues have not yet been
 attempted at this grade.
 
-## Subjects (24 live)
+## Subjects (25 live)
 
 Original 9 (`legacy`): Biology, Chemistry, Economics, English Language, Geography, Government,
 Literature-in-English, Mathematics, Physics.
@@ -49,7 +50,9 @@ subject, completing the SS1/SS2 language-subject set (French, Yoruba, Igbo all s
 (`legacy`, 33 topics, all three terms) was added 2026-09-01 as the seventh Humanities & Arts-track
 subject, the first of Phase 2b-iii (Hausa, Arabic, Music, Visual Arts, Home Management, and Foods
 and Nutrition across SS1/SS2). Arabic (`legacy`, 36 topics, all three terms) was added
-2026-09-01 as the eighth Humanities & Arts-track subject, the second of Phase 2b-iii.
+2026-09-01 as the eighth Humanities & Arts-track subject, the second of Phase 2b-iii. Music
+(`legacy`, 32 topics, all three terms) was added 2026-09-01 as the ninth Humanities & Arts-track
+subject, the third of Phase 2b-iii.
 
 Commit `b28990e4` explicitly marks the original 9-subject set "9/9 subjects" complete; each
 subject also has its own individual "3 terms, legacy" commit. Each Phase 1 addition, each
@@ -58,10 +61,10 @@ commit via the nerdc-curriculum-sourcer agent.
 
 ## Known gaps
 
-None found in commit history or the live DB aggregate for the 23 live subjects. The rest of the
+None found in commit history or the live DB aggregate for the 25 live subjects. The rest of the
 Vocational & Trade catalogue, plus Business & Commercial and remaining Humanities & Arts/
 Science-track subjects beyond the Compulsory Core, are not yet attempted at this grade (planned
 for later phases). The SS1/SS2 language-subject gap (French, Yoruba, Igbo) is now fully closed
 at SS1. Phase 2b-iii (Hausa, Arabic, Music, Visual Arts, Home Management, Foods and Nutrition
-across SS1/SS2) is in progress; Hausa and Arabic are done at SS1, the other 10 grade+subject
-combinations remain.
+across SS1/SS2) is in progress; Hausa, Arabic, and Music are done at SS1, the other 9
+grade+subject combinations remain.
