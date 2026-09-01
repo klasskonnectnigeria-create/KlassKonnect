@@ -52,7 +52,8 @@ Trade-track subject, the sixth and final subject of Phase 4a, completing the SS1
 Phase 4a (only the SS2 side remains to close out the phase overall). Carpentry and Joinery
 was added 2026-09-01 as the eleventh Vocational & Trade-track subject, the first subject of
 Phase 4b (the continuation of the Vocational & Trade sourcing pass following Phase 4a, now
-complete at 12/12). SS1 now has 42 live subjects.
+complete at 12/12). Catering Craft Practice was added 2026-09-01 as the twelfth Vocational &
+Trade-track subject, the second subject of Phase 4b. SS1 now has 43 live subjects.
 DB-verified 2026-09-01.
 
 No SS3-style five-category structure applies here — SS1's catalogue is limited to the
@@ -60,7 +61,7 @@ science/humanities core plus this new Compulsory Core tier and a newly-started V
 Trade tier plus a newly-started Business & Commercial tier; the wider Vocational & Trade and
 Business & Commercial catalogues have not yet been fully attempted at this grade.
 
-## Subjects (42 live)
+## Subjects (43 live)
 
 Original 9 (`legacy`): Biology, Chemistry, Economics, English Language, Geography, Government,
 Literature-in-English, Mathematics, Physics.
@@ -95,7 +96,10 @@ Concreting (`legacy`, 32 topics, all three terms; source: SchemeofWork.com Feder
 completing the SS1 side of the phase. Carpentry and Joinery (`legacy`, 32 topics, all three
 terms; source: SchemeofWork.com Federal) was added 2026-09-01 as the eleventh Vocational &
 Trade-track subject, the first subject of Phase 4b, the continuation of the Vocational &
-Trade sourcing pass following Phase 4a (now complete at 12/12 across SS1/SS2).
+Trade sourcing pass following Phase 4a (now complete at 12/12 across SS1/SS2). Catering
+Craft Practice (`legacy`, 31 topics, all three terms; source: SchemeofWork.com Federal) was
+added 2026-09-01 as the twelfth Vocational & Trade-track subject, the second subject of
+Phase 4b.
 
 Humanities & Arts-track subjects (2026-08-31): Christian Religious Studies (`legacy`, 30 topics,
 all three terms), Islamic Studies (`legacy`, 33 topics, all three terms), Nigerian History
@@ -151,7 +155,9 @@ Concreting all sourced at SS1 (6 of 12 Phase 4a combinations complete; only the 
 phase remains). Phase 4a is now complete at 12/12 across SS1/SS2. Phase 4b, the continuation
 of the Vocational & Trade sourcing pass, began 2026-09-01 with Carpentry and Joinery
 (`legacy`, 32 topics, all three terms; source: SchemeofWork.com Federal), sourced and
-DB-verified at SS1 as the first subject of the phase. Auto Electrical Work at
+DB-verified at SS1 as the first subject of the phase. Catering Craft Practice (`legacy`, 31
+topics, all three terms; source: SchemeofWork.com Federal) was sourced and DB-verified at
+SS1 the same day as the second subject of Phase 4b. Auto Electrical Work at
 SS1 was initially attempted
 2026-09-01 and reported unresolved after schemeofwork.com (Federal, Lagos, Osun variants),
 syllabus.ng, and ecolebooks.com all turned up no scheme of work for this subject name at any SS
