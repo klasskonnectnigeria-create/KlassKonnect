@@ -16,8 +16,8 @@ across SS1/SS2, with Tourism at SS2 as the final combination — **Phase 3 is no
 (2026-09-01) began adding Animal Husbandry / Livestock Farming, Auto Body Repairs, Auto
 Electrical Work, Auto Mechanical Work, Automobile Parts Merchandising, and
 Blocklaying/Bricklaying and Concreting across SS1/SS2 (12 combinations); Animal Husbandry /
-Livestock Farming, Auto Body Repairs, and Auto Electrical Work are the first three of these
-sourced at SS2. SS2 now has 38 live subjects. DB-verified 2026-09-01.
+Livestock Farming, Auto Body Repairs, Auto Electrical Work, and Auto Mechanical Work are the
+first four of these sourced at SS2. SS2 now has 39 live subjects. DB-verified 2026-09-01.
 
 No SS3-style five-category structure applies here — SS2's catalogue is limited to the
 science/humanities core plus this new Compulsory Core tier, plus a Humanities & Arts addition
@@ -26,7 +26,7 @@ science/humanities core plus this new Compulsory Core tier, plus a Humanities & 
 Vocational & Trade tier (Phase 4a, in progress) and further Business & Commercial subjects
 have not yet been attempted at this grade.
 
-## Subjects (38 live)
+## Subjects (39 live)
 
 Original 9 (`legacy`): Biology, Chemistry, Economics, English Language, Geography, Government,
 Literature-in-English, Mathematics, Physics.
@@ -144,9 +144,16 @@ topics per the sourcing convention). SS1 Auto Electrical Work was left **unresol
 already used for the live SS3 entry (commit `89ac16fc`), correctly not reused to avoid
 misattributing terminal exam content as SS1-specific material; a fresh SS2-specific search
 found the AseiClass source above, which does provide genuine grade-specific breakdown, so SS2
-was sourced independently of the SS1 outcome. 3 of 6 Phase 4a subjects sourced at SS2 so far
-(Auto Mechanical Work, Automobile Parts Merchandising, and Blocklaying/Bricklaying and
-Concreting remain).
+was sourced independently of the SS1 outcome. Auto Mechanical Work (`legacy`, 33 topics — full
+First/Second/Third Term coverage; source: SchemeofWork.com "Technology Curriculum for
+Secondary School. SS 2 Auto Mechanics Scheme of Work Federal", federal page, found via the
+Federal Auto Mechanic Work category listing after a general-site search surfaced a Lagos State
+version first; the Federal version was preferred and verified against raw fetched HTML; Third
+Term weeks 4 and 5 share the source's identical heading "BRAKING SYSTEM—FAULTS IN BRAKING
+SYSTEM" but have distinct activity content and were kept as separate, distinctly-named topics).
+SS1 Auto Mechanical Work was already sourced previously (commit `776e3bc4`, 33 topics). 4 of 6
+Phase 4a subjects sourced at SS2 so far (Automobile Parts Merchandising and
+Blocklaying/Bricklaying and Concreting remain).
 
 Each addition has its own individual commit via the nerdc-curriculum-sourcer agent.
 
