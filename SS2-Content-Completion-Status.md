@@ -12,16 +12,21 @@ completing the full Phase 2b-iii set (Hausa, Arabic, Music, Visual Arts, Home Ma
 Foods and Nutrition) at both SS1 and SS2. A Phase 3 Business & Commercial pass (2026-09-01)
 added Accounting, Commerce, Bookkeeping, Marketing, Insurance, Salesmanship, and Tourism
 across SS1/SS2, with Tourism at SS2 as the final combination — **Phase 3 is now complete: all
-14 planned Business & Commercial combinations sourced.** SS2 now has 35 live subjects.
+14 planned Business & Commercial combinations sourced.** A Phase 4a Vocational & Trade pass
+(2026-09-01) began adding Animal Husbandry / Livestock Farming, Auto Body Repairs, Auto
+Electrical Work, Auto Mechanical Work, Automobile Parts Merchandising, and
+Blocklaying/Bricklaying and Concreting across SS1/SS2 (12 combinations); Animal Husbandry /
+Livestock Farming is the first of these sourced at SS2. SS2 now has 36 live subjects.
 DB-verified 2026-09-01.
 
 No SS3-style five-category structure applies here — SS2's catalogue is limited to the
 science/humanities core plus this new Compulsory Core tier, plus a Humanities & Arts addition
-(Christian Religious Studies, Islamic Studies) and two Vocational & Trade additions
-(Agriculture, Technical Drawing); the rest of the Vocational & Trade and Business & Commercial
-tiers have not yet been attempted at this grade.
+(Christian Religious Studies, Islamic Studies) and a growing Vocational & Trade tier
+(Agriculture, Technical Drawing, and now Animal Husbandry / Livestock Farming); the rest of the
+Vocational & Trade tier (Phase 4a, in progress) and further Business & Commercial subjects
+have not yet been attempted at this grade.
 
-## Subjects (35 live)
+## Subjects (36 live)
 
 Original 9 (`legacy`): Biology, Chemistry, Economics, English Language, Geography, Government,
 Literature-in-English, Mathematics, Physics.
@@ -114,6 +119,16 @@ rather than split into separate topics, matching the source's own week boundarie
 was already sourced previously (commit `bd60e447`, 30 topics). **This completes Phase 3 in
 full: all 14 planned Business & Commercial combinations (Accounting, Commerce, Bookkeeping,
 Marketing, Insurance, Salesmanship, Tourism, each at both SS1 and SS2) have now been sourced.**
+
+Phase 4a Vocational & Trade addition (2026-09-01): Animal Husbandry / Livestock Farming
+(`legacy`, 32 topics — full First/Second/Third Term coverage; source: SchemeofWork.com "Animal
+Husbandry Scheme of Work for SS 2 Federal", federal page, found directly via search; First
+Term weeks 1-2, 5-6, 7-8, 10-11, Second Term weeks 1-2, 5-6, 7-8, and Third Term weeks 6-7
+each share an umbrella topic and were kept as separate per-week topics per the sourcing
+convention). SS1 Animal Husbandry / Livestock Farming was already sourced previously (commit
+`36172501`, 32 topics). This subject already exists at SS3 (commit `7b5edbec`). 1 of 6 Phase
+4a subjects sourced at SS2 so far (Auto Body Repairs, Auto Electrical Work, Auto Mechanical
+Work, Automobile Parts Merchandising, and Blocklaying/Bricklaying and Concreting remain).
 
 Each addition has its own individual commit via the nerdc-curriculum-sourcer agent.
 
