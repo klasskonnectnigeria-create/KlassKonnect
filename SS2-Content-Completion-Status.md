@@ -9,10 +9,11 @@ language-subject pass (2026-09-01) added Hausa and Arabic. Music, Visual Arts, a
 Management were added 2026-09-01 as the third, fourth, and fifth subjects of Phase 2b-iii.
 Foods and Nutrition was added 2026-09-01 as the sixth and final subject of Phase 2b-iii,
 completing the full Phase 2b-iii set (Hausa, Arabic, Music, Visual Arts, Home Management,
-Foods and Nutrition) at both SS1 and SS2. A Phase 3 Business & Commercial pass (2026-09-01,
-in progress) is adding Accounting, Commerce, Bookkeeping, Marketing, Insurance, Salesmanship,
-and Tourism across SS1/SS2; Accounting, Commerce, Bookkeeping, Marketing, Insurance, and
-Salesmanship have now been added at SS2. SS2 now has 34 live subjects. DB-verified 2026-09-01.
+Foods and Nutrition) at both SS1 and SS2. A Phase 3 Business & Commercial pass (2026-09-01)
+added Accounting, Commerce, Bookkeeping, Marketing, Insurance, Salesmanship, and Tourism
+across SS1/SS2, with Tourism at SS2 as the final combination — **Phase 3 is now complete: all
+14 planned Business & Commercial combinations sourced.** SS2 now has 35 live subjects.
+DB-verified 2026-09-01.
 
 No SS3-style five-category structure applies here — SS2's catalogue is limited to the
 science/humanities core plus this new Compulsory Core tier, plus a Humanities & Arts addition
@@ -20,7 +21,7 @@ science/humanities core plus this new Compulsory Core tier, plus a Humanities & 
 (Agriculture, Technical Drawing); the rest of the Vocational & Trade and Business & Commercial
 tiers have not yet been attempted at this grade.
 
-## Subjects (33 live)
+## Subjects (35 live)
 
 Original 9 (`legacy`): Biology, Chemistry, Economics, English Language, Geography, Government,
 Literature-in-English, Mathematics, Physics.
@@ -104,9 +105,15 @@ SchemeofWork.com "Salesmanship Scheme of Work for SS 2 Federal", federal page, f
 via search at the expected URL pattern and verified against raw fetched HTML; First Term weeks
 1-2, 3-4, 5-6, 7-8, 9-10, Second Term weeks 3-4, 5-6, 8-9, and Third Term weeks 1-2, 3-4, 7-8,
 9-10 each share umbrella topics and were kept as separate per-week topics per the sourcing
-convention). SS1 Salesmanship was already sourced previously. These are the first 6 of 14
-planned Phase 3 combinations (Accounting, Commerce, Bookkeeping, Marketing, Insurance,
-Salesmanship, Tourism across SS1/SS2); only Tourism (SS1 and SS2) remains to complete the set.
+convention). SS1 Salesmanship was already sourced previously. Tourism (`legacy`, 32 topics —
+full First/Second/Third Term coverage; source: SchemeofWork.com "Tourism Scheme of Work for SS
+2 Federal", federal page, found directly via search and verified against raw fetched HTML;
+Second and Third Term weeks each pair two closely related sub-agencies/roles under one weekly
+heading on the source, and both items were captured within that single topic's knowledge array
+rather than split into separate topics, matching the source's own week boundaries). SS1 Tourism
+was already sourced previously (commit `bd60e447`, 30 topics). **This completes Phase 3 in
+full: all 14 planned Business & Commercial combinations (Accounting, Commerce, Bookkeeping,
+Marketing, Insurance, Salesmanship, Tourism, each at both SS1 and SS2) have now been sourced.**
 
 Each addition has its own individual commit via the nerdc-curriculum-sourcer agent.
 
