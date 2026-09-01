@@ -46,8 +46,11 @@ found that AseiClass publishes a genuine SSS1/SSS2/SSS3-differentiated scheme of
 subject, the same source already used successfully for the SS2 entry, which the original
 search had missed. Auto Mechanical Work was added 2026-09-01 as the eighth Vocational &
 Trade-track subject, the fourth subject of Phase 4a. Automobile Parts Merchandising was added
-2026-09-01 as the ninth Vocational & Trade-track subject, the fifth subject of Phase 4a. SS1 now
-has 40 live subjects.
+2026-09-01 as the ninth Vocational & Trade-track subject, the fifth subject of Phase 4a.
+Blocklaying, Bricklaying and Concreting was added 2026-09-01 as the tenth Vocational &
+Trade-track subject, the sixth and final subject of Phase 4a, completing the SS1 side of
+Phase 4a (only the SS2 side remains to close out the phase overall). SS1 now has 41 live
+subjects.
 DB-verified 2026-09-01.
 
 No SS3-style five-category structure applies here — SS1's catalogue is limited to the
@@ -55,7 +58,7 @@ science/humanities core plus this new Compulsory Core tier and a newly-started V
 Trade tier plus a newly-started Business & Commercial tier; the wider Vocational & Trade and
 Business & Commercial catalogues have not yet been fully attempted at this grade.
 
-## Subjects (40 live)
+## Subjects (41 live)
 
 Original 9 (`legacy`): Biology, Chemistry, Economics, English Language, Geography, Government,
 Literature-in-English, Mathematics, Physics.
@@ -84,7 +87,10 @@ same-day unresolved report for this subject. Auto Mechanical Work (`legacy`, 33 
 three terms; source: SchemeofWork.com Federal) was added 2026-09-01 as the eighth Vocational &
 Trade-track subject, the fourth of Phase 4a. Automobile Parts Merchandising (`legacy`, 29
 topics, all three terms; source: SchemeofWork.com SSS1 page) was added 2026-09-01 as the ninth
-Vocational & Trade-track subject, the fifth of Phase 4a.
+Vocational & Trade-track subject, the fifth of Phase 4a. Blocklaying, Bricklaying and
+Concreting (`legacy`, 32 topics, all three terms; source: SchemeofWork.com Federal) was added
+2026-09-01 as the tenth Vocational & Trade-track subject, the sixth and final of Phase 4a,
+completing the SS1 side of the phase.
 
 Humanities & Arts-track subjects (2026-08-31): Christian Religious Studies (`legacy`, 30 topics,
 all three terms), Islamic Studies (`legacy`, 33 topics, all three terms), Nigerian History
@@ -122,7 +128,7 @@ commit via the nerdc-curriculum-sourcer agent.
 
 ## Known gaps
 
-None found in commit history or the live DB aggregate for the 39 live subjects. The rest of the
+None found in commit history or the live DB aggregate for the 41 live subjects. The rest of the
 Vocational & Trade catalogue, plus remaining Humanities & Arts/Science-track subjects beyond the
 Compulsory Core, are not yet attempted at this grade (planned for later phases).
 The SS1/SS2 language-subject gap (French, Yoruba, Igbo) is now fully closed at SS1.
@@ -133,10 +139,11 @@ Marketing, Insurance, Salesmanship, Tourism across SS1/SS2) is now fully complet
 subjects sourced); only the SS2 side of Tourism remains to close out the phase overall (13 of 14
 Phase 3 combinations complete). Phase 4a (Animal Husbandry/Livestock Farming, Auto Body Repairs,
 Auto Electrical Work, Auto Mechanical Work, Automobile Parts Merchandising, and
-Blocklaying/Bricklaying and Concreting across SS1/SS2 — 12 combinations total) has started with
-Animal Husbandry / Livestock Farming, Auto Body Repairs, Auto Electrical Work, Auto
-Mechanical Work, and Automobile Parts Merchandising sourced at SS1 (5 of 12 Phase 4a
-combinations complete). Auto Electrical Work at
+Blocklaying/Bricklaying and Concreting across SS1/SS2 — 12 combinations total) has completed its
+SS1 side with Animal Husbandry / Livestock Farming, Auto Body Repairs, Auto Electrical Work,
+Auto Mechanical Work, Automobile Parts Merchandising, and Blocklaying, Bricklaying and
+Concreting all sourced at SS1 (6 of 12 Phase 4a combinations complete; only the SS2 side of the
+phase remains). Auto Electrical Work at
 SS1 was initially attempted
 2026-09-01 and reported unresolved after schemeofwork.com (Federal, Lagos, Osun variants),
 syllabus.ng, and ecolebooks.com all turned up no scheme of work for this subject name at any SS
