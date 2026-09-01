@@ -11,8 +11,8 @@ Foods and Nutrition was added 2026-09-01 as the sixth and final subject of Phase
 completing the full Phase 2b-iii set (Hausa, Arabic, Music, Visual Arts, Home Management,
 Foods and Nutrition) at both SS1 and SS2. A Phase 3 Business & Commercial pass (2026-09-01,
 in progress) is adding Accounting, Commerce, Bookkeeping, Marketing, Insurance, Salesmanship,
-and Tourism across SS1/SS2; Accounting and Commerce have now been added at SS2. SS2 now has 30
-live subjects. DB-verified 2026-09-01.
+and Tourism across SS1/SS2; Accounting, Commerce, and Bookkeeping have now been added at SS2.
+SS2 now has 31 live subjects. DB-verified 2026-09-01.
 
 No SS3-style five-category structure applies here — SS2's catalogue is limited to the
 science/humanities core plus this new Compulsory Core tier, plus a Humanities & Arts addition
@@ -20,7 +20,7 @@ science/humanities core plus this new Compulsory Core tier, plus a Humanities & 
 (Agriculture, Technical Drawing); the rest of the Vocational & Trade and Business & Commercial
 tiers have not yet been attempted at this grade.
 
-## Subjects (30 live)
+## Subjects (31 live)
 
 Original 9 (`legacy`): Biology, Chemistry, Economics, English Language, Geography, Government,
 Literature-in-English, Mathematics, Physics.
@@ -81,9 +81,14 @@ full First/Second/Third Term coverage; source: SchemeofWork.com "Commerce Scheme
 2 Federal", federal page, found directly via search and verified against raw fetched HTML;
 First Term's Communications weeks 1-4 and Insurance weeks 9-12 share umbrella topics and were
 kept as separate per-week topics per the sourcing convention). SS1 Commerce was already sourced
-previously. These are the first 2 of 14 planned Phase 3 combinations (Accounting, Commerce,
-Bookkeeping, Marketing, Insurance, Salesmanship, Tourism across SS1/SS2); the remaining 12 are
-still pending.
+previously. Bookkeeping (`legacy`, 31 topics — full First/Second/Third Term coverage; source:
+SchemeofWork.com "Book Keeping Scheme of Work for SS 2 Federal", federal page, found directly
+via search and verified against raw fetched HTML; First Term weeks 1-2, 5-6, 8-9, 10-11, Second
+Term weeks 1-2, 3-4, 5-6, 7-9, and Third Term weeks 1-4, 5-11 each share umbrella topics and
+were kept as separate per-week topics per the sourcing convention). SS1 Bookkeeping was already
+sourced previously. These are the first 3 of 14 planned Phase 3 combinations (Accounting,
+Commerce, Bookkeeping, Marketing, Insurance, Salesmanship, Tourism across SS1/SS2); the
+remaining 11 are still pending.
 
 Each addition has its own individual commit via the nerdc-curriculum-sourcer agent.
 
