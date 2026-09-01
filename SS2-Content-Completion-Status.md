@@ -5,8 +5,8 @@ subjects remain complete, each with full three-term coverage. A Phase 1 sourcing
 (2026-08-31) additionally added the 4 "Compulsory Core" subjects that were already live at
 SS3 but missing at SS1/SS2 (a sourcing backlog, not a designed curriculum boundary — see
 `CLAUDE.md`). A Phase 2b-ii language-subject pass (2026-09-01) added French, Yoruba, and Igbo. A Phase 2b-iii
-language-subject pass (2026-09-01) added Hausa and Arabic. SS2 now has 24 live subjects. DB-verified
-2026-09-01.
+language-subject pass (2026-09-01) added Hausa and Arabic. Music was added 2026-09-01 as the
+third subject of Phase 2b-iii. SS2 now has 25 live subjects. DB-verified 2026-09-01.
 
 No SS3-style five-category structure applies here — SS2's catalogue is limited to the
 science/humanities core plus this new Compulsory Core tier, plus a Humanities & Arts addition
@@ -14,7 +14,7 @@ science/humanities core plus this new Compulsory Core tier, plus a Humanities & 
 (Agriculture, Technical Drawing); the rest of the Vocational & Trade and Business & Commercial
 tiers have not yet been attempted at this grade.
 
-## Subjects (24 live)
+## Subjects (25 live)
 
 Original 9 (`legacy`): Biology, Chemistry, Economics, English Language, Geography, Government,
 Literature-in-English, Mathematics, Physics.
@@ -54,7 +54,9 @@ topics — full First/Second/Third Term coverage; source: SchemeofWork.com feder
 Arabic script content verified against the raw fetched HTML as genuine, correctly encoded
 Arabic; two topic-name slots had merged two distinct weeks' topics with no separator and were
 split back into their real per-week topics by cross-checking the week-ordinal and content
-columns — see the curriculum-data file header).
+columns — see the curriculum-data file header); Music (`legacy`, 33 topics — full
+First/Second/Third Term coverage; source: SchemeofWork.com federal SS2 page, found via a direct
+URL-pattern guess from the SS1/SS3 Music page URLs after the search index missed it).
 
 Each addition has its own individual commit via the nerdc-curriculum-sourcer agent.
 
