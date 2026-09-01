@@ -16,8 +16,8 @@ across SS1/SS2, with Tourism at SS2 as the final combination — **Phase 3 is no
 (2026-09-01) began adding Animal Husbandry / Livestock Farming, Auto Body Repairs, Auto
 Electrical Work, Auto Mechanical Work, Automobile Parts Merchandising, and
 Blocklaying/Bricklaying and Concreting across SS1/SS2 (12 combinations); Animal Husbandry /
-Livestock Farming is the first of these sourced at SS2. SS2 now has 36 live subjects.
-DB-verified 2026-09-01.
+Livestock Farming and Auto Body Repairs are the first two of these sourced at SS2. SS2 now has
+37 live subjects. DB-verified 2026-09-01.
 
 No SS3-style five-category structure applies here — SS2's catalogue is limited to the
 science/humanities core plus this new Compulsory Core tier, plus a Humanities & Arts addition
@@ -126,9 +126,16 @@ Husbandry Scheme of Work for SS 2 Federal", federal page, found directly via sea
 Term weeks 1-2, 5-6, 7-8, 10-11, Second Term weeks 1-2, 5-6, 7-8, and Third Term weeks 6-7
 each share an umbrella topic and were kept as separate per-week topics per the sourcing
 convention). SS1 Animal Husbandry / Livestock Farming was already sourced previously (commit
-`36172501`, 32 topics). This subject already exists at SS3 (commit `7b5edbec`). 1 of 6 Phase
-4a subjects sourced at SS2 so far (Auto Body Repairs, Auto Electrical Work, Auto Mechanical
-Work, Automobile Parts Merchandising, and Blocklaying/Bricklaying and Concreting remain).
+`36172501`, 32 topics). This subject already exists at SS3 (commit `7b5edbec`). Auto Body
+Repairs (`legacy`, 29 topics — full First/Second/Third Term coverage; source: SchemeofWork.com
+"Auto Body Repair and Spray Painting Scheme of Work SSS2", found directly via search and
+verified against raw fetched HTML; Third Term weeks 10-11 share one set of learning objectives
+under "Techniques involved in Body preparation for painting" and were kept as a single combined
+topic matching the source's own week boundaries). SS1 Auto Body Repairs was already sourced
+previously (commit `9c853bf7`, 26 topics). This subject already exists at SS3 (commit
+`350c1a20`). 2 of 6 Phase 4a subjects sourced at SS2 so far (Auto Electrical Work, Auto
+Mechanical Work, Automobile Parts Merchandising, and Blocklaying/Bricklaying and Concreting
+remain).
 
 Each addition has its own individual commit via the nerdc-curriculum-sourcer agent.
 
