@@ -19,17 +19,18 @@ Concreting across SS1/SS2 (12 combinations), with Blocklaying, Bricklaying and C
 SS2 as the sixth and final subject sourced — **Phase 4a is now complete at SS2: 6 of 6
 Vocational & Trade subjects sourced.** (SS1 Auto Electrical Work remains unresolved and is
 being retried separately; all other 11 of 12 SS1/SS2 combinations in this phase are sourced.)
-SS2 now has 41 live subjects. DB-verified 2026-09-01.
+A Phase 4b Vocational & Trade pass began 2026-09-01 with Carpentry and Joinery, the first
+subject sourced in this next tranche. SS2 now has 42 live subjects. DB-verified 2026-09-01.
 
 No SS3-style five-category structure applies here — SS2's catalogue is limited to the
 science/humanities core plus this new Compulsory Core tier, plus a Humanities & Arts addition
-(Christian Religious Studies, Islamic Studies) and a completed Vocational & Trade tier
-(Agriculture, Technical Drawing, Animal Husbandry / Livestock Farming, Auto Body Repairs, Auto
-Electrical Work, Auto Mechanical Work, Automobile Parts Merchandising, and Blocklaying,
-Bricklaying and Concreting); further Business & Commercial and other subject expansion has not
-yet been attempted at this grade.
+(Christian Religious Studies, Islamic Studies) and a Vocational & Trade tier (Agriculture,
+Technical Drawing, Animal Husbandry / Livestock Farming, Auto Body Repairs, Auto Electrical
+Work, Auto Mechanical Work, Automobile Parts Merchandising, Blocklaying, Bricklaying and
+Concreting, and now Carpentry and Joinery); further Business & Commercial and other subject
+expansion has not yet been attempted at this grade.
 
-## Subjects (41 live)
+## Subjects (42 live)
 
 Original 9 (`legacy`): Biology, Chemistry, Economics, English Language, Geography, Government,
 Literature-in-English, Mathematics, Physics.
@@ -171,6 +172,15 @@ convention). SS1 Blocklaying, Bricklaying and Concreting was already sourced pre
 completes Phase 4a in full: 6 of 6 Vocational & Trade subjects sourced at SS2**, and 11 of 12
 SS1/SS2 combinations across the whole phase (SS1 Auto Electrical Work remains unresolved and
 is being retried separately).
+
+Phase 4b Vocational & Trade addition (2026-09-01): Carpentry and Joinery (`legacy`, 33 topics —
+full First/Second/Third Term coverage; source: SchemeofWork.com "Carpentry and Joinery Scheme
+of Work for SS 2 Federal", found directly via a URL-pattern guess matching the sibling SS1 page
+slug, and verified against raw fetched HTML content; First Term weeks 1-3, 4-7, and 8-11,
+Second Term weeks 1-4, 5-8, and 9-10, and Third Term weeks 1-3, 4-6, and 7-12 each share
+umbrella topics and were kept as separate per-week topics per the sourcing convention). SS1
+Carpentry and Joinery was already sourced previously (commit `08b5106b`, 32 topics). This
+subject already exists at SS3 (theme id 179). This is the first subject sourced in Phase 4b.
 
 Each addition has its own individual commit via the nerdc-curriculum-sourcer agent.
 
