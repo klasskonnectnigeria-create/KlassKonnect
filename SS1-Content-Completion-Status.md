@@ -49,8 +49,10 @@ Trade-track subject, the fourth subject of Phase 4a. Automobile Parts Merchandis
 2026-09-01 as the ninth Vocational & Trade-track subject, the fifth subject of Phase 4a.
 Blocklaying, Bricklaying and Concreting was added 2026-09-01 as the tenth Vocational &
 Trade-track subject, the sixth and final subject of Phase 4a, completing the SS1 side of
-Phase 4a (only the SS2 side remains to close out the phase overall). SS1 now has 41 live
-subjects.
+Phase 4a (only the SS2 side remains to close out the phase overall). Carpentry and Joinery
+was added 2026-09-01 as the eleventh Vocational & Trade-track subject, the first subject of
+Phase 4b (the continuation of the Vocational & Trade sourcing pass following Phase 4a, now
+complete at 12/12). SS1 now has 42 live subjects.
 DB-verified 2026-09-01.
 
 No SS3-style five-category structure applies here — SS1's catalogue is limited to the
@@ -58,7 +60,7 @@ science/humanities core plus this new Compulsory Core tier and a newly-started V
 Trade tier plus a newly-started Business & Commercial tier; the wider Vocational & Trade and
 Business & Commercial catalogues have not yet been fully attempted at this grade.
 
-## Subjects (41 live)
+## Subjects (42 live)
 
 Original 9 (`legacy`): Biology, Chemistry, Economics, English Language, Geography, Government,
 Literature-in-English, Mathematics, Physics.
@@ -90,7 +92,10 @@ topics, all three terms; source: SchemeofWork.com SSS1 page) was added 2026-09-0
 Vocational & Trade-track subject, the fifth of Phase 4a. Blocklaying, Bricklaying and
 Concreting (`legacy`, 32 topics, all three terms; source: SchemeofWork.com Federal) was added
 2026-09-01 as the tenth Vocational & Trade-track subject, the sixth and final of Phase 4a,
-completing the SS1 side of the phase.
+completing the SS1 side of the phase. Carpentry and Joinery (`legacy`, 32 topics, all three
+terms; source: SchemeofWork.com Federal) was added 2026-09-01 as the eleventh Vocational &
+Trade-track subject, the first subject of Phase 4b, the continuation of the Vocational &
+Trade sourcing pass following Phase 4a (now complete at 12/12 across SS1/SS2).
 
 Humanities & Arts-track subjects (2026-08-31): Christian Religious Studies (`legacy`, 30 topics,
 all three terms), Islamic Studies (`legacy`, 33 topics, all three terms), Nigerian History
@@ -128,7 +133,7 @@ commit via the nerdc-curriculum-sourcer agent.
 
 ## Known gaps
 
-None found in commit history or the live DB aggregate for the 41 live subjects. The rest of the
+None found in commit history or the live DB aggregate for the 42 live subjects. The rest of the
 Vocational & Trade catalogue, plus remaining Humanities & Arts/Science-track subjects beyond the
 Compulsory Core, are not yet attempted at this grade (planned for later phases).
 The SS1/SS2 language-subject gap (French, Yoruba, Igbo) is now fully closed at SS1.
@@ -143,7 +148,10 @@ Blocklaying/Bricklaying and Concreting across SS1/SS2 — 12 combinations total)
 SS1 side with Animal Husbandry / Livestock Farming, Auto Body Repairs, Auto Electrical Work,
 Auto Mechanical Work, Automobile Parts Merchandising, and Blocklaying, Bricklaying and
 Concreting all sourced at SS1 (6 of 12 Phase 4a combinations complete; only the SS2 side of the
-phase remains). Auto Electrical Work at
+phase remains). Phase 4a is now complete at 12/12 across SS1/SS2. Phase 4b, the continuation
+of the Vocational & Trade sourcing pass, began 2026-09-01 with Carpentry and Joinery
+(`legacy`, 32 topics, all three terms; source: SchemeofWork.com Federal), sourced and
+DB-verified at SS1 as the first subject of the phase. Auto Electrical Work at
 SS1 was initially attempted
 2026-09-01 and reported unresolved after schemeofwork.com (Federal, Lagos, Osun variants),
 syllabus.ng, and ecolebooks.com all turned up no scheme of work for this subject name at any SS
