@@ -4,8 +4,9 @@
 subjects remain complete, each with full three-term coverage. A Phase 1 sourcing pass
 (2026-08-31) additionally added the 4 "Compulsory Core" subjects that were already live at
 SS3 but missing at SS1/SS2 (a sourcing backlog, not a designed curriculum boundary — see
-`CLAUDE.md`). A Phase 2b-ii language-subject pass (2026-09-01) added French, Yoruba, and Igbo.
-SS2 now has 22 live subjects. DB-verified 2026-09-01.
+`CLAUDE.md`). A Phase 2b-ii language-subject pass (2026-09-01) added French, Yoruba, and Igbo. A Phase 2b-iii
+language-subject pass (2026-09-01) added Hausa. SS2 now has 23 live subjects. DB-verified
+2026-09-01.
 
 No SS3-style five-category structure applies here — SS2's catalogue is limited to the
 science/humanities core plus this new Compulsory Core tier, plus a Humanities & Arts addition
@@ -13,7 +14,7 @@ science/humanities core plus this new Compulsory Core tier, plus a Humanities & 
 (Agriculture, Technical Drawing); the rest of the Vocational & Trade and Business & Commercial
 tiers have not yet been attempted at this grade.
 
-## Subjects (22 live)
+## Subjects (23 live)
 
 Original 9 (`legacy`): Biology, Chemistry, Economics, English Language, Geography, Government,
 Literature-in-English, Mathematics, Physics.
@@ -44,6 +45,11 @@ substitution technique used for SS1 Yoruba — see the curriculum-data file head
 indexed on schemeofwork.com, so the Lagos State variant was used, cross-confirmed against the
 matching Osun State variant — see the curriculum-data file header). This completes the full
 6-cell language×grade set for SS1/SS2 (French, Yoruba, Igbo at both SS1 and SS2).
+
+Phase 2b-iii language-subject addition (2026-09-01): Hausa (`legacy`, 31 topics — full
+First/Second/Third Term coverage; source: SchemeofWork.com federal SS2 page; no diacritic
+mojibake issue was found on this page's raw HTML, unlike the prior Yoruba/Igbo runs, so no
+character substitution was needed — see the curriculum-data file header).
 
 Each addition has its own individual commit via the nerdc-curriculum-sourcer agent.
 
