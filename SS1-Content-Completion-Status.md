@@ -20,7 +20,10 @@ Visual Arts, Home Management, and Foods and Nutrition across SS1/SS2). Arabic wa
 Music was added 2026-09-01 as the ninth Humanities & Arts-track subject, the third subject of
 Phase 2b-iii. Visual Arts was added 2026-09-01 as the tenth Humanities & Arts-track subject, the
 fourth subject of Phase 2b-iii. Home Management was added 2026-09-01 as the third Vocational &
-Trade-track subject, the fifth subject of Phase 2b-iii. SS1 now has 27 live subjects.
+Trade-track subject, the fifth subject of Phase 2b-iii. Foods and Nutrition was added 2026-09-01
+as the fourth Vocational & Trade-track subject, the sixth and final subject of Phase 2b-iii —
+completing Phase 2b-iii at SS1 (only the SS2 side of Foods and Nutrition remains for the phase
+overall). SS1 now has 28 live subjects.
 DB-verified 2026-09-01.
 
 No SS3-style five-category structure applies here — SS1's catalogue is limited to the
@@ -28,7 +31,7 @@ science/humanities core plus this new Compulsory Core tier and a newly-started V
 Trade tier; the wider Vocational & Trade and Business & Commercial catalogues have not yet been
 attempted at this grade.
 
-## Subjects (27 live)
+## Subjects (28 live)
 
 Original 9 (`legacy`): Biology, Chemistry, Economics, English Language, Geography, Government,
 Literature-in-English, Mathematics, Physics.
@@ -43,7 +46,9 @@ three terms).
 Vocational & Trade-track subjects (2026-08-31): Agriculture (`legacy`, 33 topics, all three
 terms) and Technical Drawing (`legacy`, 30 topics, all three terms). Home Management
 (`legacy`, 35 topics, all three terms) was added 2026-09-01 as the third Vocational &
-Trade-track subject, the fifth of Phase 2b-iii.
+Trade-track subject, the fifth of Phase 2b-iii. Foods and Nutrition (`legacy`, 31 topics, all
+three terms) was added 2026-09-01 as the fourth Vocational & Trade-track subject, the sixth and
+final of Phase 2b-iii.
 
 Humanities & Arts-track subjects (2026-08-31): Christian Religious Studies (`legacy`, 30 topics,
 all three terms), Islamic Studies (`legacy`, 33 topics, all three terms), Nigerian History
@@ -72,5 +77,5 @@ Vocational & Trade catalogue, plus Business & Commercial and remaining Humanitie
 Science-track subjects beyond the Compulsory Core, are not yet attempted at this grade (planned
 for later phases). The SS1/SS2 language-subject gap (French, Yoruba, Igbo) is now fully closed
 at SS1. Phase 2b-iii (Hausa, Arabic, Music, Visual Arts, Home Management, Foods and Nutrition
-across SS1/SS2) is in progress; Hausa, Arabic, Music, Visual Arts, and Home Management are done
-at SS1, the other 7 grade+subject combinations remain.
+across SS1/SS2) is now fully complete at SS1 (all 6 subjects sourced); only the SS2 side of
+Foods and Nutrition remains to close out the phase overall.
