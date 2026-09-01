@@ -5,7 +5,7 @@ subjects remain complete, each with full three-term coverage. A Phase 1 sourcing
 (2026-08-31) additionally added the 4 "Compulsory Core" subjects that were already live at
 SS3 but missing at SS1/SS2 (a sourcing backlog, not a designed curriculum boundary — see
 `CLAUDE.md`). A Phase 2b-ii language-subject pass (2026-09-01) added French, Yoruba, and Igbo. A Phase 2b-iii
-language-subject pass (2026-09-01) added Hausa. SS2 now has 23 live subjects. DB-verified
+language-subject pass (2026-09-01) added Hausa and Arabic. SS2 now has 24 live subjects. DB-verified
 2026-09-01.
 
 No SS3-style five-category structure applies here — SS2's catalogue is limited to the
@@ -14,7 +14,7 @@ science/humanities core plus this new Compulsory Core tier, plus a Humanities & 
 (Agriculture, Technical Drawing); the rest of the Vocational & Trade and Business & Commercial
 tiers have not yet been attempted at this grade.
 
-## Subjects (23 live)
+## Subjects (24 live)
 
 Original 9 (`legacy`): Biology, Chemistry, Economics, English Language, Geography, Government,
 Literature-in-English, Mathematics, Physics.
@@ -49,7 +49,12 @@ matching Osun State variant — see the curriculum-data file header). This compl
 Phase 2b-iii language-subject addition (2026-09-01): Hausa (`legacy`, 31 topics — full
 First/Second/Third Term coverage; source: SchemeofWork.com federal SS2 page; no diacritic
 mojibake issue was found on this page's raw HTML, unlike the prior Yoruba/Igbo runs, so no
-character substitution was needed — see the curriculum-data file header).
+character substitution was needed — see the curriculum-data file header); Arabic (`legacy`, 32
+topics — full First/Second/Third Term coverage; source: SchemeofWork.com federal SS2 page;
+Arabic script content verified against the raw fetched HTML as genuine, correctly encoded
+Arabic; two topic-name slots had merged two distinct weeks' topics with no separator and were
+split back into their real per-week topics by cross-checking the week-ordinal and content
+columns — see the curriculum-data file header).
 
 Each addition has its own individual commit via the nerdc-curriculum-sourcer agent.
 
