@@ -11,8 +11,8 @@ Foods and Nutrition was added 2026-09-01 as the sixth and final subject of Phase
 completing the full Phase 2b-iii set (Hausa, Arabic, Music, Visual Arts, Home Management,
 Foods and Nutrition) at both SS1 and SS2. A Phase 3 Business & Commercial pass (2026-09-01,
 in progress) is adding Accounting, Commerce, Bookkeeping, Marketing, Insurance, Salesmanship,
-and Tourism across SS1/SS2; Accounting, Commerce, Bookkeeping, Marketing, and Insurance have
-now been added at SS2. SS2 now has 33 live subjects. DB-verified 2026-09-01.
+and Tourism across SS1/SS2; Accounting, Commerce, Bookkeeping, Marketing, Insurance, and
+Salesmanship have now been added at SS2. SS2 now has 34 live subjects. DB-verified 2026-09-01.
 
 No SS3-style five-category structure applies here — SS2's catalogue is limited to the
 science/humanities core plus this new Compulsory Core tier, plus a Humanities & Arts addition
@@ -99,8 +99,14 @@ Aviation Insurance, Liability Insurance, and Engineering Insurance, and Third Te
 covering Personal Accident/Group Insurance, Business Interruption, Risk Management, and
 Brokerage each span consecutive weeks under one shared topic label and were kept as separate
 per-week topics per the sourcing convention). SS1 Insurance was already sourced previously.
-These are the first 5 of 14 planned Phase 3 combinations (Accounting, Commerce, Bookkeeping,
-Marketing, Insurance, Salesmanship, Tourism across SS1/SS2); the remaining 9 are still pending.
+Salesmanship (`legacy`, 30 topics — full First/Second/Third Term coverage; source:
+SchemeofWork.com "Salesmanship Scheme of Work for SS 2 Federal", federal page, found directly
+via search at the expected URL pattern and verified against raw fetched HTML; First Term weeks
+1-2, 3-4, 5-6, 7-8, 9-10, Second Term weeks 3-4, 5-6, 8-9, and Third Term weeks 1-2, 3-4, 7-8,
+9-10 each share umbrella topics and were kept as separate per-week topics per the sourcing
+convention). SS1 Salesmanship was already sourced previously. These are the first 6 of 14
+planned Phase 3 combinations (Accounting, Commerce, Bookkeeping, Marketing, Insurance,
+Salesmanship, Tourism across SS1/SS2); only Tourism (SS1 and SS2) remains to complete the set.
 
 Each addition has its own individual commit via the nerdc-curriculum-sourcer agent.
 
