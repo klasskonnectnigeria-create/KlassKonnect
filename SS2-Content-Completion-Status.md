@@ -4,8 +4,8 @@
 subjects remain complete, each with full three-term coverage. A Phase 1 sourcing pass
 (2026-08-31) additionally added the 4 "Compulsory Core" subjects that were already live at
 SS3 but missing at SS1/SS2 (a sourcing backlog, not a designed curriculum boundary — see
-`CLAUDE.md`). A Phase 2b-ii language-subject pass (2026-09-01) added French and Yoruba. SS2
-now has 21 live subjects. DB-verified 2026-09-01.
+`CLAUDE.md`). A Phase 2b-ii language-subject pass (2026-09-01) added French, Yoruba, and Igbo.
+SS2 now has 22 live subjects. DB-verified 2026-09-01.
 
 No SS3-style five-category structure applies here — SS2's catalogue is limited to the
 science/humanities core plus this new Compulsory Core tier, plus a Humanities & Arts addition
@@ -13,7 +13,7 @@ science/humanities core plus this new Compulsory Core tier, plus a Humanities & 
 (Agriculture, Technical Drawing); the rest of the Vocational & Trade and Business & Commercial
 tiers have not yet been attempted at this grade.
 
-## Subjects (21 live)
+## Subjects (22 live)
 
 Original 9 (`legacy`): Biology, Chemistry, Economics, English Language, Geography, Government,
 Literature-in-English, Mathematics, Physics.
@@ -39,8 +39,11 @@ coverage).
 Phase 2b-ii language-subject addition (2026-09-01): Yoruba (`legacy`, 33 topics — full
 First/Second/Third Term coverage; source page's custom web font garbled Yoruba underdot
 characters and the syllabic nasal into Latin-1 lookalikes, resolved via the same raw-HTML
-substitution technique used for SS1 Yoruba — see the curriculum-data file header). SS2 Igbo
-is the next combination in this pass.
+substitution technique used for SS1 Yoruba — see the curriculum-data file header); Igbo
+(`legacy`, 29 topics — full First/Second/Third Term coverage; no federal SS2 Igbo page is
+indexed on schemeofwork.com, so the Lagos State variant was used, cross-confirmed against the
+matching Osun State variant — see the curriculum-data file header). This completes the full
+6-cell language×grade set for SS1/SS2 (French, Yoruba, Igbo at both SS1 and SS2).
 
 Each addition has its own individual commit via the nerdc-curriculum-sourcer agent.
 
