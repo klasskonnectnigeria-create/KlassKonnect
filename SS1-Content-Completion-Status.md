@@ -38,14 +38,15 @@ the phase overall). Animal Husbandry / Livestock Farming was added 2026-09-01 as
 Vocational & Trade-track subject, the first subject of Phase 4a (Animal Husbandry/Livestock
 Farming, Auto Body Repairs, Auto Electrical Work, Auto Mechanical Work, Automobile Parts
 Merchandising, and Blocklaying/Bricklaying and Concreting across SS1/SS2 — 12 combinations
-total). SS1 now has 36 live subjects. DB-verified 2026-09-01.
+total). Auto Body Repairs was added 2026-09-01 as the sixth Vocational & Trade-track subject,
+the second subject of Phase 4a. SS1 now has 37 live subjects. DB-verified 2026-09-01.
 
 No SS3-style five-category structure applies here — SS1's catalogue is limited to the
 science/humanities core plus this new Compulsory Core tier and a newly-started Vocational &
 Trade tier plus a newly-started Business & Commercial tier; the wider Vocational & Trade and
 Business & Commercial catalogues have not yet been fully attempted at this grade.
 
-## Subjects (36 live)
+## Subjects (37 live)
 
 Original 9 (`legacy`): Biology, Chemistry, Economics, English Language, Geography, Government,
 Literature-in-English, Mathematics, Physics.
@@ -66,7 +67,8 @@ final of Phase 2b-iii. Animal Husbandry / Livestock Farming (`legacy`, 32 topics
 terms) was added 2026-09-01 as the fifth Vocational & Trade-track subject, the first of Phase 4a
 (Animal Husbandry/Livestock Farming, Auto Body Repairs, Auto Electrical Work, Auto Mechanical
 Work, Automobile Parts Merchandising, and Blocklaying/Bricklaying and Concreting across
-SS1/SS2 — 12 combinations total).
+SS1/SS2 — 12 combinations total). Auto Body Repairs (`legacy`, 26 topics, all three terms) was
+added 2026-09-01 as the sixth Vocational & Trade-track subject, the second of Phase 4a.
 
 Humanities & Arts-track subjects (2026-08-31): Christian Religious Studies (`legacy`, 30 topics,
 all three terms), Islamic Studies (`legacy`, 33 topics, all three terms), Nigerian History
@@ -104,7 +106,7 @@ commit via the nerdc-curriculum-sourcer agent.
 
 ## Known gaps
 
-None found in commit history or the live DB aggregate for the 36 live subjects. The rest of the
+None found in commit history or the live DB aggregate for the 37 live subjects. The rest of the
 Vocational & Trade catalogue, plus remaining Humanities & Arts/Science-track subjects beyond the
 Compulsory Core, are not yet attempted at this grade (planned for later phases).
 The SS1/SS2 language-subject gap (French, Yoruba, Igbo) is now fully closed at SS1.
@@ -116,4 +118,5 @@ subjects sourced); only the SS2 side of Tourism remains to close out the phase o
 Phase 3 combinations complete). Phase 4a (Animal Husbandry/Livestock Farming, Auto Body Repairs,
 Auto Electrical Work, Auto Mechanical Work, Automobile Parts Merchandising, and
 Blocklaying/Bricklaying and Concreting across SS1/SS2 — 12 combinations total) has started with
-Animal Husbandry / Livestock Farming sourced at SS1 (1 of 12 Phase 4a combinations complete).
+Animal Husbandry / Livestock Farming and Auto Body Repairs sourced at SS1 (2 of 12 Phase 4a
+combinations complete).
