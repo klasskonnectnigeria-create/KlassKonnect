@@ -25,15 +25,16 @@ as the fourth Vocational & Trade-track subject, the sixth and final subject of P
 completing Phase 2b-iii at SS1 (only the SS2 side of Foods and Nutrition remains for the phase
 overall). Accounting was added 2026-09-01 as the first Business & Commercial-track subject,
 the first subject of Phase 3 (Accounting, Commerce, Bookkeeping, Marketing, Insurance,
-Salesmanship, Tourism across SS1/SS2 — 14 combinations total). SS1 now has 29 live subjects.
-DB-verified 2026-09-01.
+Salesmanship, Tourism across SS1/SS2 — 14 combinations total). Commerce was added 2026-09-01
+as the second Business & Commercial-track subject, the second subject of Phase 3. SS1 now has
+30 live subjects. DB-verified 2026-09-01.
 
 No SS3-style five-category structure applies here — SS1's catalogue is limited to the
 science/humanities core plus this new Compulsory Core tier and a newly-started Vocational &
 Trade tier plus a newly-started Business & Commercial tier; the wider Vocational & Trade and
 Business & Commercial catalogues have not yet been fully attempted at this grade.
 
-## Subjects (29 live)
+## Subjects (30 live)
 
 Original 9 (`legacy`): Biology, Chemistry, Economics, English Language, Geography, Government,
 Literature-in-English, Mathematics, Physics.
@@ -70,7 +71,8 @@ subject, the third of Phase 2b-iii. Visual Arts (`legacy`, 33 topics, all three 
 Business & Commercial-track subjects (2026-09-01): Accounting (`legacy`, 32 topics, all three
 terms) was added as the first Business & Commercial-track subject, the first of Phase 3
 (Accounting, Commerce, Bookkeeping, Marketing, Insurance, Salesmanship, Tourism across
-SS1/SS2 — 14 combinations total).
+SS1/SS2 — 14 combinations total). Commerce (`legacy`, 33 topics, all three terms) was added
+as the second Business & Commercial-track subject, the second of Phase 3.
 
 Commit `b28990e4` explicitly marks the original 9-subject set "9/9 subjects" complete; each
 subject also has its own individual "3 terms, legacy" commit. Each Phase 1 addition, each
@@ -79,13 +81,13 @@ commit via the nerdc-curriculum-sourcer agent.
 
 ## Known gaps
 
-None found in commit history or the live DB aggregate for the 29 live subjects. The rest of the
-Vocational & Trade catalogue, plus the remaining Business & Commercial subjects (Commerce,
-Bookkeeping, Marketing, Insurance, Salesmanship, Tourism) and remaining Humanities & Arts/
-Science-track subjects beyond the Compulsory Core, are not yet attempted at this grade (planned
-for later phases). The SS1/SS2 language-subject gap (French, Yoruba, Igbo) is now fully closed
-at SS1. Phase 2b-iii (Hausa, Arabic, Music, Visual Arts, Home Management, Foods and Nutrition
-across SS1/SS2) is now fully complete at SS1 (all 6 subjects sourced); only the SS2 side of
-Foods and Nutrition remains to close out the phase overall. Phase 3 (Accounting, Commerce,
-Bookkeeping, Marketing, Insurance, Salesmanship, Tourism across SS1/SS2) has just begun, with
-Accounting sourced at SS1; 13 of 14 Phase 3 combinations remain.
+None found in commit history or the live DB aggregate for the 30 live subjects. The rest of the
+Vocational & Trade catalogue, plus the remaining Business & Commercial subjects (Bookkeeping,
+Marketing, Insurance, Salesmanship, Tourism) and remaining Humanities & Arts/Science-track
+subjects beyond the Compulsory Core, are not yet attempted at this grade (planned for later
+phases). The SS1/SS2 language-subject gap (French, Yoruba, Igbo) is now fully closed at SS1.
+Phase 2b-iii (Hausa, Arabic, Music, Visual Arts, Home Management, Foods and Nutrition across
+SS1/SS2) is now fully complete at SS1 (all 6 subjects sourced); only the SS2 side of Foods and
+Nutrition remains to close out the phase overall. Phase 3 (Accounting, Commerce, Bookkeeping,
+Marketing, Insurance, Salesmanship, Tourism across SS1/SS2) is underway, with Accounting and
+Commerce sourced at SS1; 12 of 14 Phase 3 combinations remain.
