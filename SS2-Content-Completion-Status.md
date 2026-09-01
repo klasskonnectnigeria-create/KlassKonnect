@@ -13,21 +13,23 @@ Foods and Nutrition) at both SS1 and SS2. A Phase 3 Business & Commercial pass (
 added Accounting, Commerce, Bookkeeping, Marketing, Insurance, Salesmanship, and Tourism
 across SS1/SS2, with Tourism at SS2 as the final combination — **Phase 3 is now complete: all
 14 planned Business & Commercial combinations sourced.** A Phase 4a Vocational & Trade pass
-(2026-09-01) began adding Animal Husbandry / Livestock Farming, Auto Body Repairs, Auto
-Electrical Work, Auto Mechanical Work, Automobile Parts Merchandising, and
-Blocklaying/Bricklaying and Concreting across SS1/SS2 (12 combinations); Animal Husbandry /
-Livestock Farming, Auto Body Repairs, Auto Electrical Work, Auto Mechanical Work, and
-Automobile Parts Merchandising are the first five of these sourced at SS2. SS2 now has 40 live
-subjects. DB-verified 2026-09-01.
+(2026-09-01) added Animal Husbandry / Livestock Farming, Auto Body Repairs, Auto Electrical
+Work, Auto Mechanical Work, Automobile Parts Merchandising, and Blocklaying, Bricklaying and
+Concreting across SS1/SS2 (12 combinations), with Blocklaying, Bricklaying and Concreting at
+SS2 as the sixth and final subject sourced — **Phase 4a is now complete at SS2: 6 of 6
+Vocational & Trade subjects sourced.** (SS1 Auto Electrical Work remains unresolved and is
+being retried separately; all other 11 of 12 SS1/SS2 combinations in this phase are sourced.)
+SS2 now has 41 live subjects. DB-verified 2026-09-01.
 
 No SS3-style five-category structure applies here — SS2's catalogue is limited to the
 science/humanities core plus this new Compulsory Core tier, plus a Humanities & Arts addition
-(Christian Religious Studies, Islamic Studies) and a growing Vocational & Trade tier
-(Agriculture, Technical Drawing, and now Animal Husbandry / Livestock Farming); the rest of the
-Vocational & Trade tier (Phase 4a, in progress) and further Business & Commercial subjects
-have not yet been attempted at this grade.
+(Christian Religious Studies, Islamic Studies) and a completed Vocational & Trade tier
+(Agriculture, Technical Drawing, Animal Husbandry / Livestock Farming, Auto Body Repairs, Auto
+Electrical Work, Auto Mechanical Work, Automobile Parts Merchandising, and Blocklaying,
+Bricklaying and Concreting); further Business & Commercial and other subject expansion has not
+yet been attempted at this grade.
 
-## Subjects (40 live)
+## Subjects (41 live)
 
 Original 9 (`legacy`): Biology, Chemistry, Economics, English Language, Geography, Government,
 Literature-in-English, Mathematics, Physics.
@@ -157,8 +159,18 @@ Automobile Parts Merchandising (`legacy`, 28 topics — full First/Second/Third 
 source: SchemeofWork.com "Automobile Parts Merchandising Scheme of Work SSS2", found directly
 via a direct URL-pattern guess matching the sibling Auto Mechanical Work/Auto Body Repair SSS2
 page slugs, and verified against raw fetched HTML content). SS1 Automobile Parts Merchandising
-was already sourced previously (commit `f20282c9`, 29 topics). 5 of 6 Phase 4a subjects sourced
-at SS2 so far (Blocklaying/Bricklaying and Concreting remains).
+was already sourced previously (commit `f20282c9`, 29 topics). Blocklaying, Bricklaying and
+Concreting (`legacy`, 32 topics — full First/Second/Third Term coverage; source:
+SchemeofWork.com "Block Laying and Brick Laying Scheme of Work for SS 2 Federal", found
+directly via a direct URL-pattern guess matching the sibling SS1 page slug after the site
+search and category-page browse missed it, and verified against raw fetched HTML content;
+First Term weeks 1-5, 6-8, and 11-12, Second Term weeks 2-3 and 4-7, and Third Term weeks 5-6
+and 9-10 each share umbrella topics and were kept as separate per-week topics per the sourcing
+convention). SS1 Blocklaying, Bricklaying and Concreting was already sourced previously
+(commit `6253423a`, 32 topics). This subject already exists at SS3 (theme id 165). **This
+completes Phase 4a in full: 6 of 6 Vocational & Trade subjects sourced at SS2**, and 11 of 12
+SS1/SS2 combinations across the whole phase (SS1 Auto Electrical Work remains unresolved and
+is being retried separately).
 
 Each addition has its own individual commit via the nerdc-curriculum-sourcer agent.
 
