@@ -1,6 +1,7 @@
-// SS3 Foods & Nutrition — First & Second Term
+// SS3 Foods and Nutrition — First & Second Term
 // Source: SchemeofWork.com "SS3 Scheme of Work Unified" (source labels this subject
-// "Food and Nutrition"; the tracked catalogue name is "Foods & Nutrition" — used here as subject).
+// "Food and Nutrition"; the tracked catalogue name is "Foods and Nutrition" — used here as
+// subject, standardized 2026-09-01 to match the SS1/SS2 spelling).
 // URL: https://schemeofwork.com/ss3-scheme-of-work-unified/
 // Source does not claim NESRI-2025 compliance; this subject also predates the reform, so
 // 'legacy' is used per the versioning rule.
@@ -11,12 +12,12 @@
 // Only First and Second Term were available on this source; Third Term not found.
 
 export const curriculumData = {
-  subject: 'Foods & Nutrition',
+  subject: 'Foods and Nutrition',
   grade: 'SS3',
   curriculumVersion: 'legacy',
   themes: [
     {
-      name: 'SS3 Foods & Nutrition',
+      name: 'SS3 Foods and Nutrition',
       topics: [
         // ---- First Term ----
         {
