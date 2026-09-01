@@ -7,7 +7,9 @@ SS3 but missing at SS1/SS2 (a sourcing backlog, not a designed curriculum bounda
 `CLAUDE.md`). A Phase 2b-ii language-subject pass (2026-09-01) added French, Yoruba, and Igbo. A Phase 2b-iii
 language-subject pass (2026-09-01) added Hausa and Arabic. Music, Visual Arts, and Home
 Management were added 2026-09-01 as the third, fourth, and fifth subjects of Phase 2b-iii.
-SS2 now has 27 live subjects. DB-verified 2026-09-01.
+Foods and Nutrition was added 2026-09-01 as the sixth and final subject of Phase 2b-iii,
+completing the full Phase 2b-iii set (Hausa, Arabic, Music, Visual Arts, Home Management,
+Foods and Nutrition) at both SS1 and SS2. SS2 now has 28 live subjects. DB-verified 2026-09-01.
 
 No SS3-style five-category structure applies here — SS2's catalogue is limited to the
 science/humanities core plus this new Compulsory Core tier, plus a Humanities & Arts addition
@@ -15,7 +17,7 @@ science/humanities core plus this new Compulsory Core tier, plus a Humanities & 
 (Agriculture, Technical Drawing); the rest of the Vocational & Trade and Business & Commercial
 tiers have not yet been attempted at this grade.
 
-## Subjects (27 live)
+## Subjects (28 live)
 
 Original 9 (`legacy`): Biology, Chemistry, Economics, English Language, Geography, Government,
 Literature-in-English, Mathematics, Physics.
@@ -61,7 +63,12 @@ URL-pattern guess from the SS1/SS3 Music page URLs after the search index missed
 (`legacy`, 34 topics — full First/Second/Third Term coverage; source: SchemeofWork.com federal
 SS2 page, found directly via search, matching the already-sourced SS1 Visual Arts page pattern);
 Home Management (`legacy`, 33 topics — full First/Second/Third Term coverage; source:
-SchemeofWork.com federal SS2 page, found directly via search).
+SchemeofWork.com federal SS2 page, found directly via search); Foods and Nutrition (`legacy`,
+30 topics — full First/Second/Third Term coverage; source: SchemeofWork.com federal SS2 page,
+found directly via search; verified via raw-HTML breadcrumb check to be genuinely the Federal
+scheme rather than a Lagos-State-only page sharing a similar URL slug). This completes Phase
+2b-iii (Hausa, Arabic, Music, Visual Arts, Home Management, Foods and Nutrition) at both SS1
+and SS2 — 12 of 12 combinations sourced.
 
 Each addition has its own individual commit via the nerdc-curriculum-sourcer agent.
 
