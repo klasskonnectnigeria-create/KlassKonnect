@@ -16,8 +16,9 @@ across SS1/SS2, with Tourism at SS2 as the final combination — **Phase 3 is no
 (2026-09-01) began adding Animal Husbandry / Livestock Farming, Auto Body Repairs, Auto
 Electrical Work, Auto Mechanical Work, Automobile Parts Merchandising, and
 Blocklaying/Bricklaying and Concreting across SS1/SS2 (12 combinations); Animal Husbandry /
-Livestock Farming, Auto Body Repairs, Auto Electrical Work, and Auto Mechanical Work are the
-first four of these sourced at SS2. SS2 now has 39 live subjects. DB-verified 2026-09-01.
+Livestock Farming, Auto Body Repairs, Auto Electrical Work, Auto Mechanical Work, and
+Automobile Parts Merchandising are the first five of these sourced at SS2. SS2 now has 40 live
+subjects. DB-verified 2026-09-01.
 
 No SS3-style five-category structure applies here — SS2's catalogue is limited to the
 science/humanities core plus this new Compulsory Core tier, plus a Humanities & Arts addition
@@ -26,7 +27,7 @@ science/humanities core plus this new Compulsory Core tier, plus a Humanities & 
 Vocational & Trade tier (Phase 4a, in progress) and further Business & Commercial subjects
 have not yet been attempted at this grade.
 
-## Subjects (39 live)
+## Subjects (40 live)
 
 Original 9 (`legacy`): Biology, Chemistry, Economics, English Language, Geography, Government,
 Literature-in-English, Mathematics, Physics.
@@ -151,9 +152,13 @@ Federal Auto Mechanic Work category listing after a general-site search surfaced
 version first; the Federal version was preferred and verified against raw fetched HTML; Third
 Term weeks 4 and 5 share the source's identical heading "BRAKING SYSTEM—FAULTS IN BRAKING
 SYSTEM" but have distinct activity content and were kept as separate, distinctly-named topics).
-SS1 Auto Mechanical Work was already sourced previously (commit `776e3bc4`, 33 topics). 4 of 6
-Phase 4a subjects sourced at SS2 so far (Automobile Parts Merchandising and
-Blocklaying/Bricklaying and Concreting remain).
+SS1 Auto Mechanical Work was already sourced previously (commit `776e3bc4`, 33 topics).
+Automobile Parts Merchandising (`legacy`, 28 topics — full First/Second/Third Term coverage;
+source: SchemeofWork.com "Automobile Parts Merchandising Scheme of Work SSS2", found directly
+via a direct URL-pattern guess matching the sibling Auto Mechanical Work/Auto Body Repair SSS2
+page slugs, and verified against raw fetched HTML content). SS1 Automobile Parts Merchandising
+was already sourced previously (commit `f20282c9`, 29 topics). 5 of 6 Phase 4a subjects sourced
+at SS2 so far (Blocklaying/Bricklaying and Concreting remains).
 
 Each addition has its own individual commit via the nerdc-curriculum-sourcer agent.
 
