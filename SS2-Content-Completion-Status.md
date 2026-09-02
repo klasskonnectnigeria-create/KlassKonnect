@@ -27,8 +27,9 @@ Vocational & Trade addition (2026-09-02) added Electrical Installation and Maint
 and a subsequent Vocational & Trade addition (2026-09-02) added Fisheries. A further
 Vocational & Trade addition (2026-09-02) added Furniture Making. A further Vocational & Trade
 addition (2026-09-02) added Garment Making Construction. A further Vocational & Trade addition
-(2026-09-02) added GSM Maintenance and Repairs.
-SS2 now has 50 live subjects. DB-verified 2026-09-02.
+(2026-09-02) added GSM Maintenance and Repairs. A further Vocational & Trade addition
+(2026-09-02) added Leather Goods Manufacturing and Repairs.
+SS2 now has 51 live subjects. DB-verified 2026-09-02.
 
 No SS3-style five-category structure applies here — SS2's catalogue is limited to the
 science/humanities core plus this new Compulsory Core tier, plus a Humanities & Arts addition
@@ -268,6 +269,18 @@ weeks, were excluded as administrative in all three terms, consistent with the e
 approach already used for SS1 and SS3 GSM Maintenance and Repairs; First Term Weeks 1-2 and
 Third Term Weeks 1-2 each share one set of content in the source and were kept as a single
 topic each). SS1 and SS3 GSM Maintenance and Repairs were already sourced previously.
+
+Vocational & Trade addition (2026-09-02): Leather Goods Manufacturing and Repairs (`legacy`, 24
+topics — full First/Second/Third Term coverage; source: AseiClass "Recent Scheme/syllabus on
+Leather Goods for School Teachers & Students | Download PDF", the same source already used for
+the SS1 and SS3 versions of this subject; schemeofwork.com (Federal SS2 category, all 6 pages),
+syllabus.ng, and ecolebooks.com had no Leather Goods Manufacturing and Repairs entry for SS2;
+Revision and Revision-and-Examination weeks were excluded as administrative; several consecutive
+weeks share one broader topic — Clicking/Skiving/Folding Equipment, Working Principles of
+Machines for Upper Preparation, Equipment and Hand Tools for Shoe Bottoming, Materials for Shoe
+Bottoming, Viscosity, and Fire Outbreak — and were kept as separate per-week topics per the
+sourcing convention). SS1 and SS3 Leather Goods Manufacturing and Repairs were already sourced
+previously.
 
 Each addition has its own individual commit via the nerdc-curriculum-sourcer agent.
 
