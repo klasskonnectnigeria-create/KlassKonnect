@@ -99,15 +99,18 @@ subject, the second subject of this batch. Radio, Television and Electronics Wor
 Electronics Works Scheme of Work SSS1") as the twenty-seventh Vocational & Trade-track subject,
 the third subject of this batch. Solar Photovoltaic Installation was added 2026-09-02 (`legacy`,
 24 topics, all three terms; source: SchemeofWork.com "SS1 Scheme of Work Unified") as the
-twenty-eighth Vocational & Trade-track subject, the fourth subject of this batch. SS1 now has 59
-live subjects. DB-verified 2026-09-02.
+twenty-eighth Vocational & Trade-track subject, the fourth subject of this batch. Upholstery
+Design and Construction was added 2026-09-02 (`legacy`, 32 topics, all three terms; source:
+SchemeofWork.com "Upholstery Scheme of Work for SS 1 Federal") as the twenty-ninth Vocational &
+Trade-track subject, the fifth subject of this batch. SS1 now has 60 live subjects.
+DB-verified 2026-09-02.
 
 No SS3-style five-category structure applies here — SS1's catalogue is limited to the
 science/humanities core plus this new Compulsory Core tier and a newly-started Vocational &
 Trade tier plus a newly-started Business & Commercial tier; the wider Vocational & Trade and
 Business & Commercial catalogues have not yet been fully attempted at this grade.
 
-## Subjects (59 live)
+## Subjects (60 live)
 
 Original 9 (`legacy`): Biology, Chemistry, Economics, English Language, Geography, Government,
 Literature-in-English, Mathematics, Physics.
@@ -190,7 +193,10 @@ SchemeofWork.com "Radio,Television and Electronics Works Scheme of Work SSS1") w
 batch. Solar Photovoltaic Installation (`legacy`, 24 topics, all three terms; source:
 SchemeofWork.com "SS1 Scheme of Work Unified", Solar Photovoltaic Installation & Maintenance
 section under Trade Subjects) was added 2026-09-02 as the twenty-eighth Vocational & Trade-track
-subject, the fourth subject of this batch.
+subject, the fourth subject of this batch. Upholstery Design and Construction (`legacy`, 32
+topics, all three terms; source: SchemeofWork.com "Upholstery Scheme of Work for SS 1 Federal")
+was added 2026-09-02 as the twenty-ninth Vocational & Trade-track subject, the fifth subject of
+this batch.
 
 Humanities & Arts-track subjects (2026-08-31): Christian Religious Studies (`legacy`, 30 topics,
 all three terms), Islamic Studies (`legacy`, 33 topics, all three terms), Nigerian History
