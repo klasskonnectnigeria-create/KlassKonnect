@@ -29,7 +29,7 @@ Vocational & Trade addition (2026-09-02) added Furniture Making. A further Vocat
 addition (2026-09-02) added Garment Making Construction. A further Vocational & Trade addition
 (2026-09-02) added GSM Maintenance and Repairs. A further Vocational & Trade addition
 (2026-09-02) added Leather Goods Manufacturing and Repairs.
-SS2 now has 51 live subjects. DB-verified 2026-09-02.
+SS2 now has 52 live subjects. DB-verified 2026-09-02.
 
 No SS3-style five-category structure applies here — SS2's catalogue is limited to the
 science/humanities core plus this new Compulsory Core tier, plus a Humanities & Arts addition
@@ -40,7 +40,7 @@ Concreting, Carpentry and Joinery, Catering Craft Practice, and now Dyeing and B
 further Business & Commercial and other subject expansion has not yet been attempted at this
 grade.
 
-## Subjects (50 live)
+## Subjects (52 live)
 
 Original 9 (`legacy`): Biology, Chemistry, Economics, English Language, Geography, Government,
 Literature-in-English, Mathematics, Physics.
@@ -281,6 +281,19 @@ Machines for Upper Preparation, Equipment and Hand Tools for Shoe Bottoming, Mat
 Bottoming, Viscosity, and Fire Outbreak — and were kept as separate per-week topics per the
 sourcing convention). SS1 and SS3 Leather Goods Manufacturing and Repairs were already sourced
 previously.
+
+Vocational & Trade addition (2026-09-02): Machine Woodworking (`legacy`, 28 topics — full
+First/Second/Third Term coverage; source: SchemeofWork.com "Machine Woodwork Scheme of Work
+SSS2 Lagos State", found directly via search and verified against a live fetch of the actual
+WEEK/TOPICS/LEARNING-OBJECTIVES table; Mid Term Test, Revision, Revision and Welcome Test,
+Welcome test and Revision, Examination, and Revision/Test weeks were excluded as administrative
+in all three terms; the source page's own third-term table heading is itself mislabeled "SSS3
+Second Term" — a copy-paste error on the source site — but the page title, URL, and its own
+"Achievement Standards for SSS2 Session" section confirm that table is genuinely SS2 Third Term
+content, so it was included as such; First Term Narrow Bandsaw weeks 10-11, Second Term
+Combination Planing Machine weeks 3-6 and 8, and Third Term Spindle Moulder weeks 5-6 each
+share umbrella topics and were kept as separate per-week topics per the sourcing convention).
+SS1 and SS3 Machine Woodworking were already sourced previously.
 
 Each addition has its own individual commit via the nerdc-curriculum-sourcer agent.
 
