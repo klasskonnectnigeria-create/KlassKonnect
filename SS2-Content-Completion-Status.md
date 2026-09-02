@@ -32,8 +32,11 @@ addition (2026-09-02) added Garment Making Construction. A further Vocational & 
 addition (2026-09-02) added Machine Woodworking, and a subsequent Vocational & Trade addition
 (2026-09-02) added Metalwork. A Phase 4c Vocational & Trade pass (2026-09-02) added Painting
 and Decoration, followed by Photography as the second and final subject of Phase 4c — **Phase
-4c is now complete at SS2.**
-SS2 now has 55 live subjects. DB-verified 2026-09-02.
+4c is now complete at SS2.** A further Vocational & Trade batch (2026-09-02, following Phase 4c)
+added Plumbing and Pipe Fitting as the second of 12 planned combinations (Plumbing and Pipe
+Fitting, Printing Craft Practice, Radio Television and Electronics Works, Solar Photovoltaic
+Installation, Upholstery Design and Construction, Welding and Fabrication — each at SS1 and SS2).
+SS2 now has 56 live subjects. DB-verified 2026-09-02.
 
 No SS3-style five-category structure applies here — SS2's catalogue is limited to the
 science/humanities core plus this new Compulsory Core tier, plus a Humanities & Arts addition
@@ -333,6 +336,19 @@ source and were kept as separate per-week topics with distinguishing session nam
 Photography was already sourced previously (theme id 283, commit `04dc1a9d`, 31 topics). **This
 completes Phase 4c in full: 2 of 2 subjects (Painting and Decoration, Photography) sourced at
 SS2.**
+
+Vocational & Trade addition (2026-09-02, following Phase 4c): Plumbing and Pipe Fitting
+(`legacy`, 30 topics — full First/Second/Third Term coverage; source: SchemeofWork.com
+"Plumbing and Pipe Fitting Scheme of Work SSS2 Lagos State", found directly via search after the
+Federal SS2 category index (all pages) had no Plumbing and Pipe Fitting page; verified against a
+live fetch of the actual WKS/TOPICS/LESSON-OBJECTIVES/LEARNING-ACTIVITIES table (raw HTML
+cross-checked, since the page embeds all three terms' tables inline rather than one term per
+fetch); Mid-Term Break, Revision/Project, and Examination weeks were excluded as administrative
+in all three terms; one week of entrepreneurship content (Second Term) and two weeks of
+marketing content (Third Term) embedded in the source's own plumbing scheme were kept as real
+instructional topics rather than excluded, since they are not administrative filler). SS1
+Plumbing and Pipe Fitting was already sourced previously (theme id 285, commit `8cc51346`, 24
+topics, source: AseiClass). This is the second of 12 combinations in this batch.
 
 Each addition has its own individual commit via the nerdc-curriculum-sourcer agent.
 
