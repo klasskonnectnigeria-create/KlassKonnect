@@ -20,19 +20,21 @@ SS2 as the sixth and final subject sourced — **Phase 4a is now complete at SS2
 Vocational & Trade subjects sourced.** (SS1 Auto Electrical Work remains unresolved and is
 being retried separately; all other 11 of 12 SS1/SS2 combinations in this phase are sourced.)
 A Phase 4b Vocational & Trade pass began 2026-09-01 with Carpentry and Joinery, and continued
-2026-09-01 with Catering Craft Practice as the second subject sourced in this tranche. A
+2026-09-01 with Catering Craft Practice as the second subject sourced in this tranche, and
+2026-09-02 with Dyeing and Bleaching as the third subject sourced in this tranche. A
 standalone Technology-curriculum addition (2026-09-02) added Data Processing. SS2 now
-has 44 live subjects. DB-verified 2026-09-02.
+has 45 live subjects. DB-verified 2026-09-02.
 
 No SS3-style five-category structure applies here — SS2's catalogue is limited to the
 science/humanities core plus this new Compulsory Core tier, plus a Humanities & Arts addition
 (Christian Religious Studies, Islamic Studies) and a Vocational & Trade tier (Agriculture,
 Technical Drawing, Animal Husbandry / Livestock Farming, Auto Body Repairs, Auto Electrical
 Work, Auto Mechanical Work, Automobile Parts Merchandising, Blocklaying, Bricklaying and
-Concreting, Carpentry and Joinery, and now Catering Craft Practice); further Business &
-Commercial and other subject expansion has not yet been attempted at this grade.
+Concreting, Carpentry and Joinery, Catering Craft Practice, and now Dyeing and Bleaching);
+further Business & Commercial and other subject expansion has not yet been attempted at this
+grade.
 
-## Subjects (44 live)
+## Subjects (45 live)
 
 Original 9 (`legacy`): Biology, Chemistry, Economics, English Language, Geography, Government,
 Literature-in-English, Mathematics, Physics.
@@ -193,6 +195,17 @@ Third Term weeks 2-5 and 6-10 each share umbrella topics and were kept as separa
 topics per the sourcing convention). SS1 Catering Craft Practice was already sourced previously
 (commit `a13db39e`, 31 topics). This subject already exists at SS3 (theme id 161). This is the
 second subject sourced in Phase 4b.
+
+Phase 4b Vocational & Trade addition (2026-09-02): Dyeing and Bleaching (`legacy`, 17 topics —
+full First/Second/Third Term coverage; source: SchemeofWork.com "Dying and Bleaching Scheme of
+Work for SS 2 Federal", found directly via a URL-pattern guess matching the sibling SS1/SS3
+page slugs after a general search surfaced those grades but not SS2, and verified against a
+live fetch of the actual WEEK/TOPIC/ACTIVITIES table; "Exhibition of [term] work" weeks were
+kept as topics, not treated as administrative, since the source describes them as an active
+practical review/display activity rather than a test or break week; source content per week is
+brief — a short topic phrase plus a one-line activity description). No prior SS1/SS3 Dyeing and
+Bleaching entries were checked/created as part of this run. This is the third subject sourced in
+Phase 4b.
 
 Technology-curriculum addition (2026-09-02): Data Processing (`legacy`, 33 topics — full
 First/Second/Third Term coverage; source: SchemeofWork.com "Data Processing Scheme of Work for
