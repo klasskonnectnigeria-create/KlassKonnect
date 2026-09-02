@@ -53,15 +53,17 @@ Phase 4a (only the SS2 side remains to close out the phase overall). Carpentry a
 was added 2026-09-01 as the eleventh Vocational & Trade-track subject, the first subject of
 Phase 4b (the continuation of the Vocational & Trade sourcing pass following Phase 4a, now
 complete at 12/12). Catering Craft Practice was added 2026-09-01 as the twelfth Vocational &
-Trade-track subject, the second subject of Phase 4b. SS1 now has 43 live subjects.
-DB-verified 2026-09-01.
+Trade-track subject, the second subject of Phase 4b. Data Processing was added 2026-09-02
+(`legacy`, 33 topics, all three terms; source: SchemeofWork.com Federal) as the thirteenth
+Vocational & Trade-track subject, the third subject of Phase 4b. SS1 now has 44 live subjects.
+DB-verified 2026-09-02.
 
 No SS3-style five-category structure applies here — SS1's catalogue is limited to the
 science/humanities core plus this new Compulsory Core tier and a newly-started Vocational &
 Trade tier plus a newly-started Business & Commercial tier; the wider Vocational & Trade and
 Business & Commercial catalogues have not yet been fully attempted at this grade.
 
-## Subjects (43 live)
+## Subjects (44 live)
 
 Original 9 (`legacy`): Biology, Chemistry, Economics, English Language, Geography, Government,
 Literature-in-English, Mathematics, Physics.
@@ -99,7 +101,9 @@ Trade-track subject, the first subject of Phase 4b, the continuation of the Voca
 Trade sourcing pass following Phase 4a (now complete at 12/12 across SS1/SS2). Catering
 Craft Practice (`legacy`, 31 topics, all three terms; source: SchemeofWork.com Federal) was
 added 2026-09-01 as the twelfth Vocational & Trade-track subject, the second subject of
-Phase 4b.
+Phase 4b. Data Processing (`legacy`, 33 topics, all three terms; source: SchemeofWork.com
+Federal) was added 2026-09-02 as the thirteenth Vocational & Trade-track subject, the third
+subject of Phase 4b.
 
 Humanities & Arts-track subjects (2026-08-31): Christian Religious Studies (`legacy`, 30 topics,
 all three terms), Islamic Studies (`legacy`, 33 topics, all three terms), Nigerian History
@@ -137,7 +141,7 @@ commit via the nerdc-curriculum-sourcer agent.
 
 ## Known gaps
 
-None found in commit history or the live DB aggregate for the 42 live subjects. The rest of the
+None found in commit history or the live DB aggregate for the 44 live subjects. The rest of the
 Vocational & Trade catalogue, plus remaining Humanities & Arts/Science-track subjects beyond the
 Compulsory Core, are not yet attempted at this grade (planned for later phases).
 The SS1/SS2 language-subject gap (French, Yoruba, Igbo) is now fully closed at SS1.
@@ -157,7 +161,9 @@ of the Vocational & Trade sourcing pass, began 2026-09-01 with Carpentry and Joi
 (`legacy`, 32 topics, all three terms; source: SchemeofWork.com Federal), sourced and
 DB-verified at SS1 as the first subject of the phase. Catering Craft Practice (`legacy`, 31
 topics, all three terms; source: SchemeofWork.com Federal) was sourced and DB-verified at
-SS1 the same day as the second subject of Phase 4b. Auto Electrical Work at
+SS1 the same day as the second subject of Phase 4b. Data Processing (`legacy`, 33 topics, all
+three terms; source: SchemeofWork.com Federal) was sourced and DB-verified at SS1 on
+2026-09-02 as the third subject of Phase 4b. Auto Electrical Work at
 SS1 was initially attempted
 2026-09-01 and reported unresolved after schemeofwork.com (Federal, Lagos, Osun variants),
 syllabus.ng, and ecolebooks.com all turned up no scheme of work for this subject name at any SS
