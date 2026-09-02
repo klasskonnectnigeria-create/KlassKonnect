@@ -26,8 +26,9 @@ standalone Technology-curriculum addition (2026-09-02) added Data Processing. A 
 Vocational & Trade addition (2026-09-02) added Electrical Installation and Maintenance Work,
 and a subsequent Vocational & Trade addition (2026-09-02) added Fisheries. A further
 Vocational & Trade addition (2026-09-02) added Furniture Making. A further Vocational & Trade
-addition (2026-09-02) added Garment Making Construction.
-SS2 now has 49 live subjects. DB-verified 2026-09-02.
+addition (2026-09-02) added Garment Making Construction. A further Vocational & Trade addition
+(2026-09-02) added GSM Maintenance and Repairs.
+SS2 now has 50 live subjects. DB-verified 2026-09-02.
 
 No SS3-style five-category structure applies here — SS2's catalogue is limited to the
 science/humanities core plus this new Compulsory Core tier, plus a Humanities & Arts addition
@@ -38,7 +39,7 @@ Concreting, Carpentry and Joinery, Catering Craft Practice, and now Dyeing and B
 further Business & Commercial and other subject expansion has not yet been attempted at this
 grade.
 
-## Subjects (49 live)
+## Subjects (50 live)
 
 Original 9 (`legacy`): Biology, Chemistry, Economics, English Language, Geography, Government,
 Literature-in-English, Mathematics, Physics.
@@ -257,6 +258,16 @@ Examination weeks in all three terms were excluded as administrative; Second Ter
 each contain a week titled "Cuff Attachment" covering different content — kept as separate
 topics with distinguishing names). SS1 and SS3 Garment Making Construction were already sourced
 previously.
+
+Vocational & Trade addition (2026-09-02): GSM Maintenance and Repairs (`legacy`, 25 topics —
+full First/Second/Third Term coverage; source: SchemeofWork.com "GSM Maintenance and Repairs
+Scheme of Work for SS 2 Federal", found directly via search and verified against a live fetch
+of the actual WEEK/TOPIC-CONTENT/ACTIVITIES table; generic "Practical"/"Practical and
+revisions"/"Practices and revisions" catch-all review weeks, plus "Revision" and "Examination"
+weeks, were excluded as administrative in all three terms, consistent with the exclusion
+approach already used for SS1 and SS3 GSM Maintenance and Repairs; First Term Weeks 1-2 and
+Third Term Weeks 1-2 each share one set of content in the source and were kept as a single
+topic each). SS1 and SS3 GSM Maintenance and Repairs were already sourced previously.
 
 Each addition has its own individual commit via the nerdc-curriculum-sourcer agent.
 
