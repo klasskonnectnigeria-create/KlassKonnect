@@ -23,8 +23,9 @@ A Phase 4b Vocational & Trade pass began 2026-09-01 with Carpentry and Joinery, 
 2026-09-01 with Catering Craft Practice as the second subject sourced in this tranche, and
 2026-09-02 with Dyeing and Bleaching as the third subject sourced in this tranche. A
 standalone Technology-curriculum addition (2026-09-02) added Data Processing. A further
-Vocational & Trade addition (2026-09-02) added Electrical Installation and Maintenance Work.
-SS2 now has 46 live subjects. DB-verified 2026-09-02.
+Vocational & Trade addition (2026-09-02) added Electrical Installation and Maintenance Work,
+and a subsequent Vocational & Trade addition (2026-09-02) added Fisheries.
+SS2 now has 47 live subjects. DB-verified 2026-09-02.
 
 No SS3-style five-category structure applies here — SS2's catalogue is limited to the
 science/humanities core plus this new Compulsory Core tier, plus a Humanities & Arts addition
@@ -35,7 +36,7 @@ Concreting, Carpentry and Joinery, Catering Craft Practice, and now Dyeing and B
 further Business & Commercial and other subject expansion has not yet been attempted at this
 grade.
 
-## Subjects (45 live)
+## Subjects (46 live)
 
 Original 9 (`legacy`): Biology, Chemistry, Economics, English Language, Geography, Government,
 Literature-in-English, Mathematics, Physics.
@@ -224,6 +225,16 @@ those grades, and verified against a live fetch of the actual WEEK/TOPIC-CONTENT
 table; the page makes no NESRI-2025 compliance claim; Revision and Examination weeks were
 excluded as administrative). SS1 and SS3 Electrical Installation and Maintenance Work were
 already sourced previously.
+
+Vocational & Trade addition (2026-09-02): Fisheries (`legacy`, 31 topics — full
+First/Second/Third Term coverage; source: SchemeofWork.com "Fishery Scheme of Work for SS 2
+Federal", found directly via search and verified against a live fetch of the actual
+WEEK/TOPIC/CONTENT/ACTIVITIES table; the page makes no NESRI-2025 compliance claim; Revision
+and Examination weeks were excluded as administrative; First Term weeks 4-5 ("Culture
+System"), Second Term weeks 1-6 ("Fish Feed"), and Third Term weeks 1-3 ("Establishment of
+Fish Pond"), 4-5 ("Preparation of Old Ponds for New Stocking"), and 8-9 ("Pond Management")
+each share umbrella topics and were kept as separate per-week topics per the sourcing
+convention). SS1 and SS3 Fisheries were already sourced previously.
 
 Each addition has its own individual commit via the nerdc-curriculum-sourcer agent.
 
