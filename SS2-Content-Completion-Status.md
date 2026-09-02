@@ -24,8 +24,9 @@ A Phase 4b Vocational & Trade pass began 2026-09-01 with Carpentry and Joinery, 
 2026-09-02 with Dyeing and Bleaching as the third subject sourced in this tranche. A
 standalone Technology-curriculum addition (2026-09-02) added Data Processing. A further
 Vocational & Trade addition (2026-09-02) added Electrical Installation and Maintenance Work,
-and a subsequent Vocational & Trade addition (2026-09-02) added Fisheries.
-SS2 now has 47 live subjects. DB-verified 2026-09-02.
+and a subsequent Vocational & Trade addition (2026-09-02) added Fisheries. A further
+Vocational & Trade addition (2026-09-02) added Furniture Making.
+SS2 now has 48 live subjects. DB-verified 2026-09-02.
 
 No SS3-style five-category structure applies here — SS2's catalogue is limited to the
 science/humanities core plus this new Compulsory Core tier, plus a Humanities & Arts addition
@@ -36,7 +37,7 @@ Concreting, Carpentry and Joinery, Catering Craft Practice, and now Dyeing and B
 further Business & Commercial and other subject expansion has not yet been attempted at this
 grade.
 
-## Subjects (46 live)
+## Subjects (47 live)
 
 Original 9 (`legacy`): Biology, Chemistry, Economics, English Language, Geography, Government,
 Literature-in-English, Mathematics, Physics.
@@ -235,6 +236,16 @@ System"), Second Term weeks 1-6 ("Fish Feed"), and Third Term weeks 1-3 ("Establ
 Fish Pond"), 4-5 ("Preparation of Old Ponds for New Stocking"), and 8-9 ("Pond Management")
 each share umbrella topics and were kept as separate per-week topics per the sourcing
 convention). SS1 and SS3 Fisheries were already sourced previously.
+
+Vocational & Trade addition (2026-09-02): Furniture Making (`legacy`, 24 topics — full
+First/Second/Third Term coverage; source: SchemeofWork.com "Furniture Making Scheme of Work
+for SS 2 Federal", found directly via search and verified against a live fetch of the actual
+WEEK/TOPIC-CONTENT/ACTIVITIES table; Revision and Examination weeks at the end of First and
+Second Term were excluded as administrative; Second Term Weeks 4-5 and 6-7, and Third Term
+Weeks 1-2 and 3-4, each carry near-identical content rows in the source and were kept as
+separate per-week topics per the sourcing convention, while Third Term Weeks 5-6 and 7-8 are
+each a single combined row in the source table itself and were kept as one topic each). SS1
+and SS3 Furniture Making were already sourced previously.
 
 Each addition has its own individual commit via the nerdc-curriculum-sourcer agent.
 
