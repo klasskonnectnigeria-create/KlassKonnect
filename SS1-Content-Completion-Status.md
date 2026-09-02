@@ -78,15 +78,19 @@ State SchemeofWork.com "Machine Woodwork Scheme of Work SSS1 Osun State", since 
 page for this subject was found) as the twenty-first Vocational & Trade-track subject, the
 eleventh subject of Phase 4b. Metalwork was added 2026-09-02 (`legacy`, 31 topics, all three
 terms; source: SchemeofWork.com "Metal Work Scheme of Work for SS 1 Federal") as the
-twenty-second Vocational & Trade-track subject, the twelfth subject of Phase 4b. SS1 now has
-53 live subjects. DB-verified 2026-09-02.
+twenty-second Vocational & Trade-track subject, the twelfth subject of Phase 4b, completing the
+SS1 side of Phase 4b (12/12). Painting and Decoration was added 2026-09-02 (`legacy`, 29 topics,
+all three terms; source: SchemeofWork.com "Painting and Decoration Scheme of Work SSS1 Lagos
+State", since no Federal SS1 page for this subject was found) as the twenty-third Vocational &
+Trade-track subject, the first subject of Phase 4c (the continuation of the Vocational & Trade
+sourcing pass following Phase 4b). SS1 now has 54 live subjects. DB-verified 2026-09-02.
 
 No SS3-style five-category structure applies here — SS1's catalogue is limited to the
 science/humanities core plus this new Compulsory Core tier and a newly-started Vocational &
 Trade tier plus a newly-started Business & Commercial tier; the wider Vocational & Trade and
 Business & Commercial catalogues have not yet been fully attempted at this grade.
 
-## Subjects (53 live)
+## Subjects (54 live)
 
 Original 9 (`legacy`): Biology, Chemistry, Economics, English Language, Geography, Government,
 Literature-in-English, Mathematics, Physics.
@@ -149,7 +153,10 @@ SchemeofWork.com "Machine Woodwork Scheme of Work SSS1 Osun State") was added 20
 twenty-first Vocational & Trade-track subject, the eleventh subject of Phase 4b. Metalwork
 (`legacy`, 31 topics, all three terms; source: SchemeofWork.com "Metal Work Scheme of Work for
 SS 1 Federal") was added 2026-09-02 as the twenty-second Vocational & Trade-track subject, the
-twelfth subject of Phase 4b.
+twelfth subject of Phase 4b, completing the SS1 side of Phase 4b (12/12). Painting and Decoration
+(`legacy`, 29 topics, all three terms; source: SchemeofWork.com "Painting and Decoration Scheme
+of Work SSS1 Lagos State") was added 2026-09-02 as the twenty-third Vocational & Trade-track
+subject, the first subject of Phase 4c, since no Federal SS1 page for this subject was found.
 
 Humanities & Arts-track subjects (2026-08-31): Christian Religious Studies (`legacy`, 30 topics,
 all three terms), Islamic Studies (`legacy`, 33 topics, all three terms), Nigerian History
@@ -251,4 +258,8 @@ for this subject exists) was sourced and DB-verified at SS1 on 2026-09-02 (theme
 eleventh subject of Phase 4b. Metalwork (`legacy`, 31 topics, all three terms; source:
 SchemeofWork.com "Metal Work Scheme of Work for SS 1 Federal") was sourced and DB-verified at
 SS1 on 2026-09-02 (theme id 279) as the twelfth and final subject of Phase 4b, completing the
-SS1 side of Phase 4b.
+SS1 side of Phase 4b. Painting and Decoration (`legacy`, 29 topics, all three terms; source:
+SchemeofWork.com "Painting and Decoration Scheme of Work SSS1 Lagos State", since no Federal
+SS1 page for this subject was found) was sourced and DB-verified at SS1 on 2026-09-02
+(theme id 281) as the first subject of Phase 4c, the continuation of the Vocational & Trade
+sourcing pass following Phase 4b.
