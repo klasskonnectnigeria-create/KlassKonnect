@@ -30,9 +30,10 @@ addition (2026-09-02) added Garment Making Construction. A further Vocational & 
 (2026-09-02) added GSM Maintenance and Repairs. A further Vocational & Trade addition
 (2026-09-02) added Leather Goods Manufacturing and Repairs. A further Vocational & Trade
 addition (2026-09-02) added Machine Woodworking, and a subsequent Vocational & Trade addition
-(2026-09-02) added Metalwork. A further Vocational & Trade addition (2026-09-02) added Painting
-and Decoration.
-SS2 now has 54 live subjects. DB-verified 2026-09-02.
+(2026-09-02) added Metalwork. A Phase 4c Vocational & Trade pass (2026-09-02) added Painting
+and Decoration, followed by Photography as the second and final subject of Phase 4c — **Phase
+4c is now complete at SS2.**
+SS2 now has 55 live subjects. DB-verified 2026-09-02.
 
 No SS3-style five-category structure applies here — SS2's catalogue is limited to the
 science/humanities core plus this new Compulsory Core tier, plus a Humanities & Arts addition
@@ -316,7 +317,22 @@ broader topic on flower decoration/arrangement and were kept as separate per-wee
 the sourcing convention, with the shared context noted in each learningOutcome; Third Term
 week 10 ("Time Duration") has only a bare title with no elaborated content in the source but
 was kept as a real (non-administrative) topic, with its knowledge point inferred from the
-immediately surrounding Job Estimation and Costing weeks).
+immediately surrounding Job Estimation and Costing weeks). This is the first subject sourced in
+Phase 4c.
+
+Phase 4c Vocational & Trade addition (2026-09-02): Photography (`legacy`, 29 topics — full
+First/Second/Third Term coverage; source: SchemeofWork.com "Photography Scheme of Work for SS 2
+Federal", found directly via search and verified against a live fetch of the actual
+WEEK/TOPIC-CONTENT/ACTIVITIES table (raw HTML cross-checked); a Lagos State variant was also
+found but the more detailed Federal page (14/13/13 weeks vs. 13/13/13) was preferred; bare
+"Revision"/"Examination" weeks with no listed content were excluded as administrative in all
+three terms, but First Term Week 1 ("Revision (Printing of Photographs)") was kept as a real
+topic since the source pairs it with a concrete activity ("Observe Printing Process"); Third
+Term's two consecutive "Field Trip" weeks (9-10) share identical content/activities in the
+source and were kept as separate per-week topics with distinguishing session names). SS1
+Photography was already sourced previously (theme id 283, commit `04dc1a9d`, 31 topics). **This
+completes Phase 4c in full: 2 of 2 subjects (Painting and Decoration, Photography) sourced at
+SS2.**
 
 Each addition has its own individual commit via the nerdc-curriculum-sourcer agent.
 
