@@ -66,7 +66,10 @@ subject, the sixth subject of Phase 4b. Furniture Making was added 2026-09-02 (`
 topics, all three terms; source: SchemeofWork.com Federal) as the seventeenth Vocational &
 Trade-track subject, the seventh subject of Phase 4b. Garment Making Construction was added
 2026-09-02 (`legacy`, 33 topics, all three terms; source: SchemeofWork.com Federal) as the
-eighteenth Vocational & Trade-track subject, the eighth subject of Phase 4b. SS1 now has 49
+eighteenth Vocational & Trade-track subject, the eighth subject of Phase 4b. GSM Maintenance
+and Repairs was added 2026-09-02 (`legacy`, 19 topics, Second+Third Term only — the Federal
+source page has no First Term section; source: SchemeofWork.com Federal) as the nineteenth
+Vocational & Trade-track subject, the ninth subject of Phase 4b. SS1 now has 50
 live subjects. DB-verified 2026-09-02.
 
 No SS3-style five-category structure applies here — SS1's catalogue is limited to the
@@ -74,7 +77,7 @@ science/humanities core plus this new Compulsory Core tier and a newly-started V
 Trade tier plus a newly-started Business & Commercial tier; the wider Vocational & Trade and
 Business & Commercial catalogues have not yet been fully attempted at this grade.
 
-## Subjects (49 live)
+## Subjects (50 live)
 
 Original 9 (`legacy`): Biology, Chemistry, Economics, English Language, Geography, Government,
 Literature-in-English, Mathematics, Physics.
@@ -126,7 +129,10 @@ source: SchemeofWork.com Federal) was added 2026-09-02 as the seventeenth Vocati
 Trade-track subject, the seventh subject of Phase 4b. Garment Making Construction (`legacy`,
 33 topics, all three terms; source: SchemeofWork.com "Garment Making Scheme of Work for SS 1
 Federal") was added 2026-09-02 as the eighteenth Vocational & Trade-track subject, the eighth
-subject of Phase 4b.
+subject of Phase 4b. GSM Maintenance and Repairs (`legacy`, 19 topics, Second+Third Term only;
+source: SchemeofWork.com "GSM Maintenance and Repairs Scheme of Work for SS 1 Federal") was
+added 2026-09-02 as the nineteenth Vocational & Trade-track subject, the ninth subject of
+Phase 4b.
 
 Humanities & Arts-track subjects (2026-08-31): Christian Religious Studies (`legacy`, 30 topics,
 all three terms), Islamic Studies (`legacy`, 33 topics, all three terms), Nigerian History
@@ -164,7 +170,7 @@ commit via the nerdc-curriculum-sourcer agent.
 
 ## Known gaps
 
-None found in commit history or the live DB aggregate for the 49 live subjects. The rest of the
+None found in commit history or the live DB aggregate for the 50 live subjects. The rest of the
 Vocational & Trade catalogue, plus remaining Humanities & Arts/Science-track subjects beyond the
 Compulsory Core, are not yet attempted at this grade (planned for later phases).
 The SS1/SS2 language-subject gap (French, Yoruba, Igbo) is now fully closed at SS1.
@@ -216,4 +222,8 @@ all three terms; source: SchemeofWork.com "Furniture Making Scheme of Work for S
 was sourced and DB-verified at SS1 on 2026-09-02 (theme id 269) as the seventh subject of
 Phase 4b. Garment Making Construction (`legacy`, 33 topics, all three terms; source:
 SchemeofWork.com "Garment Making Scheme of Work for SS 1 Federal") was sourced and DB-verified
-at SS1 on 2026-09-02 (theme id 271) as the eighth subject of Phase 4b.
+at SS1 on 2026-09-02 (theme id 271) as the eighth subject of Phase 4b. GSM Maintenance and
+Repairs (`legacy`, 19 topics, Second+Third Term only — the Federal source page has no First
+Term section; source: SchemeofWork.com "GSM Maintenance and Repairs Scheme of Work for SS 1
+Federal") was sourced and DB-verified at SS1 on 2026-09-02 (theme id 273) as the ninth subject
+of Phase 4b.
