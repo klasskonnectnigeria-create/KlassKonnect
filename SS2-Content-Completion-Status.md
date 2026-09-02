@@ -35,8 +35,9 @@ and Decoration, followed by Photography as the second and final subject of Phase
 4c is now complete at SS2.** A further Vocational & Trade batch (2026-09-02, following Phase 4c)
 added Plumbing and Pipe Fitting as the second of 12 planned combinations (Plumbing and Pipe
 Fitting, Printing Craft Practice, Radio Television and Electronics Works, Solar Photovoltaic
-Installation, Upholstery Design and Construction, Welding and Fabrication — each at SS1 and SS2).
-SS2 now has 56 live subjects. DB-verified 2026-09-02.
+Installation, Upholstery Design and Construction, Welding and Fabrication — each at SS1 and SS2),
+and continued 2026-09-02 with Printing Craft Practice as the third combination sourced in this
+batch. SS2 now has 57 live subjects. DB-verified 2026-09-02.
 
 No SS3-style five-category structure applies here — SS2's catalogue is limited to the
 science/humanities core plus this new Compulsory Core tier, plus a Humanities & Arts addition
@@ -47,7 +48,7 @@ Concreting, Carpentry and Joinery, Catering Craft Practice, and now Dyeing and B
 further Business & Commercial and other subject expansion has not yet been attempted at this
 grade.
 
-## Subjects (54 live)
+## Subjects (57 live)
 
 Original 9 (`legacy`): Biology, Chemistry, Economics, English Language, Geography, Government,
 Literature-in-English, Mathematics, Physics.
@@ -349,6 +350,21 @@ marketing content (Third Term) embedded in the source's own plumbing scheme were
 instructional topics rather than excluded, since they are not administrative filler). SS1
 Plumbing and Pipe Fitting was already sourced previously (theme id 285, commit `8cc51346`, 24
 topics, source: AseiClass). This is the second of 12 combinations in this batch.
+
+Vocational & Trade addition (2026-09-02, following Phase 4c): Printing Craft Practice
+(`legacy`, 26 topics — full First/Second/Third Term coverage; source: SchemeofWork.com
+"Printing Craft Scheme of Work SSS2 Lagos State", the same Lagos State affiliate used for the
+already-sourced SS1 page (no Federal SS2 page exists for this subject); verified against a live
+fetch of the actual WKS/TOPICS/LEARNING-OBJECTIVES/LEARNING-ACTIVITIES table (raw HTML
+cross-checked); Revision, Mid Term Break, Revision/Test, and Examination weeks were excluded as
+administrative in all three terms, except where a "Revision <Topic>" week label was paired with
+a concrete learning objective for real content (First Term Week 2 "Revision Relief printing
+(Hand composition)" and Third Term Week 1 "Revision Photo composition"), which were kept as
+real topics; First Term weeks 2, 4 and 5, all labelled "Screen Printing" in the source but
+covering distinct sub-content, were kept as separate per-week topics with distinguishing names;
+the source's Third Term table skips a numbered Week 9 entirely, which is a gap in the source
+itself). SS1 Printing Craft Practice was already sourced previously (25 topics, source: the same
+Lagos State affiliate's SSS1 page). This is the third of 12 combinations in this batch.
 
 Each addition has its own individual commit via the nerdc-curriculum-sourcer agent.
 
