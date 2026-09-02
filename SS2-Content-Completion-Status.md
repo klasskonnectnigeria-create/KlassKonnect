@@ -28,8 +28,10 @@ and a subsequent Vocational & Trade addition (2026-09-02) added Fisheries. A fur
 Vocational & Trade addition (2026-09-02) added Furniture Making. A further Vocational & Trade
 addition (2026-09-02) added Garment Making Construction. A further Vocational & Trade addition
 (2026-09-02) added GSM Maintenance and Repairs. A further Vocational & Trade addition
-(2026-09-02) added Leather Goods Manufacturing and Repairs.
-SS2 now has 52 live subjects. DB-verified 2026-09-02.
+(2026-09-02) added Leather Goods Manufacturing and Repairs. A further Vocational & Trade
+addition (2026-09-02) added Machine Woodworking, and a subsequent Vocational & Trade addition
+(2026-09-02) added Metalwork.
+SS2 now has 53 live subjects. DB-verified 2026-09-02.
 
 No SS3-style five-category structure applies here — SS2's catalogue is limited to the
 science/humanities core plus this new Compulsory Core tier, plus a Humanities & Arts addition
@@ -294,6 +296,15 @@ content, so it was included as such; First Term Narrow Bandsaw weeks 10-11, Seco
 Combination Planing Machine weeks 3-6 and 8, and Third Term Spindle Moulder weeks 5-6 each
 share umbrella topics and were kept as separate per-week topics per the sourcing convention).
 SS1 and SS3 Machine Woodworking were already sourced previously.
+
+Vocational & Trade addition (2026-09-02): Metalwork (`legacy`, 17 topics — full First/Second/
+Third Term coverage; source: SchemeofWork.com "Metal Work Scheme of Work SSS2 Lagos State",
+found directly via search and verified against a live fetch of the actual WKS/TOPICS/LEARNING-
+OBJECTIVES table (source uses "WKS" rather than "WEEK"); Revision, Mid-term Break, and
+Revision/Examination weeks were excluded as administrative in all three terms; a handful of
+topic labels with apparent source-side OCR typos ("Centre latte", "Coding tools", "Cars and
+maintenance of machine tools", "Power saving machines") were corrected to their evident intended
+meaning based on surrounding content).
 
 Each addition has its own individual commit via the nerdc-curriculum-sourcer agent.
 
