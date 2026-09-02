@@ -69,15 +69,18 @@ Trade-track subject, the seventh subject of Phase 4b. Garment Making Constructio
 eighteenth Vocational & Trade-track subject, the eighth subject of Phase 4b. GSM Maintenance
 and Repairs was added 2026-09-02 (`legacy`, 19 topics, Second+Third Term only — the Federal
 source page has no First Term section; source: SchemeofWork.com Federal) as the nineteenth
-Vocational & Trade-track subject, the ninth subject of Phase 4b. SS1 now has 50
-live subjects. DB-verified 2026-09-02.
+Vocational & Trade-track subject, the ninth subject of Phase 4b. Leather Goods Manufacturing
+and Repairs was added 2026-09-02 (`legacy`, 24 topics, all three terms; source: AseiClass, since
+schemeofwork.com's Federal SS1 category, syllabus.ng, and ecolebooks.com had no SS1 entry for
+this subject) as the twentieth Vocational & Trade-track subject, the tenth subject of Phase 4b.
+SS1 now has 51 live subjects. DB-verified 2026-09-02.
 
 No SS3-style five-category structure applies here — SS1's catalogue is limited to the
 science/humanities core plus this new Compulsory Core tier and a newly-started Vocational &
 Trade tier plus a newly-started Business & Commercial tier; the wider Vocational & Trade and
 Business & Commercial catalogues have not yet been fully attempted at this grade.
 
-## Subjects (50 live)
+## Subjects (51 live)
 
 Original 9 (`legacy`): Biology, Chemistry, Economics, English Language, Geography, Government,
 Literature-in-English, Mathematics, Physics.
@@ -132,6 +135,9 @@ Federal") was added 2026-09-02 as the eighteenth Vocational & Trade-track subjec
 subject of Phase 4b. GSM Maintenance and Repairs (`legacy`, 19 topics, Second+Third Term only;
 source: SchemeofWork.com "GSM Maintenance and Repairs Scheme of Work for SS 1 Federal") was
 added 2026-09-02 as the nineteenth Vocational & Trade-track subject, the ninth subject of
+Phase 4b. Leather Goods Manufacturing and Repairs (`legacy`, 24 topics, all three terms;
+source: AseiClass "Recent Scheme/syllabus on Leather Goods for School Teachers & Students") was
+added 2026-09-02 as the twentieth Vocational & Trade-track subject, the tenth subject of
 Phase 4b.
 
 Humanities & Arts-track subjects (2026-08-31): Christian Religious Studies (`legacy`, 30 topics,
