@@ -37,7 +37,8 @@ added Plumbing and Pipe Fitting as the second of 12 planned combinations (Plumbi
 Fitting, Printing Craft Practice, Radio Television and Electronics Works, Solar Photovoltaic
 Installation, Upholstery Design and Construction, Welding and Fabrication — each at SS1 and SS2),
 and continued 2026-09-02 with Printing Craft Practice as the third combination sourced in this
-batch. SS2 now has 57 live subjects. DB-verified 2026-09-02.
+batch, and 2026-09-02 with Radio, Television and Electronics Works as the sixth combination
+sourced in this batch. SS2 now has 58 live subjects. DB-verified 2026-09-02.
 
 No SS3-style five-category structure applies here — SS2's catalogue is limited to the
 science/humanities core plus this new Compulsory Core tier, plus a Humanities & Arts addition
@@ -48,7 +49,7 @@ Concreting, Carpentry and Joinery, Catering Craft Practice, and now Dyeing and B
 further Business & Commercial and other subject expansion has not yet been attempted at this
 grade.
 
-## Subjects (57 live)
+## Subjects (58 live)
 
 Original 9 (`legacy`): Biology, Chemistry, Economics, English Language, Geography, Government,
 Literature-in-English, Mathematics, Physics.
@@ -365,6 +366,20 @@ covering distinct sub-content, were kept as separate per-week topics with distin
 the source's Third Term table skips a numbered Week 9 entirely, which is a gap in the source
 itself). SS1 Printing Craft Practice was already sourced previously (25 topics, source: the same
 Lagos State affiliate's SSS1 page). This is the third of 12 combinations in this batch.
+
+Vocational & Trade addition (2026-09-02, following Phase 4c): Radio, Television and Electronics
+Works (`legacy`, 30 topics — full First/Second/Third Term coverage; source: SchemeofWork.com
+"Radio,Television and Electronics Works Scheme of Work SSS2", found directly via a targeted
+search, matching the same Federal-style page format as the already-sourced SS1 page; verified
+against a live fetch of the actual WEEK/TOPIC/SUB-CONTENT table; Mid Term Break, Revision, and
+Examination weeks were excluded as administrative in all three terms; the Second Term "Welcome
+Test/Electronic Measuring Instrument" week and the Third Term "Welcome Test/Satellite
+Communication Systems" week were kept as real topics since each pairs the review portion with
+concrete described content; the First, Second, and Third Term "Practical/Projects" weeks were
+kept since each has a concrete described project). SS1 Radio, Television and Electronics Works
+was already sourced previously (theme id 289, commit `9ec75d27`, 29 topics, source: the same
+SchemeofWork.com page format). This is the sixth of 12 combinations in this batch. SS2 now has
+58 live subjects.
 
 Each addition has its own individual commit via the nerdc-curriculum-sourcer agent.
 
