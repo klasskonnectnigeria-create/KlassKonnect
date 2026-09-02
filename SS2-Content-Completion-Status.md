@@ -39,9 +39,12 @@ Installation, Upholstery Design and Construction, Welding and Fabrication — ea
 and continued 2026-09-02 with Printing Craft Practice as the third combination sourced in this
 batch, 2026-09-02 with Radio, Television and Electronics Works as the sixth combination
 sourced in this batch, 2026-09-02 with Solar Photovoltaic Installation as the eighth
-combination sourced in this batch, and 2026-09-02 with Upholstery Design and Construction as
-the tenth combination sourced in this batch. SS2 now has 60 live subjects. DB-verified
-2026-09-02.
+combination sourced in this batch, 2026-09-02 with Upholstery Design and Construction as the
+tenth combination sourced in this batch, and 2026-09-02 with Welding and Fabrication as the
+twelfth and final combination sourced in this batch — **this batch of 12 combinations
+(Plumbing and Pipe Fitting, Printing Craft Practice, Radio Television and Electronics Works,
+Solar Photovoltaic Installation, Upholstery Design and Construction, Welding and Fabrication —
+each at SS1 and SS2) is now complete.** SS2 now has 61 live subjects. DB-verified 2026-09-02.
 
 No SS3-style five-category structure applies here — SS2's catalogue is limited to the
 science/humanities core plus this new Compulsory Core tier, plus a Humanities & Arts addition
@@ -52,7 +55,7 @@ Concreting, Carpentry and Joinery, Catering Craft Practice, and now Dyeing and B
 further Business & Commercial and other subject expansion has not yet been attempted at this
 grade.
 
-## Subjects (59 live)
+## Subjects (61 live)
 
 Original 9 (`legacy`): Biology, Chemistry, Economics, English Language, Geography, Government,
 Literature-in-English, Mathematics, Physics.
@@ -403,7 +406,27 @@ consecutive weeks share one broader topic — Safety in Machine Operation, Safe 
 Maintenance and Repair, Types of Maintenance, Platform Materials, Frame Construction — and
 were kept as separate per-week topics per the sourcing convention). SS1 Upholstery Design and
 Construction was already sourced previously (theme id 293, commit `427ec0a0`, 32 topics). This
-is the tenth of 12 combinations in this batch. SS2 now has 60 live subjects.
+is the tenth of 12 combinations in this batch.
+
+Vocational & Trade addition (2026-09-02, following Phase 4c): Welding and Fabrication
+(`legacy`, 30 topics — full First/Second/Third Term coverage; source: SchemeofWork.com
+"Fabrication and Welding Scheme of Work SSS2", found directly via search, matching the same
+Lagos-State-affiliate page format as the already-sourced SS1 page; verified against a live
+fetch of the actual WKS/TOPICS/LEARNING-OBJECTIVES/LEARNING-ACTIVITIES table (raw HTML
+cross-checked); Mid-term Break and Examination weeks were excluded as administrative in all
+three terms, as was a bare "Welcome test" (Second Term Week 1) and a bare "Completion and
+submission of given projects" (Second Term Week 12) with no listed learning content; the
+source's own First Term table skips a numbered Week 12 entirely, a gap in the source itself;
+First Term Week 11 ("Project work"), Third Term Week 1 ("Welcome test/Environmental Health"),
+and Third Term Week 12 ("Revision and projects") were each kept as real topics since the
+source pairs them with concrete described content rather than a bare review label; Second Term
+Weeks 4-6 ("Rivets and Riveting") share one set of objectives across a single merged source row
+and were kept as separate per-week topics per the sourcing convention). SS1 Welding and
+Fabrication was already sourced previously (theme id 295, commit `2bf74b31`, 27 topics). This
+is the twelfth and final combination in this batch. **This completes the full 12-combination
+batch (Plumbing and Pipe Fitting, Printing Craft Practice, Radio Television and Electronics
+Works, Solar Photovoltaic Installation, Upholstery Design and Construction, Welding and
+Fabrication — each at SS1 and SS2).** SS2 now has 61 live subjects.
 
 Each addition has its own individual commit via the nerdc-curriculum-sourcer agent.
 
