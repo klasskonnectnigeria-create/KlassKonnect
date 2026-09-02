@@ -73,14 +73,17 @@ Vocational & Trade-track subject, the ninth subject of Phase 4b. Leather Goods M
 and Repairs was added 2026-09-02 (`legacy`, 24 topics, all three terms; source: AseiClass, since
 schemeofwork.com's Federal SS1 category, syllabus.ng, and ecolebooks.com had no SS1 entry for
 this subject) as the twentieth Vocational & Trade-track subject, the tenth subject of Phase 4b.
-SS1 now has 51 live subjects. DB-verified 2026-09-02.
+Machine Woodworking was added 2026-09-02 (`legacy`, 25 topics, all three terms; source: Osun
+State SchemeofWork.com "Machine Woodwork Scheme of Work SSS1 Osun State", since no Federal SS1
+page for this subject was found) as the twenty-first Vocational & Trade-track subject, the
+eleventh subject of Phase 4b. SS1 now has 52 live subjects. DB-verified 2026-09-02.
 
 No SS3-style five-category structure applies here — SS1's catalogue is limited to the
 science/humanities core plus this new Compulsory Core tier and a newly-started Vocational &
 Trade tier plus a newly-started Business & Commercial tier; the wider Vocational & Trade and
 Business & Commercial catalogues have not yet been fully attempted at this grade.
 
-## Subjects (51 live)
+## Subjects (52 live)
 
 Original 9 (`legacy`): Biology, Chemistry, Economics, English Language, Geography, Government,
 Literature-in-English, Mathematics, Physics.
@@ -138,7 +141,9 @@ added 2026-09-02 as the nineteenth Vocational & Trade-track subject, the ninth s
 Phase 4b. Leather Goods Manufacturing and Repairs (`legacy`, 24 topics, all three terms;
 source: AseiClass "Recent Scheme/syllabus on Leather Goods for School Teachers & Students") was
 added 2026-09-02 as the twentieth Vocational & Trade-track subject, the tenth subject of
-Phase 4b.
+Phase 4b. Machine Woodworking (`legacy`, 25 topics, all three terms; source: Osun State
+SchemeofWork.com "Machine Woodwork Scheme of Work SSS1 Osun State") was added 2026-09-02 as the
+twenty-first Vocational & Trade-track subject, the eleventh subject of Phase 4b.
 
 Humanities & Arts-track subjects (2026-08-31): Christian Religious Studies (`legacy`, 30 topics,
 all three terms), Islamic Studies (`legacy`, 33 topics, all three terms), Nigerian History
@@ -232,4 +237,9 @@ at SS1 on 2026-09-02 (theme id 271) as the eighth subject of Phase 4b. GSM Maint
 Repairs (`legacy`, 19 topics, Second+Third Term only — the Federal source page has no First
 Term section; source: SchemeofWork.com "GSM Maintenance and Repairs Scheme of Work for SS 1
 Federal") was sourced and DB-verified at SS1 on 2026-09-02 (theme id 273) as the ninth subject
-of Phase 4b.
+of Phase 4b. Leather Goods Manufacturing and Repairs (`legacy`, 24 topics, all three terms;
+source: AseiClass) was sourced and DB-verified at SS1 on 2026-09-02 as the tenth subject of
+Phase 4b. Machine Woodworking (`legacy`, 25 topics, all three terms; source: Osun State
+SchemeofWork.com "Machine Woodwork Scheme of Work SSS1 Osun State", since no Federal SS1 page
+for this subject exists) was sourced and DB-verified at SS1 on 2026-09-02 (theme id 277) as the
+eleventh subject of Phase 4b.
