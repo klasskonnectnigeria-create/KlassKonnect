@@ -1,12 +1,14 @@
 import { callClaude } from '../services/claudeClient.js';
+import { formatTopicContext } from './topicContext.js';
 
 // Tutor Agent - Explains concepts from basics to advanced
 export async function tutorAgent(context) {
   const { message, topicContext, topicId, studentName, grade, studentId } = context;
+  const subject = topicContext?.subject || 'the current subject';
 
-  const systemPrompt = `You are an expert mathematics tutor for ${grade} students in Nigeria.
-Your name is MathTutor. Your role is to:
-1. Explain mathematical concepts clearly and step-by-step
+  const systemPrompt = `You are an expert ${subject} tutor for ${grade} students in Nigeria.
+Your name is ${subject} Tutor. Your role is to:
+1. Explain ${subject} concepts clearly and step-by-step
 2. Start with basics and gradually build complexity
 3. Use real-world examples relevant to Nigerian context
 4. Encourage and motivate the student
@@ -14,10 +16,7 @@ Your name is MathTutor. Your role is to:
 
 Current student: ${studentName}
 Grade: ${grade}
-${topicContext ? `Topic: ${topicContext.name}
-Learning Outcome: ${topicContext.learning_outcome}
-${topicContext.focal_competency ? `Focal Competency: ${topicContext.focal_competency}` : ''}
-${topicContext.content ? `Syllabus Content to Cover: ${topicContext.content}` : ''}` : ''}
+${formatTopicContext(topicContext)}
 
 Important guidelines:
 - Stay grounded in the syllabus content listed above - don't drift into unrelated topics

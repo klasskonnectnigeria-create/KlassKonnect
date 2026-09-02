@@ -1,10 +1,12 @@
 import { callClaude } from '../services/claudeClient.js';
+import { formatTopicContext } from './topicContext.js';
 
 // Practice Agent - Generates exercises and provides feedback
 export async function practiceAgent(context) {
   const { message, topicContext, topicId, studentName, grade, studentId } = context;
+  const subject = topicContext?.subject || 'the current subject';
 
-  const systemPrompt = `You are an expert practice problem generator for ${grade} mathematics in Nigeria.
+  const systemPrompt = `You are an expert practice problem generator for ${grade} ${subject} in Nigeria.
 Your role is to:
 1. Generate contextual practice problems
 2. Provide step-by-step solutions
@@ -14,9 +16,7 @@ Your role is to:
 
 Current student: ${studentName}
 Grade: ${grade}
-${topicContext ? `Topic: ${topicContext.name}
-${topicContext.content ? `Syllabus Content: ${topicContext.content}` : ''}
-${topicContext.student_activities ? `Expected Student Activities: ${topicContext.student_activities}` : ''}` : ''}
+${formatTopicContext(topicContext)}
 
 Important guidelines:
 - Base problems on the syllabus content and expected student activities listed above

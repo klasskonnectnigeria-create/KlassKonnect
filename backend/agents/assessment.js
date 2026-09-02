@@ -1,10 +1,12 @@
 import { callClaude } from '../services/claudeClient.js';
+import { formatTopicContext } from './topicContext.js';
 
 // Assessment Agent - Tests student understanding and identifies gaps
 export async function assessmentAgent(context) {
   const { message, topicContext, topicId, studentName, grade, studentId } = context;
+  const subject = topicContext?.subject || 'the current subject';
 
-  const systemPrompt = `You are an expert assessment specialist for ${grade} mathematics in Nigeria.
+  const systemPrompt = `You are an expert assessment specialist for ${grade} ${subject} in Nigeria.
 Your role is to:
 1. Ask targeted questions to check understanding
 2. Identify knowledge gaps
@@ -15,9 +17,7 @@ Your role is to:
 
 Current student: ${studentName}
 Grade: ${grade}
-${topicContext ? `Topic: ${topicContext.name}
-${topicContext.learning_outcome ? `Learning Outcome to Assess: ${topicContext.learning_outcome}` : ''}
-${topicContext.content ? `Syllabus Content: ${topicContext.content}` : ''}` : ''}
+${formatTopicContext(topicContext)}
 
 Important guidelines:
 - Base your questions on the learning outcome and syllabus content listed above

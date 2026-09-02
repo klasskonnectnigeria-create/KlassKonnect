@@ -15,19 +15,7 @@ router.post('/chat', verifyToken, async (req, res) => {
   }
 
   try {
-    // Get topic details if provided
-    let topicContext = null;
-    if (topicId) {
-      const topicResult = await pool.query(
-        'SELECT id, name, learning_outcome, focal_competency, content, teacher_activities, student_activities, materials FROM topics WHERE id = $1',
-        [topicId]
-      );
-      if (topicResult.rows.length > 0) {
-        topicContext = topicResult.rows[0];
-      }
-    }
-
-    // Get student info for context
+    // Get student info for context (needed first so the topic lookup below can be grade-scoped)
     const studentResult = await pool.query(
       'SELECT full_name, grade FROM students WHERE id = $1',
       [req.studentId]
@@ -38,6 +26,50 @@ router.post('/chat', verifyToken, async (req, res) => {
     }
 
     const student = studentResult.rows[0];
+
+    // Get topic details if provided, scoped to the student's own grade (matches content.js's pattern)
+    let topicContext = null;
+    if (topicId) {
+      const topicResult = await pool.query(
+        `SELECT t.id, t.name, t.learning_outcome, t.focal_competency, th.subject, th.grade
+         FROM topics t
+         JOIN themes th ON th.id = t.theme_id
+         WHERE t.id = $1 AND th.grade = $2`,
+        [topicId, student.grade]
+      );
+
+      if (topicResult.rows.length === 0) {
+        return res.status(403).json({ error: 'Topic not available for your grade' });
+      }
+
+      const topic = topicResult.rows[0];
+
+      const [contentResult, activitiesResult, evaluationResult] = await Promise.all([
+        pool.query('SELECT section_type, content_text FROM content WHERE topic_id = $1', [topicId]),
+        pool.query('SELECT activity_description FROM learning_activities WHERE topic_id = $1', [topicId]),
+        pool.query('SELECT evaluation_criteria FROM evaluation_guides WHERE topic_id = $1', [topicId])
+      ]);
+
+      const contentByType = {};
+      contentResult.rows.forEach(row => {
+        contentByType[row.section_type] = row.content_text;
+      });
+
+      topicContext = {
+        id: topic.id,
+        name: topic.name,
+        subject: topic.subject,
+        grade: topic.grade,
+        learning_outcome: topic.learning_outcome,
+        focal_competency: topic.focal_competency,
+        knowledge: contentByType.knowledge || null,
+        skills: contentByType.skills || null,
+        competencies: contentByType.competencies || null,
+        values: contentByType.values || null,
+        activities: activitiesResult.rows.map(row => row.activity_description),
+        evaluationGuide: evaluationResult.rows[0]?.evaluation_criteria || null
+      };
+    }
 
     // Get conversation context for better responses (use in-memory history for now)
     const conversationHistory = [];

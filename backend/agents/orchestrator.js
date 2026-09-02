@@ -69,7 +69,9 @@ function detectIntent(message) {
     lowerMessage.includes('problem') ||
     lowerMessage.includes('solve') ||
     lowerMessage.includes('answer') ||
-    lowerMessage.includes('question') ||
+    lowerMessage.includes('practice question') ||
+    lowerMessage.includes('give me a question') ||
+    lowerMessage.includes('ask me a question') ||
     lowerMessage.includes('try a') ||
     lowerMessage.includes('more problems') ||
     lowerMessage.match(/^\d+/) // Starts with a number (likely an answer)
