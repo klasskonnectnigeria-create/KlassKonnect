@@ -94,14 +94,17 @@ and Electronics Works, Solar Photovoltaic Installation, Upholstery Design and Co
 Welding and Fabrication across SS1/SS2 — has not yet been assigned a phase name). Printing Craft
 Practice was added 2026-09-02 (`legacy`, 25 topics, all three terms; source: SchemeofWork.com
 "Printing Craft Scheme of Work SSS1 Lagos State") as the twenty-sixth Vocational & Trade-track
-subject, the second subject of this batch. SS1 now has 57 live subjects. DB-verified 2026-09-02.
+subject, the second subject of this batch. Radio, Television and Electronics Works was added
+2026-09-02 (`legacy`, 29 topics, all three terms; source: SchemeofWork.com "Radio,Television and
+Electronics Works Scheme of Work SSS1") as the twenty-seventh Vocational & Trade-track subject,
+the third subject of this batch. SS1 now has 58 live subjects. DB-verified 2026-09-02.
 
 No SS3-style five-category structure applies here — SS1's catalogue is limited to the
 science/humanities core plus this new Compulsory Core tier and a newly-started Vocational &
 Trade tier plus a newly-started Business & Commercial tier; the wider Vocational & Trade and
 Business & Commercial catalogues have not yet been fully attempted at this grade.
 
-## Subjects (57 live)
+## Subjects (58 live)
 
 Original 9 (`legacy`): Biology, Chemistry, Economics, English Language, Geography, Government,
 Literature-in-English, Mathematics, Physics.
@@ -177,7 +180,11 @@ schemeofwork.com) was added 2026-09-02 as the twenty-fifth Vocational & Trade-tr
 first subject of the next (as-yet-unnamed) batch of the Vocational & Trade sourcing pass
 following Phase 4c. Printing Craft Practice (`legacy`, 25 topics, all three terms; source:
 SchemeofWork.com "Printing Craft Scheme of Work SSS1 Lagos State") was added 2026-09-02 as the
-twenty-sixth Vocational & Trade-track subject, the second subject of this batch.
+twenty-sixth Vocational & Trade-track subject, the second subject of this batch. Radio,
+Television and Electronics Works (`legacy`, 29 topics, all three terms; source:
+SchemeofWork.com "Radio,Television and Electronics Works Scheme of Work SSS1") was added
+2026-09-02 as the twenty-seventh Vocational & Trade-track subject, the third subject of this
+batch.
 
 Humanities & Arts-track subjects (2026-08-31): Christian Religious Studies (`legacy`, 30 topics,
 all three terms), Islamic Studies (`legacy`, 33 topics, all three terms), Nigerian History
