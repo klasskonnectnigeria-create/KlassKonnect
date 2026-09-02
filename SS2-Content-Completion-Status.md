@@ -344,3 +344,14 @@ instead of a verified source). It was correctly re-sourced and re-imported in co
 `279bd7e0` ("properly re-sourced from verified fetch"). This is the incident documented as a
 cautionary example in `.claude/agents/nerdc-curriculum-sourcer.md`. No other SS2 subject has
 a known gap.
+
+**Mining is SS3-only and excluded from the SS1/SS2 target catalogue.** SS2 Mining was not
+attempted: the SS1 side was sourced first (2026-09-02) and came back unresolved after checking
+schemeofwork.com (Federal/Lagos/Osun), syllabus.ng, ecolebooks.com, and NABTEB, plus
+`lessonnote.com.ng`'s NERDC trade-subject enumeration, which does not list Mining among the
+~35 approved trade subjects at all. The only Mining source found — `waecsyllabus.com`, already
+used for the existing SS3 theme — is a single undifferentiated 3-year syllabus with no
+SS1/SS2/SS3 breakdown, so it cannot be legitimately sourced as SS2-specific content either.
+Mining is treated as a WAEC-exam-only elective rather than a genuine 3-year NERDC trade
+subject, so it is not part of the sourcing backlog described in `CLAUDE.md`. The SS1/SS2 target
+catalogue count should be read as 61 (SS3's 62 minus Mining), not 62.

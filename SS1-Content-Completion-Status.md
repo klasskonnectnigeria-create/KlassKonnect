@@ -203,6 +203,20 @@ commit via the nerdc-curriculum-sourcer agent.
 None found in commit history or the live DB aggregate for the 50 live subjects. The rest of the
 Vocational & Trade catalogue, plus remaining Humanities & Arts/Science-track subjects beyond the
 Compulsory Core, are not yet attempted at this grade (planned for later phases).
+
+**Mining is SS3-only and excluded from the SS1/SS2 target catalogue.** An SS1 sourcing attempt
+on 2026-09-02 came back unresolved: no schemeofwork.com variant (Federal/Lagos/Osun), syllabus.ng,
+ecolebooks.com, or NABTEB has a standalone SS1 Mining scheme of work, and `lessonnote.com.ng`'s
+NERDC trade-subject enumeration (~35 approved trade subjects) does not list Mining at all. The
+only source with any Mining content — `waecsyllabus.com`, already used for the existing SS3
+theme — is a single undifferentiated 3-year syllabus with no SS1/SS2/SS3 breakdown, so it cannot
+legitimately be relabeled as SS1- or SS2-specific content. Unlike the vocational/trade subjects
+covered by the sourcing backlog described in `CLAUDE.md` (which genuinely do carry SS1/SS2/SS3
+schemes under the standard NERDC track structure), Mining appears to be a WAEC-exam-only elective
+sourced solely from the WAEC syllabus, not a subject that follows a student through SS1 → SS2 →
+SS3. SS2 Mining was not attempted, on the reasoning that the same absence of a grade-specific
+source almost certainly applies there too. The SS1/SS2 target catalogue count should therefore be
+read as 61 (SS3's 62 minus Mining), not 62.
 The SS1/SS2 language-subject gap (French, Yoruba, Igbo) is now fully closed at SS1.
 Phase 2b-iii (Hausa, Arabic, Music, Visual Arts, Home Management, Foods and Nutrition across
 SS1/SS2) is now fully complete at SS1 (all 6 subjects sourced); only the SS2 side of Foods and
