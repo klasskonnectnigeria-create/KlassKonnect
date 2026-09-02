@@ -62,14 +62,17 @@ Work was added 2026-09-02 (`legacy`, 29 topics, all three terms; source: Schemeo
 page) as the fifteenth Vocational & Trade-track subject, the fifth subject of Phase 4b. Fisheries
 was added 2026-09-02 (`legacy`, 22 topics, all three terms; source: Scheme of Work Osun State,
 since no Federal SS1 Fishery page could be located) as the sixteenth Vocational & Trade-track
-subject, the sixth subject of Phase 4b. SS1 now has 47 live subjects. DB-verified 2026-09-02.
+subject, the sixth subject of Phase 4b. Furniture Making was added 2026-09-02 (`legacy`, 30
+topics, all three terms; source: SchemeofWork.com Federal) as the seventeenth Vocational &
+Trade-track subject, the seventh subject of Phase 4b. SS1 now has 48 live subjects.
+DB-verified 2026-09-02.
 
 No SS3-style five-category structure applies here — SS1's catalogue is limited to the
 science/humanities core plus this new Compulsory Core tier and a newly-started Vocational &
 Trade tier plus a newly-started Business & Commercial tier; the wider Vocational & Trade and
 Business & Commercial catalogues have not yet been fully attempted at this grade.
 
-## Subjects (47 live)
+## Subjects (48 live)
 
 Original 9 (`legacy`): Biology, Chemistry, Economics, English Language, Geography, Government,
 Literature-in-English, Mathematics, Physics.
@@ -116,7 +119,9 @@ subject, the fourth subject of Phase 4b. Electrical Installation and Maintenance
 2026-09-02 as the fifteenth Vocational & Trade-track subject, the fifth subject of Phase 4b.
 Fisheries (`legacy`, 22 topics, all three terms; source: Scheme of Work Osun State, since no
 Federal SS1 Fishery page exists) was added 2026-09-02 as the sixteenth Vocational & Trade-track
-subject, the sixth subject of Phase 4b.
+subject, the sixth subject of Phase 4b. Furniture Making (`legacy`, 30 topics, all three terms;
+source: SchemeofWork.com Federal) was added 2026-09-02 as the seventeenth Vocational &
+Trade-track subject, the seventh subject of Phase 4b.
 
 Humanities & Arts-track subjects (2026-08-31): Christian Religious Studies (`legacy`, 30 topics,
 all three terms), Islamic Studies (`legacy`, 33 topics, all three terms), Nigerian History
@@ -201,4 +206,7 @@ Installation and Maintenance Work Scheme of Work SSS1") was sourced and DB-verif
 three terms; source: Scheme of Work Osun State "Fishery Scheme of Work SSS 1 Osun State") was
 sourced and DB-verified at SS1 on 2026-09-02 (theme id 267) as the sixth subject of Phase 4b —
 no Federal SS1 Fishery page exists on schemeofwork.com (only SS2/SS3 Federal), so the Osun
-State variant was used per the fallback source order.
+State variant was used per the fallback source order. Furniture Making (`legacy`, 30 topics,
+all three terms; source: SchemeofWork.com "Furniture Making Scheme of Work for SS 1 Federal")
+was sourced and DB-verified at SS1 on 2026-09-02 (theme id 269) as the seventh subject of
+Phase 4b.
