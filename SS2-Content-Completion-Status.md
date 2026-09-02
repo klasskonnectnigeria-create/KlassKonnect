@@ -25,8 +25,9 @@ A Phase 4b Vocational & Trade pass began 2026-09-01 with Carpentry and Joinery, 
 standalone Technology-curriculum addition (2026-09-02) added Data Processing. A further
 Vocational & Trade addition (2026-09-02) added Electrical Installation and Maintenance Work,
 and a subsequent Vocational & Trade addition (2026-09-02) added Fisheries. A further
-Vocational & Trade addition (2026-09-02) added Furniture Making.
-SS2 now has 48 live subjects. DB-verified 2026-09-02.
+Vocational & Trade addition (2026-09-02) added Furniture Making. A further Vocational & Trade
+addition (2026-09-02) added Garment Making Construction.
+SS2 now has 49 live subjects. DB-verified 2026-09-02.
 
 No SS3-style five-category structure applies here — SS2's catalogue is limited to the
 science/humanities core plus this new Compulsory Core tier, plus a Humanities & Arts addition
@@ -37,7 +38,7 @@ Concreting, Carpentry and Joinery, Catering Craft Practice, and now Dyeing and B
 further Business & Commercial and other subject expansion has not yet been attempted at this
 grade.
 
-## Subjects (47 live)
+## Subjects (49 live)
 
 Original 9 (`legacy`): Biology, Chemistry, Economics, English Language, Geography, Government,
 Literature-in-English, Mathematics, Physics.
@@ -246,6 +247,16 @@ Weeks 1-2 and 3-4, each carry near-identical content rows in the source and were
 separate per-week topics per the sourcing convention, while Third Term Weeks 5-6 and 7-8 are
 each a single combined row in the source table itself and were kept as one topic each). SS1
 and SS3 Furniture Making were already sourced previously.
+
+Vocational & Trade addition (2026-09-02): Garment Making Construction (`legacy`, 33 topics —
+full First/Second/Third Term coverage; source: SchemeofWork.com "Garment Making Scheme of Work
+for SS 2 Federal", found directly via search and verified against a live fetch of the actual
+WEEK/TOPIC/CONTENT table; the page identifies itself as a "Trade Syllabus for Senior Secondary
+School" under the Federal scheme and makes no NESRI-2025 compliance claim; Revision and
+Examination weeks in all three terms were excluded as administrative; Second Term and Third Term
+each contain a week titled "Cuff Attachment" covering different content — kept as separate
+topics with distinguishing names). SS1 and SS3 Garment Making Construction were already sourced
+previously.
 
 Each addition has its own individual commit via the nerdc-curriculum-sourcer agent.
 
