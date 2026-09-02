@@ -85,7 +85,13 @@ State", since no Federal SS1 page for this subject was found) as the twenty-thir
 Trade-track subject, the first subject of Phase 4c (the continuation of the Vocational & Trade
 sourcing pass following Phase 4b). Photography was added 2026-09-02 (`legacy`, 31 topics, all
 three terms; source: SchemeofWork.com "Photography Scheme of Work for SS 1 Federal") as the
-twenty-fourth Vocational & Trade-track subject, the second subject of Phase 4c. SS1 now has 55
+twenty-fourth Vocational & Trade-track subject, the second subject of Phase 4c. Plumbing and Pipe
+Fitting was added 2026-09-02 (`legacy`, 24 topics, all three terms; source: AseiClass "Recent
+Scheme/syllabus on Plumbing And Pipe Fitting for School Teachers & Students") as the twenty-fifth
+Vocational & Trade-track subject, the next Vocational & Trade addition following Phase 4c (this
+batch of 12 combinations — Plumbing and Pipe Fitting, Printing Craft Practice, Radio Television
+and Electronics Works, Solar Photovoltaic Installation, Upholstery Design and Construction, and
+Welding and Fabrication across SS1/SS2 — has not yet been assigned a phase name). SS1 now has 56
 live subjects. DB-verified 2026-09-02.
 
 No SS3-style five-category structure applies here — SS1's catalogue is limited to the
@@ -93,7 +99,7 @@ science/humanities core plus this new Compulsory Core tier and a newly-started V
 Trade tier plus a newly-started Business & Commercial tier; the wider Vocational & Trade and
 Business & Commercial catalogues have not yet been fully attempted at this grade.
 
-## Subjects (55 live)
+## Subjects (56 live)
 
 Original 9 (`legacy`): Biology, Chemistry, Economics, English Language, Geography, Government,
 Literature-in-English, Mathematics, Physics.
@@ -162,7 +168,12 @@ of Work SSS1 Lagos State") was added 2026-09-02 as the twenty-third Vocational &
 subject, the first subject of Phase 4c, since no Federal SS1 page for this subject was found.
 Photography (`legacy`, 31 topics, all three terms; source: SchemeofWork.com "Photography Scheme
 of Work for SS 1 Federal") was added 2026-09-02 as the twenty-fourth Vocational & Trade-track
-subject, the second subject of Phase 4c.
+subject, the second subject of Phase 4c. Plumbing and Pipe Fitting (`legacy`, 24 topics, all
+three terms; source: AseiClass "Recent Scheme/syllabus on Plumbing And Pipe Fitting for School
+Teachers & Students", since no Federal, Lagos, or Osun SS1 page for this subject was found on
+schemeofwork.com) was added 2026-09-02 as the twenty-fifth Vocational & Trade-track subject, the
+first subject of the next (as-yet-unnamed) batch of the Vocational & Trade sourcing pass
+following Phase 4c.
 
 Humanities & Arts-track subjects (2026-08-31): Christian Religious Studies (`legacy`, 30 topics,
 all three terms), Islamic Studies (`legacy`, 33 topics, all three terms), Nigerian History
