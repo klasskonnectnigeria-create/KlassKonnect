@@ -38,8 +38,10 @@ Fitting, Printing Craft Practice, Radio Television and Electronics Works, Solar 
 Installation, Upholstery Design and Construction, Welding and Fabrication — each at SS1 and SS2),
 and continued 2026-09-02 with Printing Craft Practice as the third combination sourced in this
 batch, 2026-09-02 with Radio, Television and Electronics Works as the sixth combination
-sourced in this batch, and 2026-09-02 with Solar Photovoltaic Installation as the eighth
-combination sourced in this batch. SS2 now has 59 live subjects. DB-verified 2026-09-02.
+sourced in this batch, 2026-09-02 with Solar Photovoltaic Installation as the eighth
+combination sourced in this batch, and 2026-09-02 with Upholstery Design and Construction as
+the tenth combination sourced in this batch. SS2 now has 60 live subjects. DB-verified
+2026-09-02.
 
 No SS3-style five-category structure applies here — SS2's catalogue is limited to the
 science/humanities core plus this new Compulsory Core tier, plus a Humanities & Arts addition
@@ -389,7 +391,19 @@ a raw-HTML fetch since WebFetch's summarized view truncated before reaching the 
 section, matching the SS1 finding; Midterm Test, Midterm Break, and "Revision & Exams" weeks
 were excluded as administrative in all three terms). SS1 Solar Photovoltaic Installation was
 already sourced previously (theme id 291, commit `6f8bfcfa`, 24 topics). This is the eighth of
-12 combinations in this batch. SS2 now has 59 live subjects.
+12 combinations in this batch.
+
+Vocational & Trade addition (2026-09-02, following Phase 4c): Upholstery Design and
+Construction (`legacy`, 32 topics — full First/Second/Third Term coverage; source:
+SchemeofWork.com "Upholstery Scheme of Work for SS 2 Federal", found by pattern-matching the
+sibling SS1/SS3 page slug on the Federal SS2 category index after a direct search did not
+surface it; verified against a live fetch of the actual WEEK/TOPIC-CONTENT/ACTIVITIES table;
+Revision and Examination weeks were excluded as administrative in all three terms; several
+consecutive weeks share one broader topic — Safety in Machine Operation, Safe Storage,
+Maintenance and Repair, Types of Maintenance, Platform Materials, Frame Construction — and
+were kept as separate per-week topics per the sourcing convention). SS1 Upholstery Design and
+Construction was already sourced previously (theme id 293, commit `427ec0a0`, 32 topics). This
+is the tenth of 12 combinations in this batch. SS2 now has 60 live subjects.
 
 Each addition has its own individual commit via the nerdc-curriculum-sourcer agent.
 
