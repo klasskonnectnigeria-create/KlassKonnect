@@ -20,8 +20,9 @@ SS2 as the sixth and final subject sourced — **Phase 4a is now complete at SS2
 Vocational & Trade subjects sourced.** (SS1 Auto Electrical Work remains unresolved and is
 being retried separately; all other 11 of 12 SS1/SS2 combinations in this phase are sourced.)
 A Phase 4b Vocational & Trade pass began 2026-09-01 with Carpentry and Joinery, and continued
-2026-09-01 with Catering Craft Practice as the second subject sourced in this tranche. SS2 now
-has 43 live subjects. DB-verified 2026-09-01.
+2026-09-01 with Catering Craft Practice as the second subject sourced in this tranche. A
+standalone Technology-curriculum addition (2026-09-02) added Data Processing. SS2 now
+has 44 live subjects. DB-verified 2026-09-02.
 
 No SS3-style five-category structure applies here — SS2's catalogue is limited to the
 science/humanities core plus this new Compulsory Core tier, plus a Humanities & Arts addition
@@ -31,7 +32,7 @@ Work, Auto Mechanical Work, Automobile Parts Merchandising, Blocklaying, Brickla
 Concreting, Carpentry and Joinery, and now Catering Craft Practice); further Business &
 Commercial and other subject expansion has not yet been attempted at this grade.
 
-## Subjects (43 live)
+## Subjects (44 live)
 
 Original 9 (`legacy`): Biology, Chemistry, Economics, English Language, Geography, Government,
 Literature-in-English, Mathematics, Physics.
@@ -192,6 +193,14 @@ Third Term weeks 2-5 and 6-10 each share umbrella topics and were kept as separa
 topics per the sourcing convention). SS1 Catering Craft Practice was already sourced previously
 (commit `a13db39e`, 31 topics). This subject already exists at SS3 (theme id 161). This is the
 second subject sourced in Phase 4b.
+
+Technology-curriculum addition (2026-09-02): Data Processing (`legacy`, 33 topics — full
+First/Second/Third Term coverage; source: SchemeofWork.com "Data Processing Scheme of Work for
+SS 2 Federal", found directly via search and verified against a live fetch of the actual
+WEEK/TOPIC-CONTENT/ACTIVITIES table; the page identifies itself as part of the "Nigeria Senior
+Secondary Technology Curriculum" and makes no NESRI-2025 compliance claim; First Term weeks 4-5
+and 8-11, Second Term weeks 1-3, and Third Term weeks 1-2, 4-5, 6-7, 10-11 each share umbrella
+topics and were kept as separate per-week topics per the sourcing convention).
 
 Each addition has its own individual commit via the nerdc-curriculum-sourcer agent.
 
