@@ -83,14 +83,17 @@ SS1 side of Phase 4b (12/12). Painting and Decoration was added 2026-09-02 (`leg
 all three terms; source: SchemeofWork.com "Painting and Decoration Scheme of Work SSS1 Lagos
 State", since no Federal SS1 page for this subject was found) as the twenty-third Vocational &
 Trade-track subject, the first subject of Phase 4c (the continuation of the Vocational & Trade
-sourcing pass following Phase 4b). SS1 now has 54 live subjects. DB-verified 2026-09-02.
+sourcing pass following Phase 4b). Photography was added 2026-09-02 (`legacy`, 31 topics, all
+three terms; source: SchemeofWork.com "Photography Scheme of Work for SS 1 Federal") as the
+twenty-fourth Vocational & Trade-track subject, the second subject of Phase 4c. SS1 now has 55
+live subjects. DB-verified 2026-09-02.
 
 No SS3-style five-category structure applies here — SS1's catalogue is limited to the
 science/humanities core plus this new Compulsory Core tier and a newly-started Vocational &
 Trade tier plus a newly-started Business & Commercial tier; the wider Vocational & Trade and
 Business & Commercial catalogues have not yet been fully attempted at this grade.
 
-## Subjects (54 live)
+## Subjects (55 live)
 
 Original 9 (`legacy`): Biology, Chemistry, Economics, English Language, Geography, Government,
 Literature-in-English, Mathematics, Physics.
@@ -157,6 +160,9 @@ twelfth subject of Phase 4b, completing the SS1 side of Phase 4b (12/12). Painti
 (`legacy`, 29 topics, all three terms; source: SchemeofWork.com "Painting and Decoration Scheme
 of Work SSS1 Lagos State") was added 2026-09-02 as the twenty-third Vocational & Trade-track
 subject, the first subject of Phase 4c, since no Federal SS1 page for this subject was found.
+Photography (`legacy`, 31 topics, all three terms; source: SchemeofWork.com "Photography Scheme
+of Work for SS 1 Federal") was added 2026-09-02 as the twenty-fourth Vocational & Trade-track
+subject, the second subject of Phase 4c.
 
 Humanities & Arts-track subjects (2026-08-31): Christian Religious Studies (`legacy`, 30 topics,
 all three terms), Islamic Studies (`legacy`, 33 topics, all three terms), Nigerian History
@@ -262,4 +268,6 @@ SS1 side of Phase 4b. Painting and Decoration (`legacy`, 29 topics, all three te
 SchemeofWork.com "Painting and Decoration Scheme of Work SSS1 Lagos State", since no Federal
 SS1 page for this subject was found) was sourced and DB-verified at SS1 on 2026-09-02
 (theme id 281) as the first subject of Phase 4c, the continuation of the Vocational & Trade
-sourcing pass following Phase 4b.
+sourcing pass following Phase 4b. Photography (`legacy`, 31 topics, all three terms; source:
+SchemeofWork.com "Photography Scheme of Work for SS 1 Federal") was sourced and DB-verified at
+SS1 on 2026-09-02 (theme id 283) as the second subject of Phase 4c.
