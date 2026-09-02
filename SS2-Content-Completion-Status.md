@@ -37,8 +37,9 @@ added Plumbing and Pipe Fitting as the second of 12 planned combinations (Plumbi
 Fitting, Printing Craft Practice, Radio Television and Electronics Works, Solar Photovoltaic
 Installation, Upholstery Design and Construction, Welding and Fabrication — each at SS1 and SS2),
 and continued 2026-09-02 with Printing Craft Practice as the third combination sourced in this
-batch, and 2026-09-02 with Radio, Television and Electronics Works as the sixth combination
-sourced in this batch. SS2 now has 58 live subjects. DB-verified 2026-09-02.
+batch, 2026-09-02 with Radio, Television and Electronics Works as the sixth combination
+sourced in this batch, and 2026-09-02 with Solar Photovoltaic Installation as the eighth
+combination sourced in this batch. SS2 now has 59 live subjects. DB-verified 2026-09-02.
 
 No SS3-style five-category structure applies here — SS2's catalogue is limited to the
 science/humanities core plus this new Compulsory Core tier, plus a Humanities & Arts addition
@@ -49,7 +50,7 @@ Concreting, Carpentry and Joinery, Catering Craft Practice, and now Dyeing and B
 further Business & Commercial and other subject expansion has not yet been attempted at this
 grade.
 
-## Subjects (58 live)
+## Subjects (59 live)
 
 Original 9 (`legacy`): Biology, Chemistry, Economics, English Language, Geography, Government,
 Literature-in-English, Mathematics, Physics.
@@ -378,8 +379,17 @@ Communication Systems" week were kept as real topics since each pairs the review
 concrete described content; the First, Second, and Third Term "Practical/Projects" weeks were
 kept since each has a concrete described project). SS1 Radio, Television and Electronics Works
 was already sourced previously (theme id 289, commit `9ec75d27`, 29 topics, source: the same
-SchemeofWork.com page format). This is the sixth of 12 combinations in this batch. SS2 now has
-58 live subjects.
+SchemeofWork.com page format). This is the sixth of 12 combinations in this batch.
+
+Vocational & Trade addition (2026-09-02, following Phase 4c): Solar Photovoltaic Installation
+(`legacy`, 24 topics — full First/Second/Third Term coverage; source: SchemeofWork.com "SS2
+Scheme of Work Unified" (Solar Photovoltaic Installation & Maintenance section), found via the
+same unified-page pattern already used for the SS1 entry; the SS2 page's article body required
+a raw-HTML fetch since WebFetch's summarized view truncated before reaching the relevant
+section, matching the SS1 finding; Midterm Test, Midterm Break, and "Revision & Exams" weeks
+were excluded as administrative in all three terms). SS1 Solar Photovoltaic Installation was
+already sourced previously (theme id 291, commit `6f8bfcfa`, 24 topics). This is the eighth of
+12 combinations in this batch. SS2 now has 59 live subjects.
 
 Each addition has its own individual commit via the nerdc-curriculum-sourcer agent.
 
