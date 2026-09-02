@@ -64,15 +64,17 @@ was added 2026-09-02 (`legacy`, 22 topics, all three terms; source: Scheme of Wo
 since no Federal SS1 Fishery page could be located) as the sixteenth Vocational & Trade-track
 subject, the sixth subject of Phase 4b. Furniture Making was added 2026-09-02 (`legacy`, 30
 topics, all three terms; source: SchemeofWork.com Federal) as the seventeenth Vocational &
-Trade-track subject, the seventh subject of Phase 4b. SS1 now has 48 live subjects.
-DB-verified 2026-09-02.
+Trade-track subject, the seventh subject of Phase 4b. Garment Making Construction was added
+2026-09-02 (`legacy`, 33 topics, all three terms; source: SchemeofWork.com Federal) as the
+eighteenth Vocational & Trade-track subject, the eighth subject of Phase 4b. SS1 now has 49
+live subjects. DB-verified 2026-09-02.
 
 No SS3-style five-category structure applies here — SS1's catalogue is limited to the
 science/humanities core plus this new Compulsory Core tier and a newly-started Vocational &
 Trade tier plus a newly-started Business & Commercial tier; the wider Vocational & Trade and
 Business & Commercial catalogues have not yet been fully attempted at this grade.
 
-## Subjects (48 live)
+## Subjects (49 live)
 
 Original 9 (`legacy`): Biology, Chemistry, Economics, English Language, Geography, Government,
 Literature-in-English, Mathematics, Physics.
@@ -121,7 +123,10 @@ Fisheries (`legacy`, 22 topics, all three terms; source: Scheme of Work Osun Sta
 Federal SS1 Fishery page exists) was added 2026-09-02 as the sixteenth Vocational & Trade-track
 subject, the sixth subject of Phase 4b. Furniture Making (`legacy`, 30 topics, all three terms;
 source: SchemeofWork.com Federal) was added 2026-09-02 as the seventeenth Vocational &
-Trade-track subject, the seventh subject of Phase 4b.
+Trade-track subject, the seventh subject of Phase 4b. Garment Making Construction (`legacy`,
+33 topics, all three terms; source: SchemeofWork.com "Garment Making Scheme of Work for SS 1
+Federal") was added 2026-09-02 as the eighteenth Vocational & Trade-track subject, the eighth
+subject of Phase 4b.
 
 Humanities & Arts-track subjects (2026-08-31): Christian Religious Studies (`legacy`, 30 topics,
 all three terms), Islamic Studies (`legacy`, 33 topics, all three terms), Nigerian History
@@ -159,7 +164,7 @@ commit via the nerdc-curriculum-sourcer agent.
 
 ## Known gaps
 
-None found in commit history or the live DB aggregate for the 47 live subjects. The rest of the
+None found in commit history or the live DB aggregate for the 49 live subjects. The rest of the
 Vocational & Trade catalogue, plus remaining Humanities & Arts/Science-track subjects beyond the
 Compulsory Core, are not yet attempted at this grade (planned for later phases).
 The SS1/SS2 language-subject gap (French, Yoruba, Igbo) is now fully closed at SS1.
@@ -209,4 +214,6 @@ no Federal SS1 Fishery page exists on schemeofwork.com (only SS2/SS3 Federal), s
 State variant was used per the fallback source order. Furniture Making (`legacy`, 30 topics,
 all three terms; source: SchemeofWork.com "Furniture Making Scheme of Work for SS 1 Federal")
 was sourced and DB-verified at SS1 on 2026-09-02 (theme id 269) as the seventh subject of
-Phase 4b.
+Phase 4b. Garment Making Construction (`legacy`, 33 topics, all three terms; source:
+SchemeofWork.com "Garment Making Scheme of Work for SS 1 Federal") was sourced and DB-verified
+at SS1 on 2026-09-02 (theme id 271) as the eighth subject of Phase 4b.
