@@ -30,8 +30,9 @@ addition (2026-09-02) added Garment Making Construction. A further Vocational & 
 (2026-09-02) added GSM Maintenance and Repairs. A further Vocational & Trade addition
 (2026-09-02) added Leather Goods Manufacturing and Repairs. A further Vocational & Trade
 addition (2026-09-02) added Machine Woodworking, and a subsequent Vocational & Trade addition
-(2026-09-02) added Metalwork.
-SS2 now has 53 live subjects. DB-verified 2026-09-02.
+(2026-09-02) added Metalwork. A further Vocational & Trade addition (2026-09-02) added Painting
+and Decoration.
+SS2 now has 54 live subjects. DB-verified 2026-09-02.
 
 No SS3-style five-category structure applies here — SS2's catalogue is limited to the
 science/humanities core plus this new Compulsory Core tier, plus a Humanities & Arts addition
@@ -42,7 +43,7 @@ Concreting, Carpentry and Joinery, Catering Craft Practice, and now Dyeing and B
 further Business & Commercial and other subject expansion has not yet been attempted at this
 grade.
 
-## Subjects (52 live)
+## Subjects (54 live)
 
 Original 9 (`legacy`): Biology, Chemistry, Economics, English Language, Geography, Government,
 Literature-in-English, Mathematics, Physics.
@@ -305,6 +306,17 @@ Revision/Examination weeks were excluded as administrative in all three terms; a
 topic labels with apparent source-side OCR typos ("Centre latte", "Coding tools", "Cars and
 maintenance of machine tools", "Power saving machines") were corrected to their evident intended
 meaning based on surrounding content).
+
+Vocational & Trade addition (2026-09-02): Painting and Decoration (`legacy`, 32 topics — full
+First/Second/Third Term coverage; source: SchemeofWork.com "Painting and Decoration Scheme of
+Work for SS 2 Federal", found directly via search and verified against a live fetch of the
+actual WEEK/TOPIC/CONTENT/ACTIVITIES table; Revision and Examination weeks were excluded as
+administrative in all three terms; First Term weeks 9-11 ("Decoration for Interior") share one
+broader topic on flower decoration/arrangement and were kept as separate per-week topics per
+the sourcing convention, with the shared context noted in each learningOutcome; Third Term
+week 10 ("Time Duration") has only a bare title with no elaborated content in the source but
+was kept as a real (non-administrative) topic, with its knowledge point inferred from the
+immediately surrounding Job Estimation and Costing weeks).
 
 Each addition has its own individual commit via the nerdc-curriculum-sourcer agent.
 
