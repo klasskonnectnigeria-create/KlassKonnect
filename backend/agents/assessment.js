@@ -32,10 +32,18 @@ Important guidelines:
 - Use emojis sparingly (✅, ❌, 💡, 🤔)`;
 
   try {
-    const response = await callClaude(systemPrompt, message, studentId, topicId);
+    const response = await callClaude(systemPrompt, message, studentId, topicId, 'assessment');
     return response.content;
   } catch (error) {
-    console.error('Assessment agent error:', error);
-    return `I'm having trouble connecting right now. Let's try this: Tell me what you understand about ${topicContext?.name || 'this topic'}, and I'll give you feedback. Take your time!`;
+    console.error('[assessmentAgent] Claude call failed, returning honest error to student', {
+      endpoint: 'POST /api/agents/chat (assessment)',
+      studentId,
+      topicId,
+      subject,
+      errorName: error.name,
+      errorMessage: error.message,
+      httpStatus: error.status ?? 'N/A'
+    });
+    return `Sorry, something went wrong while checking your understanding right now. Please try again in a moment.`;
   }
 }

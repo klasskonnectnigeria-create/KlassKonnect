@@ -42,7 +42,7 @@ export function clearHistory(historyKey) {
   conversationHistories.delete(historyKey);
 }
 
-export async function callClaude(systemPrompt, userMessage, studentId, topicId) {
+export async function callClaude(systemPrompt, userMessage, studentId, topicId, source = 'unknown') {
   const historyKey = topicId ? `${studentId}:${topicId}` : String(studentId);
   const history = getConversationHistory(historyKey);
 
@@ -118,23 +118,30 @@ export async function callClaude(systemPrompt, userMessage, studentId, topicId) 
       }
     };
   } catch (error) {
-    console.error('[callClaude] API error caught:', {
-      message: error.message,
-      name: error.name,
-      status: error.status || 'N/A',
-      type: error.type || 'UNKNOWN',
-      fullError: JSON.stringify(error, null, 2)
+    // Real API failure (auth, network, rate limit, or anything else from the SDK).
+    // Log every field needed to diagnose this later, then let it propagate — the
+    // calling agent (tutor/practice/assessment) is responsible for turning this into
+    // an honest, subject-agnostic message to the student. We must NOT paper over a
+    // real failure with canned academic content that looks like a normal answer.
+    console.error('[callClaude] Claude API call failed', {
+      source,
+      studentId,
+      topicId,
+      historyKey,
+      errorName: error.name,
+      errorMessage: error.message,
+      httpStatus: error.status ?? 'N/A',
+      errorType: error.type || 'UNKNOWN',
+      timestamp: new Date().toISOString()
     });
 
-    // Fallback to demo mode on API errors
-    if (error.message.includes('authentication') || error.message.includes('401') || error.status === 401) {
-      console.log('⚠️  Claude API auth failed, using demo responses');
-      return getDemoResponse(userMessage, historyKey, history);
-    }
-
-    // Log all errors for debugging, but still fail gracefully
-    console.error('[callClaude] Non-auth error, but falling back to demo mode for graceful degradation');
-    return getDemoResponse(userMessage, historyKey, history);
+    const apiError = new Error(`Claude API call failed (source=${source}): ${error.message}`);
+    apiError.cause = error;
+    apiError.status = error.status;
+    apiError.source = source;
+    apiError.studentId = studentId;
+    apiError.topicId = topicId;
+    throw apiError;
   }
 }
 

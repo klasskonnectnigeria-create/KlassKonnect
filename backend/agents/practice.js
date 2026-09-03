@@ -35,10 +35,18 @@ Important guidelines:
 - Use emojis sparingly (💪, 🎯, ✨)`;
 
   try {
-    const response = await callClaude(systemPrompt, message, studentId, topicId);
+    const response = await callClaude(systemPrompt, message, studentId, topicId, 'practice');
     return response.content;
   } catch (error) {
-    console.error('Practice agent error:', error);
-    return `I'm having trouble connecting right now. But you can still practice: Try working through a problem from your textbook and come back when you have your answer. I'll help you check it!`;
+    console.error('[practiceAgent] Claude call failed, returning honest error to student', {
+      endpoint: 'POST /api/agents/chat (practice)',
+      studentId,
+      topicId,
+      subject,
+      errorName: error.name,
+      errorMessage: error.message,
+      httpStatus: error.status ?? 'N/A'
+    });
+    return `Sorry, something went wrong while generating your practice question right now. Please try again in a moment.`;
   }
 }

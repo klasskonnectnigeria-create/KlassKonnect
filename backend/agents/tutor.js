@@ -31,13 +31,18 @@ Important guidelines:
 - Always end with an actionable next step or question`;
 
   try {
-    const response = await callClaude(systemPrompt, message, studentId, topicId);
+    const response = await callClaude(systemPrompt, message, studentId, topicId, 'tutor');
     return response.content;
   } catch (error) {
-    console.error('Tutor agent error:', error);
-    console.error('Error message:', error.message);
-    console.error('Error type:', error.type);
-    console.error('Full error:', JSON.stringify(error));
-    return `I apologize, I'm having trouble connecting right now. Please try again in a moment. In the meantime, remember: start with the basics, break problems into smaller steps, and don't hesitate to ask for clarification!`;
+    console.error('[tutorAgent] Claude call failed, returning honest error to student', {
+      endpoint: 'POST /api/agents/chat (tutor)',
+      studentId,
+      topicId,
+      subject,
+      errorName: error.name,
+      errorMessage: error.message,
+      httpStatus: error.status ?? 'N/A'
+    });
+    return `Sorry, something went wrong while reaching the tutor right now. Please try again in a moment.`;
   }
 }
