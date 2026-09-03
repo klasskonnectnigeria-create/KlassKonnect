@@ -1,8 +1,12 @@
 # Primary 6 Content Completion Status
 
-**Status: IN PROGRESS** — 5 subjects live in the database as of 2026-09-03.
+**Status: IN PROGRESS** — 6 subjects live in the database as of 2026-09-03.
 
 ## Sourced
+
+- **Mathematics** — First, Second, and Third Term (33 topics), `legacy`. Source:
+  SchemeofWork.com "Mathematics Scheme of Work Primary 6 Federal". File:
+  `backend/scripts/curriculum-data/primary6-mathematics.js`.
 
 - **English Studies** — First, Second, and Third Term (23 topics), `legacy`. Source:
   SchemeofWork.com "English Scheme of Work Primary 6 Lagos State" (the Federal Primary 6
@@ -29,7 +33,7 @@
 
 ## Known gaps
 
-All other Primary 6 subjects remain unsourced (e.g. Mathematics, French, Nigerian History,
+All other Primary 6 subjects remain unsourced (e.g. French, Nigerian History,
 Physical and Health Education, Pre-vocational Studies, Social and Citizenship Studies,
 Yoruba — per the subject list on the same source page used above).
 Second/Third Term Basic Digital Literacy content should be re-checked in a future session
