@@ -1,6 +1,6 @@
 # Primary 6 Content Completion Status
 
-**Status: IN PROGRESS** — 14 subjects live in the database as of 2026-09-03.
+**Status: IN PROGRESS** — 15 subjects live in the database as of 2026-09-03.
 
 ## Sourced
 
@@ -91,6 +91,14 @@
   terms retained parenthetically) rather than copied verbatim in the garbled form.
   Administrative weeks (Mmugharị na Ule/revision, Ule na Mmechi/examination) excluded.
   File: `backend/scripts/curriculum-data/primary6-igbo.js`.
+
+- **Islamic Studies** — First, Second, and Third Term (33 topics), `legacy`. Source:
+  SchemeofWork.com "Islamic Religious Studies Scheme of Work Primary 6 Federal". Sourced
+  alongside the existing Christian Religious Studies subject to offer both religious-studies
+  tracks, per the Federal Ministry of Education's official Primary 4-6 Basic Education
+  Subject List (3 September 2025 press release), which lists both CRS and IS. Administrative
+  weeks (Revision, Examination, Examination and Closing) excluded.
+  File: `backend/scripts/curriculum-data/primary6-islamic-studies.js`.
 
 ## Known gaps
 
