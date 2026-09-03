@@ -1,6 +1,6 @@
 # Primary 6 Content Completion Status
 
-**Status: IN PROGRESS** — 10 subjects live in the database as of 2026-09-03.
+**Status: IN PROGRESS** — 11 subjects live in the database as of 2026-09-03.
 
 ## Sourced
 
@@ -54,11 +54,17 @@
   was used instead). Third Term on this source is thinner than First/Second (real content
   ends at Week 6). Administrative weeks (Revision, Revision/Resumption Test, Mid-term Break)
   excluded. File: `backend/scripts/curriculum-data/primary6-pre-vocational-studies.js`.
+- **Social and Citizenship Studies** — First, Second, and Third Term (25 topics), `legacy`.
+  Source: SchemeofWork.com "Social Studies Scheme of Work Primary 6 Lagos State" (the
+  federal, non-Lagos Primary 6 page for this subject only offered a thin, one-line-per-week
+  First Term summary with no Second/Third Term content, so the Lagos State variant was used
+  instead, mapped to the NESRI-2025 "Social and Citizenship Studies" naming). Administrative
+  weeks (Mid Term Break, Revision) excluded.
+  File: `backend/scripts/curriculum-data/primary6-social-and-citizenship-studies.js`.
 
 ## Known gaps
 
 All other Primary 6 subjects remain unsourced (e.g.
-Social and Citizenship Studies, Yoruba — per the subject list on the same source page used
-above).
+Yoruba — per the subject list on the same source page used above).
 Second/Third Term Basic Digital Literacy and French content should be re-checked in a
 future session in case the source publishes it later.
