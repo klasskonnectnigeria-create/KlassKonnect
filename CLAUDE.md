@@ -30,27 +30,47 @@ rendered anywhere in the app:
 
 Do not assume any code path restricts which categories of subjects a grade can have.
 
-## Remaining sourcing gaps: Primary 6 is partially sourced; Primary 4/5 have a provenance gap
+## Remaining sourcing gaps: Primary 6 is reconciled and nearly done; Primary 4/5 fall short of the same target and have a provenance gap
 
 The SS1/SS2 vs SS3 sourcing backlog once documented here is closed: SS1 and SS2 each carry
 61 live subjects against SS3's 62, and the sole difference is `Mining`, which genuinely is
 SS3-only. Don't re-source SS1/SS2 wholesale on the assumption that they're thin — check the
 live count for the specific subject first.
 
-Two open items remain across the catalogue:
+**The upper-primary (Primary 4-6) target subject list is no longer open-ended.** It's been
+reconciled against an authoritative source: the Federal Ministry of Education's official press
+release, 3 September 2025, "Lighter Load, Stronger Minds: FG Overhauls Curriculum for a
+Smarter Generation" (`education.gov.ng/wp-content/uploads/2025/09/FG-OVERHAULS-CURRICULUM.pdf`
+— the NESRI 2025 reform document itself, citing NERDC/WAEC/NECO/NBTE/NABTEB consultation, with
+an official Basic Education Subject List table for Primary 4-6). Expanding that table's
+"Nigerian Languages" (Hausa/Igbo/Yoruba, pick one) and "CRS/IS" (pick one by faith) rows into
+every individual option — matching this platform's convention already established at SS1-3,
+where all of Hausa/Igbo/Yoruba/Arabic/CRS/IS are separate live subjects rather than one pick —
+gives a 16-subject target: English Studies, Mathematics, Basic Science and Technology,
+Physical and Health Education, Basic Digital Literacy, Nigerian History, Social and
+Citizenship Studies, Cultural and Creative Arts, Pre-vocational Studies, Christian Religious
+Studies, Islamic Studies, Yoruba, Hausa, Igbo, French, Arabic Language. (Note: the live
+`nerdc.gov.ng` content-manager pages for Primary 4-6 host an older, pre-reform curriculum and
+should not be used as the target list — they bundle a "National Values" subject instead of
+separate Nigerian History/Basic Digital Literacy/Physical & Health Education entries.)
 
-- **Primary 6 is in progress, not unsourced.** As of 2026-09-03 it has 12 live subjects
-  in `themes` (Mathematics, English Studies, Basic Digital Literacy, Basic Science and
-  Technology, Christian Religious Studies, Cultural and Creative Arts, French, Nigerian
-  History, Physical and Health Education, Pre-vocational Studies, Social and Citizenship
-  Studies, Yoruba) — see `Primary6-Content-Completion-Status.md` for full sourcing detail
-  and citations. The full target subject list for this grade hasn't been enumerated against
-  a canonical source yet, so the remaining gap size is unknown; check the live count for a
-  specific subject before assuming it needs sourcing.
-- **Primary 4 and Primary 5 have a known provenance gap.** Primary 4 shows 12 live subjects
-  but only 11 have a git-tracked file under `backend/scripts/curriculum-data/`; Primary 5
-  shows 11 live subjects but only 1 (`primary5-mathematics.js`) is git-tracked. The rest were
-  seeded directly via `backend/routes/seed.js`, not through the `nerdc-curriculum-sourcer`
-  pipeline, so their source provenance isn't recorded the way sourced subjects' is. This is
-  worth reconciling (either backfilling the missing curriculumData files or accepting
-  seed.js as their record) before treating Primary 4/5 as fully sourced.
+Open items across the catalogue:
+
+- **Primary 6 is at 15 of the 16-subject target** as of 2026-09-03 — see
+  `Primary6-Content-Completion-Status.md` for full sourcing detail, citations, and the target
+  table. The sole gap is **Arabic Language**, which is genuinely unresolved (not just
+  unsourced) after exhausting SchemeofWork.com, syllabus.ng, and ecolebooks.com — don't
+  re-attempt it without a new source lead.
+- **Primary 4 and Primary 5 fall short of the same 16-subject target.** Primary 4 (12 live)
+  is missing Hausa, Igbo, and Arabic Language. Primary 5 (11 live) is missing Hausa, Igbo,
+  Islamic Studies, and Arabic Language. Neither has been checked against real sources for
+  these yet — this is a distinct, newer finding from the Primary 6 reconciliation, separate
+  from the provenance gap below.
+- **Primary 4 and Primary 5 also have a known provenance gap.** Primary 4 shows 12 live
+  subjects but only 11 have a git-tracked file under `backend/scripts/curriculum-data/`;
+  Primary 5 shows 11 live subjects but only 1 (`primary5-mathematics.js`) is git-tracked. The
+  rest were seeded directly via `backend/routes/seed.js`, not through the
+  `nerdc-curriculum-sourcer` pipeline, so their source provenance isn't recorded the way
+  sourced subjects' is. This is worth reconciling (either backfilling the missing
+  curriculumData files or accepting seed.js as their record) before treating Primary 4/5's
+  existing subjects as fully sourced.
