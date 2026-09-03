@@ -1,6 +1,6 @@
 # Primary 6 Content Completion Status
 
-**Status: IN PROGRESS** — 8 subjects live in the database as of 2026-09-03.
+**Status: IN PROGRESS** — 9 subjects live in the database as of 2026-09-03.
 
 ## Sourced
 
@@ -42,11 +42,15 @@
   Scheme of Work for Primary School" page had only one-line topic titles per term with no
   weekly detail, so the fuller Lagos State variant was used instead).
   File: `backend/scripts/curriculum-data/primary6-nigerian-history.js`.
+- **Physical and Health Education** — First, Second, and Third Term (25 topics), `legacy`.
+  Source: SchemeofWork.com "Physical Health Education Scheme of Work for Pry 6".
+  Administrative weeks (Revision, Readiness Test, Mid-term Break, Examination) excluded.
+  File: `backend/scripts/curriculum-data/primary6-physical-and-health-education.js`.
 
 ## Known gaps
 
 All other Primary 6 subjects remain unsourced (e.g.
-Physical and Health Education, Pre-vocational Studies, Social and Citizenship Studies,
+Pre-vocational Studies, Social and Citizenship Studies,
 Yoruba — per the subject list on the same source page used above).
 Second/Third Term Basic Digital Literacy and French content should be re-checked in a
 future session in case the source publishes it later.
