@@ -1,22 +1,24 @@
 # Primary 5 Content Completion Status
 
-**Status: IN PROGRESS** — 14 of a 16-subject reconciled target live in the database,
-DB-verified 2026-09-03 (grade-level aggregate: 14 subjects, 481 topics). Hausa, Igbo, and
-Islamic Studies were added this session via the nerdc-curriculum-sourcer pipeline — Hausa
-sourced from SchemeofWork.com, Igbo from SyllabusNG (Lagos State Unified Scheme of Work;
-SchemeofWork.com's Federal Primary 5 Igbo page only had First Term, so SyllabusNG was used
-for complete Second/Third Term coverage), Islamic Studies sourced from SchemeofWork.com's
+**Status: IN PROGRESS** — 15 of a 16-subject reconciled target live in the database,
+DB-verified 2026-09-03 (grade-level aggregate: 15 subjects, 491 topics). Hausa, Igbo, and
+Islamic Studies were added earlier this session via the nerdc-curriculum-sourcer pipeline —
+Hausa sourced from SchemeofWork.com, Igbo from SyllabusNG (Lagos State Unified Scheme of
+Work; SchemeofWork.com's Federal Primary 5 Igbo page only had First Term, so SyllabusNG was
+used for complete Second/Third Term coverage), Islamic Studies sourced from SchemeofWork.com's
 Federal Primary 5 page (same source pattern used successfully for Primary 6 Islamic
-Studies). Two gaps remain against the 16-subject target: **Arabic Language**, genuinely
-unresolved (not merely unsourced) after a confirmation pass this session, and **French**,
-which is present at Primary 4 and Primary 6 but was never sourced for Primary 5 at all —
-see "Known gaps" below. This is a distinct outcome from Primary 6 (15 of 16, French already
-live, only Arabic missing) — don't assume French parity across grades without checking.
+Studies). **French** was added in a follow-up pass, sourced from SchemeofWork.com's unified
+Federal Primary 5 page — First Term only (10 topics), matching the same First-Term-only
+pattern already documented for Primary 4 French and Primary 6 French; the source page itself
+states "Other Terms Coming Soon" for all subjects on that page. One gap remains against the
+16-subject target: **Arabic Language**, genuinely unresolved (not merely unsourced) after a
+confirmation pass this session — see "Known gaps" below. This now matches the Primary 6
+outcome (15 of 16, sole gap Arabic Language).
 
 No SS3-style five-category structure applies to this grade — Primary 5 has no
 vocational/trade tier, so subjects are tracked as a flat list.
 
-## Subjects (14 live, all `legacy`)
+## Subjects (15 live, all `legacy`)
 
 | Subject | Topics | Git provenance |
 |---|---|---|
@@ -25,6 +27,7 @@ vocational/trade tier, so subjects are tracked as a flat list.
 | Christian Religious Studies | 30 | **live in database, no git-tracked curriculum-data file — seeded via legacy parsePdf.js/seedDb.js workflow, source unknown** |
 | Cultural and Creative Arts | 19 | **live in database, no git-tracked curriculum-data file — seeded via legacy parsePdf.js/seedDb.js workflow, source unknown** |
 | English Studies | 32 | **live in database, no git-tracked curriculum-data file — seeded via legacy parsePdf.js/seedDb.js workflow, source unknown** |
+| **French** | 10 | `primary5-french.js` — "NERDC Curriculum Scheme of Work for Primary 5" (SchemeofWork.com), First Term only, legacy |
 | **Hausa** | 33 | `primary5-hausa.js` — "Hausa Language Scheme of Work Primary 5 Federal" (SchemeofWork.com), First/Second/Third Term, legacy |
 | **Igbo** | 27 | `primary5-igbo.js` — "Primary 5 Igbo Language Scheme of Work" (SyllabusNG, Lagos State Unified Scheme of Work), First/Second/Third Term, legacy |
 | **Islamic Studies** | 33 | `primary5-islamic-studies.js` — "Islamic Religious Studies Scheme of Work Primary 5 Federal" (SchemeofWork.com), First/Second/Third Term, legacy |
@@ -35,10 +38,10 @@ vocational/trade tier, so subjects are tracked as a flat list.
 | Social and Citizenship Studies | 66 | **live in database, no git-tracked curriculum-data file — seeded via legacy parsePdf.js/seedDb.js workflow, source unknown** |
 | Yoruba | 33 | **live in database, no git-tracked curriculum-data file — seeded via legacy parsePdf.js/seedDb.js workflow, source unknown** |
 
-## Data-provenance gap: 10 of 14 subjects
+## Data-provenance gap: 10 of 15 subjects
 
-Only Mathematics, Hausa, Igbo, and Islamic Studies have a real, git-tracked source file and
-importer commit.
+Only Mathematics, French, Hausa, Igbo, and Islamic Studies have a real, git-tracked source
+file and importer commit.
 The other 10 subjects went through the repo's original, pre-agent seeding path:
 `backend/scripts/seedDb.js` reads whatever curriculum structure is currently sitting in
 `backend/scripts/parsePdf.js` and inserts it — a scratch file meant to be hand-edited and
@@ -74,16 +77,20 @@ was offered as follow-up work and has not yet been done.
   Nigerian/NERDC-aligned and isn't a recognized aggregator, so it does not meet this project's
   sourcing bar. Unresolved — should be re-checked in a future session in case a source
   publishes it later.
-- **French** — not yet sourced for this grade at all; it isn't in the subject table above.
-  Primary 4 and Primary 6 both have French live (`primary4-french.js`, `primary6-french.js`),
-  so this is a genuine Primary 5-specific gap, not a target-list discrepancy. Not attempted
-  this session (out of scope — only Hausa/Igbo/Islamic Studies/Arabic Language were sourced);
-  discovered while reconciling this file's subject count against its own claims.
 
-This leaves Primary 5 at 14 of 16, with two open gaps (French: unattempted; Arabic Language:
-unresolved) — not the "15 of 16, one gap" outcome Primary 6 reached.
+**French — resolved 2026-09-03.** Sourced from SchemeofWork.com's unified "NERDC Curriculum
+Scheme of Work for Primary 5" page (same page/pattern used for the other SchemeofWork.com
+subjects above), First Term only (10 topics after excluding Week 11 Revision and Week 12
+Examination). The source page explicitly states "Other Terms Coming Soon... Kindly Check
+back" for the whole page, and no Second/Third Term French Primary 5 content could be found
+on Lagos/Osun schemeofwork.com variants, syllabus.ng, or ecolebooks.com — matching the same
+First-Term-only outcome already documented for Primary 4 French and Primary 6 French. Content
+was raw-HTML-verified (not just WebFetch-summarized) before writing the data file.
 
-Beyond that, and the provenance gap above — all 14 subjects have full topic sets live in
+This leaves Primary 5 at 15 of 16, with one open gap (Arabic Language: unresolved) — matching
+the "15 of 16, one gap" outcome Primary 6 reached.
+
+Beyond that, and the provenance gap above — all 15 subjects have full topic sets live in
 the database; term-level completeness (First/Second/Third) was not independently
 re-verified this session for the 10 undocumented subjects, since there is no source file
 to check against.
