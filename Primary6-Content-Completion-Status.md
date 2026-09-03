@@ -1,6 +1,6 @@
 # Primary 6 Content Completion Status
 
-**Status: IN PROGRESS** — 6 subjects live in the database as of 2026-09-03.
+**Status: IN PROGRESS** — 7 subjects live in the database as of 2026-09-03.
 
 ## Sourced
 
@@ -30,11 +30,17 @@
   into 3 themes (Arts and Crafts; Performing Arts & Entertainment; Customs and Traditions)
   rather than First/Second/Third Term labels; no administrative weeks were present to
   exclude. File: `backend/scripts/curriculum-data/primary6-cultural-and-creative-arts.js`.
+- **French** — First Term only (10 topics), `legacy`. Source: SchemeofWork.com "NERDC
+  Curriculum Scheme of Work for Primary 6". Second and Third Term not sourced — the
+  source page itself marks those as "Other Terms Coming Soon," and no fuller Lagos/Osun
+  State, syllabus.ng, or ecolebooks.com variant for French Primary 6 could be found.
+  Source content is a thin one-line-per-week summary (no more detailed table exists
+  elsewhere on the page for this subject). File: `backend/scripts/curriculum-data/primary6-french.js`.
 
 ## Known gaps
 
-All other Primary 6 subjects remain unsourced (e.g. French, Nigerian History,
+All other Primary 6 subjects remain unsourced (e.g. Nigerian History,
 Physical and Health Education, Pre-vocational Studies, Social and Citizenship Studies,
 Yoruba — per the subject list on the same source page used above).
-Second/Third Term Basic Digital Literacy content should be re-checked in a future session
-in case the source publishes it later.
+Second/Third Term Basic Digital Literacy and French content should be re-checked in a
+future session in case the source publishes it later.
