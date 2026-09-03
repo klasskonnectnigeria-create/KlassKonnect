@@ -30,7 +30,7 @@ rendered anywhere in the app:
 
 Do not assume any code path restricts which categories of subjects a grade can have.
 
-## Remaining sourcing gaps: Primary 6 is unsourced; Primary 4/5 have a provenance gap
+## Remaining sourcing gaps: Primary 6 is partially sourced; Primary 4/5 have a provenance gap
 
 The SS1/SS2 vs SS3 sourcing backlog once documented here is closed: SS1 and SS2 each carry
 61 live subjects against SS3's 62, and the sole difference is `Mining`, which genuinely is
@@ -39,9 +39,14 @@ live count for the specific subject first.
 
 Two open items remain across the catalogue:
 
-- **Primary 6 is the only genuinely unsourced grade.** It has zero rows in `themes` —
-  no subjects at all. Every other grade (Primary 4, Primary 5, JSS1-3, SS1-3) has live
-  content.
+- **Primary 6 is in progress, not unsourced.** As of 2026-09-03 it has 12 live subjects
+  in `themes` (Mathematics, English Studies, Basic Digital Literacy, Basic Science and
+  Technology, Christian Religious Studies, Cultural and Creative Arts, French, Nigerian
+  History, Physical and Health Education, Pre-vocational Studies, Social and Citizenship
+  Studies, Yoruba) — see `Primary6-Content-Completion-Status.md` for full sourcing detail
+  and citations. The full target subject list for this grade hasn't been enumerated against
+  a canonical source yet, so the remaining gap size is unknown; check the live count for a
+  specific subject before assuming it needs sourcing.
 - **Primary 4 and Primary 5 have a known provenance gap.** Primary 4 shows 12 live subjects
   but only 11 have a git-tracked file under `backend/scripts/curriculum-data/`; Primary 5
   shows 11 live subjects but only 1 (`primary5-mathematics.js`) is git-tracked. The rest were
