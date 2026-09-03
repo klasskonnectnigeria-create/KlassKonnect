@@ -1,6 +1,6 @@
 # Primary 6 Content Completion Status
 
-**Status: IN PROGRESS** — 12 subjects live in the database as of 2026-09-03.
+**Status: IN PROGRESS** — 13 subjects live in the database as of 2026-09-03.
 
 ## Sourced
 
@@ -68,6 +68,14 @@
   text rather than copied verbatim in its garbled form. Administrative weeks (Atunyewo
   Eko/Revision, Idanwo/Examination) excluded.
   File: `backend/scripts/curriculum-data/primary6-yoruba.js`.
+- **Hausa** — First, Second, and Third Term (33 topics), `legacy`. Source: SchemeofWork.com
+  "Hausa Language Scheme of Work Primary 6 Federal". The source's own Hausa text uses a
+  non-standard font/diacritic encoding for hooked consonants (e.g. rendering "ɗalibai" as
+  garbled "Calibai"); topic names and knowledge points were translated into readable English
+  from that source text (with unhooked Hausa terms retained parenthetically for
+  identification) rather than copied verbatim in its garbled form. Administrative weeks
+  (Bitar Ayyukan Baya/Maimaitacin Aikin Baya "review", Jarabawa "examination") excluded.
+  File: `backend/scripts/curriculum-data/primary6-hausa.js`.
 
 ## Known gaps
 
