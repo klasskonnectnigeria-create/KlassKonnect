@@ -1,14 +1,15 @@
 # Primary 5 Content Completion Status
 
-**Status: 14 subjects live**, DB-verified 2026-09-03 (grade-level aggregate: 14 subjects,
-481 topics). Hausa, Igbo, and Islamic Studies were added this session via the
-nerdc-curriculum-sourcer pipeline — Hausa sourced from SchemeofWork.com, Igbo from
-SyllabusNG (Lagos State Unified Scheme of Work; SchemeofWork.com's Federal Primary 5 Igbo
-page only had First Term, so SyllabusNG was used for complete Second/Third Term coverage),
-Islamic Studies sourced from SchemeofWork.com's Federal Primary 5 page (same source
-pattern used successfully for Primary 6 Islamic Studies). Still short of the reconciled
-16-subject NESRI 2025 target (see root `CLAUDE.md` "Remaining sourcing gaps" section) —
-missing Arabic Language.
+**Status: IN PROGRESS** — 14 of a 16-subject reconciled target live in the database,
+DB-verified 2026-09-03 (grade-level aggregate: 14 subjects, 481 topics). Hausa, Igbo, and
+Islamic Studies were added this session via the nerdc-curriculum-sourcer pipeline — Hausa
+sourced from SchemeofWork.com, Igbo from SyllabusNG (Lagos State Unified Scheme of Work;
+SchemeofWork.com's Federal Primary 5 Igbo page only had First Term, so SyllabusNG was used
+for complete Second/Third Term coverage), Islamic Studies sourced from SchemeofWork.com's
+Federal Primary 5 page (same source pattern used successfully for Primary 6 Islamic
+Studies). The sole remaining gap, Arabic Language, is genuinely unresolved (not merely
+unsourced) after a confirmation pass this session — see "Known gaps" below. This mirrors
+Primary 6's outcome exactly (15 of 16, same sole gap).
 
 No SS3-style five-category structure applies to this grade — Primary 5 has no
 vocational/trade tier, so subjects are tracked as a flat list.
@@ -59,8 +60,19 @@ was offered as follow-up work and has not yet been done.
 
 ## Known gaps
 
-Missing from the reconciled 16-subject NESRI 2025 target (see root `CLAUDE.md`): Arabic
-Language — not yet checked against real sources.
+- **Arabic Language** — checked 2026-09-03 (confirmation pass; same subject already came back
+  unresolved at Primary 4 and Primary 6). NERDC's own `content_manager/pri4-6.html` page still
+  advertises a "Primary 4-6 Arabic Curriculum" PDF link, but it remains a non-functional
+  `javascript:;` placeholder (unchanged from the Primary 6 check). SchemeofWork.com's dedicated
+  Arabic Scheme of Work category page carries only SS1 Federal and SS3 Federal entries, no
+  Primary content. syllabus.ng's Primary 5 scheme-of-work page lists "Primary 5 Arabic Language"
+  as a menu item but with no functional href, matching the pattern already found at Primary 4/6.
+  ecolebooks.com has no Nigerian NERDC-aligned Arabic Primary content. One tangential lead (a
+  standalone PDF from a UK-based "Olive Tree Primary School") was found but is not verifiable as
+  Nigerian/NERDC-aligned and isn't a recognized aggregator, so it does not meet this project's
+  sourcing bar. Unresolved — this closes out the last open item of the reconciled 16-subject
+  NESRI 2025 target for Primary 5 (15 of 16 sourced/live, same gap as Primary 6); should be
+  re-checked in a future session in case a source publishes it later.
 
 Beyond that, and the provenance gap above — all 14 subjects have full topic sets live in
 the database; term-level completeness (First/Second/Third) was not independently
