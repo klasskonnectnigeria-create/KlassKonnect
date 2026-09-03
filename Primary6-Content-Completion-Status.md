@@ -1,6 +1,6 @@
 # Primary 6 Content Completion Status
 
-**Status: IN PROGRESS** — 7 subjects live in the database as of 2026-09-03.
+**Status: IN PROGRESS** — 8 subjects live in the database as of 2026-09-03.
 
 ## Sourced
 
@@ -36,10 +36,16 @@
   State, syllabus.ng, or ecolebooks.com variant for French Primary 6 could be found.
   Source content is a thin one-line-per-week summary (no more detailed table exists
   elsewhere on the page for this subject). File: `backend/scripts/curriculum-data/primary6-french.js`.
+- **Nigerian History** — First, Second, and Third Term (17 topics), `legacy`. Source:
+  SchemeofWork.com "History Scheme of Work Primary 6 Lagos State" (no dedicated Federal
+  Primary 6 History page exists on the site; a separate thin "Nigerian History Curriculum
+  Scheme of Work for Primary School" page had only one-line topic titles per term with no
+  weekly detail, so the fuller Lagos State variant was used instead).
+  File: `backend/scripts/curriculum-data/primary6-nigerian-history.js`.
 
 ## Known gaps
 
-All other Primary 6 subjects remain unsourced (e.g. Nigerian History,
+All other Primary 6 subjects remain unsourced (e.g.
 Physical and Health Education, Pre-vocational Studies, Social and Citizenship Studies,
 Yoruba — per the subject list on the same source page used above).
 Second/Third Term Basic Digital Literacy and French content should be re-checked in a
