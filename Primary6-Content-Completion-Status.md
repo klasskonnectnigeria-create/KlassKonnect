@@ -1,6 +1,50 @@
 # Primary 6 Content Completion Status
 
-**Status: IN PROGRESS** — 15 subjects live in the database as of 2026-09-03.
+**Status: IN PROGRESS** — 15 of a 16-subject reconciled target live in the database as of
+2026-09-03. The sole gap (Arabic Language) is genuinely unresolved, not merely unsourced —
+see "Known gaps" below.
+
+## Target subject list (reconciled 2026-09-03)
+
+The prior version of this doc treated Primary 6 as having an open-ended, unenumerated subject
+list ("all other subjects remain unsourced"). That's now closed out against an authoritative
+source: the Federal Ministry of Education's official press release, 3 September 2025,
+**"Lighter Load, Stronger Minds: FG Overhauls Curriculum for a Smarter Generation"**
+(`education.gov.ng/wp-content/uploads/2025/09/FG-OVERHAULS-CURRICULUM.pdf`), issued by the
+Director of Press & Public Relations following the Minister of Education's announcement, and
+explicitly stated to follow "wide consultations with NERDC, WAEC, NECO, NBTE, NABTEB." This is
+the NESRI 2025 reform document itself, effective the 2025/26 academic year, and includes an
+official "Basic Education Subject List" table for Primary 4-6. (The live `nerdc.gov.ng`
+content-manager pages for Primary 4-6 host the older, pre-reform curriculum PDFs and were not
+used as the target list for this reason — they're missing Nigerian History, Basic Digital
+Literacy, and Physical & Health Education as separate subjects, using a bundled "National
+Values" subject instead.)
+
+The official document lists what one student takes (11-13 subjects, since "Nigerian Languages"
+and "CRS/IS" are each a single pick). Expanding those two rows into every individual option —
+consistent with this platform's established convention, confirmed live in the DB: SS1/SS2/SS3
+already carry Hausa, Igbo, Yoruba, Arabic, Christian Religious Studies, and Islamic Studies all
+as separate browsable subjects rather than enforcing one pick — gives this 16-subject
+reconciled target for Primary 6:
+
+| Subject | Status |
+|---|---|
+| English Studies | ✅ live |
+| Mathematics | ✅ live |
+| Basic Science and Technology | ✅ live |
+| Physical and Health Education | ✅ live |
+| Basic Digital Literacy | ✅ live |
+| Nigerian History | ✅ live |
+| Social and Citizenship Studies | ✅ live |
+| Cultural and Creative Arts | ✅ live |
+| Pre-vocational Studies | ✅ live |
+| Christian Religious Studies | ✅ live |
+| Islamic Studies | ✅ live |
+| Yoruba | ✅ live |
+| Hausa | ✅ live |
+| Igbo | ✅ live |
+| French | ✅ live |
+| Arabic Language | ❌ unresolved — no usable source found (see "Known gaps") |
 
 ## Sourced
 
@@ -102,8 +146,8 @@
 
 ## Known gaps
 
-All other Primary 6 subjects remain unsourced.
-Second/Third Term Basic Digital Literacy and French content should be re-checked in a
+Against the 16-subject reconciled target above, Arabic Language is the only remaining gap.
+Second/Third Term Basic Digital Literacy and French content should also be re-checked in a
 future session in case the source publishes it later.
 
 - **Arabic Language** — checked 2026-09-03 per the Federal Ministry of Education's official
