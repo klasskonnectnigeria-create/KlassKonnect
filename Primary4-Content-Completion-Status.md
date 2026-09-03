@@ -1,13 +1,13 @@
 # Primary 4 Content Completion Status
 
-**Status: 13 subjects live**, DB-verified 2026-09-03 (grade-level aggregate: 13 subjects,
-294 topics), against the reconciled 16-subject NESRI 2025 target (see root `CLAUDE.md`
-"Remaining sourcing gaps" section). Still missing: **Igbo, Arabic Language**.
+**Status: 14 subjects live**, DB-verified 2026-09-03 (grade-level aggregate: 14 subjects,
+330 topics), against the reconciled 16-subject NESRI 2025 target (see root `CLAUDE.md`
+"Remaining sourcing gaps" section). Still missing: **Arabic Language**.
 
 No SS3-style five-category structure applies to this grade — Primary 4 has no
 vocational/trade tier, so subjects are tracked as a flat list.
 
-## Subjects (13 live, all `legacy`)
+## Subjects (14 live, all `legacy`)
 
 | Subject | Topics | Git provenance |
 |---|---|---|
@@ -18,6 +18,7 @@ vocational/trade tier, so subjects are tracked as a flat list.
 | English Studies | 24 | `primary4-english-studies.js` |
 | French | 10 | `primary4-french.js` |
 | Hausa | 32 | `primary4-hausa.js` |
+| Igbo | 36 | `primary4-igbo.js` |
 | Islamic Studies | 21 | `primary4-islamic-studies.js` |
 | **Mathematics** | 14 | **live in database, no git-tracked curriculum-data file — seeded via legacy parsePdf.js/seedDb.js workflow, source unknown** |
 | Nigerian History | 24 | `primary4-nigerian-history.js` |
@@ -27,9 +28,9 @@ vocational/trade tier, so subjects are tracked as a flat list.
 
 ## Remaining gaps against the 16-subject NESRI 2025 target
 
-**Igbo** and **Arabic Language** are still missing (Hausa was sourced and imported
-2026-09-03 via SchemeofWork.com's federal Primary 4 Hausa page, closing that gap). Neither
-has yet been checked against real sources for this grade.
+**Arabic Language** is still missing. Hausa (2026-09-03) and Igbo (2026-09-03) were both
+sourced and imported from SchemeofWork.com's federal Primary 4 pages, closing those gaps.
+Arabic Language has not yet been checked against real sources for this grade.
 
 ## Data-provenance gap: Mathematics
 
