@@ -1,6 +1,6 @@
 # Primary 6 Content Completion Status
 
-**Status: IN PROGRESS** — 9 subjects live in the database as of 2026-09-03.
+**Status: IN PROGRESS** — 10 subjects live in the database as of 2026-09-03.
 
 ## Sourced
 
@@ -46,11 +46,19 @@
   Source: SchemeofWork.com "Physical Health Education Scheme of Work for Pry 6".
   Administrative weeks (Revision, Readiness Test, Mid-term Break, Examination) excluded.
   File: `backend/scripts/curriculum-data/primary6-physical-and-health-education.js`.
+- **Pre-vocational Studies** — First, Second, and Third Term (43 topics), `legacy`. Source:
+  SchemeofWork.com "Pre Vocational Studies PVS Scheme of Work Primary 6 Lagos State" (the
+  Federal "NERDC Curriculum Scheme of Work for Primary 6" page's own PVS section only had a
+  thin First Term summary with "Other Terms Coming Soon," so the fuller Lagos State variant,
+  which runs two parallel strands — PVS (Agriculture) and PVS (Home Economics) each week —
+  was used instead). Third Term on this source is thinner than First/Second (real content
+  ends at Week 6). Administrative weeks (Revision, Revision/Resumption Test, Mid-term Break)
+  excluded. File: `backend/scripts/curriculum-data/primary6-pre-vocational-studies.js`.
 
 ## Known gaps
 
 All other Primary 6 subjects remain unsourced (e.g.
-Pre-vocational Studies, Social and Citizenship Studies,
-Yoruba — per the subject list on the same source page used above).
+Social and Citizenship Studies, Yoruba — per the subject list on the same source page used
+above).
 Second/Third Term Basic Digital Literacy and French content should be re-checked in a
 future session in case the source publishes it later.
