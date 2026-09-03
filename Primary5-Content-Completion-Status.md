@@ -7,9 +7,11 @@ sourced from SchemeofWork.com, Igbo from SyllabusNG (Lagos State Unified Scheme 
 SchemeofWork.com's Federal Primary 5 Igbo page only had First Term, so SyllabusNG was used
 for complete Second/Third Term coverage), Islamic Studies sourced from SchemeofWork.com's
 Federal Primary 5 page (same source pattern used successfully for Primary 6 Islamic
-Studies). The sole remaining gap, Arabic Language, is genuinely unresolved (not merely
-unsourced) after a confirmation pass this session — see "Known gaps" below. This mirrors
-Primary 6's outcome exactly (15 of 16, same sole gap).
+Studies). Two gaps remain against the 16-subject target: **Arabic Language**, genuinely
+unresolved (not merely unsourced) after a confirmation pass this session, and **French**,
+which is present at Primary 4 and Primary 6 but was never sourced for Primary 5 at all —
+see "Known gaps" below. This is a distinct outcome from Primary 6 (15 of 16, French already
+live, only Arabic missing) — don't assume French parity across grades without checking.
 
 No SS3-style five-category structure applies to this grade — Primary 5 has no
 vocational/trade tier, so subjects are tracked as a flat list.
@@ -70,9 +72,16 @@ was offered as follow-up work and has not yet been done.
   ecolebooks.com has no Nigerian NERDC-aligned Arabic Primary content. One tangential lead (a
   standalone PDF from a UK-based "Olive Tree Primary School") was found but is not verifiable as
   Nigerian/NERDC-aligned and isn't a recognized aggregator, so it does not meet this project's
-  sourcing bar. Unresolved — this closes out the last open item of the reconciled 16-subject
-  NESRI 2025 target for Primary 5 (15 of 16 sourced/live, same gap as Primary 6); should be
-  re-checked in a future session in case a source publishes it later.
+  sourcing bar. Unresolved — should be re-checked in a future session in case a source
+  publishes it later.
+- **French** — not yet sourced for this grade at all; it isn't in the subject table above.
+  Primary 4 and Primary 6 both have French live (`primary4-french.js`, `primary6-french.js`),
+  so this is a genuine Primary 5-specific gap, not a target-list discrepancy. Not attempted
+  this session (out of scope — only Hausa/Igbo/Islamic Studies/Arabic Language were sourced);
+  discovered while reconciling this file's subject count against its own claims.
+
+This leaves Primary 5 at 14 of 16, with two open gaps (French: unattempted; Arabic Language:
+unresolved) — not the "15 of 16, one gap" outcome Primary 6 reached.
 
 Beyond that, and the provenance gap above — all 14 subjects have full topic sets live in
 the database; term-level completeness (First/Second/Third) was not independently

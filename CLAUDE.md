@@ -30,7 +30,7 @@ rendered anywhere in the app:
 
 Do not assume any code path restricts which categories of subjects a grade can have.
 
-## Remaining sourcing gaps: Primary 6 is reconciled and nearly done; Primary 4/5 fall short of the same target and have a provenance gap
+## Remaining sourcing gaps: Primary 4/5/6 are all reconciled against the 16-subject target; Primary 4/5 still have a provenance gap
 
 The SS1/SS2 vs SS3 sourcing backlog once documented here is closed: SS1 and SS2 each carry
 61 live subjects against SS3's 62, and the sole difference is `Mining`, which genuinely is
@@ -61,16 +61,23 @@ Open items across the catalogue:
   table. The sole gap is **Arabic Language**, which is genuinely unresolved (not just
   unsourced) after exhausting SchemeofWork.com, syllabus.ng, and ecolebooks.com — don't
   re-attempt it without a new source lead.
-- **Primary 4 and Primary 5 fall short of the same 16-subject target.** Primary 4 (12 live)
-  is missing Hausa, Igbo, and Arabic Language. Primary 5 (11 live) is missing Hausa, Igbo,
-  Islamic Studies, and Arabic Language. Neither has been checked against real sources for
-  these yet — this is a distinct, newer finding from the Primary 6 reconciliation, separate
-  from the provenance gap below.
-- **Primary 4 and Primary 5 also have a known provenance gap.** Primary 4 shows 12 live
-  subjects but only 11 have a git-tracked file under `backend/scripts/curriculum-data/`;
-  Primary 5 shows 11 live subjects but only 1 (`primary5-mathematics.js`) is git-tracked. The
-  rest were seeded directly via `backend/routes/seed.js`, not through the
-  `nerdc-curriculum-sourcer` pipeline, so their source provenance isn't recorded the way
-  sourced subjects' is. This is worth reconciling (either backfilling the missing
-  curriculumData files or accepting seed.js as their record) before treating Primary 4/5's
-  existing subjects as fully sourced.
+- **Primary 4 is at 14 of the 16-subject target** as of 2026-09-03 — Hausa and Igbo were
+  sourced from SchemeofWork.com this session (see `Primary4-Content-Completion-Status.md`).
+  The sole gap is **Arabic Language**, checked and genuinely unresolved (same dead ends as
+  Primary 6: no Primary-level Arabic content on SchemeofWork.com/syllabus.ng/ecolebooks.com,
+  and NERDC's own site links a non-functional placeholder) — don't re-attempt without a new
+  source lead.
+- **Primary 5 is at 14 of the 16-subject target** as of 2026-09-03 — Hausa, Igbo, and
+  Islamic Studies were sourced this session (see `Primary5-Content-Completion-Status.md`).
+  Two gaps remain, unlike Primary 4/6's single gap: **Arabic Language** (checked, genuinely
+  unresolved, same pattern as Primary 4/6) and **French** (present at Primary 4 and Primary
+  6 but never sourced for Primary 5 at all — not yet attempted). Don't assume French parity
+  across grades without checking the live count first.
+- **Primary 4 and Primary 5 also have a known provenance gap**, orthogonal to the target-list
+  gaps above. Primary 4's 14 live subjects have 13 git-tracked files under
+  `backend/scripts/curriculum-data/` — only Mathematics is untracked, seeded via the legacy
+  `parsePdf.js`/`seedDb.js` path. Primary 5's 14 live subjects have only 4 git-tracked files
+  (Mathematics, Hausa, Igbo, Islamic Studies) — the other 10 went through that same legacy
+  seeding path and have no recorded source. This is worth reconciling (either backfilling the
+  missing curriculumData files or accepting the legacy seeding as their record) before treating
+  those subjects as fully sourced.
