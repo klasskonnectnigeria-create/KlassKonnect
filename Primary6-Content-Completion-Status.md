@@ -1,6 +1,6 @@
 # Primary 6 Content Completion Status
 
-**Status: IN PROGRESS** — 2 subjects live in the database as of 2026-09-03.
+**Status: IN PROGRESS** — 3 subjects live in the database as of 2026-09-03.
 
 ## Sourced
 
@@ -13,12 +13,15 @@
   (Lagos State Unified Scheme of Work variant; a thinner, incomplete "NERDC"-labelled
   page for the same subject/grade was also checked but had less detail and was not used).
   File: `backend/scripts/curriculum-data/primary6-basic-science-and-technology.js`.
+- **Christian Religious Studies** — First, Second, and Third Term (31 topics), `legacy`.
+  Source: SchemeofWork.com "Christian Religious Studies Scheme of Work Primary 6 Federal".
+  File: `backend/scripts/curriculum-data/primary6-christian-religious-studies.js`.
 
 ## Known gaps
 
 All other Primary 6 subjects remain unsourced (e.g. English Studies, Mathematics,
-Christian Religious Studies, Cultural and Creative Arts, French, Nigerian History,
-Physical and Health Education, Pre-vocational Studies, Social and Citizenship Studies,
-Yoruba — per the subject list on the same source page used above).
+Cultural and Creative Arts, French, Nigerian History, Physical and Health Education,
+Pre-vocational Studies, Social and Citizenship Studies, Yoruba — per the subject list
+on the same source page used above).
 Second/Third Term Basic Digital Literacy content should be re-checked in a future session
 in case the source publishes it later.
