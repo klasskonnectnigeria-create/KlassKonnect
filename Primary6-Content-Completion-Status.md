@@ -1,13 +1,19 @@
 # Primary 6 Content Completion Status
 
-**Status: UNSOURCED** — 0 subjects live in the database. DB-verified 2026-08-31 (no rows for
-grade `Primary 6` in `themes`/`topics` at all) — matches the count inferred from commit
-history and curriculum-data file presence exactly: zero `primary6-*` files exist in
-`backend/scripts/curriculum-data/`, and no Primary 6 commit appears anywhere in git history.
+**Status: IN PROGRESS** — 1 subject live in the database as of 2026-09-03.
 
-This is a real, entire-grade sourcing gap, not a documentation gap — there is nothing yet to
-document beyond "not started."
+## Sourced
+
+- **Basic Digital Literacy** — First Term only (10 topics), `legacy`. Source:
+  SchemeofWork.com "NERDC Curriculum Scheme of Work for Primary 6". Second and Third Term
+  not sourced — the source page itself marks those as "Other Terms Coming Soon."
+  File: `backend/scripts/curriculum-data/primary6-basic-digital-literacy.js`.
 
 ## Known gaps
 
-Every Primary 6 subject is unsourced. No prior sourcing session has touched this grade.
+All other Primary 6 subjects remain unsourced (e.g. English Studies, Mathematics, Basic
+Science and Technology, Christian Religious Studies, Cultural and Creative Arts, French,
+Nigerian History, Physical and Health Education, Pre-vocational Studies, Social and
+Citizenship Studies, Yoruba — per the subject list on the same source page used above).
+Second/Third Term Basic Digital Literacy content should be re-checked in a future session
+in case the source publishes it later.
