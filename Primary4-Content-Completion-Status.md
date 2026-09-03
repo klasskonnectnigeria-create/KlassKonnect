@@ -1,13 +1,13 @@
 # Primary 4 Content Completion Status
 
-**Status: 12 subjects live**, DB-verified 2026-08-31 (grade-level aggregate: 12 subjects,
-262 topics). This corrects an earlier file-based estimate of 11 subjects — the DB has one
-more subject live (Mathematics) than the curriculum-data files in the repo account for.
+**Status: 13 subjects live**, DB-verified 2026-09-03 (grade-level aggregate: 13 subjects,
+294 topics), against the reconciled 16-subject NESRI 2025 target (see root `CLAUDE.md`
+"Remaining sourcing gaps" section). Still missing: **Igbo, Arabic Language**.
 
 No SS3-style five-category structure applies to this grade — Primary 4 has no
 vocational/trade tier, so subjects are tracked as a flat list.
 
-## Subjects (12 live, all `legacy`)
+## Subjects (13 live, all `legacy`)
 
 | Subject | Topics | Git provenance |
 |---|---|---|
@@ -17,12 +17,19 @@ vocational/trade tier, so subjects are tracked as a flat list.
 | Cultural and Creative Arts | 32 | `primary4-cultural-and-creative-arts.js` |
 | English Studies | 24 | `primary4-english-studies.js` |
 | French | 10 | `primary4-french.js` |
+| Hausa | 32 | `primary4-hausa.js` |
 | Islamic Studies | 21 | `primary4-islamic-studies.js` |
 | **Mathematics** | 14 | **live in database, no git-tracked curriculum-data file — seeded via legacy parsePdf.js/seedDb.js workflow, source unknown** |
 | Nigerian History | 24 | `primary4-nigerian-history.js` |
 | Physical and Health Education | 25 | `primary4-physical-and-health-education.js` |
 | Pre-vocational Studies | 29 | `primary4-pre-vocational-studies.js` |
 | Social and Citizenship Studies | 28 | `primary4-social-and-citizenship-studies.js` |
+
+## Remaining gaps against the 16-subject NESRI 2025 target
+
+**Igbo** and **Arabic Language** are still missing (Hausa was sourced and imported
+2026-09-03 via SchemeofWork.com's federal Primary 4 Hausa page, closing that gap). Neither
+has yet been checked against real sources for this grade.
 
 ## Data-provenance gap: Mathematics
 
