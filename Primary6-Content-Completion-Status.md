@@ -1,6 +1,6 @@
 # Primary 6 Content Completion Status
 
-**Status: IN PROGRESS** — 3 subjects live in the database as of 2026-09-03.
+**Status: IN PROGRESS** — 4 subjects live in the database as of 2026-09-03.
 
 ## Sourced
 
@@ -16,12 +16,16 @@
 - **Christian Religious Studies** — First, Second, and Third Term (31 topics), `legacy`.
   Source: SchemeofWork.com "Christian Religious Studies Scheme of Work Primary 6 Federal".
   File: `backend/scripts/curriculum-data/primary6-christian-religious-studies.js`.
+- **Cultural and Creative Arts** — Full Year (11 topics), `legacy`. Source: SchemeofWork.com
+  "Cultural and Creative Arts CCA Curriculum for Primary 6". This source organizes content
+  into 3 themes (Arts and Crafts; Performing Arts & Entertainment; Customs and Traditions)
+  rather than First/Second/Third Term labels; no administrative weeks were present to
+  exclude. File: `backend/scripts/curriculum-data/primary6-cultural-and-creative-arts.js`.
 
 ## Known gaps
 
 All other Primary 6 subjects remain unsourced (e.g. English Studies, Mathematics,
-Cultural and Creative Arts, French, Nigerian History, Physical and Health Education,
-Pre-vocational Studies, Social and Citizenship Studies, Yoruba — per the subject list
-on the same source page used above).
+French, Nigerian History, Physical and Health Education, Pre-vocational Studies, Social
+and Citizenship Studies, Yoruba — per the subject list on the same source page used above).
 Second/Third Term Basic Digital Literacy content should be re-checked in a future session
 in case the source publishes it later.
