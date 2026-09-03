@@ -61,12 +61,16 @@ Open items across the catalogue:
   table. The sole gap is **Arabic Language**, which is genuinely unresolved (not just
   unsourced) after exhausting SchemeofWork.com, syllabus.ng, and ecolebooks.com — don't
   re-attempt it without a new source lead.
-- **Primary 4 is at 14 of the 16-subject target** as of 2026-09-03 — Hausa and Igbo were
-  sourced from SchemeofWork.com this session (see `Primary4-Content-Completion-Status.md`).
-  The sole gap is **Arabic Language**, checked and genuinely unresolved (same dead ends as
-  Primary 6: no Primary-level Arabic content on SchemeofWork.com/syllabus.ng/ecolebooks.com,
-  and NERDC's own site links a non-functional placeholder) — don't re-attempt without a new
-  source lead.
+- **Primary 4 is at 15 of the 16-subject target** as of 2026-09-03 — Hausa, Igbo, and Yoruba
+  were all sourced from SchemeofWork.com this session (see
+  `Primary4-Content-Completion-Status.md`). Yoruba was a target-list gap not caught by the
+  original Hausa/Igbo/Arabic Language sourcing pass — cross-check a grade's full live subject
+  list against the 16-subject target (not just the subjects explicitly requested) before
+  declaring a grade's gaps closed. The sole remaining gap is **Arabic Language**, checked and
+  genuinely unresolved (same dead ends as Primary 5/6: no Primary-level Arabic content on
+  SchemeofWork.com/syllabus.ng/ecolebooks.com, and NERDC's own site links a non-functional
+  placeholder) — don't re-attempt without a new source lead. This now matches Primary 5/6's
+  outcome exactly.
 - **Primary 5 is at 15 of the 16-subject target** as of 2026-09-03 — Hausa, Igbo, Islamic
   Studies, and French were all sourced this session (see
   `Primary5-Content-Completion-Status.md`). French is First-Term-only (10 topics), matching
@@ -74,8 +78,12 @@ Open items across the catalogue:
   sole remaining gap is **Arabic Language**, checked and genuinely unresolved (same dead ends
   as Primary 4/6) — don't re-attempt without a new source lead. This now matches Primary 6's
   outcome exactly.
+- **All three of Primary 4/5/6 now converge on the same outcome: 15 of 16, with Arabic
+  Language as the sole gap**, genuinely unresolved at every grade after exhausting the same
+  handful of sources (SchemeofWork.com, syllabus.ng, ecolebooks.com, NERDC's own site). Don't
+  re-attempt any of the three without a new source lead.
 - **Primary 4 and Primary 5 also have a known provenance gap**, orthogonal to the target-list
-  gaps above. Primary 4's 14 live subjects have 13 git-tracked files under
+  gaps above. Primary 4's 15 live subjects have 14 git-tracked files under
   `backend/scripts/curriculum-data/` — only Mathematics is untracked, seeded via the legacy
   `parsePdf.js`/`seedDb.js` path. Primary 5's 15 live subjects have only 5 git-tracked files
   (Mathematics, French, Hausa, Igbo, Islamic Studies) — the other 10 went through that same
