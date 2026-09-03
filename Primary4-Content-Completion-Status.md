@@ -1,14 +1,14 @@
 # Primary 4 Content Completion Status
 
-**Status: 14 subjects live**, DB-verified 2026-09-03 (grade-level aggregate: 14 subjects,
-330 topics), against the reconciled 16-subject NESRI 2025 target (see root `CLAUDE.md`
+**Status: 15 subjects live**, DB-verified 2026-09-03 (grade-level aggregate: 15 subjects,
+363 topics), against the reconciled 16-subject NESRI 2025 target (see root `CLAUDE.md`
 "Remaining sourcing gaps" section). **Arabic Language is genuinely unresolved** (not just
-unsourced) — see "Remaining gaps" below.
+unsourced) — see "Remaining gaps" below; it is now the sole gap.
 
 No SS3-style five-category structure applies to this grade — Primary 4 has no
 vocational/trade tier, so subjects are tracked as a flat list.
 
-## Subjects (14 live, all `legacy`)
+## Subjects (15 live, all `legacy`)
 
 | Subject | Topics | Git provenance |
 |---|---|---|
@@ -26,11 +26,13 @@ vocational/trade tier, so subjects are tracked as a flat list.
 | Physical and Health Education | 25 | `primary4-physical-and-health-education.js` |
 | Pre-vocational Studies | 29 | `primary4-pre-vocational-studies.js` |
 | Social and Citizenship Studies | 28 | `primary4-social-and-citizenship-studies.js` |
+| Yoruba | 33 | `primary4-yoruba.js` |
 
 ## Remaining gaps against the 16-subject NESRI 2025 target
 
 **Arabic Language** is still missing and is now genuinely unresolved (2026-09-03), not just
-unsourced. Hausa (2026-09-03) and Igbo (2026-09-03) were both sourced and imported from
+unsourced — it is the sole remaining gap against the 16-subject target. Hausa (2026-09-03),
+Igbo (2026-09-03), and Yoruba (2026-09-03) were all sourced and imported from
 SchemeofWork.com's federal Primary 4 pages, closing those gaps. Arabic Language was checked
 against SchemeofWork.com (Federal, Lagos, Osun variants — no Primary Arabic content exists on
 the site at all, only SS1/SS3), syllabus.ng (lists "Primary 4 Arabic Language" as a subject
