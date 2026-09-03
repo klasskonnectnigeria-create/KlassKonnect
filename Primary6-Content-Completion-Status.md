@@ -1,6 +1,6 @@
 # Primary 6 Content Completion Status
 
-**Status: IN PROGRESS** — 13 subjects live in the database as of 2026-09-03.
+**Status: IN PROGRESS** — 14 subjects live in the database as of 2026-09-03.
 
 ## Sourced
 
@@ -76,6 +76,21 @@
   identification) rather than copied verbatim in its garbled form. Administrative weeks
   (Bitar Ayyukan Baya/Maimaitacin Aikin Baya "review", Jarabawa "examination") excluded.
   File: `backend/scripts/curriculum-data/primary6-hausa.js`.
+
+- **Igbo** — First, Second, and Third Term (66 topics), `legacy`. Source: SchemeofWork.com
+  "Igbo Language Scheme of Work Primary 6 Federal". The page repeats the same content
+  twice — a thin one-line-per-week summary and a fuller weekly (IZU) table with
+  NDINISIOKWU/teacher-activity/pupil-activity detail — the fuller detailed version was
+  used. Unlike the Yoruba and Hausa Primary 6 sources (one topic per week), this source
+  genuinely lists two distinct sub-topics per week (ISIOKWU A and ISIOKWU B — typically
+  one language/grammar or comprehension strand and one literature/culture strand, each
+  with its own content), so both were kept as separate topics per week rather than
+  collapsed. The source's own Igbo text uses a non-standard font/diacritic encoding for
+  dotted vowels and underdotted consonants (e.g. rendering "ị" as garbled "j"); topic
+  names and knowledge points were translated into readable English (with corrected Igbo
+  terms retained parenthetically) rather than copied verbatim in the garbled form.
+  Administrative weeks (Mmugharị na Ule/revision, Ule na Mmechi/examination) excluded.
+  File: `backend/scripts/curriculum-data/primary6-igbo.js`.
 
 ## Known gaps
 
