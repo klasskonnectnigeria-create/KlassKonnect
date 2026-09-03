@@ -67,17 +67,18 @@ Open items across the catalogue:
   Primary 6: no Primary-level Arabic content on SchemeofWork.com/syllabus.ng/ecolebooks.com,
   and NERDC's own site links a non-functional placeholder) — don't re-attempt without a new
   source lead.
-- **Primary 5 is at 14 of the 16-subject target** as of 2026-09-03 — Hausa, Igbo, and
-  Islamic Studies were sourced this session (see `Primary5-Content-Completion-Status.md`).
-  Two gaps remain, unlike Primary 4/6's single gap: **Arabic Language** (checked, genuinely
-  unresolved, same pattern as Primary 4/6) and **French** (present at Primary 4 and Primary
-  6 but never sourced for Primary 5 at all — not yet attempted). Don't assume French parity
-  across grades without checking the live count first.
+- **Primary 5 is at 15 of the 16-subject target** as of 2026-09-03 — Hausa, Igbo, Islamic
+  Studies, and French were all sourced this session (see
+  `Primary5-Content-Completion-Status.md`). French is First-Term-only (10 topics), matching
+  the same partial-term precedent already documented for Primary 4 and Primary 6 French. The
+  sole remaining gap is **Arabic Language**, checked and genuinely unresolved (same dead ends
+  as Primary 4/6) — don't re-attempt without a new source lead. This now matches Primary 6's
+  outcome exactly.
 - **Primary 4 and Primary 5 also have a known provenance gap**, orthogonal to the target-list
   gaps above. Primary 4's 14 live subjects have 13 git-tracked files under
   `backend/scripts/curriculum-data/` — only Mathematics is untracked, seeded via the legacy
-  `parsePdf.js`/`seedDb.js` path. Primary 5's 14 live subjects have only 4 git-tracked files
-  (Mathematics, Hausa, Igbo, Islamic Studies) — the other 10 went through that same legacy
-  seeding path and have no recorded source. This is worth reconciling (either backfilling the
-  missing curriculumData files or accepting the legacy seeding as their record) before treating
-  those subjects as fully sourced.
+  `parsePdf.js`/`seedDb.js` path. Primary 5's 15 live subjects have only 5 git-tracked files
+  (Mathematics, French, Hausa, Igbo, Islamic Studies) — the other 10 went through that same
+  legacy seeding path and have no recorded source. This is worth reconciling (either
+  backfilling the missing curriculumData files or accepting the legacy seeding as their
+  record) before treating those subjects as fully sourced.
