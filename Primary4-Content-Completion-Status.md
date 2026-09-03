@@ -2,7 +2,8 @@
 
 **Status: 14 subjects live**, DB-verified 2026-09-03 (grade-level aggregate: 14 subjects,
 330 topics), against the reconciled 16-subject NESRI 2025 target (see root `CLAUDE.md`
-"Remaining sourcing gaps" section). Still missing: **Arabic Language**.
+"Remaining sourcing gaps" section). **Arabic Language is genuinely unresolved** (not just
+unsourced) — see "Remaining gaps" below.
 
 No SS3-style five-category structure applies to this grade — Primary 4 has no
 vocational/trade tier, so subjects are tracked as a flat list.
@@ -28,9 +29,25 @@ vocational/trade tier, so subjects are tracked as a flat list.
 
 ## Remaining gaps against the 16-subject NESRI 2025 target
 
-**Arabic Language** is still missing. Hausa (2026-09-03) and Igbo (2026-09-03) were both
-sourced and imported from SchemeofWork.com's federal Primary 4 pages, closing those gaps.
-Arabic Language has not yet been checked against real sources for this grade.
+**Arabic Language** is still missing and is now genuinely unresolved (2026-09-03), not just
+unsourced. Hausa (2026-09-03) and Igbo (2026-09-03) were both sourced and imported from
+SchemeofWork.com's federal Primary 4 pages, closing those gaps. Arabic Language was checked
+against SchemeofWork.com (Federal, Lagos, Osun variants — no Primary Arabic content exists on
+the site at all, only SS1/SS3), syllabus.ng (lists "Primary 4 Arabic Language" as a subject
+name in its all-subjects index but with no working link — the page doesn't exist), ecolebooks.com
+(Uganda-focused, no Nigerian Arabic Primary content), edudelighttutors.com (no Arabic Language
+in its Basic 4 subject list at all), classbasic.com's "Lagos State Unified Scheme of Work for
+Primary 4-6 (Middle Basic)" (its table of contents lists an "Arabic Language" section at pages
+441–441 — suspiciously just a single page versus 20-40+ pages for every other subject — but the
+actual downloaded 391-page PDF document skips directly from the end of the Agriculture section
+to "HOME ECONOMICS (PRIMARY FOUR)" with no Arabic Language content present anywhere in the
+document; the ToC entry is a stub that was never filled in), and NERDC's own official site
+(nerdc.gov.ng/content_manager/pri4-6.html advertises a "Primary 4-6 Arabic Curriculum" PDF but
+the download link is a non-functional `javascript:;` placeholder, not an accessible file). One
+real Arabic scheme of work was found (The Olive Tree Primary School, UK) but it's a UK KS2
+generic scheme with no NERDC/WAEC connection, so it was not used. This mirrors the identical
+finding already documented for Primary 6 Arabic Language — don't re-attempt without a new
+source lead.
 
 ## Data-provenance gap: Mathematics
 
