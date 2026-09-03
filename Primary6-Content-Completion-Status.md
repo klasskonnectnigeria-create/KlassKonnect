@@ -105,3 +105,13 @@
 All other Primary 6 subjects remain unsourced.
 Second/Third Term Basic Digital Literacy and French content should be re-checked in a
 future session in case the source publishes it later.
+
+- **Arabic Language** — checked 2026-09-03 per the Federal Ministry of Education's official
+  Primary 4-6 Basic Education Subject List (3 September 2025 press release), which lists
+  "Arabic Language (Optional)" alongside French. No usable source found: SchemeofWork.com has
+  no Arabic content for Primary 6 on its Federal, Lagos State, or Osun State pages, and its own
+  dedicated "Arabic Scheme of Work Primary" category page is an empty placeholder ("Oops!
+  Nothing here"); syllabus.ng lists "Primary 6 Arabic Language (Optional)" as a subject name
+  but with no functional download link; ecolebooks.com has no matching Nigerian NERDC content
+  (the site's primary-school scheme-of-work material is Uganda-curriculum-focused). Unresolved
+  — should be re-checked in a future session in case a source publishes it later.
