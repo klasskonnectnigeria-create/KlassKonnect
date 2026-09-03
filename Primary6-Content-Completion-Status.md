@@ -1,6 +1,6 @@
 # Primary 6 Content Completion Status
 
-**Status: IN PROGRESS** — 11 subjects live in the database as of 2026-09-03.
+**Status: IN PROGRESS** — 12 subjects live in the database as of 2026-09-03.
 
 ## Sourced
 
@@ -61,10 +61,16 @@
   instead, mapped to the NESRI-2025 "Social and Citizenship Studies" naming). Administrative
   weeks (Mid Term Break, Revision) excluded.
   File: `backend/scripts/curriculum-data/primary6-social-and-citizenship-studies.js`.
+- **Yoruba** — First, Second, and Third Term (33 topics), `legacy`. Source: SchemeofWork.com
+  "Yoruba Language Scheme of Work Primary 6 Federal". The source's own Yoruba text uses a
+  non-standard font/diacritic encoding for tonal and dotted-vowel characters; topic names
+  and knowledge points were transliterated/translated into readable form from that source
+  text rather than copied verbatim in its garbled form. Administrative weeks (Atunyewo
+  Eko/Revision, Idanwo/Examination) excluded.
+  File: `backend/scripts/curriculum-data/primary6-yoruba.js`.
 
 ## Known gaps
 
-All other Primary 6 subjects remain unsourced (e.g.
-Yoruba — per the subject list on the same source page used above).
+All other Primary 6 subjects remain unsourced.
 Second/Third Term Basic Digital Literacy and French content should be re-checked in a
 future session in case the source publishes it later.
