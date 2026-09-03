@@ -30,22 +30,22 @@ rendered anywhere in the app:
 
 Do not assume any code path restricts which categories of subjects a grade can have.
 
-## SS1/SS2 having far fewer subjects than SS3 is a sourcing backlog, not a designed boundary
+## Remaining sourcing gaps: Primary 6 is unsourced; Primary 4/5 have a provenance gap
 
-SS3 has 62 live subjects; SS1 and SS2 each have only 9 (Biology, Chemistry, Economics,
-English Language, Geography, Government, Literature-in-English, Mathematics, Physics — one
-broad seed per major track). This gap is **not** because vocational/trade, business/
-commercial, or most humanities subjects are SS3-only under the real curriculum.
+The SS1/SS2 vs SS3 sourcing backlog once documented here is closed: SS1 and SS2 each carry
+61 live subjects against SS3's 62, and the sole difference is `Mining`, which genuinely is
+SS3-only. Don't re-source SS1/SS2 wholesale on the assumption that they're thin — check the
+live count for the specific subject first.
 
-Under Nigeria's NERDC/WAEC senior-secondary structure, a student selects a subject
-combination/track (Science, Arts, Commercial, or Technical/Vocational) at the start of SS1
-and carries that same subject list through SS1 → SS2 → SS3 with increasing depth each year,
-culminating in WASSCE at the end of SS3. Vocational/trade and business/commercial subjects
-are three-year subjects like any other — they are not officially SS3-exclusive electives.
-Scheme-of-work sources (schemeofwork.com and similar, the same sources
-`nerdc-curriculum-sourcer` already uses) publish SS1, SS2, and SS3 versions of nearly every
-subject, including the trade subjects.
+Two open items remain across the catalogue:
 
-So the disparity exists only because SS3 sourcing was carried to completion while SS1/SS2
-sourcing stopped after the initial 9-subject seed. Treat SS1/SS2 as a real, fillable content
-gap — not a structural limit — when deciding what to source next.
+- **Primary 6 is the only genuinely unsourced grade.** It has zero rows in `themes` —
+  no subjects at all. Every other grade (Primary 4, Primary 5, JSS1-3, SS1-3) has live
+  content.
+- **Primary 4 and Primary 5 have a known provenance gap.** Primary 4 shows 12 live subjects
+  but only 11 have a git-tracked file under `backend/scripts/curriculum-data/`; Primary 5
+  shows 11 live subjects but only 1 (`primary5-mathematics.js`) is git-tracked. The rest were
+  seeded directly via `backend/routes/seed.js`, not through the `nerdc-curriculum-sourcer`
+  pipeline, so their source provenance isn't recorded the way sourced subjects' is. This is
+  worth reconciling (either backfilling the missing curriculumData files or accepting
+  seed.js as their record) before treating Primary 4/5 as fully sourced.
