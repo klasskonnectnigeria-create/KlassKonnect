@@ -37,6 +37,28 @@ The SS1/SS2 vs SS3 sourcing backlog once documented here is closed: SS1 and SS2 
 SS3-only. Don't re-source SS1/SS2 wholesale on the assumption that they're thin — check the
 live count for the specific subject first.
 
+**Open question, unresolved and actively evolving: WAEC's own SS trade-subject list may make
+SS3's 33-subject Vocational & Trade catalogue obsolete — don't act on this yet.** Per Oct-Nov
+2025 news reporting (WAEC Nigeria National Office Head Dr. Amos Josiah Dangut, disclosed after
+the 63rd Nigeria National Council meeting in Umuahia, Abia State; corroborated by multiple
+outlets including Guardian.ng's "Senate halts WAEC curriculum change over concerns for 2026
+candidates" and Vanguard's "WAEC's new subjects combination is confusion masquerading as
+reform"), WAEC has officially streamlined SS-level trade subjects from roughly 26-35 down to
+**six** for the 2026 WASSCE: Solar PV Installation and Maintenance, Fashion Design and Garment
+Making, Livestock Farming, Beauty and Cosmetology, Computer Hardware and GSM Repairs, and
+Horticulture and Crop Production — the same six named in the NESRI 2025 JSS reform table (see
+JSS section below). This is independent confirmation that **Mining is not part of the new
+WAEC list**, consistent with it being SS3-only relative to SS1/SS2 above. It also raises a real
+open question: should most of SS3's existing 33-subject Vocational & Trade catalogue (Welding
+and Fabrication, Auto Body Repairs, Auto Electrical Work, Mining, etc. — see
+`SS3-Content-Completion-Status.md`) eventually be consolidated or renamed to match this
+6-subject WAEC list? **Do not restructure or delete any existing SS3 vocational content based
+on this alone.** The reform itself is contested and still moving: multiple sources report the
+Nigerian Senate halted immediate implementation of the new WAEC guidelines in December 2025
+over concerns that 2025/2026 SS3 candidates would be forced into trade subjects they were never
+taught, with lawmakers pushing for the new rules to apply only from the 2027/2028 diet onward.
+Treat this as a live, unsettled situation to monitor rather than a target to reconcile against.
+
 **The upper-primary (Primary 4-6) target subject list is no longer open-ended.** It's been
 reconciled against an authoritative source: the Federal Ministry of Education's official press
 release, 3 September 2025, "Lighter Load, Stronger Minds: FG Overhauls Curriculum for a
