@@ -30,7 +30,7 @@ rendered anywhere in the app:
 
 Do not assume any code path restricts which categories of subjects a grade can have.
 
-## Remaining sourcing gaps: Primary 4/5/6 are all reconciled against the 16-subject target; Primary 4/5 still have a provenance gap
+## Remaining sourcing gaps: Primary 4/5/6 are all reconciled against the 16-subject target (Primary 4/5 still have a provenance gap); JSS1-3 are newly reconciled against a 21-subject target with a substantial 9-subject gap
 
 The SS1/SS2 vs SS3 sourcing backlog once documented here is closed: SS1 and SS2 each carry
 61 live subjects against SS3's 62, and the sole difference is `Mining`, which genuinely is
@@ -90,3 +90,32 @@ Open items across the catalogue:
   legacy seeding path and have no recorded source. This is worth reconciling (either
   backfilling the missing curriculumData files or accepting the legacy seeding as their
   record) before treating those subjects as fully sourced.
+
+**JSS1-3 have been reconciled against an authoritative target too, found during a 2026-09-04
+audit** — the same NESRI 2025 press release PDF used for Primary 4-6 also carries a Junior
+Secondary School column in its Basic Education Subject List table, sitting right next to the
+Primary 4-6 column. Expanding that column's pick-one groups the same way as Primary 4-6
+(Nigerian Languages → Hausa/Igbo/Yoruba; CRS/IS → Christian Religious Studies/Islamic Studies)
+plus its named "Trade Subjects (Students to choose 1 subject)" list → six separate subjects,
+gives a 21-subject target: English Studies, Mathematics, Hausa, Igbo, Yoruba, Intermediate
+Science, Physical and Health Education, Digital Technologies, Christian Religious Studies,
+Islamic Studies, Nigerian History, Social and Citizenship Studies, Cultural and Creative Arts,
+French, Arabic Language, Solar Photovoltaic Installation and Maintenance, Fashion Design and
+Garment Making, Livestock Farming, Beauty and Cosmetology, Computer Hardware and GSM Repairs,
+Horticulture and Crop Production.
+
+- **JSS1, JSS2, and JSS3 are each at 12 of the 21-subject target** as of 2026-09-04 — all three
+  grades carry the exact identical 13-subject catalogue (confirmed via a JSS1-vs-JSS2-vs-JSS3
+  cross-check, which alone would have missed this gap since the three grades agree with each
+  other). See `JSS1-Content-Completion-Status.md`, `JSS2-Content-Completion-Status.md`, and
+  `JSS3-Content-Completion-Status.md` for full detail. **9 subjects are missing from all three
+  grades**: Hausa, Igbo, Arabic Language, and all 6 named trade options (Solar Photovoltaic
+  Installation and Maintenance, Fashion Design and Garment Making, Livestock Farming, Beauty
+  and Cosmetology, Computer Hardware and GSM Repairs, Horticulture and Crop Production). None
+  of the 9 have been sourced or checked for sourceability yet — this is a substantially bigger
+  gap than any single Primary 4-6 grade (1 missing subject each) and hasn't been prioritized.
+- **Business Studies is live in all three JSS grades but isn't on the NESRI JSS target list at
+  all** — flagged as a legacy holdover, not removed. Its tag is inconsistent across grades:
+  `legacy` in JSS1 and JSS2, but `nesri_2025` in JSS3 (commit `fa5673e7`), which is misleading
+  since it isn't actually part of the NESRI 2025 target. Needs a decision on whether to keep it
+  (with JSS3's tag corrected) or retire it in favor of the target list.
