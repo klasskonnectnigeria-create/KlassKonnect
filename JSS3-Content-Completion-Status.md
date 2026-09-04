@@ -1,21 +1,22 @@
 # JSS3 Content Completion Status
 
-**Status: 17 subjects live**, each with full three-term coverage, DB-verified 2026-09-04
-(grade-level aggregate: 17 subjects, 385 topics — 277 from the 2026-08-31 baseline, plus 28
+**Status: 18 subjects live**, each with full three-term coverage, DB-verified 2026-09-04
+(grade-level aggregate: 18 subjects, 409 topics — 277 from the 2026-08-31 baseline, plus 28
 from Hausa and 28 from Igbo, plus 31 from Arabic Language, plus 21 from Fashion Design and
-Garment Making, all sourced and DB-verified 2026-09-04) — but only **16 of the 21 subjects**
-in the reconciled NESRI 2025 target (see "Remaining gaps" below; 5 subjects still missing,
-one legacy holdover present that isn't on the target list).
+Garment Making, plus 24 from Beauty and Cosmetology, all sourced and DB-verified 2026-09-04)
+— but only **17 of the 21 subjects** in the reconciled NESRI 2025 target (see "Remaining
+gaps" below; 4 subjects still missing, one legacy holdover present that isn't on the target
+list).
 
 No SS3-style category structure applies to this grade — JSS3 has no vocational/trade tier,
 so subjects are tracked as a flat list rather than split into categories.
 
-## Subjects (17 live)
+## Subjects (18 live)
 
-Arabic Language, Business Studies, Christian Religious Studies, Cultural and Creative Arts,
-Digital Technologies, English Studies, Fashion Design and Garment Making, French, Hausa,
-Igbo, Intermediate Science, Islamic Studies, Mathematics, Nigerian History, Physical and
-Health Education, Social and Citizenship Studies, Yoruba.
+Arabic Language, Beauty and Cosmetology, Business Studies, Christian Religious Studies,
+Cultural and Creative Arts, Digital Technologies, English Studies, Fashion Design and Garment
+Making, French, Hausa, Igbo, Intermediate Science, Islamic Studies, Mathematics, Nigerian
+History, Physical and Health Education, Social and Citizenship Studies, Yoruba.
 
 Each has an individual "Add JSS3 &lt;Subject&gt; curriculum (3 terms, ...)" commit
 confirming full three-term coverage. Hausa and Igbo (source: SchemeofWork.com's L1/
@@ -26,12 +27,16 @@ all three terms, `legacy` version) was also added 2026-09-04 via the same agent.
 Design and Garment Making (source: SchemeofWork.com's "JSS3 Scheme of Work Unified" page's
 trade-subject section, 21 topics across all three terms, `legacy` version) was added
 2026-09-04 via the same agent, the first of the 6 named trade subjects to be sourced for
-JSS3.
+JSS3. Beauty and Cosmetology (source: the same SchemeofWork.com "JSS3 Scheme of Work
+Unified" page's dedicated trade-subject section, 24 topics across all three terms, `legacy`
+version; administrative weeks — Midterm Examination, Midterm Break, Revision,
+Examination/Closing — excluded) was added 2026-09-04 via the same agent, the second of the 6
+named trade subjects to be sourced for JSS3.
 
 ## Known gaps
 
-None found in commit history or the live DB aggregate for the 17 subjects that are live — no
-JSS3 subject among those 17 is flagged as partial or unresolved. But see "Remaining gaps
+None found in commit history or the live DB aggregate for the 18 subjects that are live — no
+JSS3 subject among those 18 is flagged as partial or unresolved. But see "Remaining gaps
 against the 21-subject NESRI 2025 target" below: the original 13-subject catalogue was never
 checked against an authoritative target list until the 2026-09-04 audit found one.
 
@@ -52,7 +57,7 @@ Photovoltaic Installation and Maintenance, Fashion Design and Garment Making, Li
 Farming, Beauty and Cosmetology, Computer Hardware and GSM Repairs, Horticulture and Crop
 Production.
 
-JSS3 is at **16 of 21** target subjects as of 2026-09-04, up from 12/21 at the start of this
+JSS3 is at **17 of 21** target subjects as of 2026-09-04, up from 12/21 at the start of this
 day's sourcing work — Hausa and Igbo were both sourced from SchemeofWork.com's Federal "Hausa
 Language Scheme of Work for JSS 3" and "Igbo Language Scheme of Work for JSS 3" pages (L1/
 first-language track, 28 topics each, `legacy` version; each page's parallel L2 track was not
@@ -72,13 +77,20 @@ Examination, Closing/Vacation, plus third-term BECE-prep and BECE-exam weeks —
 Note: SchemeofWork.com's separate "NERDC Curriculum Scheme of Work for Fashion Design and
 Garment Making" page only covers SS1-3, not JSS — the JSS3 content came from the Unified page
 instead, the same source already used for JSS1/JSS2 Fashion Design and Garment Making.
-**5 subjects are still missing** from JSS3: the remaining 5 named trade options (Solar
-Photovoltaic Installation and Maintenance, Livestock Farming, Beauty and Cosmetology, Computer
-Hardware and GSM Repairs, Horticulture and Crop Production). None of these 5 have been sourced
-yet, though the JSS3 Scheme of Work Unified page appears to carry dedicated sections for all
-of them (seen in its table of contents during this session) and is a promising lead for
-sourcing them next. This remains a larger gap than any single Primary 4-6 grade (which topped
-out at 1 missing subject each) and has not yet been fully prioritized for sourcing.
+Beauty and Cosmetology was then sourced from the same "JSS3 Scheme of Work Unified" page's own
+dedicated Beauty and Cosmetology section (24 topics across all three terms, `legacy` version;
+administrative weeks — Midterm Examination, Midterm Break, Revision, Examination/Closing —
+excluded). As with Fashion Design and Garment Making, SchemeofWork.com's separate "NERDC
+Curriculum Scheme of Work for Beauty and Cosmetology" page was checked and confirmed to cover
+only SS1-3 (verified directly against the raw HTML, zero JSS mentions), so the JSS3 content
+came from the Unified page instead.
+**4 subjects are still missing** from JSS3: the remaining 4 named trade options (Solar
+Photovoltaic Installation and Maintenance, Livestock Farming, Computer Hardware and GSM
+Repairs, Horticulture and Crop Production). None of these 4 have been sourced yet, though the
+JSS3 Scheme of Work Unified page appears to carry dedicated sections for all of them (seen in
+its table of contents during this session) and is a promising lead for sourcing them next.
+This remains a larger gap than any single Primary 4-6 grade (which topped out at 1 missing
+subject each) and has not yet been fully prioritized for sourcing.
 
 **Business Studies is a legacy holdover — with an inconsistent tag.** It's live in the DB but
 doesn't appear anywhere in the NESRI JSS target column; unlike JSS1 and JSS2 (where Business
