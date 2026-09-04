@@ -1,29 +1,30 @@
 # JSS2 Content Completion Status
 
-**Status: 14 subjects live**, each with full three-term coverage (Hausa added 2026-09-04,
-DB-verified: 33 topics) — now **13 of the 21 subjects** in the reconciled NESRI 2025 target (see
-"Remaining gaps" below; 8 subjects still missing, one legacy holdover present that isn't on the
-target list).
+**Status: 15 subjects live**, each with full three-term coverage (Hausa and Igbo both added
+2026-09-04, DB-verified: 33 and 30 topics respectively) — now **14 of the 21 subjects** in the
+reconciled NESRI 2025 target (see "Remaining gaps" below; 7 subjects still missing, one legacy
+holdover present that isn't on the target list).
 
 No SS3-style category structure applies to this grade — JSS2 has no vocational/trade tier,
 so subjects are tracked as a flat list rather than split into categories.
 
-## Subjects (14 live)
+## Subjects (15 live)
 
 Business Studies, Christian Religious Studies, Cultural and Creative Arts, Digital
-Technologies, English Studies, French, Hausa, Intermediate Science, Islamic Studies,
+Technologies, English Studies, French, Hausa, Igbo, Intermediate Science, Islamic Studies,
 Mathematics, Nigerian History, Physical and Health Education, Social and Citizenship Studies,
 Yoruba.
 
 Commit `90a4943e` added 9 subjects (179 topics); commit `0f7e7602` completed the remaining 4
 (Business Studies, Cultural and Creative Arts, English Studies, Mathematics — 131 topics).
-Hausa was added 2026-09-04 via the nerdc-curriculum-sourcer agent (SchemeofWork.com, L1 track,
-legacy curriculum_version, 33 topics across three terms).
+Hausa and Igbo were both added 2026-09-04 via the nerdc-curriculum-sourcer agent
+(SchemeofWork.com, L1 track, legacy curriculum_version — Hausa: 33 topics, Igbo: 30 topics,
+each across three terms).
 
 ## Known gaps
 
-None found in commit history or the live DB aggregate for the 14 subjects that are live — no
-JSS2 subject among those 14 is flagged as partial or unresolved. But see "Remaining gaps
+None found in commit history or the live DB aggregate for the 15 subjects that are live — no
+JSS2 subject among those 15 is flagged as partial or unresolved. But see "Remaining gaps
 against the 21-subject NESRI 2025 target" below: the subject catalogue was never checked
 against an authoritative target list until the 2026-09-04 audit found one.
 
@@ -44,15 +45,15 @@ Photovoltaic Installation and Maintenance, Fashion Design and Garment Making, Li
 Farming, Beauty and Cosmetology, Computer Hardware and GSM Repairs, Horticulture and Crop
 Production.
 
-JSS2 is at **13 of 21** target subjects as of 2026-09-04 (Hausa sourced this session from
-SchemeofWork.com's Federal JSS2 L1 track — see Subjects above). JSS1 and JSS3 were previously
-identical to JSS2's prior 13-subject catalogue; this Hausa addition has not yet been mirrored
-at JSS1/JSS3, so check the live count for JSS1/JSS3 Hausa before assuming it's also sourced
-there. **8 subjects remain missing**: Igbo, Arabic Language, and all 6 named trade options
-(Solar Photovoltaic Installation and Maintenance, Fashion Design and Garment Making, Livestock
-Farming, Beauty and Cosmetology, Computer Hardware and GSM Repairs, Horticulture and Crop
-Production). None of these 8 have been sourced or attempted yet, and — unlike the Primary 4-6
-Arabic Language gap — sourceability hasn't been checked against
+JSS2 is at **14 of 21** target subjects as of 2026-09-04 (Hausa and Igbo both sourced this
+session from SchemeofWork.com's Federal JSS2 L1 track — see Subjects above). JSS1 and JSS3 were
+previously identical to JSS2's prior 13-subject catalogue; these Hausa/Igbo additions have not
+yet been mirrored at JSS1/JSS3, so check the live count for JSS1/JSS3 Hausa/Igbo before assuming
+they're also sourced there. **7 subjects remain missing**: Arabic Language and all 6 named
+trade options (Solar Photovoltaic Installation and Maintenance, Fashion Design and Garment
+Making, Livestock Farming, Beauty and Cosmetology, Computer Hardware and GSM Repairs,
+Horticulture and Crop Production). None of these 7 have been sourced or attempted yet, and —
+unlike the Primary 4-6 Arabic Language gap — sourceability hasn't been checked against
 SchemeofWork.com/syllabus.ng/ecolebooks.com for any of them. This is a substantially larger gap
 than any single Primary 4-6 grade (which topped out at 1 missing subject each) and has not yet
 been prioritized for sourcing.
