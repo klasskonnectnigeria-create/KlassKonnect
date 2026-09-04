@@ -1,8 +1,11 @@
 # JSS1 Content Completion Status
 
 **Status: 22 subjects live**, each with full three-term coverage, DB-verified 2026-09-04
-(Hausa added earlier this session: 3 themes, 33 topics, `legacy`; Igbo added this session: 3
-themes, 35 topics, `legacy`; Arabic Language added this session: 1 theme, 31 topics, `legacy`;
+(Hausa added earlier this session: originally imported as 3 per-term theme rows, 33 topics,
+`legacy`; **merged into 1 theme on 2026-09-04** to match every other subject's single-bundled-
+theme pattern — see "Theme structure fix" below; Igbo added this session: originally imported
+as 3 per-term theme rows, 35 topics, `legacy`; **merged into 1 theme on 2026-09-04** for the
+same reason; Arabic Language added this session: 1 theme, 31 topics, `legacy`;
 Fashion Design and Garment Making added this session: 1 theme, 26 topics, `legacy` — data was
 already live in the DB from a prior session whose source file was never committed; this session
 reconciled that provenance gap by committing the file, without re-importing; Beauty and
@@ -111,3 +114,23 @@ subjects.
 appear anywhere in the NESRI JSS target column. Not removed — flagged here pending a decision
 on whether it predates the 2025 reform and should stay, or should be retired in favor of the
 target list.
+
+## Theme structure fix (2026-09-04)
+
+Hausa and Igbo were originally imported as **3 separate per-term theme rows** each
+(`"JSS1 Hausa (First Term)"`, `"(Second Term)"`, `"(Third Term)"`, and likewise for Igbo) —
+the only two subjects across JSS1-3 using that pattern; every other subject bundles all three
+terms' topics into a single theme row. Since the mobile app renders every theme as its own flat
+card (`mobile/screens/HomeScreen.js`), this meant a student saw three separate "Hausa" tiles
+instead of one, unlike every other subject.
+
+Fixed by merging each subject+grade's 3 theme rows into 1: the lowest-ID theme row was kept and
+renamed to the standard `"<Grade> <Subject>"` format, all topics were reassigned to it via
+`UPDATE topics SET theme_id = ...`, and the now-empty theme rows were deleted. Verified
+per-merge that the surviving theme's topic count matched the pre-merge total exactly (JSS1
+Hausa: 33, JSS1 Igbo: 35), and confirmed via a final DB audit that every JSS1/2/3 subject (66
+total across the three grades) now has exactly 1 theme row. No other table references
+`theme_id` except `topics` (confirmed against `backend/scripts/schema.sql`), and no backend
+route or mobile code hardcodes a theme ID, so the merge required no code changes — DB-only.
+`sequence_order` was already numbered continuously across the 3 original per-term themes (not
+restarting at 1 per term), so topic ordering within the merged theme needed no renumbering.

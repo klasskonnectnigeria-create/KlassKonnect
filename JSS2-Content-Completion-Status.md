@@ -95,3 +95,19 @@ also sourced there.
 `0f7e7602`) but doesn't appear anywhere in the NESRI JSS target column. Not removed — flagged
 here pending a decision on whether it predates the 2025 reform and should stay, or should be
 retired in favor of the target list.
+
+## Theme structure fix (2026-09-04)
+
+Hausa and Igbo were originally imported as **3 separate per-term theme rows** each
+(`"JSS2 Hausa (First Term)"`, `"(Second Term)"`, `"(Third Term)"`, and likewise for Igbo) — the
+only two subjects across JSS1-3 using that pattern; every other subject bundles all three
+terms' topics into a single theme row, and the mobile app renders every theme as its own flat
+card, so a student saw three separate "Hausa" tiles instead of one.
+
+Fixed by merging each subject's 3 theme rows into 1: the lowest-ID theme row was kept and
+renamed to the standard `"<Grade> <Subject>"` format, all topics were reassigned to it via
+`UPDATE topics SET theme_id = ...`, and the now-empty theme rows were deleted. Verified
+per-merge that the surviving theme's topic count matched the pre-merge total exactly (JSS2
+Hausa: 33, JSS2 Igbo: 30), and confirmed via a final DB audit that every JSS1/2/3 subject (66
+total) now has exactly 1 theme row. DB-only fix — no backend route or mobile code hardcodes a
+theme ID, so no code changes were required.

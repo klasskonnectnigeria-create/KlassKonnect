@@ -30,7 +30,7 @@ rendered anywhere in the app:
 
 Do not assume any code path restricts which categories of subjects a grade can have.
 
-## Remaining sourcing gaps: Primary 4/5/6 are all reconciled against the 16-subject target (Primary 4/5 still have a provenance gap); JSS1-3 are newly reconciled against a 21-subject target with a substantial 9-subject gap
+## Remaining sourcing gaps: Primary 4/5/6 are all reconciled against the 16-subject target (Primary 4/5 still have a provenance gap); JSS1-3 are fully reconciled against their 21-subject target, closed 2026-09-04
 
 The SS1/SS2 vs SS3 sourcing backlog once documented here is closed: SS1 and SS2 each carry
 61 live subjects against SS3's 62, and the sole difference is `Mining`, which genuinely is
@@ -126,16 +126,28 @@ French, Arabic Language, Solar Photovoltaic Installation and Maintenance, Fashio
 Garment Making, Livestock Farming, Beauty and Cosmetology, Computer Hardware and GSM Repairs,
 Horticulture and Crop Production.
 
-- **JSS1, JSS2, and JSS3 are each at 12 of the 21-subject target** as of 2026-09-04 — all three
-  grades carry the exact identical 13-subject catalogue (confirmed via a JSS1-vs-JSS2-vs-JSS3
-  cross-check, which alone would have missed this gap since the three grades agree with each
-  other). See `JSS1-Content-Completion-Status.md`, `JSS2-Content-Completion-Status.md`, and
-  `JSS3-Content-Completion-Status.md` for full detail. **9 subjects are missing from all three
-  grades**: Hausa, Igbo, Arabic Language, and all 6 named trade options (Solar Photovoltaic
-  Installation and Maintenance, Fashion Design and Garment Making, Livestock Farming, Beauty
-  and Cosmetology, Computer Hardware and GSM Repairs, Horticulture and Crop Production). None
-  of the 9 have been sourced or checked for sourceability yet — this is a substantially bigger
-  gap than any single Primary 4-6 grade (1 missing subject each) and hasn't been prioritized.
+- **JSS1, JSS2, and JSS3 are each now at 21 of the 21-subject target** as of 2026-09-04 —
+  starting from an identical 12-subject baseline across all three grades (confirmed via a
+  JSS1-vs-JSS2-vs-JSS3 cross-check), the same 9-subject gap (Hausa, Igbo, Arabic Language, and
+  all 6 named trade options: Solar Photovoltaic Installation and Maintenance, Fashion Design
+  and Garment Making, Livestock Farming, Beauty and Cosmetology, Computer Hardware and GSM
+  Repairs, Horticulture and Crop Production) was closed at all three grades in one session, all
+  sourced from each grade's `schemeofwork.com/jssN-scheme-of-work-unified/` page. See
+  `JSS1-Content-Completion-Status.md`, `JSS2-Content-Completion-Status.md`, and
+  `JSS3-Content-Completion-Status.md` for full per-subject sourcing detail and citations.
+- **Theme structure fix (2026-09-04)**: Hausa and Igbo had been imported as 3 separate
+  per-term theme rows each (e.g. `"JSS1 Hausa (First Term)"` / `"(Second Term)"` /
+  `"(Third Term)"`), the only two subjects across JSS1-3 using that pattern — every other
+  subject bundles all three terms into one theme row, and since the mobile app renders every
+  theme as its own flat card (`mobile/screens/HomeScreen.js`), this meant students saw three
+  "Hausa" tiles instead of one. Fixed by merging each subject+grade's 3 theme rows into 1 (6
+  merges total: Hausa/Igbo × JSS1/2/3) — lowest-ID theme kept and renamed to the standard
+  `"<Grade> <Subject>"` format, topics reassigned via `UPDATE topics SET theme_id`, empty
+  theme rows deleted. Verified per-merge topic-count match and a final DB audit confirming
+  every JSS1/2/3 subject (66 total) has exactly 1 theme row. DB-only — no other table
+  references `theme_id` except `topics`, and no backend route or mobile code hardcodes a theme
+  ID, so no code changes were needed. If sourcing a new language subject with per-term source
+  pages in the future, bundle it into one theme from the start rather than importing per term.
 - **Business Studies is live in all three JSS grades but isn't on the NESRI JSS target list at
   all** — flagged as a legacy holdover, not removed. Its tag is inconsistent across grades:
   `legacy` in JSS1 and JSS2, but `nesri_2025` in JSS3 (commit `fa5673e7`), which is misleading
