@@ -1,20 +1,21 @@
 # JSS2 Content Completion Status
 
-**Status: 16 subjects live**, each with full three-term coverage (Hausa and Igbo added
+**Status: 17 subjects live**, each with full three-term coverage (Hausa and Igbo added
 2026-09-04, DB-verified: 33 and 30 topics respectively; Arabic Language added later the same
-day, DB-verified: 33 topics) — now **15 of the 21 subjects** in the reconciled NESRI 2025 target
-(see "Remaining gaps" below; 6 subjects still missing, one legacy holdover present that isn't
+day, DB-verified: 33 topics; Fashion Design and Garment Making added later the same day,
+DB-verified: 26 topics) — now **16 of the 21 subjects** in the reconciled NESRI 2025 target
+(see "Remaining gaps" below; 5 subjects still missing, one legacy holdover present that isn't
 on the target list).
 
 No SS3-style category structure applies to this grade — JSS2 has no vocational/trade tier,
 so subjects are tracked as a flat list rather than split into categories.
 
-## Subjects (16 live)
+## Subjects (17 live)
 
 Arabic Language, Business Studies, Christian Religious Studies, Cultural and Creative Arts,
-Digital Technologies, English Studies, French, Hausa, Igbo, Intermediate Science, Islamic
-Studies, Mathematics, Nigerian History, Physical and Health Education, Social and Citizenship
-Studies, Yoruba.
+Digital Technologies, English Studies, Fashion Design and Garment Making, French, Hausa, Igbo,
+Intermediate Science, Islamic Studies, Mathematics, Nigerian History, Physical and Health
+Education, Social and Citizenship Studies, Yoruba.
 
 Commit `90a4943e` added 9 subjects (179 topics); commit `0f7e7602` completed the remaining 4
 (Business Studies, Cultural and Creative Arts, English Studies, Mathematics — 131 topics).
@@ -22,7 +23,10 @@ Hausa and Igbo were both added 2026-09-04 via the nerdc-curriculum-sourcer agent
 (SchemeofWork.com, L1 track, legacy curriculum_version — Hausa: 33 topics, Igbo: 30 topics,
 each across three terms). Arabic Language was added the same day via the same agent
 (SchemeofWork.com's single Federal JSS1/JSS2/JSS3 Arabic page, JSS2 section only, legacy
-curriculum_version — 33 topics across three terms).
+curriculum_version — 33 topics across three terms). Fashion Design and Garment Making was
+added later the same day via the same agent (SchemeofWork.com's "JSS2 Scheme of Work Unified"
+page, legacy curriculum_version — 26 topics across three terms, after excluding administrative
+weeks).
 
 ## Known gaps
 
@@ -48,17 +52,18 @@ Photovoltaic Installation and Maintenance, Fashion Design and Garment Making, Li
 Farming, Beauty and Cosmetology, Computer Hardware and GSM Repairs, Horticulture and Crop
 Production.
 
-JSS2 is at **15 of 21** target subjects as of 2026-09-04 (Hausa and Igbo sourced earlier the
-same session, Arabic Language sourced later the same day — all three from SchemeofWork.com; see
-Subjects above). JSS1 and JSS3 were previously identical to JSS2's prior 13-subject catalogue;
-these additions have not yet been mirrored at JSS1/JSS3, so check the live count for JSS1/JSS3
-Hausa/Igbo/Arabic Language before assuming they're also sourced there. **6 subjects remain
-missing**: all 6 named trade options (Solar Photovoltaic Installation and Maintenance, Fashion
-Design and Garment Making, Livestock Farming, Beauty and Cosmetology, Computer Hardware and GSM
-Repairs, Horticulture and Crop Production). None of these 6 have been sourced or attempted yet,
-and sourceability hasn't been checked against SchemeofWork.com/syllabus.ng/ecolebooks.com for
-any of them. This is a substantially larger gap than any single Primary 4-6 grade (which topped
-out at 1 missing subject each) and has not yet been prioritized for sourcing.
+JSS2 is at **16 of 21** target subjects as of 2026-09-04 (Hausa and Igbo sourced earlier the
+same session, Arabic Language sourced later the same day, Fashion Design and Garment Making
+sourced later still — all four from SchemeofWork.com; see Subjects above). JSS1 and JSS3 were
+previously identical to JSS2's prior 13-subject catalogue; these additions have not yet been
+mirrored at JSS1/JSS3, so check the live count for JSS1/JSS3 Hausa/Igbo/Arabic
+Language/Fashion Design before assuming they're also sourced there. **5 subjects remain
+missing**: the 5 remaining named trade options (Solar Photovoltaic Installation and
+Maintenance, Livestock Farming, Beauty and Cosmetology, Computer Hardware and GSM Repairs,
+Horticulture and Crop Production). None of these 5 have been sourced or attempted yet, and
+sourceability hasn't been checked against SchemeofWork.com/syllabus.ng/ecolebooks.com for any
+of them. This is a substantially larger gap than any single Primary 4-6 grade (which topped out
+at 1 missing subject each) and has not yet been prioritized for sourcing.
 
 **Business Studies is a legacy holdover.** It's live in the DB (tagged `legacy` per commit
 `0f7e7602`) but doesn't appear anywhere in the NESRI JSS target column. Not removed — flagged
