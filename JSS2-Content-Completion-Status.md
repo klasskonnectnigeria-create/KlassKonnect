@@ -1,25 +1,28 @@
 # JSS2 Content Completion Status
 
-**Status: 21 subjects live**, each with full three-term coverage (Hausa and Igbo added
+**Status: 22 subjects live**, each with full three-term coverage (Hausa and Igbo added
 2026-09-04, DB-verified: 33 and 30 topics respectively; Arabic Language added later the same
 day, DB-verified: 33 topics; Fashion Design and Garment Making added later the same day,
 DB-verified: 26 topics; Beauty and Cosmetology added later the same day, DB-verified: 27
 topics; Livestock Farming added later the same day, DB-verified: 24 topics; Solar
 Photovoltaic Installation and Maintenance added later the same day, DB-verified: 21 topics;
-Computer Hardware and GSM Repairs added later the same day, DB-verified: 23 topics)
-— now **20 of the 21 subjects** in the reconciled NESRI 2025 target (see "Remaining gaps"
-below; 1 subject still missing, one legacy holdover present that isn't on the target list).
+Computer Hardware and GSM Repairs added later the same day, DB-verified: 23 topics;
+Horticulture and Crop Production added later the same day, DB-verified: 24 topics)
+— now **21 of the 21 subjects** in the reconciled NESRI 2025 target, closing the target-list
+gap entirely (one legacy holdover, Business Studies, present that isn't on the target list —
+see "Remaining gaps" below).
 
 No SS3-style category structure applies to this grade — JSS2 has no vocational/trade tier,
 so subjects are tracked as a flat list rather than split into categories.
 
-## Subjects (21 live)
+## Subjects (22 live)
 
 Arabic Language, Beauty and Cosmetology, Business Studies, Christian Religious Studies,
 Computer Hardware and GSM Repairs, Cultural and Creative Arts, Digital Technologies, English
-Studies, Fashion Design and Garment Making, French, Hausa, Igbo, Intermediate Science, Islamic
-Studies, Livestock Farming, Mathematics, Nigerian History, Physical and Health Education,
-Social and Citizenship Studies, Solar Photovoltaic Installation and Maintenance, Yoruba.
+Studies, Fashion Design and Garment Making, French, Hausa, Horticulture and Crop Production,
+Igbo, Intermediate Science, Islamic Studies, Livestock Farming, Mathematics, Nigerian History,
+Physical and Health Education, Social and Citizenship Studies, Solar Photovoltaic Installation
+and Maintenance, Yoruba.
 
 Commit `90a4943e` added 9 subjects (179 topics); commit `0f7e7602` completed the remaining 4
 (Business Studies, Cultural and Creative Arts, English Studies, Mathematics — 131 topics).
@@ -46,7 +49,11 @@ Term's Work" recap weeks (matching the exclusion convention already used for JSS
 Photovoltaic Installation and Maintenance). Computer Hardware and GSM Repairs was added later
 the same day via the same agent, also sourced directly from the "JSS2 Scheme of Work Unified"
 page (its embedded Computer Hardware and GSM Repairs section) — 23 topics across three terms,
-after excluding the same administrative weeks.
+after excluding the same administrative weeks. Horticulture and Crop Production was added
+later the same day via the same agent, also sourced directly from the "JSS2 Scheme of Work
+Unified" page (its embedded Horticulture and Crop Production section) — 24 topics across
+three terms, after excluding the same administrative weeks. This was the sixth and final named
+trade option, closing the target-list gap for JSS2 entirely.
 
 ## Known gaps
 
@@ -72,21 +79,17 @@ Photovoltaic Installation and Maintenance, Fashion Design and Garment Making, Li
 Farming, Beauty and Cosmetology, Computer Hardware and GSM Repairs, Horticulture and Crop
 Production.
 
-JSS2 is at **20 of 21** target subjects as of 2026-09-04 (Hausa and Igbo sourced earlier the
+JSS2 is at **21 of 21** target subjects as of 2026-09-04 (Hausa and Igbo sourced earlier the
 same session, Arabic Language sourced later the same day, Fashion Design and Garment Making,
-Beauty and Cosmetology, Livestock Farming, Solar Photovoltaic Installation and Maintenance, and
-Computer Hardware and GSM Repairs sourced later still — all eight from SchemeofWork.com; see
-Subjects above). JSS1 and JSS3 were previously identical to JSS2's prior 13-subject catalogue;
-these additions have not yet been mirrored at JSS1/JSS3, so check the live count for
-JSS1/JSS3 Hausa/Igbo/Arabic Language/Fashion Design/Beauty and Cosmetology/Livestock
-Farming/Solar Photovoltaic Installation and Maintenance/Computer Hardware and GSM Repairs
-before assuming they're also sourced there. **1 subject remains missing**: Horticulture and
-Crop Production, the last of the six named trade options. It has not been sourced or attempted
-yet — the "JSS2 Scheme of Work Unified" page on SchemeofWork.com (used for all six of the other
-trade subjects sourced so far) is confirmed to also embed a section for Horticulture and Crop
-Production, so that page is the natural next stop. This is now the smallest gap yet at this
-grade — down from an earlier 9-subject gap to a single subject — but still needs its own
-sourcing pass.
+Beauty and Cosmetology, Livestock Farming, Solar Photovoltaic Installation and Maintenance,
+Computer Hardware and GSM Repairs, and finally Horticulture and Crop Production sourced later
+still — all nine from SchemeofWork.com's "JSS2 Scheme of Work Unified" page; see Subjects
+above). **The target-list gap is now fully closed for JSS2.** JSS1 and JSS3 were previously
+identical to JSS2's prior 13-subject catalogue; these additions have not yet been mirrored at
+JSS1/JSS3, so check the live count for JSS1/JSS3 Hausa/Igbo/Arabic Language/Fashion Design/
+Beauty and Cosmetology/Livestock Farming/Solar Photovoltaic Installation and Maintenance/
+Computer Hardware and GSM Repairs/Horticulture and Crop Production before assuming they're
+also sourced there.
 
 **Business Studies is a legacy holdover.** It's live in the DB (tagged `legacy` per commit
 `0f7e7602`) but doesn't appear anywhere in the NESRI JSS target column. Not removed — flagged
