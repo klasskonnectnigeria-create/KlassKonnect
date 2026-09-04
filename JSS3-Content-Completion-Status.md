@@ -1,25 +1,26 @@
 # JSS3 Content Completion Status
 
-**Status: 21 subjects live**, each with full three-term coverage, DB-verified 2026-09-04
-(grade-level aggregate: 21 subjects, 468 topics — 277 from the 2026-08-31 baseline, plus 28
+**Status: 22 subjects live**, each with full three-term coverage, DB-verified 2026-09-04
+(grade-level aggregate: 22 subjects, 492 topics — 277 from the 2026-08-31 baseline, plus 28
 from Hausa and 28 from Igbo, plus 31 from Arabic Language, plus 21 from Fashion Design and
 Garment Making, plus 24 from Beauty and Cosmetology, plus 20 from Livestock Farming, plus 22
 from Solar Photovoltaic Installation and Maintenance, plus 17 from Computer Hardware and GSM
-Repairs, all sourced and DB-verified 2026-09-04)
-— but only **20 of the 21 subjects** in the reconciled NESRI 2025 target (see "Remaining
-gaps" below; 1 subject still missing, one legacy holdover present that isn't on the target
+Repairs, plus 24 from Horticulture and Crop Production, all sourced and DB-verified 2026-09-04)
+— now **21 of 21 subjects** in the reconciled NESRI 2025 target are live (see "Remaining
+gaps" below; one legacy holdover, Business Studies, also present but isn't on the target
 list).
 
 No SS3-style category structure applies to this grade — JSS3 has no vocational/trade tier,
 so subjects are tracked as a flat list rather than split into categories.
 
-## Subjects (21 live)
+## Subjects (22 live)
 
 Arabic Language, Beauty and Cosmetology, Business Studies, Christian Religious Studies,
 Computer Hardware and GSM Repairs, Cultural and Creative Arts, Digital Technologies, English
-Studies, Fashion Design and Garment Making, French, Hausa, Igbo, Intermediate Science, Islamic
-Studies, Livestock Farming, Mathematics, Nigerian History, Physical and Health Education,
-Social and Citizenship Studies, Solar Photovoltaic Installation and Maintenance, Yoruba.
+Studies, Fashion Design and Garment Making, French, Hausa, Horticulture and Crop Production,
+Igbo, Intermediate Science, Islamic Studies, Livestock Farming, Mathematics, Nigerian History,
+Physical and Health Education, Social and Citizenship Studies, Solar Photovoltaic Installation
+and Maintenance, Yoruba.
 
 Each has an individual "Add JSS3 &lt;Subject&gt; curriculum (3 terms, ...)" commit
 confirming full three-term coverage. Hausa and Igbo (source: SchemeofWork.com's L1/
@@ -119,13 +120,15 @@ sourced from the same "JSS3 Scheme of Work Unified" page's own dedicated trade-s
 directly to confirm the real Week/Topic/Breakdown table content before writing the file — Third
 Term's real content is thin, only 3 topics — Final Business Project, Exhibition and Product
 Display, Entrepreneurship Fair Preparation — before weeks 4-13 become Mid-Term
-Examination/Revision-and-BECE-Preparation/BECE Examination administrative content).
-**1 subject is still missing** from JSS3: the last named trade option, Horticulture and Crop
-Production. It has not been sourced yet, though the JSS3 Scheme of Work Unified page appears to
-carry a dedicated section for it (seen in its table of contents during this session) and is a
-promising lead for sourcing it next. This remains a larger gap than any single Primary 4-6
-grade (which topped out at 1 missing subject each, matching where JSS3 now stands) — JSS3 is
-one subject away from closing its NESRI 2025 target gap entirely.
+Examination/Revision-and-BECE-Preparation/BECE Examination administrative content). Horticulture
+and Crop Production — the last of the 6 named trade options — was then sourced from the same
+"JSS3 Scheme of Work Unified" page's own dedicated Horticulture and Crop Production section (24
+topics across all three terms, `legacy` version; raw HTML was fetched and grepped directly to
+confirm genuine Week/Topic/Breakdown table content for all three terms before writing the file;
+administrative weeks — Mid-Term Test, Mid-Term Break, Revision, Examination, Closing/Vacation —
+excluded). **JSS3 now has all 21 of 21 target subjects live**, closing the gap first identified
+in the 2026-09-04 audit — the largest single-grade gap closed in one day across the tracked
+catalogue.
 
 **Business Studies is a legacy holdover — with an inconsistent tag.** It's live in the DB but
 doesn't appear anywhere in the NESRI JSS target column; unlike JSS1 and JSS2 (where Business
