@@ -392,3 +392,19 @@ SS1 had no subject of this exact name before this import; the pre-existing, sepa
 "Agriculture" subject (broader, general-purpose) was left untouched. Midterm Examination,
 Midterm Break, Revision, Examination, and Closing weeks were excluded from all three terms as
 administrative content.
+
+Computer Hardware and GSM Repairs (`legacy`, 18 topics — 9 First Term + 9 Second Term; no SS1
+Third Term section exists on the source page; source: SchemeofWork.com "NERDC Curriculum
+Scheme of Work for Computer Hardware and GSM Repairs",
+https://schemeofwork.com/nerdc-curriculum-scheme-of-work-for-computer-hardware-and-gsm-repairs/)
+was sourced and DB-verified at SS1 on 2026-09-05 (theme id 399) as a new, thirty-fourth
+Vocational & Trade-track subject, outside the numbered phase batches above. This is another of
+the 6 new NESRI 2025 / WAEC-reform SS trade subjects confirmed via the official 3 Sept 2025 FME
+press release PDF (page-4 Senior Secondary School Subject List, "One Core Trade Subject"
+6-option list — see `CLAUDE.md`'s open-question section). A fresh DB query confirmed SS1 had no
+subject of this exact name before this import; the pre-existing, separate legacy "GSM
+Maintenance and Repairs" subject (theme id 273, 19 topics — narrower, GSM/mobile-phone repair
+only, no Computer Hardware component) was confirmed untouched (still 273/19 topics) after this
+import, per an explicit decision to source this as its own standalone subject mirroring how
+JSS1-3 structured the same subject. Mid-Term Tests and Assignments, Revision, and Examination
+weeks were excluded from both terms as administrative content.
