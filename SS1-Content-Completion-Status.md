@@ -122,14 +122,22 @@ new NESRI 2025 / WAEC-reform SS trade subjects named in the FME's 3 Sept 2025 pr
 (see `CLAUDE.md` open-question section). Unlike Fashion Design and Garment Making, there was no
 pre-existing related subject at SS1/SS2/SS3 under any name (Beauty, Cosmetology, Hairdressing)
 — this is a genuinely new addition, not a rename or merge. SS1 now has 63 live subjects.
-DB-verified 2026-09-05 (theme id 393).
+DB-verified 2026-09-05 (theme id 393). Horticulture and Crop Production (`legacy`, 24 topics,
+all three terms; source: SchemeofWork.com "SS1 Scheme of Work Unified") was added 2026-09-05 as
+a new, thirty-third Vocational & Trade-track subject, outside the numbered phase batches above.
+This is another of the 6 new NESRI 2025 / WAEC-reform SS trade subjects confirmed via the
+official 3 Sept 2025 FME press release PDF (page-4 Senior Secondary School Subject List, "One
+Core Trade Subject" 6-option list — see `CLAUDE.md`'s open-question section). SS1 already has a
+live, separate, broader "Agriculture" subject; that is a different, general-purpose subject not
+scoped to horticulture/crop production and was left untouched. SS1 now has 64 live subjects.
+DB-verified 2026-09-05 (theme id 396).
 
 No SS3-style five-category structure applies here — SS1's catalogue is limited to the
 science/humanities core plus this new Compulsory Core tier and a newly-started Vocational &
 Trade tier plus a newly-started Business & Commercial tier; the wider Vocational & Trade and
 Business & Commercial catalogues have not yet been fully attempted at this grade.
 
-## Subjects (63 live)
+## Subjects (64 live)
 
 Original 9 (`legacy`): Biology, Chemistry, Economics, English Language, Geography, Government,
 Literature-in-English, Mathematics, Physics.
@@ -371,3 +379,16 @@ rename or merge. Examination weeks (11-13) were excluded from both terms as admi
 content; the "Revision & Project" week in each term was kept as a topic since it carries real
 project/skill content (a hair-care portfolio in First Term, a skincare & makeup guide in Second
 Term) rather than being purely administrative.
+
+Horticulture and Crop Production (`legacy`, 24 topics, all three terms; source:
+SchemeofWork.com "SS1 Scheme of Work Unified",
+https://schemeofwork.com/ss1-scheme-of-work-unified/, Horticulture and Crop Production section
+under Trade Subjects) was sourced and DB-verified at SS1 on 2026-09-05 (theme id 396) as a new,
+thirty-third Vocational & Trade-track subject, outside the numbered phase batches above. This is
+another of the 6 new NESRI 2025 / WAEC-reform SS trade subjects confirmed via the official 3
+Sept 2025 FME press release PDF (page-4 Senior Secondary School Subject List, "One Core Trade
+Subject" 6-option list — see `CLAUDE.md`'s open-question section). A fresh DB query confirmed
+SS1 had no subject of this exact name before this import; the pre-existing, separate
+"Agriculture" subject (broader, general-purpose) was left untouched. Midterm Examination,
+Midterm Break, Revision, Examination, and Closing weeks were excluded from all three terms as
+administrative content.
