@@ -34,6 +34,29 @@ rendered anywhere in the app:
 
 Do not assume any code path restricts which categories of subjects a grade can have.
 
+### Extra/legacy subjects are not a problem — only genuinely missing new subjects are
+
+When checking a grade's live catalogue against an official target list, **a subject that's
+live but isn't on the target list is not a gap and doesn't need reconciling, removing, or
+renaming.** The target lists (Primary/JSS 16/21-subject NESRI 2025 lists, the SS 6-subject
+NESRI 2025 trade list) describe what's *new or required*, not an exhaustive allowlist of
+everything a grade is permitted to have. Only a subject NERDC/WAEC has genuinely introduced
+that the app doesn't yet have counts as a real gap worth sourcing.
+
+Two practical consequences:
+- Before treating a named target subject as missing, check whether an existing live subject
+  under a different but close-enough name already covers it (e.g. "Solar Photovoltaic
+  Installation" vs. the NESRI 2025 "Solar PV Installation and Maintenance" — same subject,
+  not a gap) — don't source a duplicate under the new exact name.
+- Legacy/off-target subjects already live (e.g. Business Studies at JSS1-3; the pre-reform
+  33-subject SS3 Vocational & Trade catalogue, even now that 4 of the 6 new NESRI 2025 SS
+  trade subjects have been added alongside it) can be left alone indefinitely just for being
+  off-target. Do not restructure, retag, or remove them on that basis alone, unless the user
+  explicitly asks for that cleanup — a subject being untargeted is not itself a problem to
+  fix. (This is distinct from unrelated data-quality issues on such a subject, like a
+  mislabeled `curriculum_version` tag — see Business Studies in "Open items" below, which is
+  still worth fixing on its own merits.)
+
 ### Railway/Postgres access
 
 `RAILWAY_TOKEN` in this environment is project-scoped. That kind of token has no associated
@@ -73,9 +96,9 @@ documented path hits a block — stop and ask instead.
 | JSS1 | 22 | 21 (NESRI 2025) + 1 legacy | 21/21 target complete; Business Studies is an untargeted legacy extra |
 | JSS2 | 22 | 21 (NESRI 2025) + 1 legacy | 21/21 target complete; Business Studies is an untargeted legacy extra |
 | JSS3 | 22 | 21 (NESRI 2025) + 1 legacy | 21/21 target complete; Business Studies is an untargeted legacy extra |
-| SS1 | 61 | 61 (= SS2) | Matches SS2 exactly |
-| SS2 | 61 | 61 (= SS1) | Matches SS1 exactly |
-| SS3 | 62 | 62 | **COMPLETE** — 62/62, including all 33 Vocational & Trade subjects |
+| SS1 | 65 | 65 (= SS2) | Matches SS2 exactly; includes 4 new NESRI 2025 trade subjects (2026-09-05) |
+| SS2 | 65 | 65 (= SS1) | Matches SS1 exactly; includes 4 new NESRI 2025 trade subjects (2026-09-05) |
+| SS3 | 66 | 66 | **COMPLETE** on its original 62-subject catalogue; +4 new NESRI 2025 trade subjects (2026-09-05) |
 
 **Primary 4-6** target is a 16-subject list reconciled against the Federal Ministry of
 Education's official 3 September 2025 press release, "Lighter Load, Stronger Minds: FG
@@ -111,14 +134,35 @@ and all 6 named trade options) in one 2026-09-04 session, each sourced from that
 for full per-subject sourcing detail and citations. Business Studies is live at all three
 grades but isn't part of this target — see "Open items" below.
 
-**SS1/SS2 vs SS3**: this backlog is closed. SS1 and SS2 each carry 61 live subjects against
-SS3's 62, and the sole difference is `Mining`, which genuinely is SS3-only (see "Open items"
-below for the live WAEC reform question this touches). Don't re-source SS1/SS2 wholesale on
-the assumption they're thin — check the live count for the specific subject first.
+**SS1/SS2 vs SS3 (original 62-subject catalogue)**: this backlog is closed. SS1 and SS2 each
+carried 61 live subjects against SS3's 62, and the sole difference was `Mining`, which
+genuinely is SS3-only. Don't re-source SS1/SS2 wholesale on the assumption they're thin —
+check the live count for the specific subject first.
 
-**SS3** is fully COMPLETE: all 62 catalogued subjects across the five doc-convention categories
-(Compulsory Core, Science & Mathematics, Humanities & Arts, Business & Commercial, Vocational &
-Trade) have real sourced content live. See `SS3-Content-Completion-Status.md`.
+**SS3** is fully COMPLETE on its original catalogue: all 62 subjects across the five
+doc-convention categories (Compulsory Core, Science & Mathematics, Humanities & Arts, Business
+& Commercial, Vocational & Trade) have real sourced content live. See
+`SS3-Content-Completion-Status.md`.
+
+**NESRI 2025 SS trade-subject additions (2026-09-05)**: per the "extra/legacy subjects are
+fine" rule below, checking SS1/2/3 against the official 6-subject NESRI 2025 SS trade list
+(same source PDF as Primary/JSS, page 4's "Senior Secondary School Subject List" — this is
+confirmed straight from the primary source document, not just secondhand news reporting as
+earlier framed) found 4 of the 6 genuinely missing outright and 2 already covered by
+close-enough existing subjects:
+
+- **Genuinely missing, sourced and added at all three grades**: Fashion Design and Garment
+  Making, Beauty and Cosmetology, Horticulture and Crop Production, Computer Hardware and GSM
+  Repairs. Each added as its own new standalone subject, distinct from and leaving untouched
+  any similarly-scoped legacy subject already live (Garment Making Construction; Agriculture;
+  GSM Maintenance and Repairs — the last one mirrors how JSS1-3 also sourced "Computer
+  Hardware and GSM Repairs" as a wholly standalone subject). All sourced from
+  schemeofwork.com, tagged `legacy`, terms vary by subject/grade (see
+  `SS1/2/3-Content-Completion-Status.md` for full per-subject topic counts and term coverage).
+- **Not gaps — already covered by existing subjects under close-enough names**: Solar PV
+  Installation and Maintenance (live as the pre-existing "Solar Photovoltaic Installation");
+  Livestock Farming (live within the pre-existing "Animal Husbandry / Livestock Farming").
+  Confirmed via DB check, not sourced separately, per the rule below.
 
 ### AI tutor bug fixes (5 bugs found in live testing, all fixed)
 
@@ -221,6 +265,20 @@ plus one unrelated content-duplication bug:
   (`Nubians <globlbuy@Daniels-MacBook-Air.local>`) to the project's own identity
   (`KlassKonnect <klasskonnectnigeria@gmail.com>`) starting 2026-09-02; all commits since have
   used the correct identity.
+- **Verify after any interruption before committing (2026-09-05 incident)**: during the SS3
+  Horticulture and Crop Production sourcing run, the sourcer subagent hit a session rate
+  limit right after its DB import but before its `git commit` — the DB write itself was fine,
+  but its staged status-file edit turned out to also contain a fabricated claim (that an
+  unrelated "Solar Photovoltaic Installation" subject had been newly sourced that session,
+  which never actually happened — no such DB row or file existed beyond the real, pre-existing
+  2026-08-30 version). This was caught by diffing the staged changes and cross-checking the
+  live DB against the claimed state before committing, rather than trusting the interrupted
+  run's own summary; the false claim was stripped and the fix pushed as a follow-up commit
+  (`3396bea1`) rather than an amend. **Lesson: after any interruption (rate limit, error,
+  resumed session), verify `git status`/`git diff` and the live DB match what's about to be
+  committed — do not commit staged changes, or trust a task's self-reported summary, without
+  that check.** Every subsequent task in that same batch was re-verified this way before
+  committing and came back clean.
 
 ---
 
@@ -235,24 +293,34 @@ plus one unrelated content-duplication bug:
   the download link is a non-functional `javascript:;` placeholder). One tangential UK KS2
   scheme was found but isn't NERDC/WAEC-aligned, so wasn't used. Don't re-attempt without a
   new source lead; re-check in a future session in case a source publishes it later.
-- **WAEC's SS trade-subject reform is live and unsettled — do not act on it yet.** Per
-  Oct-Nov 2025 news reporting (WAEC Nigeria National Office Head Dr. Amos Josiah Dangut,
-  disclosed after the 63rd Nigeria National Council meeting in Umuahia, Abia State;
-  corroborated by Guardian.ng and Vanguard reporting), WAEC has officially streamlined
-  SS-level trade subjects from roughly 26-35 down to **six** for the 2026 WASSCE: Solar PV
-  Installation and Maintenance, Fashion Design and Garment Making, Livestock Farming, Beauty
-  and Cosmetology, Computer Hardware and GSM Repairs, and Horticulture and Crop Production —
-  the same six named in the NESRI 2025 JSS reform table above. This independently confirms
-  Mining isn't part of the new WAEC list (consistent with it being SS3-only vs. SS1/SS2), and
-  raises a real open question: should most of SS3's existing 33-subject Vocational & Trade
-  catalogue (Welding and Fabrication, Auto Body Repairs, Auto Electrical Work, Mining, etc.)
-  eventually be consolidated or renamed to match this 6-subject list? **Do not restructure or
-  delete any existing SS3 vocational content based on this alone** — the reform itself is
-  contested and still moving: the Nigerian Senate halted immediate implementation in December
-  2025 over concerns that 2025/2026 SS3 candidates would be forced into trade subjects they
-  were never taught, with lawmakers pushing for the new rules to apply only from the
-  2027/2028 diet onward. Monitor as a live, unsettled situation rather than a target to
-  reconcile against.
+- **WAEC's SS trade-subject reform: the new 6-subject list is now sourced; whether to touch
+  the old 33-subject catalogue is still unsettled — do not act on that part yet.** The SS
+  6-subject trade list (Solar PV Installation and Maintenance, Fashion Design and Garment
+  Making, Livestock Farming, Beauty and Cosmetology, Computer Hardware and GSM Repairs,
+  Horticulture and Crop Production) is confirmed straight from the primary source — the same
+  official 3 Sept 2025 FME press release PDF used for Primary/JSS also has a page-4 "Senior
+  Secondary School Subject List" table naming this exact six as the "One Core Trade Subject"
+  option — not merely the Oct-Nov 2025 news reporting (WAEC Nigeria National Office Head Dr.
+  Amos Josiah Dangut, disclosed after the 63rd Nigeria National Council meeting; corroborated
+  by Guardian.ng and Vanguard) this was originally sourced from, which remains useful
+  corroborating context but was superseded as the primary citation once the PDF itself was
+  checked. As of 2026-09-05, the 4 of these 6 that were genuinely missing have been sourced
+  and added at SS1/SS2/SS3 (see "Current state" above); the other 2 (Solar PV Installation
+  and Maintenance, Livestock Farming) were confirmed already covered by existing subjects
+  under close-enough names, so no gap remained there.
+
+  **What's still genuinely open**: whether most of SS3's existing, separate 33-subject
+  Vocational & Trade catalogue (Welding and Fabrication, Auto Body Repairs, Auto Electrical
+  Work, Mining, etc.) should eventually be consolidated, renamed, or retired to match this
+  6-subject list — this is a different question from "is the new list sourced," and remains
+  unresolved. **Do not restructure or delete any existing SS3 (or SS1/SS2) vocational
+  content based on this alone** — per the "extra/legacy subjects are fine" rule above, the
+  old catalogue isn't a problem just for coexisting with the new one, and the reform's rollout
+  itself is still contested and moving: the Nigerian Senate halted immediate implementation in
+  December 2025 over concerns that 2025/2026 SS3 candidates would be forced into trade
+  subjects they were never taught, with lawmakers pushing for the new rules to apply only from
+  the 2027/2028 diet onward. Monitor as a live, unsettled situation rather than a target to
+  reconcile the old catalogue against.
 - **Business Studies (JSS1-3) isn't on the NESRI JSS target list at all** — live in all three
   grades, flagged as a legacy holdover, not removed. Its tag is inconsistent: `legacy` in JSS1
   and JSS2, but `nesri_2025` in JSS3 (commit `fa5673e7`), which is misleading since it isn't
