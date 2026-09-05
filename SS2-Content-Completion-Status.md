@@ -55,7 +55,7 @@ Concreting, Carpentry and Joinery, Catering Craft Practice, and now Dyeing and B
 further Business & Commercial and other subject expansion has not yet been attempted at this
 grade.
 
-## Subjects (61 live)
+## Subjects (62 live)
 
 Original 9 (`legacy`): Biology, Chemistry, Economics, English Language, Geography, Government,
 Literature-in-English, Mathematics, Physics.
@@ -148,6 +148,21 @@ rather than split into separate topics, matching the source's own week boundarie
 was already sourced previously (commit `bd60e447`, 30 topics). **This completes Phase 3 in
 full: all 14 planned Business & Commercial combinations (Accounting, Commerce, Bookkeeping,
 Marketing, Insurance, Salesmanship, Tourism, each at both SS1 and SS2) have now been sourced.**
+
+NESRI 2025 / WAEC-reform trade-subject addition (2026-09-05): Fashion Design and Garment
+Making (`legacy`, 20 topics — First and Second Term only; source: SchemeofWork.com "NERDC
+Curriculum Scheme of Work for Fashion Design and Garment Making" (the same page's SSS2
+section), found by checking the already-sourced SS1 page's SSS2 section first, per the
+established unified-page pattern; verified against raw fetched HTML; Examination weeks were
+excluded as administrative; the page's SS2 section has no standalone Third Term — it proceeds
+directly into a combined SS3 First & Second Term section — so Third Term is omitted, matching
+the same omission already documented for SS1). This is one of the 6 new NESRI 2025 / WAEC-reform
+SS trade subjects (Solar PV Installation and Maintenance, Fashion Design and Garment Making,
+Livestock Farming, Beauty and Cosmetology, Computer Hardware and GSM Repairs, Horticulture and
+Crop Production — see `CLAUDE.md`), distinct from the pre-existing legacy `Garment Making
+Construction` subject already live at SS2 (narrower scope, no fashion-design component, left
+untouched). SS1 Fashion Design and Garment Making was already sourced previously. SS2 now has
+62 live subjects.
 
 Phase 4a Vocational & Trade addition (2026-09-01): Animal Husbandry / Livestock Farming
 (`legacy`, 32 topics — full First/Second/Third Term coverage; source: SchemeofWork.com "Animal
