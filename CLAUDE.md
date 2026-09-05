@@ -86,18 +86,43 @@ documented path hits a block — stop and ask instead.
 
 ## Brand & design system
 
-### Official KlassKonnect brand — colors, logo, tagline (authoritative spec, 2026-09-05)
+### Official KlassKonnect brand — colors, typography, logo, tagline (authoritative spec, updated 2026-09-05)
 
 This is the current source of truth for KlassKonnect branding. It supersedes any color
-scheme, logo, or brand description found elsewhere in the app or its docs — see "Stale brand
-references in the app" below for what still needs to catch up to it.
+scheme, typeface, logo, or brand description found elsewhere in the app or its docs — see
+"Brand migration status" below for what still needs to catch up to it. Synced from
+`KK_ASSETS_CLAUDE.md` (a fuller brand doc from Claude Design that hasn't otherwise been merged
+into this repo) — this file's own "KlassKonnect Logo System.pdf" only carries the 4 core
+colors, logo, and tagline below; the typography and subject-identity colors are new,
+previously undocumented anywhere in this repo.
 
-**Colors**:
+**Core colors**:
 - Ink Navy `#0B1B3F` — mark, headings, dark UI
 - Konnect Blue `#1B54F5` — actions, links, "Konnect" wordmark
-- Signal Yellow `#F5A524` — accent only, never small text (use `#7F4F00` when set as type on
-  light backgrounds)
+- Signal Yellow `#F5A524` — accent only, never small text (use `#7F4F00` — "Deep Yellow" below
+  — when set as type on light backgrounds)
 - Paper `#F2F1EC` — backgrounds, light lockup ground
+
+**Subject-identity colors** — a separate, distinct palette for identifying subjects/categories
+only, not general UI:
+- Green `#0E9F6E`
+- Violet `#6D4AF3`
+- Amber `#E0A21B`
+- Coral `#E4572E`
+
+No feature in the app currently colors subjects/categories at all (see CLAUDE.md's "Subject
+categories are a doc convention, not a product concept" above — themes render as a flat,
+uncolored list). These 4 colors have nothing to attach to yet; documented here for whenever
+that feature is actually built, not as something to retrofit onto existing UI.
+
+**Typography**:
+- Archivo — brand/headings
+- Plus Jakarta Sans — app UI
+
+No typeface was documented anywhere in this repo before this — the app currently renders
+entirely in the platform default system font (San Francisco/Roboto), since no font is loaded
+or referenced anywhere in `mobile/` (`expo-font` is present only as a transitive dependency,
+unused). Applying this is unstarted work — see "Brand migration status" below.
 
 **Logo**: flat vector, no bevels/shadows/gradients. 4 lockups: primary, stacked, compact,
 reversed. App icon uses 18% padding. Single-color rule: the yellow dot goes to the ground
@@ -105,52 +130,47 @@ color, never outlined to fake it. Minimum sizes: mark 20px, compact lockup 120px
 lockup with tagline 220px wide. Clear space = half the bubble height on all sides, measured
 from the tail tip.
 
-**Tagline**: "LEARN YOUR WAY, IN YOUR CURRICULUM." — always uppercase, letterspaced, never
-below 9px, never sentence case.
+**Tagline**: "LEARN YOUR WAY, IN YOUR CURRICULUM." — always uppercase, letterspaced 0.16em,
+never below 9px, never sentence case. **Two-tone, not single-color**: "LEARN YOUR WAY," in Ink
+Navy, "IN YOUR CURRICULUM." in Deep Yellow `#7F4F00` (the same text-safe shade of Signal
+Yellow noted above — one color, two names depending on context). The app's current
+implementation (`LoginScreen.js`) renders the whole tagline in one flat gray and doesn't split
+the two-tone color or use the 0.16em spacing value — not yet corrected to match this; see
+"Brand migration status" below.
 
 **Hard rules**: no stretching or rotating the wordmark; never recolor "Klass" and "Konnect"
 separately from the pair; no photo behind the mark without a solid tile.
 
-### Stale brand references in the app — not yet migrated (2026-09-05 audit)
+### Brand migration status (updated 2026-09-05)
 
-The app currently runs on an entirely different, older color scheme and has no real logo
-asset anywhere. Nothing below has been changed — this is a scope report only, so a future
-migration knows what it's touching:
+**Colors and logo are done.** `mobile/constants/colors.js` (the real, in-use design-token
+file, imported by all 14 screens/components) now maps its existing token names onto Ink Navy /
+Konnect Blue / Signal Yellow / Paper — `colors.primary` is Konnect Blue (the app's dominant
+action/link color, by actual usage), `colors.primaryDark` is Ink Navy, etc.; every value not
+literally one of the 4 core hexes is commented "derived" in the file for design sign-off. The
+hardcoded hex values that used to bypass the token file (`GamificationDisplay.js` ×6,
+`HomeScreen.js` ×2, `ThemesScreen.js` ×1, `TopicDetailsScreen.js` ×2, `app/(app)/_layout.js`
+×1) all now reference tokens instead. `LoginScreen.js` renders a real two-tone wordmark
+("Klass" in Ink Navy, "Konnect" in Konnect Blue) and the tagline text (see below for what's
+still wrong about it). The app icon, Android adaptive icon, splash screen, and web favicon are
+all wired in `mobile/app.json` and `mobile/assets/` from the real logo
+(`KlassKonnect_Logo_Assets_v2.zip`) — verified via actual `xcrun simctl` screenshots showing
+the K-mark on the home screen icon and Ink Navy on the splash background, not just source-file
+inspection. `PHASE2_SUMMARY.md` has a dated note flagging its old-palette "Design System"
+section as a historical build-log snapshot, not current brand.
 
-- **`mobile/constants/colors.js`** is the actual, in-use design-token file (colors + spacing
-  + borderRadius + typography), imported by 14 screens/components (ForgotPasswordScreen,
-  HomeScreen, LeaderboardScreen, LoginScreen, ThemesScreen, LeaderboardEntry,
-  TopicDetailsScreen, SignupScreen, Button, GamificationDisplay, Input, Card, LoadingScreen,
-  ProgressBar). Its entire palette is the old "Nigerian green/gold/orange" scheme
-  (`primary #2E7D32`, `secondary #FFC107`, `accent #FF6F00`, plus background/surface/text/
-  border/status tokens) — none of it matches Ink Navy / Konnect Blue / Signal Yellow / Paper.
-  This is the single highest-leverage file for a future migration.
-- **Hardcoded hex values that bypass `colors.js` entirely** — won't be caught by just
-  updating the token file:
-  - `mobile/components/GamificationDisplay.js` — 6 hardcoded Bootstrap-style alert hexes
-    (`#FFF3CD`/`#FFE69C`/`#856404` warning tones, `#D4EDDA`/`#155724` ×2 success tones)
-  - `mobile/screens/HomeScreen.js` — `#F0F7F0`, `#FFF8F0` (soft green/tan tints)
-  - `mobile/screens/ThemesScreen.js` — `#F0F7F0`
-  - `mobile/screens/TopicDetailsScreen.js` — `#FF6F00` (old accent orange), `#fff`
-  - `mobile/app/(app)/_layout.js` — `#FFFFFF` (likely neutral, lowest priority)
-- **No real logo exists anywhere in the app.** The iOS app icon
-  (`mobile/ios/KlassKonnect/Images.xcassets/AppIcon.appiconset/App-Icon-1024x1024@1x.png`) is
-  a blank white square, and the Android splash logo
-  (`mobile/android/app/src/main/res/drawable-*/splashscreen_logo.png`, all 5 densities) is the
-  generic Expo/React Native default "bullseye" placeholder graphic — neither is a real
-  KlassKonnect mark. `mobile/app.json` doesn't declare custom `icon`/`splash` config fields at
-  all, consistent with these being unmodified scaffold defaults. None of the 4 required
-  lockups (primary, stacked, compact, reversed) exist in any form yet.
-- **Wordmark/tagline text doesn't match the spec.** `mobile/screens/LoginScreen.js` renders
-  `"KLASSKONNECT"` as a plain styled `<Text>` element (not the vector wordmark), with the
-  subtitle "Your Personal AI Tutor" — not the official tagline "LEARN YOUR WAY, IN YOUR
-  CURRICULUM." `mobile/screens/SignupScreen.js` has "Join KlassKonnect today" as ordinary body
-  copy (not a tagline usage, but adjacent branding text worth reviewing in the same pass).
-- **`PHASE2_SUMMARY.md`** (a build-log doc, not app code) explicitly documents the old
-  palette — "Colors: Nigerian green, gold, orange with proper contrast" and "Clean, welcoming
-  UI with NERDC branding" — now contradicted by this spec. Left as-is (it's a historical
-  record of what was built at the time, not a live source of truth), but flagged since it
-  could mislead a future reader who checks it before checking this file.
+**Still open, not yet done:**
+- **Tagline color/spacing**: `LoginScreen.js`'s tagline renders as one flat gray, not the
+  two-tone Ink-Navy/Deep-Yellow split, and doesn't use the 0.16em letterspacing value — both
+  added to the spec above after the initial LoginScreen implementation.
+- **Typography**: Archivo/Plus Jakarta Sans aren't loaded or applied anywhere — the app still
+  renders in the platform default system font. No font files, `expo-font` usage, or
+  `fontFamily` references exist yet.
+- **Subject-identity colors**: undeployed by design — there's no subject/category-coloring
+  feature to attach them to (see above). Not a gap to close; don't build the feature
+  speculatively just to use these colors.
+- **`SignupScreen.js`** has "Join KlassKonnect today" as ordinary body copy — not a tagline
+  usage, but adjacent branding text nobody's reviewed against the current spec yet.
 
 ---
 
@@ -411,7 +431,9 @@ plus one unrelated content-duplication bug:
 - **JSS1 Fashion Design and Garment Making has a provenance gap of its own**: live in the DB
   from a prior session whose source file was never committed. A later session reconciled this
   by committing the file without re-importing — see `JSS1-Content-Completion-Status.md`.
-- **Brand migration to the new palette/logo is scoped but not started** — the app currently
-  runs the old "Nigerian green/gold/orange" color scheme with no real logo asset anywhere; see
-  "Brand & design system" above for the full scope (the token file, the hardcoded-hex
-  locations that bypass it, and the missing logo/tagline work) before starting any UI work.
+- **Brand migration — colors and logo are done; typography and tagline styling are not** —
+  see "Brand migration status" under "Brand & design system" above before starting any further
+  UI work. Remaining: load Archivo/Plus Jakarta Sans and apply them, fix `LoginScreen.js`'s
+  tagline to the two-tone Ink-Navy/Deep-Yellow + 0.16em spec, and review `SignupScreen.js`'s
+  branding copy. Subject-identity colors are documented but deliberately unbuilt — no feature
+  exists to attach them to.
