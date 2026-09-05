@@ -1,5 +1,18 @@
 # CLAUDE.md
 
+## Getting started
+
+At the beginning of every work session on this project, open a terminal and run:
+
+```
+cd ~/CC/nerdc-ai-tutor
+claude
+```
+
+This loads this file's full context (current state, brand system, open items, operating
+conventions) before any work begins. If Claude Code offers to resume a prior session, prefer
+that when continuing recent work; start fresh only when beginning something new.
+
 ## Operating conventions
 
 ### NERDC curriculum sourcing — always use the subagent
