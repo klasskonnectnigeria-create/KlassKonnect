@@ -114,14 +114,22 @@ as a new, thirty-first Vocational & Trade-track subject. This is one of the 6 ne
 WAEC-reform SS trade subjects named in the FME's 3 Sept 2025 press release PDF (see `CLAUDE.md`
 open-question section) — it is distinct from the pre-existing legacy subject "Garment Making
 Construction" (theme id 271, 33 topics), which was left untouched. SS1 now has 62 live
-subjects. DB-verified 2026-09-05 (theme id 390).
+subjects. DB-verified 2026-09-05 (theme id 390). Beauty and Cosmetology (`legacy`, 20 topics,
+First and Second Term only — the source page has no SS1 Third Term section — source:
+SchemeofWork.com "NERDC Curriculum Scheme of Work for Beauty and Cosmetology") was added
+2026-09-05 as a new, thirty-second Vocational & Trade-track subject. This is another of the 6
+new NESRI 2025 / WAEC-reform SS trade subjects named in the FME's 3 Sept 2025 press release PDF
+(see `CLAUDE.md` open-question section). Unlike Fashion Design and Garment Making, there was no
+pre-existing related subject at SS1/SS2/SS3 under any name (Beauty, Cosmetology, Hairdressing)
+— this is a genuinely new addition, not a rename or merge. SS1 now has 63 live subjects.
+DB-verified 2026-09-05 (theme id 393).
 
 No SS3-style five-category structure applies here — SS1's catalogue is limited to the
 science/humanities core plus this new Compulsory Core tier and a newly-started Vocational &
 Trade tier plus a newly-started Business & Commercial tier; the wider Vocational & Trade and
 Business & Commercial catalogues have not yet been fully attempted at this grade.
 
-## Subjects (62 live)
+## Subjects (63 live)
 
 Original 9 (`legacy`): Biology, Chemistry, Economics, English Language, Geography, Government,
 Literature-in-English, Mathematics, Physics.
@@ -347,3 +355,19 @@ It is a distinct subject from the pre-existing legacy "Garment Making Constructi
 271, 33 topics, all three terms) already live at SS1 — narrower older subject, no Fashion
 Design component — which was confirmed untouched (still 271/33 topics) after this import.
 Examination weeks (11-13) were excluded from both terms as administrative content.
+
+Beauty and Cosmetology (`legacy`, 20 topics — 10 First Term + 10 Second Term; no SS1 Third Term
+section exists on the source page; source: SchemeofWork.com "NERDC Curriculum Scheme of Work
+for Beauty and Cosmetology",
+https://schemeofwork.com/nerdc-curriculum-scheme-of-work-for-beauty-and-cosmetology) was sourced
+and DB-verified at SS1 on 2026-09-05 (theme id 393) as a new, thirty-second Vocational &
+Trade-track subject, outside the numbered phase batches above. This is another of the 6 new
+NESRI 2025 / WAEC-reform SS trade subjects confirmed via the official 3 Sept 2025 FME press
+release PDF (page-4 Senior Secondary School Subject List, "One Core Trade Subject" 6-option
+list — see `CLAUDE.md`'s open-question section on the WAEC SS trade-subject reform). A fresh DB
+query confirmed no related subject (Beauty, Cosmetology, Hairdressing, etc.) existed anywhere in
+the SS1/SS2/SS3 catalogue before this import, so this is a genuinely new subject rather than a
+rename or merge. Examination weeks (11-13) were excluded from both terms as administrative
+content; the "Revision & Project" week in each term was kept as a topic since it carries real
+project/skill content (a hair-care portfolio in First Term, a skincare & makeup guide in Second
+Term) rather than being purely administrative.
