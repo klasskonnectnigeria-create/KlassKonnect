@@ -192,6 +192,22 @@ SS trade subjects sourced at SS2 (Solar PV Installation and Maintenance, Fashion
 Garment Making, Livestock Farming, Beauty and Cosmetology, Computer Hardware and GSM Repairs,
 Horticulture and Crop Production — see `CLAUDE.md`). SS2 now has 64 live subjects.
 
+NESRI 2025 / WAEC-reform trade-subject addition (2026-09-05): Computer Hardware and GSM Repairs
+(`legacy`, 18 topics — First and Second Term only; source: SchemeofWork.com "NERDC Curriculum
+Scheme of Work for Computer Hardware and GSM Repairs" (the same page's SS2 section), found by
+checking the already-sourced SS1 page's SS2 section first, per the established unified-page
+pattern; verified against raw fetched HTML with clear WEEK/TOPIC/Learning Objectives tables;
+Mid-Term Tests and Assignments, Revision, and Examination weeks were excluded as administrative;
+the page's SS2 section has no standalone Third Term — it proceeds directly into a combined SS3
+First & Second Term section — so Third Term is omitted, matching the same omission already
+documented for SS1). SS2 previously had zero subject matching this exact name; the pre-existing,
+narrower legacy "GSM Maintenance and Repairs" subject already live at SS2 (theme id 274) was left
+completely untouched, not merged. This is the fourth of the 6 new NESRI 2025 / WAEC-reform SS
+trade subjects sourced at SS2 (Solar PV Installation and Maintenance, Fashion Design and Garment
+Making, Livestock Farming, Beauty and Cosmetology, Computer Hardware and GSM Repairs, Horticulture
+and Crop Production — see `CLAUDE.md`). SS1 Computer Hardware and GSM Repairs was already sourced
+previously. SS2 now has 65 live subjects.
+
 Phase 4a Vocational & Trade addition (2026-09-01): Animal Husbandry / Livestock Farming
 (`legacy`, 32 topics — full First/Second/Third Term coverage; source: SchemeofWork.com "Animal
 Husbandry Scheme of Work for SS 2 Federal", federal page, found directly via search; First
