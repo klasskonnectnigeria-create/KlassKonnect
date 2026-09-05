@@ -178,6 +178,20 @@ Installation and Maintenance, Fashion Design and Garment Making, Livestock Farmi
 Cosmetology, Computer Hardware and GSM Repairs, Horticulture and Crop Production — see
 `CLAUDE.md`). SS2 now has 63 live subjects.
 
+NESRI 2025 / WAEC-reform trade-subject addition (2026-09-05): Horticulture and Crop Production
+(`legacy`, 24 topics — full First/Second/Third Term coverage; source: SchemeofWork.com "SS2
+Scheme of Work Unified", the "SS 2 Trade Subjects" section, found at
+`https://schemeofwork.com/ss2-scheme-of-work-unified/` following the same unified-page pattern
+that worked for the SS1 side of this subject; verified against raw fetched HTML with clear
+WEEK/TOPIC/CONTENT tables; Midterm Examination, Midterm Break, Revision, Examination, and
+Closing weeks were excluded as administrative in all three terms). SS2 previously had zero
+subject matching this exact name; the pre-existing, broader "Agriculture" subject at SS2 was
+left untouched, not merged. SS1 Horticulture and Crop Production was already sourced
+previously (same session, 24 topics). This is the third of the 6 new NESRI 2025 / WAEC-reform
+SS trade subjects sourced at SS2 (Solar PV Installation and Maintenance, Fashion Design and
+Garment Making, Livestock Farming, Beauty and Cosmetology, Computer Hardware and GSM Repairs,
+Horticulture and Crop Production — see `CLAUDE.md`). SS2 now has 64 live subjects.
+
 Phase 4a Vocational & Trade addition (2026-09-01): Animal Husbandry / Livestock Farming
 (`legacy`, 32 topics — full First/Second/Third Term coverage; source: SchemeofWork.com "Animal
 Husbandry Scheme of Work for SS 2 Federal", federal page, found directly via search; First
