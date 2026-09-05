@@ -107,14 +107,21 @@ Trade-track subject, the fifth subject of this batch. Welding and Fabrication wa
 Welding Scheme of Work SSS1") as the thirtieth Vocational & Trade-track subject, the sixth and
 final subject of this batch, completing the SS1 side of this batch (only the SS2 side of
 Welding and Fabrication remains to close out the batch overall). SS1 now has 61 live subjects.
-DB-verified 2026-09-02.
+DB-verified 2026-09-02. Fashion Design and Garment Making (`legacy`, 20 topics, First and
+Second Term only — the source page has no SS1 Third Term section — source: SchemeofWork.com
+"NERDC Curriculum Scheme of Work for Fashion Design and Garment Making") was added 2026-09-05
+as a new, thirty-first Vocational & Trade-track subject. This is one of the 6 new NESRI 2025 /
+WAEC-reform SS trade subjects named in the FME's 3 Sept 2025 press release PDF (see `CLAUDE.md`
+open-question section) — it is distinct from the pre-existing legacy subject "Garment Making
+Construction" (theme id 271, 33 topics), which was left untouched. SS1 now has 62 live
+subjects. DB-verified 2026-09-05 (theme id 390).
 
 No SS3-style five-category structure applies here — SS1's catalogue is limited to the
 science/humanities core plus this new Compulsory Core tier and a newly-started Vocational &
 Trade tier plus a newly-started Business & Commercial tier; the wider Vocational & Trade and
 Business & Commercial catalogues have not yet been fully attempted at this grade.
 
-## Subjects (61 live)
+## Subjects (62 live)
 
 Original 9 (`legacy`): Biology, Chemistry, Economics, English Language, Geography, Government,
 Literature-in-English, Mathematics, Physics.
@@ -326,3 +333,17 @@ SS1 page for this subject was found) was sourced and DB-verified at SS1 on 2026-
 sourcing pass following Phase 4b. Photography (`legacy`, 31 topics, all three terms; source:
 SchemeofWork.com "Photography Scheme of Work for SS 1 Federal") was sourced and DB-verified at
 SS1 on 2026-09-02 (theme id 283) as the second subject of Phase 4c.
+
+Fashion Design and Garment Making (`legacy`, 20 topics — 10 First Term + 10 Second Term; no SS1
+Third Term section exists on the source page; source: SchemeofWork.com "NERDC Curriculum
+Scheme of Work for Fashion Design and Garment Making",
+https://schemeofwork.com/nerdc-curriculum-scheme-of-work-for-fashion-design-and-garment-making/)
+was sourced and DB-verified at SS1 on 2026-09-05 (theme id 390) as a new, thirty-first
+Vocational & Trade-track subject, outside the numbered phase batches above. This is one of the
+6 new NESRI 2025 / WAEC-reform SS trade subjects confirmed via the official 3 Sept 2025 FME
+press release PDF (page-4 Senior Secondary School Subject List, "One Core Trade Subject"
+6-option list — see `CLAUDE.md`'s open-question section on the WAEC SS trade-subject reform).
+It is a distinct subject from the pre-existing legacy "Garment Making Construction" (theme id
+271, 33 topics, all three terms) already live at SS1 — narrower older subject, no Fashion
+Design component — which was confirmed untouched (still 271/33 topics) after this import.
+Examination weeks (11-13) were excluded from both terms as administrative content.
