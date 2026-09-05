@@ -197,7 +197,7 @@ const styles = StyleSheet.create({
   },
   progressCard: {
     marginBottom: spacing.lg,
-    backgroundColor: '#F0F7F0'
+    backgroundColor: colors.primaryLight
   },
   progressBar: {
     marginBottom: spacing.md

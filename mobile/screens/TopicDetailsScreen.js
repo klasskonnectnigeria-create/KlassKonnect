@@ -438,14 +438,14 @@ const styles = StyleSheet.create({
     fontWeight: 'bold'
   },
   offlineBadge: {
-    backgroundColor: colors.warning || '#FF6F00',
+    backgroundColor: colors.warning,
     borderRadius: borderRadius.sm,
     paddingHorizontal: spacing.sm,
     paddingVertical: spacing.xs,
     marginLeft: spacing.sm
   },
   offlineBadgeText: {
-    color: colors.text.inverse || '#fff'
+    color: colors.text.inverse
   },
   tabBar: {
     flexDirection: 'row',

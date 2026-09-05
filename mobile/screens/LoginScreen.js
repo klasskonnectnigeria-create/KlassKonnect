@@ -112,11 +112,12 @@ export function LoginScreen({ navigation, onGoToSignup }) {
             {/* Branding */}
             <View style={styles.header}>
               <Text style={styles.title}>
-                KLASSKONNECT
+                <Text style={styles.titleKlass}>Klass</Text>
+                <Text style={styles.titleKonnect}>Konnect</Text>
               </Text>
 
-              <Text style={styles.subtitle}>
-                Your Personal AI Tutor
+              <Text style={styles.tagline}>
+                LEARN YOUR WAY, IN YOUR CURRICULUM.
               </Text>
             </View>
 
@@ -270,18 +271,30 @@ const styles = StyleSheet.create({
   },
 
   title: {
-    color: colors.primary,
     fontSize: 32,
     lineHeight: 40,
     fontWeight: '800',
     letterSpacing: -0.5
   },
+  // Canonical wordmark colors — "Klass" is always Ink Navy, "Konnect" is always Konnect
+  // Blue. Fixed by brand spec; don't vary these per screen or recolor them together.
+  titleKlass: {
+    color: colors.primaryDark // Ink Navy
+  },
+  titleKonnect: {
+    color: colors.primary // Konnect Blue
+  },
 
-  subtitle: {
+  // Official tagline: always uppercase, letterspaced, never below 9px (see CLAUDE.md).
+  tagline: {
     marginTop: spacing.sm,
     color: colors.text.secondary,
-    fontSize: 18,
-    lineHeight: 26
+    fontSize: 11,
+    lineHeight: 16,
+    fontWeight: '600',
+    letterSpacing: 1.5,
+    textTransform: 'uppercase',
+    textAlign: 'center'
   },
 
   form: {

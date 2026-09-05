@@ -1,12 +1,13 @@
 import React from 'react';
 import { Stack } from 'expo-router';
+import { colors } from '../../constants/colors';
 
 export default function AppLayout() {
   return (
     <Stack
       screenOptions={{
         headerShown: false,
-        cardStyle: { backgroundColor: '#FFFFFF' }
+        cardStyle: { backgroundColor: colors.background }
       }}
     >
       <Stack.Screen name="home" />

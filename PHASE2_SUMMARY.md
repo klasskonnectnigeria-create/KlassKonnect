@@ -1,5 +1,10 @@
 # Phase 2 Summary: Mobile UI Development ✓
 
+> **Note (2026-09-05):** the "Design System" section below (Nigerian green/gold/orange
+> palette) documents the app's colors as of this phase, not the current brand. It's kept
+> as-is as a historical build log — see root `CLAUDE.md` → "Brand & design system" for the
+> official, current KlassKonnect palette (Ink Navy / Konnect Blue / Signal Yellow / Paper).
+
 ## Completed
 
 ### Core Navigation

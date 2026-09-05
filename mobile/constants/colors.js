@@ -1,18 +1,25 @@
+// KlassKonnect brand palette (see root CLAUDE.md "Brand & design system" for the source spec).
+// Core brand colors: Ink Navy #0B1B3F, Konnect Blue #1B54F5, Signal Yellow #F5A524
+// (never as small text — use #7F4F00 instead), Paper #F2F1EC.
+// Token names below are preserved from the pre-rebrand palette so all existing imports keep
+// working; only `secondaryLight` is new. Values marked "derived" are tints/steps this file
+// needed but aren't one of the 4 core hexes above — flagged for design sign-off.
 export const colors = {
-  primary: '#2E7D32',        // Nigerian green
-  primaryDark: '#1B5E20',
-  primaryLight: '#81C784',
+  primary: '#1B54F5',        // Konnect Blue — actions/links/borders (the app's dominant interactive color, ~49 call sites)
+  primaryDark: '#0B1B3F',    // Ink Navy — dark UI / pressed-state companion to primary
+  primaryLight: '#E7ECFD',   // derived: pale Konnect Blue tint, for soft highlight card backgrounds
 
-  secondary: '#FFC107',      // Gold
-  secondaryDark: '#FFA000',
+  secondary: '#F5A524',      // Signal Yellow — safe as a fill/border; never as small text
+  secondaryLight: '#FDECD2', // derived: pale Signal Yellow tint, for soft accent card backgrounds
+  secondaryDark: '#7F4F00',  // Signal Yellow's text-safe dark shade, reused for pressed/dark states
 
-  accent: '#FF6F00',         // Orange
+  accent: '#7F4F00',         // Signal Yellow set as TYPE on light backgrounds — never the raw #F5A524 for text, per brand spec
 
-  background: '#FFFFFF',
-  surface: '#F5F5F5',
+  background: '#F2F1EC',     // Paper — screen backgrounds, light lockup ground
+  surface: '#E8E7E0',        // derived: muted Paper step for inputs/disabled states/recessed surfaces
 
   text: {
-    primary: '#212121',
+    primary: '#0B1B3F',      // Ink Navy — headings and primary body text
     secondary: '#757575',
     light: '#BDBDBD',
     inverse: '#FFFFFF'
@@ -22,6 +29,8 @@ export const colors = {
   divider: '#EEEEEE',
 
   success: '#4CAF50',
+  successLight: '#D4EDDA',   // pale success tint for banners/notifications (same value already in use, just centralized)
+  successDark: '#155724',    // success text-on-light shade (same value already in use, just centralized)
   warning: '#FF9800',
   error: '#F44336',
   info: '#2196F3',

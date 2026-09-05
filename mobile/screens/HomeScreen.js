@@ -293,7 +293,7 @@ const styles = StyleSheet.create({
   },
   statsCard: {
     marginBottom: spacing.lg,
-    backgroundColor: '#F0F7F0'
+    backgroundColor: colors.primaryLight
   },
   statsTitle: {
     color: colors.primary,
@@ -351,7 +351,7 @@ const styles = StyleSheet.create({
     color: colors.primary
   },
   ctaCard: {
-    backgroundColor: '#FFF8F0',
+    backgroundColor: colors.secondaryLight,
     marginTop: spacing.lg
   },
   ctaTitle: {

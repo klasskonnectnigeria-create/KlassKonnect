@@ -187,15 +187,15 @@ const styles = StyleSheet.create({
   },
   maxStreakBox: {
     flex: 1,
-    backgroundColor: '#FFF3CD',
+    backgroundColor: colors.secondaryLight,
     borderRadius: borderRadius.lg,
     padding: spacing.md,
     justifyContent: 'center',
     borderWidth: 1,
-    borderColor: '#FFE69C'
+    borderColor: colors.secondary
   },
   maxStreakValue: {
-    color: '#856404',
+    color: colors.accent,
     fontWeight: '600',
     textAlign: 'center'
   },
@@ -235,7 +235,7 @@ const styles = StyleSheet.create({
   notificationContainer: {
     marginHorizontal: spacing.md,
     marginVertical: spacing.md,
-    backgroundColor: '#D4EDDA',
+    backgroundColor: colors.successLight,
     borderRadius: borderRadius.lg,
     padding: spacing.md,
     borderLeftWidth: 4,
@@ -253,11 +253,11 @@ const styles = StyleSheet.create({
     flex: 1
   },
   notificationTitle: {
-    color: '#155724',
+    color: colors.successDark,
     fontWeight: '600',
     marginBottom: spacing.xs
   },
   notificationDesc: {
-    color: '#155724'
+    color: colors.successDark
   }
 });
