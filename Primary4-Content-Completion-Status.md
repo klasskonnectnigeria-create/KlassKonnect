@@ -1,9 +1,10 @@
 # Primary 4 Content Completion Status
 
-**Status: 15 subjects live**, DB-verified 2026-09-03 (grade-level aggregate: 15 subjects,
-363 topics), against the reconciled 16-subject NESRI 2025 target (see root `CLAUDE.md`
-"Remaining sourcing gaps" section). **Arabic Language is genuinely unresolved** (not just
-unsourced) — see "Remaining gaps" below; it is now the sole gap.
+**Status: 15 subjects live**, grade-level aggregate 356 topics as of 2026-09-05 (see
+Mathematics dedupe below; 363 as DB-verified 2026-09-03 before that fix), against the
+reconciled 16-subject NESRI 2025 target (see root `CLAUDE.md` "Remaining sourcing gaps"
+section). **Arabic Language is genuinely unresolved** (not just unsourced) — see "Remaining
+gaps" below; it is now the sole gap.
 
 **Theme structure fix (2026-09-05)**: a direct DB audit found Hausa, Igbo, Pre-vocational
 Studies, Social and Citizenship Studies, and Yoruba each split into 3 per-term theme rows
@@ -17,21 +18,27 @@ uncertainty below: Social and Citizenship Studies and Pre-vocational Studies wer
 3 per-term rows *because* they already had full 3-term content, not because Second/Third Term
 was missing — so both are confirmed full 3-term coverage, not First-Term-only.
 
-**Mathematics has genuine duplicate content, not yet resolved (2026-09-05)**: a DB audit found
-Mathematics has 10 theme rows, not 1 — 5 subject areas (NUMBER NUMERATION, BASIC OPERATIONS,
-MENSURATION, GEOMETRY, EVERYDAY STATISTICS) each duplicated as 2 theme rows (ids 6-10 created
-2026-08-19, ids 11-15 created 2026-08-20), 14 topics total. All topic/content fields
-(learning_outcome, focal_competency, content, teacher_activities, student_activities,
-materials) are byte-identical between the two copies — this is a straight re-import, not
-divergent content, so neither copy has "better" material. However the two copies have
-diverged in linked usage data: the first copy (theme ids 6-10, topics 8-14) carries 29 real
-`conversation_logs` rows (genuine AI-tutor chat exchanges from test accounts across
-2026-08-20 to 2026-08-25) and zero `student_progress` rows; the second copy (theme ids 11-15,
-topics 15-21) carries 21 `student_progress` rows (all `not_started`/0 attempts, identical
-timestamp matching the second import — a seeding artifact, not real progress) and zero
-`conversation_logs`. Deleting either copy outright would destroy the other's linked data, so
-this needs the child-table references reassigned (like the theme merges above) before any row
-is deleted — not attempted yet, reported here for a decision on which copy to keep.
+**Mathematics duplicate content — resolved (2026-09-05)**: following up on the 2026-09-05 DB
+audit that found Mathematics had 10 theme rows (5 subject areas each duplicated as 2 theme
+rows, ids 6-10 created 2026-08-19 and ids 11-15 created 2026-08-20, byte-identical content),
+the 2026-08-19 copy was kept as canonical — it's the one carrying the 29 real
+`conversation_logs` rows (genuine AI-tutor chat exchanges, 2026-08-20 to 2026-08-25). Before
+deleting the 2026-08-20 copy: its 21 `student_progress` rows (all `not_started`/0 attempts,
+a seeding artifact — every row shared the exact timestamp of that import) were reassigned via
+`UPDATE student_progress SET topic_id = <old>` to the corresponding topic on the surviving
+copy, mapped by matching theme name + topic name + sequence_order (a clean 1:1 correspondence
+across all 7 topics, verified programmatically, with no `(student_id, topic_id)` unique-
+constraint conflicts since the surviving copy had zero prior `student_progress` rows). Its
+duplicate topic-metadata rows (28 `content`, 26 `learning_activities`, 7
+`evaluation_guides` — byte-identical to what the surviving copy already holds, so nothing
+lost) were then deleted, followed by its now-childless topics and theme rows. Verified
+before/after: 5 theme rows / 7 topics survive (was 10/14), `content`=28, `learning_activities`
+=26, `evaluation_guides`=7, `student_progress`=21 (all reassigned, no duplicates), and
+`conversation_logs`=29 unchanged — plus a grade-wide audit confirming every other Primary 4
+subject still has exactly 1 theme row. Mathematics' 5-theme structure (one row per topic
+category: NUMBER NUMERATION, BASIC OPERATIONS, MENSURATION, GEOMETRY, EVERYDAY STATISTICS) is
+its own long-standing pattern, unrelated to the per-term-split bug above, and is unchanged by
+this fix.
 
 No SS3-style five-category structure applies to this grade — Primary 4 has no
 vocational/trade tier, so subjects are tracked as a flat list.
@@ -49,7 +56,7 @@ vocational/trade tier, so subjects are tracked as a flat list.
 | Hausa | 32 | `primary4-hausa.js` |
 | Igbo | 36 | `primary4-igbo.js` |
 | Islamic Studies | 21 | `primary4-islamic-studies.js` |
-| **Mathematics** | 14 | **live in database, no git-tracked curriculum-data file — seeded via legacy parsePdf.js/seedDb.js workflow, source unknown** |
+| **Mathematics** | 7 | **live in database, no git-tracked curriculum-data file — seeded via legacy parsePdf.js/seedDb.js workflow, source unknown; was 14 topics (5 subject areas duplicated) until the 2026-09-05 dedupe fix** |
 | Nigerian History | 24 | `primary4-nigerian-history.js` |
 | Physical and Health Education | 25 | `primary4-physical-and-health-education.js` |
 | Pre-vocational Studies | 29 | `primary4-pre-vocational-studies.js` |
