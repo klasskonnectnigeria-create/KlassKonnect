@@ -55,7 +55,7 @@ Concreting, Carpentry and Joinery, Catering Craft Practice, and now Dyeing and B
 further Business & Commercial and other subject expansion has not yet been attempted at this
 grade.
 
-## Subjects (62 live)
+## Subjects (63 live)
 
 Original 9 (`legacy`): Biology, Chemistry, Economics, English Language, Geography, Government,
 Literature-in-English, Mathematics, Physics.
@@ -163,6 +163,20 @@ Crop Production — see `CLAUDE.md`), distinct from the pre-existing legacy `Gar
 Construction` subject already live at SS2 (narrower scope, no fashion-design component, left
 untouched). SS1 Fashion Design and Garment Making was already sourced previously. SS2 now has
 62 live subjects.
+
+NESRI 2025 / WAEC-reform trade-subject addition (2026-09-05): Beauty and Cosmetology
+(`legacy`, 20 topics — First and Second Term only; source: SchemeofWork.com "NERDC Curriculum
+Scheme of Work for Beauty and Cosmetology" (the same page's SS2 section), found by checking the
+already-sourced SS1 page's SS2 section first, per the established unified-page pattern; this
+page proceeds directly from SS1 Second Term into SS2 content with no SS1 Third Term either;
+Examination weeks were excluded as administrative; the page's SS2 coverage has no standalone
+Third Term at all — it ends after Second Term — so Third Term is omitted here). SS2 previously
+had zero subject matching this name, and no related subject exists anywhere in the SS1/SS2/SS3
+catalogue — a genuinely new addition, not a rename/merge of anything existing. This is the
+second of the 6 new NESRI 2025 / WAEC-reform SS trade subjects sourced at SS2 (Solar PV
+Installation and Maintenance, Fashion Design and Garment Making, Livestock Farming, Beauty and
+Cosmetology, Computer Hardware and GSM Repairs, Horticulture and Crop Production — see
+`CLAUDE.md`). SS2 now has 63 live subjects.
 
 Phase 4a Vocational & Trade addition (2026-09-01): Animal Husbandry / Livestock Farming
 (`legacy`, 32 topics — full First/Second/Third Term coverage; source: SchemeofWork.com "Animal
