@@ -1,4 +1,8 @@
-## NERDC curriculum sourcing
+# CLAUDE.md
+
+## Operating conventions
+
+### NERDC curriculum sourcing — always use the subagent
 
 This repo has a subagent at `.claude/agents/nerdc-curriculum-sourcer.md` for sourcing real
 NERDC/WAEC curriculum content and importing it into the live database.
@@ -13,7 +17,7 @@ Don't improvise this process manually — always delegate to the subagent so the
 validation steps, grade-string convention, and commit format stay consistent with prior sourcing
 sessions.
 
-## Subject categories are a doc convention, not a product concept
+### Subject categories are a doc convention, not a product concept
 
 The "5-category" grouping used in the `*-Content-Completion-Status.md` tracking files —
 Compulsory Core, Science & Math, Humanities & Arts, Business & Commercial, Vocational &
@@ -30,171 +34,242 @@ rendered anywhere in the app:
 
 Do not assume any code path restricts which categories of subjects a grade can have.
 
-## Remaining sourcing gaps: Primary 4/5/6 are all reconciled against the 16-subject target (Primary 4/5 still have a provenance gap); JSS1-3 are fully reconciled against their 21-subject target, closed 2026-09-04
+### Railway/Postgres access
 
-The SS1/SS2 vs SS3 sourcing backlog once documented here is closed: SS1 and SS2 each carry
-61 live subjects against SS3's 62, and the sole difference is `Mining`, which genuinely is
-SS3-only. Don't re-source SS1/SS2 wholesale on the assumption that they're thin — check the
-live count for the specific subject first.
+`RAILWAY_TOKEN` in this environment is project-scoped. That kind of token has no associated
+user identity, so `railway whoami`, `railway list`, `railway ssh`, and `railway connect` all
+correctly return `Unauthorized` — that's expected, documented behavior for this token type,
+not a sign it's broken or misconfigured. Never use those commands as a health check, and never
+respond to their failure by unsetting `RAILWAY_TOKEN` or falling back to a cached
+interactive/browser-login session — that silently switches which account and credentials the
+rest of the pipeline runs under. Use `railway status` or `railway variables --service Postgres`
+instead, both of which are project-scoped and work fine with a project token.
 
-**Open question, unresolved and actively evolving: WAEC's own SS trade-subject list may make
-SS3's 33-subject Vocational & Trade catalogue obsolete — don't act on this yet.** Per Oct-Nov
-2025 news reporting (WAEC Nigeria National Office Head Dr. Amos Josiah Dangut, disclosed after
-the 63rd Nigeria National Council meeting in Umuahia, Abia State; corroborated by multiple
-outlets including Guardian.ng's "Senate halts WAEC curriculum change over concerns for 2026
-candidates" and Vanguard's "WAEC's new subjects combination is confusion masquerading as
-reform"), WAEC has officially streamlined SS-level trade subjects from roughly 26-35 down to
-**six** for the 2026 WASSCE: Solar PV Installation and Maintenance, Fashion Design and Garment
-Making, Livestock Farming, Beauty and Cosmetology, Computer Hardware and GSM Repairs, and
-Horticulture and Crop Production — the same six named in the NESRI 2025 JSS reform table (see
-JSS section below). This is independent confirmation that **Mining is not part of the new
-WAEC list**, consistent with it being SS3-only relative to SS1/SS2 above. It also raises a real
-open question: should most of SS3's existing 33-subject Vocational & Trade catalogue (Welding
-and Fabrication, Auto Body Repairs, Auto Electrical Work, Mining, etc. — see
-`SS3-Content-Completion-Status.md`) eventually be consolidated or renamed to match this
-6-subject WAEC list? **Do not restructure or delete any existing SS3 vocational content based
-on this alone.** The reform itself is contested and still moving: multiple sources report the
-Nigerian Senate halted immediate implementation of the new WAEC guidelines in December 2025
-over concerns that 2025/2026 SS3 candidates would be forced into trade subjects they were never
-taught, with lawmakers pushing for the new rules to apply only from the 2027/2028 diet onward.
-Treat this as a live, unsettled situation to monitor rather than a target to reconcile against.
+**Don't use `railway connect`** — it needs account-level SSH auth a project token can't
+satisfy, and fails with `Unauthorized` even though the token itself is fine. Go straight to the
+public TCP proxy instead:
 
-**The upper-primary (Primary 4-6) target subject list is no longer open-ended.** It's been
-reconciled against an authoritative source: the Federal Ministry of Education's official press
-release, 3 September 2025, "Lighter Load, Stronger Minds: FG Overhauls Curriculum for a
-Smarter Generation" (`education.gov.ng/wp-content/uploads/2025/09/FG-OVERHAULS-CURRICULUM.pdf`
-— the NESRI 2025 reform document itself, citing NERDC/WAEC/NECO/NBTE/NABTEB consultation, with
-an official Basic Education Subject List table for Primary 4-6). Expanding that table's
-"Nigerian Languages" (Hausa/Igbo/Yoruba, pick one) and "CRS/IS" (pick one by faith) rows into
-every individual option — matching this platform's convention already established at SS1-3,
-where all of Hausa/Igbo/Yoruba/Arabic/CRS/IS are separate live subjects rather than one pick —
-gives a 16-subject target: English Studies, Mathematics, Basic Science and Technology,
-Physical and Health Education, Basic Digital Literacy, Nigerian History, Social and
-Citizenship Studies, Cultural and Creative Arts, Pre-vocational Studies, Christian Religious
-Studies, Islamic Studies, Yoruba, Hausa, Igbo, French, Arabic Language. (Note: the live
+```bash
+railway variables --service Postgres --kv > /tmp/pgvars.env
+```
+
+Read `RAILWAY_TCP_PROXY_DOMAIN`, `RAILWAY_TCP_PROXY_PORT`, and `PGPASSWORD`/`POSTGRES_PASSWORD`
+from that output, then connect `psql`/`DATABASE_URL` directly to the proxy. Delete the file
+once you've read what you need — **never write a password or `DATABASE_URL` to disk even
+temporarily**, and never silently switch connection methods (e.g. to `railway run`) if the
+documented path hits a block — stop and ask instead.
+
+---
+
+## Current state (as of 2026-09-05)
+
+### Curriculum content, by grade
+
+| Grade tier | Live subjects | Target | Status |
+|---|---|---|---|
+| Primary 4 | 15 | 16 (NESRI 2025) | Arabic Language unresolved (sole gap) |
+| Primary 5 | 15 | 16 (NESRI 2025) | Arabic Language unresolved (sole gap) |
+| Primary 6 | 15 | 16 (NESRI 2025) | Arabic Language unresolved (sole gap) |
+| JSS1 | 22 | 21 (NESRI 2025) + 1 legacy | 21/21 target complete; Business Studies is an untargeted legacy extra |
+| JSS2 | 22 | 21 (NESRI 2025) + 1 legacy | 21/21 target complete; Business Studies is an untargeted legacy extra |
+| JSS3 | 22 | 21 (NESRI 2025) + 1 legacy | 21/21 target complete; Business Studies is an untargeted legacy extra |
+| SS1 | 61 | 61 (= SS2) | Matches SS2 exactly |
+| SS2 | 61 | 61 (= SS1) | Matches SS1 exactly |
+| SS3 | 62 | 62 | **COMPLETE** — 62/62, including all 33 Vocational & Trade subjects |
+
+**Primary 4-6** target is a 16-subject list reconciled against the Federal Ministry of
+Education's official 3 September 2025 press release, "Lighter Load, Stronger Minds: FG
+Overhauls Curriculum for a Smarter Generation" (the NESRI 2025 reform document,
+`education.gov.ng/wp-content/uploads/2025/09/FG-OVERHAULS-CURRICULUM.pdf`), citing
+NERDC/WAEC/NECO/NBTE/NABTEB consultation. Its Primary 4-6 subject table's "Nigerian Languages"
+(pick one) and "CRS/IS" (pick one) rows were expanded into every individual option — matching
+this platform's convention of offering Hausa/Igbo/Yoruba/Arabic/CRS/IS as separate live
+subjects rather than enforcing one pick — giving: English Studies, Mathematics, Basic Science
+and Technology, Physical and Health Education, Basic Digital Literacy, Nigerian History,
+Social and Citizenship Studies, Cultural and Creative Arts, Pre-vocational Studies, Christian
+Religious Studies, Islamic Studies, Yoruba, Hausa, Igbo, French, Arabic Language. (The live
 `nerdc.gov.ng` content-manager pages for Primary 4-6 host an older, pre-reform curriculum and
-should not be used as the target list — they bundle a "National Values" subject instead of
-separate Nigerian History/Basic Digital Literacy/Physical & Health Education entries.)
+were not used as the target — they bundle a "National Values" subject instead of separate
+Nigerian History/Basic Digital Literacy/Physical & Health Education entries.) All three grades
+converged on the identical outcome — 15 of 16, Arabic Language the sole gap — independently.
+See "Open items" below for why Arabic Language isn't just unsourced but genuinely unresourceable
+right now, and for a provenance caveat on some Primary 4/5 subjects.
 
-Open items across the catalogue:
+**JSS1-3** target is a 21-subject list from the same NESRI 2025 press release PDF, which also
+carries a Junior Secondary School column in its Basic Education Subject List table. Expanding
+its pick-one groups the same way (Nigerian Languages → Hausa/Igbo/Yoruba; CRS/IS → Christian
+Religious Studies/Islamic Studies) plus its named "Trade Subjects (Students to choose 1
+subject)" list into six separate subjects gives: English Studies, Mathematics, Hausa, Igbo,
+Yoruba, Intermediate Science, Physical and Health Education, Digital Technologies, Christian
+Religious Studies, Islamic Studies, Nigerian History, Social and Citizenship Studies, Cultural
+and Creative Arts, French, Arabic Language, Solar Photovoltaic Installation and Maintenance,
+Fashion Design and Garment Making, Livestock Farming, Beauty and Cosmetology, Computer
+Hardware and GSM Repairs, Horticulture and Crop Production. All three grades started from an
+identical 12-subject baseline and closed the same 9-subject gap (Hausa, Igbo, Arabic Language,
+and all 6 named trade options) in one 2026-09-04 session, each sourced from that grade's
+`schemeofwork.com/jssN-scheme-of-work-unified/` page. See `JSS1/2/3-Content-Completion-Status.md`
+for full per-subject sourcing detail and citations. Business Studies is live at all three
+grades but isn't part of this target — see "Open items" below.
 
-- **Primary 6 is at 15 of the 16-subject target** as of 2026-09-03 — see
-  `Primary6-Content-Completion-Status.md` for full sourcing detail, citations, and the target
-  table. The sole gap is **Arabic Language**, which is genuinely unresolved (not just
-  unsourced) after exhausting SchemeofWork.com, syllabus.ng, and ecolebooks.com — don't
-  re-attempt it without a new source lead.
-- **Primary 4 is at 15 of the 16-subject target** as of 2026-09-03 — Hausa, Igbo, and Yoruba
-  were all sourced from SchemeofWork.com this session (see
-  `Primary4-Content-Completion-Status.md`). Yoruba was a target-list gap not caught by the
-  original Hausa/Igbo/Arabic Language sourcing pass — cross-check a grade's full live subject
-  list against the 16-subject target (not just the subjects explicitly requested) before
-  declaring a grade's gaps closed. The sole remaining gap is **Arabic Language**, checked and
-  genuinely unresolved (same dead ends as Primary 5/6: no Primary-level Arabic content on
-  SchemeofWork.com/syllabus.ng/ecolebooks.com, and NERDC's own site links a non-functional
-  placeholder) — don't re-attempt without a new source lead. This now matches Primary 5/6's
-  outcome exactly.
-- **Primary 5 is at 15 of the 16-subject target** as of 2026-09-03 — Hausa, Igbo, Islamic
-  Studies, and French were all sourced this session (see
-  `Primary5-Content-Completion-Status.md`). French is First-Term-only (10 topics), matching
-  the same partial-term precedent already documented for Primary 4 and Primary 6 French. The
-  sole remaining gap is **Arabic Language**, checked and genuinely unresolved (same dead ends
-  as Primary 4/6) — don't re-attempt without a new source lead. This now matches Primary 6's
-  outcome exactly.
-- **All three of Primary 4/5/6 now converge on the same outcome: 15 of 16, with Arabic
-  Language as the sole gap**, genuinely unresolved at every grade after exhausting the same
-  handful of sources (SchemeofWork.com, syllabus.ng, ecolebooks.com, NERDC's own site). Don't
-  re-attempt any of the three without a new source lead.
-- **Primary 4 and Primary 5 also have a known provenance gap**, orthogonal to the target-list
-  gaps above. Primary 4's 15 live subjects have 14 git-tracked files under
-  `backend/scripts/curriculum-data/` — only Mathematics is untracked, seeded via the legacy
-  `parsePdf.js`/`seedDb.js` path. Primary 5's 15 live subjects have only 5 git-tracked files
-  (Mathematics, French, Hausa, Igbo, Islamic Studies) — the other 10 went through that same
-  legacy seeding path and have no recorded source. This is worth reconciling (either
-  backfilling the missing curriculumData files or accepting the legacy seeding as their
-  record) before treating those subjects as fully sourced.
-- **Theme structure fix (2026-09-05)**: a direct DB audit found the exact same per-term
-  theme-row split bug already fixed for JSS1-3 Hausa/Igbo (commit `08c947b7`) also present
-  across Primary 4/5/6 — 28 subject-instances (5 in Primary 4, 13 in Primary 5, 10 in
-  Primary 6, including fully sourced file-backed subjects like Hausa/Igbo/Islamic
-  Studies/Mathematics, not just the legacy-seeded ones) had 3 per-term theme rows instead of
-  1 bundled theme. Fixed the same way as the JSS merge: lowest theme ID kept per
-  grade+subject, renamed to `"<Grade> <Subject>"`, topics reassigned via
-  `UPDATE topics SET theme_id`, empty theme rows deleted, one transaction per merge.
-  Per-merge topic-count match verified before/after for all 28, plus a final audit confirming
-  every Primary 4/5/6 subject has exactly 1 theme row except Primary 4 Mathematics (see
-  below, deliberately untouched). See `Primary4/5/6-Content-Completion-Status.md` for the
-  full per-grade breakdown. As with the JSS fix, this also resolved standing "term coverage
-  unverified" caveats in the Primary 4/5 docs: subjects that turned out to be split into 3
-  term rows necessarily had all 3 terms' worth of content, not just First Term.
-- **Primary 4 Mathematics duplicate content — resolved (2026-09-05)**: unlike the per-term
-  splits above, this was a straight re-import — 10 theme rows instead of 1, i.e. 5 subject
-  areas (NUMBER NUMERATION, BASIC OPERATIONS, MENSURATION, GEOMETRY, EVERYDAY STATISTICS)
-  each duplicated as 2 theme rows (created 2026-08-19 and 2026-08-20 respectively), 14 topics
-  total, with every topic field byte-identical between the two copies. The two copies had
-  diverged in linked usage data though: the 2026-08-19 copy carried 29 real
-  `conversation_logs` rows (genuine AI-tutor chat, 2026-08-20 to 2026-08-25) and 0
+**SS1/SS2 vs SS3**: this backlog is closed. SS1 and SS2 each carry 61 live subjects against
+SS3's 62, and the sole difference is `Mining`, which genuinely is SS3-only (see "Open items"
+below for the live WAEC reform question this touches). Don't re-source SS1/SS2 wholesale on
+the assumption they're thin — check the live count for the specific subject first.
+
+**SS3** is fully COMPLETE: all 62 catalogued subjects across the five doc-convention categories
+(Compulsory Core, Science & Mathematics, Humanities & Arts, Business & Commercial, Vocational &
+Trade) have real sourced content live. See `SS3-Content-Completion-Status.md`.
+
+### AI tutor bug fixes (5 bugs found in live testing, all fixed)
+
+Two sessions of live testing against the production DB and Claude API surfaced 5 real bugs in
+the chat/tutor pipeline, all now fixed and verified:
+
+1. **Subject grounding** — every agent prompt (tutor/assessment/practice) hardcoded
+   `"mathematics"` as the subject regardless of the topic's actual subject, so a student on
+   Physics, Auto Mechanical Work, etc. was told they were being tutored in math.
+2. **Content grounding** — the chat endpoint's topic query read
+   `topics.content`/`teacher_activities`/`student_activities`/`materials`, columns the importer
+   never populates. The real sourced content lives in separate `content`/`learning_activities`/
+   `evaluation_guides` tables and never reached the model. Fixed to join those tables the same
+   way `content.js` already did.
+3. **Cross-grade security** — the chat endpoint had no check that a requested `topicId`
+   belonged to the student's own grade, unlike `content.js`'s theme lookup. Added the same
+   grade-scoped `WHERE` + 403 pattern.
+4. **Routing** — `detectIntent()` misrouted any message containing the bare substring
+   `"question"` (e.g. "what subject is this, quick question") to the practice agent instead of
+   tutor. Narrowed to specific practice-request phrasings.
+5. **Silent API-error fallback** — `callClaude()` caught every error from the Anthropic SDK
+   (auth failures, network errors, rate limits, anything) and returned `getDemoResponse()`, a
+   hardcoded math-only reply, in the same shape as a real success. A student asking a non-math
+   tutor (e.g. Yoruba) a question during a real outage would silently get a fabricated "I'm
+   here to help you understand mathematics!" answer with no error signal anywhere. Fixed to log
+   full diagnostics (source agent, studentId, topicId, error name/message/status/type,
+   timestamp) and rethrow instead of swallowing the error, letting the honest,
+   subject-agnostic catch blocks already in `tutor.js`/`practice.js`/`assessment.js` fire
+   correctly. `getDemoResponse()` itself is untouched and still used for the explicit
+   `DEMO_MODE=true` flag and local dev without an API key — neither is an error path.
+
+Bugs 1-4: commit `70c1e844`. Bug 5: commit `09606c4b`. Both verified live — re-ran the exact
+conversations that surfaced each bug (bugs 1-4) and an invalid-API-key 401 (bug 5) and
+confirmed the fix.
+
+### Data-integrity fixes (theme-row duplication)
+
+Two rounds of direct DB audits found and fixed the same structural bug in different places,
+plus one unrelated content-duplication bug:
+
+- **Per-term theme-row split, JSS1-3 (2026-09-04, commit `08c947b7`)**: Hausa and Igbo had
+  been imported as 3 separate per-term theme rows each (e.g. `"JSS1 Hausa (First Term)"` /
+  `"(Second Term)"` / `"(Third Term)"`) instead of 1 bundled theme like every other subject —
+  since the mobile app renders every theme as its own flat card, students saw 3 "Hausa" tiles
+  instead of 1. Fixed by merging each subject+grade's 3 rows into 1 (6 merges: Hausa/Igbo ×
+  JSS1/2/3): lowest theme ID kept and renamed to `"<Grade> <Subject>"`, topics reassigned via
+  `UPDATE topics SET theme_id`, empty theme rows deleted. Verified per-merge topic-count match
+  and a final audit confirming every JSS1/2/3 subject (66 total) has exactly 1 theme row.
+  DB-only — no other table references `theme_id` except `topics`, and no backend route or
+  mobile code hardcodes a theme ID.
+- **Per-term theme-row split, Primary 4/5/6 (2026-09-05)**: a direct DB audit found the
+  identical bug across 28 subject-instances (5 in Primary 4, 13 in Primary 5, 10 in Primary
+  6) — including fully sourced, file-backed subjects like Hausa/Igbo/Islamic Studies/
+  Mathematics, not just legacy-seeded ones. Fixed the same way, one transaction per merge, all
+  28 verified topic-count-match before/after, plus a final audit confirming every Primary
+  4/5/6 subject has exactly 1 theme row except Primary 4 Mathematics (see next item). Bonus:
+  this resolved standing "term coverage unverified" doc caveats for Primary 4/5 — subjects
+  that turned out to be split into 3 term rows necessarily had all 3 terms' content already,
+  not just First Term. See `Primary4/5/6-Content-Completion-Status.md` for the full breakdown.
+- **Primary 4 Mathematics duplicate content (2026-09-05, resolved)**: a separate, unrelated
+  bug — a straight re-import, not a per-term split. 5 subject areas (NUMBER NUMERATION, BASIC
+  OPERATIONS, MENSURATION, GEOMETRY, EVERYDAY STATISTICS) were each duplicated as 2 theme rows
+  (one set created 2026-08-19, one 2026-08-20), 14 topics total, with every topic field
+  byte-identical between copies. The two copies had diverged in linked usage data: the
+  2026-08-19 copy carried 29 real `conversation_logs` rows (genuine AI-tutor chat) and 0
   `student_progress` rows; the 2026-08-20 copy carried 21 `student_progress` rows (all
-  `not_started`/0 attempts, a seeding artifact — all created at the exact same timestamp as
-  that import) and 0 `conversation_logs`. Kept the 2026-08-19 copy (real conversation history).
-  Before deleting the 2026-08-20 copy, its 21 `student_progress` rows were reassigned via
-  `UPDATE student_progress SET topic_id = <old>` to the matching topic on the surviving copy
-  (mapped by theme name + topic name + sequence_order, verified no unique-constraint
-  conflicts), then its duplicate `content`/`learning_activities`/`evaluation_guides` rows
-  (byte-identical to what the surviving copy already has) were deleted, then its now-childless
-  topics and theme rows. Verified before/after: 5 theme rows / 7 topics survive (was 10/14),
-  all child-table counts match expectations, no orphans or duplicate `student_progress` rows.
-  See `Primary4-Content-Completion-Status.md` for full detail.
+  `not_started`/0 attempts — a seeding artifact, all sharing the import's exact timestamp) and
+  0 `conversation_logs`. Kept the 2026-08-19 copy (real conversation history). Before deleting
+  the 2026-08-20 copy: reassigned its 21 `student_progress` rows to the matching topic on the
+  surviving copy (mapped by theme name + topic name + sequence_order, a clean 1:1
+  correspondence, no unique-constraint conflicts), deleted its duplicate `content`/
+  `learning_activities`/`evaluation_guides` rows (byte-identical to what the surviving copy
+  already holds), then its now-childless topics and theme rows. Verified before/after: 5 theme
+  rows / 7 topics survive (was 10/14), all child-table counts match expectations, no orphans
+  or duplicate `student_progress` rows. See `Primary4-Content-Completion-Status.md`.
+- **SS3 Chemistry — audited, confirmed not a bug (2026-09-05)**: SS3 Chemistry genuinely has
+  2 theme rows, both named "SS3 Chemistry": one with real subject content (20 topics: Food
+  Chemistry, Industrial Chemistry, Environmental Chemistry, exam-prep, etc.) and one that's a
+  distinct revision/exam-prep module (6 topics: Summary of Major Topics, Intensive Revision,
+  Mock Final Exams, etc.), traced to two real commits (`3522a4f2` then gap-fill `6cf5dbfc`).
+  Unlike the splits/duplicates above, these are two different modules that happen to share a
+  name, not duplicate rows of the same content. Confirmed and left untouched — no action taken.
 
-**JSS1-3 have been reconciled against an authoritative target too, found during a 2026-09-04
-audit** — the same NESRI 2025 press release PDF used for Primary 4-6 also carries a Junior
-Secondary School column in its Basic Education Subject List table, sitting right next to the
-Primary 4-6 column. Expanding that column's pick-one groups the same way as Primary 4-6
-(Nigerian Languages → Hausa/Igbo/Yoruba; CRS/IS → Christian Religious Studies/Islamic Studies)
-plus its named "Trade Subjects (Students to choose 1 subject)" list → six separate subjects,
-gives a 21-subject target: English Studies, Mathematics, Hausa, Igbo, Yoruba, Intermediate
-Science, Physical and Health Education, Digital Technologies, Christian Religious Studies,
-Islamic Studies, Nigerian History, Social and Citizenship Studies, Cultural and Creative Arts,
-French, Arabic Language, Solar Photovoltaic Installation and Maintenance, Fashion Design and
-Garment Making, Livestock Farming, Beauty and Cosmetology, Computer Hardware and GSM Repairs,
-Horticulture and Crop Production.
+### Infrastructure fixes
 
-- **JSS1, JSS2, and JSS3 are each now at 21 of the 21-subject target** as of 2026-09-04 —
-  starting from an identical 12-subject baseline across all three grades (confirmed via a
-  JSS1-vs-JSS2-vs-JSS3 cross-check), the same 9-subject gap (Hausa, Igbo, Arabic Language, and
-  all 6 named trade options: Solar Photovoltaic Installation and Maintenance, Fashion Design
-  and Garment Making, Livestock Farming, Beauty and Cosmetology, Computer Hardware and GSM
-  Repairs, Horticulture and Crop Production) was closed at all three grades in one session, all
-  sourced from each grade's `schemeofwork.com/jssN-scheme-of-work-unified/` page. See
-  `JSS1-Content-Completion-Status.md`, `JSS2-Content-Completion-Status.md`, and
-  `JSS3-Content-Completion-Status.md` for full per-subject sourcing detail and citations.
-- **Theme structure fix (2026-09-04)**: Hausa and Igbo had been imported as 3 separate
-  per-term theme rows each (e.g. `"JSS1 Hausa (First Term)"` / `"(Second Term)"` /
-  `"(Third Term)"`), the only two subjects across JSS1-3 using that pattern — every other
-  subject bundles all three terms into one theme row, and since the mobile app renders every
-  theme as its own flat card (`mobile/screens/HomeScreen.js`), this meant students saw three
-  "Hausa" tiles instead of one. Fixed by merging each subject+grade's 3 theme rows into 1 (6
-  merges total: Hausa/Igbo × JSS1/2/3) — lowest-ID theme kept and renamed to the standard
-  `"<Grade> <Subject>"` format, topics reassigned via `UPDATE topics SET theme_id`, empty
-  theme rows deleted. Verified per-merge topic-count match and a final DB audit confirming
-  every JSS1/2/3 subject (66 total) has exactly 1 theme row. DB-only — no other table
-  references `theme_id` except `topics`, and no backend route or mobile code hardcodes a theme
-  ID, so no code changes were needed. If sourcing a new language subject with per-term source
-  pages in the future, bundle it into one theme from the start rather than importing per term.
-- **Business Studies is live in all three JSS grades but isn't on the NESRI JSS target list at
-  all** — flagged as a legacy holdover, not removed. Its tag is inconsistent across grades:
-  `legacy` in JSS1 and JSS2, but `nesri_2025` in JSS3 (commit `fa5673e7`), which is misleading
-  since it isn't actually part of the NESRI 2025 target. Needs a decision on whether to keep it
-  (with JSS3's tag corrected) or retire it in favor of the target list.
+- **Railway token behavior clarified** (commit `415dff24`): `RAILWAY_TOKEN` here is
+  project-scoped, so `whoami`/`list`/`ssh`/`connect` correctly return `Unauthorized` — that was
+  being misread as broken. Documented in the sourcer subagent (see "Operating conventions"
+  above) so it isn't re-litigated per session.
+- **TCP proxy connection method** (commit `cbc3f6ee`): `railway connect` needs account-level
+  SSH auth a project token can't provide. Every sourcing run was independently hitting and
+  working around this by reading the TCP proxy vars and connecting `psql`/`DATABASE_URL`
+  directly — now the documented path instead of `railway connect`.
+- **Credential-handling hardening** (commit `96169f0f`): after a sourcing run hit a classifier
+  block on the documented path and silently switched to `railway run`, briefly writing a
+  plaintext DB password to a scratchpad file before self-correcting — added hard constraints:
+  never write a password/`DATABASE_URL` to disk even temporarily, and stop-and-ask rather than
+  silently switch connection methods on any block.
+- **Git commit identity**: commit authorship switched from a generic placeholder identity
+  (`Nubians <globlbuy@Daniels-MacBook-Air.local>`) to the project's own identity
+  (`KlassKonnect <klasskonnectnigeria@gmail.com>`) starting 2026-09-02; all commits since have
+  used the correct identity.
 
-## SS3 Chemistry has 2 theme rows — confirmed as-is, not a bug, no action needed
+---
 
-A direct DB audit on 2026-09-05 confirmed SS3 Chemistry (`themes.subject = 'Chemistry',
-grade = 'SS3'`) genuinely has 2 theme rows, both named "SS3 Chemistry": id 25 (created
-2026-08-25, 20 topics — real subject content: Food Chemistry, Industrial Chemistry,
-Environmental Chemistry, exam-prep topics, etc.) and id 100 (created 2026-08-27, 6 topics —
-a distinct revision/exam-prep module: Summary of Major Topics, Intensive Revision, Mock Final
-Exams, Final Preparations, etc.). Both trace to real commits (`3522a4f2` then the gap-fill
-`6cf5dbfc`) and SS3 is documented elsewhere as fully COMPLETE (2026-08-31). Unlike the
-Primary/JSS per-term splits above, these aren't duplicate/split rows of the same content —
-they're two different modules that happen to share a name. Confirmed present and left
-untouched; no merge or cleanup needed here.
+## Open items
+
+- **Arabic Language is unresolved across Primary 4, 5, and 6** — the sole gap against each
+  grade's 16-subject target, and genuinely unresourceable right now, not just unsourced.
+  Exhausted at every grade: SchemeofWork.com (Federal/Lagos/Osun — no Primary Arabic content
+  exists on the site at all, only SS1/SS3), syllabus.ng (lists "Primary N Arabic Language" as
+  a menu item with no working link), ecolebooks.com (Uganda-focused, no matching Nigerian
+  content), and NERDC's own `nerdc.gov.ng/content_manager/pri4-6.html` (advertises a PDF but
+  the download link is a non-functional `javascript:;` placeholder). One tangential UK KS2
+  scheme was found but isn't NERDC/WAEC-aligned, so wasn't used. Don't re-attempt without a
+  new source lead; re-check in a future session in case a source publishes it later.
+- **WAEC's SS trade-subject reform is live and unsettled — do not act on it yet.** Per
+  Oct-Nov 2025 news reporting (WAEC Nigeria National Office Head Dr. Amos Josiah Dangut,
+  disclosed after the 63rd Nigeria National Council meeting in Umuahia, Abia State;
+  corroborated by Guardian.ng and Vanguard reporting), WAEC has officially streamlined
+  SS-level trade subjects from roughly 26-35 down to **six** for the 2026 WASSCE: Solar PV
+  Installation and Maintenance, Fashion Design and Garment Making, Livestock Farming, Beauty
+  and Cosmetology, Computer Hardware and GSM Repairs, and Horticulture and Crop Production —
+  the same six named in the NESRI 2025 JSS reform table above. This independently confirms
+  Mining isn't part of the new WAEC list (consistent with it being SS3-only vs. SS1/SS2), and
+  raises a real open question: should most of SS3's existing 33-subject Vocational & Trade
+  catalogue (Welding and Fabrication, Auto Body Repairs, Auto Electrical Work, Mining, etc.)
+  eventually be consolidated or renamed to match this 6-subject list? **Do not restructure or
+  delete any existing SS3 vocational content based on this alone** — the reform itself is
+  contested and still moving: the Nigerian Senate halted immediate implementation in December
+  2025 over concerns that 2025/2026 SS3 candidates would be forced into trade subjects they
+  were never taught, with lawmakers pushing for the new rules to apply only from the
+  2027/2028 diet onward. Monitor as a live, unsettled situation rather than a target to
+  reconcile against.
+- **Business Studies (JSS1-3) isn't on the NESRI JSS target list at all** — live in all three
+  grades, flagged as a legacy holdover, not removed. Its tag is inconsistent: `legacy` in JSS1
+  and JSS2, but `nesri_2025` in JSS3 (commit `fa5673e7`), which is misleading since it isn't
+  actually part of the NESRI 2025 target. Needs a decision: keep it (with JSS3's tag
+  corrected) or retire it in favor of the target list.
+- **Primary 4 and Primary 5 have a provenance gap** for some legacy-seeded subjects,
+  orthogonal to the target-list gap above. Primary 4's 15 live subjects have 14 git-tracked
+  files under `backend/scripts/curriculum-data/` — only Mathematics is untracked, seeded via
+  the legacy `parsePdf.js`/`seedDb.js` path (though its content does have a traceable origin:
+  git's very first commit, `ed9c11d6`, happens to capture that exact content). Primary 5's 15
+  live subjects have only 5 git-tracked files (Mathematics, French, Hausa, Igbo, Islamic
+  Studies) — the other 10 went through that same legacy seeding path with no recorded source
+  at all. **Do not run `backend/scripts/seedDb.js`** on either grade — it's destructive and
+  will overwrite live data with whatever `parsePdf.js` next contains, with no way to recover
+  the untracked subjects if lost. Worth reconciling (backfill proper `curriculum-data/*.js`
+  files from the live DB content, or formally accept the legacy seeding as the record) before
+  treating those subjects as fully sourced.
+- **JSS1 Fashion Design and Garment Making has a provenance gap of its own**: live in the DB
+  from a prior session whose source file was never committed. A later session reconciled this
+  by committing the file without re-importing — see `JSS1-Content-Completion-Status.md`.
