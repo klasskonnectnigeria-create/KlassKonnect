@@ -75,6 +75,21 @@ original 62-subject catalogue counted as "COMPLETE" above, and are being sourced
   source gives no finer per-week breakdown to split further without fabrication. No SS3 Third
   Term exists on this source (consistent with SS1/SS2). Genuinely new subject — no related
   entry existed anywhere in the SS1/SS2/SS3 catalogue before this session.
+- **Solar Photovoltaic Installation** — live as of 2026-09-05 (First Term, Second Term, and a
+  very thin Third Term with a single genuine topic after exam-prep exclusions; 11 topics
+  total, legacy) via schemeofwork.com's "SS3 Scheme of Work Unified" page, Trade Subjects
+  section. Genuinely new subject — distinct from any existing subject in the 62-subject
+  catalogue above.
+- **Horticulture and Crop Production** — live as of 2026-09-05 (First, Second and Third Term,
+  20 topics, legacy) via schemeofwork.com's "SS3 Scheme of Work Unified" page, Trade Subjects
+  section (same page and section as Solar Photovoltaic Installation above). Distinct from the
+  existing broader "Agriculture" subject in the 62-subject catalogue above, which was left
+  untouched. Unlike SS1/SS2's identical 24-topic (8-per-term) structure for this same subject,
+  SS3's Second and especially Third Term content follows a generic "final-year project + exam
+  prep" template shared across several SS3 trade subjects on this page — once exam-prep,
+  revision, and past-question-review weeks are excluded (matching the exclusion pattern
+  already established for Solar Photovoltaic Installation above), First Term yields 7 topics,
+  Second Term 8, and Third Term only 5 genuine project/practical topics remain.
 
 ## Open scope question
 
