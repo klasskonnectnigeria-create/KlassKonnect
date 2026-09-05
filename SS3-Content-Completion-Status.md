@@ -86,6 +86,14 @@ original 62-subject catalogue counted as "COMPLETE" above, and are being sourced
   Photovoltaic Installation" file, sourced from this same page back on 2026-08-30), First
   Term yields 7 topics, Second Term 8, and Third Term only 5 genuine project/practical topics
   remain.
+- **Computer Hardware and GSM Repairs** — live as of 2026-09-05 (First & Second Term, 16
+  topics, legacy) via schemeofwork.com's "NERDC Curriculum Scheme of Work for Computer
+  Hardware and GSM Repairs" page, covering SS1/SS2/SS3 in one document. Verified directly
+  (not assumed from the SS1/SS2 precedent) that no SS3 Third Term section exists on this
+  source. Distinct from the existing legacy "GSM Maintenance and Repairs" subject in the
+  62-subject catalogue above (narrower, GSM-only scope) — that subject (theme id 175, 12
+  topics) was confirmed untouched after this import. Genuinely new subject at SS3 — no prior
+  entry of this exact name existed in the catalogue before this session.
 
 ## Open scope question
 
