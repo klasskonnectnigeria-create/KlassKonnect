@@ -50,6 +50,21 @@ usable real source and refused to fabricate content.
   mycsn-style aggregators). They were never real entries in the tracked catalogue and
   their removal corrects the catalogue size rather than reducing coverage.
 
+## NESRI 2025 SS trade-subject additions (new, on top of the 62-subject catalogue above)
+
+Per the official 3 Sept 2025 FME press release PDF (page-4 Senior Secondary School Subject
+List, "One Core Trade Subject" list), WAEC's 2026 reform streamlines SS-level trade subjects
+to six: Solar PV Installation and Maintenance, Fashion Design and Garment Making, Livestock
+Farming, Beauty and Cosmetology, Computer Hardware and GSM Repairs, and Horticulture and Crop
+Production. These are genuinely new subject-name gaps under the reform, not part of the
+original 62-subject catalogue counted as "COMPLETE" above, and are being sourced separately:
+
+- **Fashion Design and Garment Making** — live as of 2026-09-05 (First & Second Term, 10
+  topics, legacy) via schemeofwork.com's unified Fashion Design and Garment Making page,
+  covering SS1/SS2/SS3 in one document. This is distinct from the existing legacy "Garment
+  Making Construction" subject in the 33-subject Vocational & Trade bucket above (narrower
+  scope, no Fashion Design component) — that subject was left untouched.
+
 ## Open scope question
 
 The NESRI (National Education Sector Renewal Initiative) curriculum reform's exact
