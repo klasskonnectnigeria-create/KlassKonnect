@@ -64,6 +64,17 @@ original 62-subject catalogue counted as "COMPLETE" above, and are being sourced
   covering SS1/SS2/SS3 in one document. This is distinct from the existing legacy "Garment
   Making Construction" subject in the 33-subject Vocational & Trade bucket above (narrower
   scope, no Fashion Design component) — that subject was left untouched.
+- **Beauty and Cosmetology** — live as of 2026-09-05 (First & Second Term, 6 topics, legacy)
+  via schemeofwork.com's unified Beauty and Cosmetology page, covering SS1/SS2/SS3 in one
+  document. Unlike SS1/SS2's per-week Topic/Learning Objectives table on the same page, the
+  SS3 section is written as a small number of multi-week blocks describing a final-year
+  specialization/portfolio/project structure (Weeks 1-4 Specialization Module, Weeks 5-8
+  Client Management & Practical Sessions, Weeks 9-10 Portfolio Development in First Term;
+  Weeks 1-5 Final Year Project, Weeks 6-8 Workshops & Career Talks, Weeks 9-10 Project
+  Presentation & Exhibition in Second Term) — each block imported as a single topic since the
+  source gives no finer per-week breakdown to split further without fabrication. No SS3 Third
+  Term exists on this source (consistent with SS1/SS2). Genuinely new subject — no related
+  entry existed anywhere in the SS1/SS2/SS3 catalogue before this session.
 
 ## Open scope question
 
