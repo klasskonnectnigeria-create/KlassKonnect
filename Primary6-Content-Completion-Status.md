@@ -4,6 +4,21 @@
 2026-09-03. The sole gap (Arabic Language) is genuinely unresolved, not merely unsourced —
 see "Known gaps" below.
 
+**Theme structure fix (2026-09-05)**: a direct DB audit found 10 of Primary 6's 15 subjects
+split into 3 per-term theme rows instead of 1 bundled theme — the same bug already fixed for
+JSS1-3 Hausa/Igbo (commit `08c947b7`) and for Primary 4/5 the same session. Affected: Basic
+Science and Technology, Christian Religious Studies, Hausa, Igbo, Islamic Studies,
+**Mathematics**, Nigerian History, Physical and Health Education, Pre-vocational Studies, and
+Yoruba — all fully sourced, file-backed subjects, so the bug wasn't limited to legacy-seeded
+content here. Cultural and Creative Arts, English Studies, and Social and Citizenship Studies
+were already single-row; Basic Digital Literacy and French remain genuinely First-Term-only
+(1 row each). Merged all 10 live in the DB: lowest theme ID kept and renamed to the standard
+`"Primary 6 <Subject>"` format, topics reassigned via `UPDATE topics SET theme_id`, empty
+theme rows deleted. Per-merge topic-count match verified before/after for all 10 (unchanged
+— the topic counts documented per subject below were already correct grade-level totals; only
+the tile/row count was wrong), plus a final audit confirming every Primary 6 subject now has
+exactly 1 theme row.
+
 ## Target subject list (reconciled 2026-09-03)
 
 The prior version of this doc treated Primary 6 as having an open-ended, unenumerated subject

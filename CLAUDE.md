@@ -112,6 +112,36 @@ Open items across the catalogue:
   legacy seeding path and have no recorded source. This is worth reconciling (either
   backfilling the missing curriculumData files or accepting the legacy seeding as their
   record) before treating those subjects as fully sourced.
+- **Theme structure fix (2026-09-05)**: a direct DB audit found the exact same per-term
+  theme-row split bug already fixed for JSS1-3 Hausa/Igbo (commit `08c947b7`) also present
+  across Primary 4/5/6 — 28 subject-instances (5 in Primary 4, 13 in Primary 5, 10 in
+  Primary 6, including fully sourced file-backed subjects like Hausa/Igbo/Islamic
+  Studies/Mathematics, not just the legacy-seeded ones) had 3 per-term theme rows instead of
+  1 bundled theme. Fixed the same way as the JSS merge: lowest theme ID kept per
+  grade+subject, renamed to `"<Grade> <Subject>"`, topics reassigned via
+  `UPDATE topics SET theme_id`, empty theme rows deleted, one transaction per merge.
+  Per-merge topic-count match verified before/after for all 28, plus a final audit confirming
+  every Primary 4/5/6 subject has exactly 1 theme row except Primary 4 Mathematics (see
+  below, deliberately untouched). See `Primary4/5/6-Content-Completion-Status.md` for the
+  full per-grade breakdown. As with the JSS fix, this also resolved standing "term coverage
+  unverified" caveats in the Primary 4/5 docs: subjects that turned out to be split into 3
+  term rows necessarily had all 3 terms' worth of content, not just First Term.
+- **Primary 4 Mathematics has genuine duplicate content, flagged but not yet resolved
+  (2026-09-05)**: unlike the per-term splits above, this is a straight re-import — 10 theme
+  rows instead of 1, i.e. 5 subject areas (NUMBER NUMERATION, BASIC OPERATIONS, MENSURATION,
+  GEOMETRY, EVERYDAY STATISTICS) each duplicated as 2 theme rows (created 2026-08-19 and
+  2026-08-20 respectively), 14 topics total, with every topic field
+  (learning_outcome/focal_competency/content/teacher_activities/student_activities/materials)
+  byte-identical between the two copies — no content difference to prefer one over the other.
+  But the two copies have diverged in linked usage data: the 2026-08-19 copy carries 29 real
+  `conversation_logs` rows (genuine AI-tutor chat, 2026-08-20 to 2026-08-25) and 0
+  `student_progress` rows; the 2026-08-20 copy carries 21 `student_progress` rows (all
+  `not_started`/0 attempts, a seeding artifact — all created at the exact same timestamp as
+  that import) and 0 `conversation_logs`. Deleting either copy outright would destroy the
+  other's linked data, so this needs the child-table rows reassigned first (same idea as the
+  theme merges, but one level deeper — `conversation_logs`/`student_progress` reference
+  `topic_id`, not `theme_id`). Not attempted — needs a decision on which copy's topic IDs to
+  keep before any deletion.
 
 **JSS1-3 have been reconciled against an authoritative target too, found during a 2026-09-04
 audit** — the same NESRI 2025 press release PDF used for Primary 4-6 also carries a Junior
@@ -153,3 +183,16 @@ Horticulture and Crop Production.
   `legacy` in JSS1 and JSS2, but `nesri_2025` in JSS3 (commit `fa5673e7`), which is misleading
   since it isn't actually part of the NESRI 2025 target. Needs a decision on whether to keep it
   (with JSS3's tag corrected) or retire it in favor of the target list.
+
+## SS3 Chemistry has 2 theme rows — confirmed as-is, not a bug, no action needed
+
+A direct DB audit on 2026-09-05 confirmed SS3 Chemistry (`themes.subject = 'Chemistry',
+grade = 'SS3'`) genuinely has 2 theme rows, both named "SS3 Chemistry": id 25 (created
+2026-08-25, 20 topics — real subject content: Food Chemistry, Industrial Chemistry,
+Environmental Chemistry, exam-prep topics, etc.) and id 100 (created 2026-08-27, 6 topics —
+a distinct revision/exam-prep module: Summary of Major Topics, Intensive Revision, Mock Final
+Exams, Final Preparations, etc.). Both trace to real commits (`3522a4f2` then the gap-fill
+`6cf5dbfc`) and SS3 is documented elsewhere as fully COMPLETE (2026-08-31). Unlike the
+Primary/JSS per-term splits above, these aren't duplicate/split rows of the same content —
+they're two different modules that happen to share a name. Confirmed present and left
+untouched; no merge or cleanup needed here.

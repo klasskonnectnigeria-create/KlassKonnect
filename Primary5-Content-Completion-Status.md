@@ -18,6 +18,23 @@ outcome (15 of 16, sole gap Arabic Language).
 No SS3-style five-category structure applies to this grade — Primary 5 has no
 vocational/trade tier, so subjects are tracked as a flat list.
 
+**Theme structure fix (2026-09-05)**: a direct DB audit found 13 of Primary 5's 15 subjects
+split into 3 per-term theme rows instead of 1 bundled theme — the same bug already fixed for
+JSS1-3 Hausa/Igbo (commit `08c947b7`) and for 5 Primary 4 subjects the same session. Affected:
+Basic Digital Literacy, Basic Science and Technology, Christian Religious Studies, Cultural
+and Creative Arts, English Studies, Hausa, Igbo, Islamic Studies, Nigerian History, Physical
+and Health Education, Pre-vocational Studies, Social and Citizenship Studies, and Yoruba —
+including 3 subjects with real git-tracked source files (Hausa, Igbo, Islamic Studies), so
+this wasn't limited to the undocumented legacy-seeded subjects. Only Mathematics (already 1
+row) and French (1 row, genuinely First-Term-only) were unaffected. Merged all 13 live in the
+DB: lowest theme ID kept and renamed to the standard `"Primary 5 <Subject>"` format, topics
+reassigned via `UPDATE topics SET theme_id`, empty theme rows deleted. Per-merge topic-count
+match verified before/after for all 13 (unchanged), plus a final audit confirming every
+Primary 5 subject now has exactly 1 theme row. This also confirms all 13 subjects have theme
+rows for all 3 terms (First/Second/Third existed as separate rows pre-merge) — resolving the
+"term-level completeness not independently re-verified" caveat below at the row-existence
+level, though per-term content depth itself was not re-audited.
+
 ## Subjects (15 live, all `legacy`)
 
 | Subject | Topics | Git provenance |

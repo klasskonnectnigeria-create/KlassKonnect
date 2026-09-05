@@ -5,6 +5,34 @@
 "Remaining sourcing gaps" section). **Arabic Language is genuinely unresolved** (not just
 unsourced) — see "Remaining gaps" below; it is now the sole gap.
 
+**Theme structure fix (2026-09-05)**: a direct DB audit found Hausa, Igbo, Pre-vocational
+Studies, Social and Citizenship Studies, and Yoruba each split into 3 per-term theme rows
+instead of 1 bundled theme — the same bug already fixed for JSS1-3 Hausa/Igbo (commit
+`08c947b7`). Merged all 5 live in the DB: lowest theme ID kept and renamed to the standard
+`"Primary 4 <Subject>"` format, topics reassigned via `UPDATE topics SET theme_id`, empty
+theme rows deleted. Per-merge topic-count match verified before/after (32/36/29/28/33 topics
+respectively, unchanged), plus a final audit confirming every Primary 4 subject except
+Mathematics (see below) now has exactly 1 theme row. This also resolves the "Known gaps"
+uncertainty below: Social and Citizenship Studies and Pre-vocational Studies were split into
+3 per-term rows *because* they already had full 3-term content, not because Second/Third Term
+was missing — so both are confirmed full 3-term coverage, not First-Term-only.
+
+**Mathematics has genuine duplicate content, not yet resolved (2026-09-05)**: a DB audit found
+Mathematics has 10 theme rows, not 1 — 5 subject areas (NUMBER NUMERATION, BASIC OPERATIONS,
+MENSURATION, GEOMETRY, EVERYDAY STATISTICS) each duplicated as 2 theme rows (ids 6-10 created
+2026-08-19, ids 11-15 created 2026-08-20), 14 topics total. All topic/content fields
+(learning_outcome, focal_competency, content, teacher_activities, student_activities,
+materials) are byte-identical between the two copies — this is a straight re-import, not
+divergent content, so neither copy has "better" material. However the two copies have
+diverged in linked usage data: the first copy (theme ids 6-10, topics 8-14) carries 29 real
+`conversation_logs` rows (genuine AI-tutor chat exchanges from test accounts across
+2026-08-20 to 2026-08-25) and zero `student_progress` rows; the second copy (theme ids 11-15,
+topics 15-21) carries 21 `student_progress` rows (all `not_started`/0 attempts, identical
+timestamp matching the second import — a seeding artifact, not real progress) and zero
+`conversation_logs`. Deleting either copy outright would destroy the other's linked data, so
+this needs the child-table references reassigned (like the theme merges above) before any row
+is deleted — not attempted yet, reported here for a decision on which copy to keep.
+
 No SS3-style five-category structure applies to this grade — Primary 4 has no
 vocational/trade tier, so subjects are tracked as a flat list.
 
@@ -72,7 +100,9 @@ Per commit `9b8076e9` ("Complete Primary 4 curriculum: add 11 subjects (179 topi
 legacy). 5 subjects (SCS, CCA, Basic Digital Literacy, PVS, French) are First Term only —
 Second/Third Term not yet sourced"), 5 subjects were First-Term-only at that point. Commit
 `f10ee23a` subsequently upgraded **Cultural and Creative Arts** to full 3-term (32-topic)
-coverage. The remaining 4 — **Social and Citizenship Studies, Basic Digital Literacy,
-Pre-vocational Studies, French** — are believed still First-Term-only; this has not been
-independently re-verified against the live DB at the term level (only subject-level topic
-counts were confirmed this session, which don't distinguish term coverage).
+coverage. The 2026-09-05 theme-merge DB audit (see above) resolved this for two more:
+**Social and Citizenship Studies** and **Pre-vocational Studies** were found split into 3
+per-term theme rows, confirming they already had full 3-term coverage all along (now merged
+into 1 theme row each). Only **Basic Digital Literacy** and **French** remain confirmed
+First-Term-only — each has exactly 1 live theme row named "(First Term)" with no Second/Third
+Term rows anywhere in the DB.
