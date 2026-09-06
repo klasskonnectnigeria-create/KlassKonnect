@@ -3,12 +3,16 @@ import { pool } from '../server.js';
 import { verifyToken } from '../middleware/auth.js';
 import { orchestrateQuery } from '../agents/orchestrator.js';
 import { getConversationContext, saveConversation, getTopicUnderstanding } from '../services/conversationManager.js';
+import { updateGamificationStats, getLevelProgress, getStudentGamificationProfile } from '../services/gamificationService.js';
 
 const router = express.Router();
 
 // Main agent endpoint - student asks a question or requests help
 router.post('/chat', verifyToken, async (req, res) => {
   const { message, topicId, agentType } = req.body;
+
+  // Track response time for gamification speed bonus
+  req.startTime = Date.now();
 
   if (!message || message.trim() === '') {
     return res.status(400).json({ error: 'Message is required' });
@@ -111,10 +115,63 @@ router.post('/chat', verifyToken, async (req, res) => {
       );
     }
 
+    // GAMIFICATION: Determine if response indicates correct answer and update stats
+    let gamificationData = null;
+    try {
+      // Heuristic: check if response contains positive feedback indicators
+      const isCorrect = response.content.includes('Excellent!') ||
+                       response.content.includes('You got it!') ||
+                       response.content.includes('That\'s right!') ||
+                       response.content.includes('Perfect!') ||
+                       response.content.includes('Correct!');
+
+      // Calculate response time (from request to response)
+      const responseTime = Date.now() - req.startTime;
+      const responseTimeSeconds = Math.round(responseTime / 1000);
+
+      // Update gamification stats
+      const statsUpdate = await updateGamificationStats(req.studentId, {
+        isCorrect,
+        timeSeconds: responseTimeSeconds,
+        topicId,
+        responseQuality: 'normal'
+      });
+
+      // Get updated level progress for display
+      const levelProgress = await getLevelProgress(req.studentId);
+
+      // Get full profile for dashboard
+      const profile = await getStudentGamificationProfile(req.studentId);
+
+      gamificationData = {
+        pointsEarned: statsUpdate.pointsEarned,
+        totalPoints: statsUpdate.totalPoints,
+        level: statsUpdate.level,
+        levelName: statsUpdate.levelName,
+        currentStreak: statsUpdate.currentStreak,
+        levelProgress: {
+          currentLevel: levelProgress.currentLevel,
+          currentLevelName: levelProgress.currentLevelName,
+          nextLevelName: levelProgress.nextLevelName,
+          pointsToNextLevel: levelProgress.pointsToNextLevel,
+          progressPercent: levelProgress.progressPercent
+        },
+        profile: {
+          badgeCount: profile.badgeCount,
+          longestStreak: profile.longestStreak
+        }
+      };
+    } catch (gamificationError) {
+      // Log but don't block the response if gamification fails
+      console.error('Gamification update failed:', gamificationError);
+      gamificationData = null;
+    }
+
     res.json({
       response: response.content,
       agentType: response.agentType,
-      nextStep: response.nextStep
+      nextStep: response.nextStep,
+      gamification: gamificationData
     });
   } catch (error) {
     console.error('Error in chat endpoint:', error);
