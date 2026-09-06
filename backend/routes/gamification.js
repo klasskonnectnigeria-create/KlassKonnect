@@ -1,6 +1,12 @@
 import express from 'express';
 import { pool } from '../server.js';
 import { verifyToken } from '../middleware/auth.js';
+import {
+  updateGamificationStats,
+  checkBadgeQualifications,
+  getStudentGamificationProfile,
+  getLevelProgress
+} from '../services/gamificationService.js';
 
 const router = express.Router();
 
@@ -121,6 +127,83 @@ router.get('/stats', verifyToken, async (req, res) => {
   } catch (error) {
     console.error('Error fetching gamification stats:', error);
     res.status(500).json({ error: 'Error fetching stats' });
+  }
+});
+
+// ============ NEW GAMIFICATION SERVICE ENDPOINTS ============
+
+/**
+ * POST /api/gamification/interaction
+ * Record a chat interaction and auto-update gamification stats
+ *
+ * Request body: {
+ *   isCorrect: boolean,
+ *   timeSeconds: number (optional),
+ *   topicId: number (optional),
+ *   agentType: 'tutor' | 'practice' | 'assessment'
+ * }
+ */
+router.post('/interaction', verifyToken, async (req, res) => {
+  try {
+    const { isCorrect, timeSeconds, topicId, agentType } = req.body;
+
+    // Update gamification stats
+    const statsUpdate = await updateGamificationStats(req.studentId, {
+      isCorrect,
+      timeSeconds,
+      topicId,
+      responseQuality: 'normal'
+    });
+
+    // Check for badge qualifications (simplified version)
+    const badgesUnlocked = await checkBadgeQualifications(req.studentId, {
+      currentStreak: statsUpdate.currentStreak,
+      daysActive: 1
+    });
+
+    res.json({
+      success: true,
+      pointsEarned: statsUpdate.pointsEarned,
+      totalPoints: statsUpdate.totalPoints,
+      level: statsUpdate.level,
+      levelName: statsUpdate.levelName,
+      currentStreak: statsUpdate.currentStreak,
+      badgesUnlocked: badgesUnlocked.length > 0 ? badgesUnlocked.map(b => ({
+        name: b.badge_name,
+        description: b.badge_description
+      })) : []
+    });
+  } catch (error) {
+    console.error('Error recording interaction:', error);
+    res.status(500).json({ error: 'Error recording interaction', details: error.message });
+  }
+});
+
+/**
+ * GET /api/gamification/profile
+ * Get student's full gamification profile with badges
+ */
+router.get('/profile', verifyToken, async (req, res) => {
+  try {
+    const profile = await getStudentGamificationProfile(req.studentId);
+    res.json(profile);
+  } catch (error) {
+    console.error('Error fetching gamification profile:', error);
+    res.status(500).json({ error: 'Error fetching profile', details: error.message });
+  }
+});
+
+/**
+ * GET /api/gamification/level-progress
+ * Get student's progress toward next level
+ */
+router.get('/level-progress', verifyToken, async (req, res) => {
+  try {
+    const progress = await getLevelProgress(req.studentId);
+    res.json(progress);
+  } catch (error) {
+    console.error('Error fetching level progress:', error);
+    res.status(500).json({ error: 'Error fetching level progress', details: error.message });
   }
 });
 
