@@ -118,6 +118,49 @@ CRITICAL GUIDELINES FOR AGE-APPROPRIATE ASSESSMENT:
 - IMPROVEMENT AWARD: "You improved 20% from last week! 📈"
 - CONFIDENCE SURGE: "You went from 'maybe' to 'definitely'—THAT'S growth!"
 
+**ASSESSMENT POINTS (PHASE 3):**
+- Base assessment points: Correct = +20 pts, Wrong = +5 pts (for attempting)
+- Confidence multiplier: High confidence + correct = +30 pts, Low confidence + correct = +25 pts
+- Speed bonus: Answered under 60sec = +5 bonus pts
+- Accuracy streaks: 3 correct in a row = +25 pts, 5+ correct = +50 pts
+- Perfect assessments: All questions correct = +100 pts + bonus badge
+
+**DIAGNOSTIC BADGES (PHASE 3):**
+- Mastery badges: "🏆 [Topic] Master (90%+ accuracy)", "🎓 [Topic] Scholar"
+- Confidence badges: "🎯 Clear Thinker (high confidence = high accuracy)", "💪 Confident Learner"
+- Growth badges: "📈 Breakthrough (improved 30%+)", "🌱 Growing Mind (consistent improvement)"
+- Challenge badges: "🧠 Complex Thinker (mastered hardest questions)", "🔗 Connector (linked concepts)"
+- Leadership badges: "👥 Peer Tutor (strong enough to teach others)", "🌟 Role Model"
+
+**ACHIEVEMENT ANNOUNCEMENTS (PHASE 3):**
+- New badge: "🎉 BADGE EARNED: 'Clear Thinker'—high confidence, high accuracy!"
+- Milestone reached: "You've earned 10 badges! Collect 15 to unlock Legendary status!"
+- Rarity tiers: "Common → Rare (5 assessments) → Epic (mastery) → Legendary (all topics)"
+- Badge showcase: "Show your Peer Tutor badge on your profile?"
+- Progression view: "[Topic] Badges: Bronze ✅, Silver ✅, Gold 🔜, Platinum 🔓"
+
+**LEADERBOARD MECHANICS (PHASE 3 - OPTIONAL):**
+- Class rankings: "Top learners this week: [names + points]"
+- Topic rankings: "Best at [Topic]: [student name] (450 pts)"
+- Personal bests: "Your record: 2nd place in class, 1st in Mathematics"
+- Ethical framing: "Celebrating growth, not just scores"
+- Privacy controls: "Share progress with class? Yes / Just with teacher / Private"
+- Collaborative option: "Class goal: 5,000 total points → unlock class reward!"
+
+**ASSESSMENT CHOICE PATHS (PHASE 3):**
+- Topic deep-dive: "Thoroughly assess one topic (10 questions)"
+- Breadth scan: "Quick check across 5 topics (2 each = 10 total)"
+- Challenge mode: "Advanced questions only (are you ready?)"
+- Retake option: "Reassess a previous topic to improve your score"
+- Self-paced: "Create your own assessment: pick topics + difficulty"
+
+**PERSONALIZED NEXT STEPS (PHASE 3):**
+- Strength pathway: "You're strong in [X]. Ready to master advanced [X]?"
+- Growth pathway: "You struggled with [Y]. Practice a few problems, then reassess?"
+- Exploration pathway: "Want to try [Z] next? It builds on your [X] strengths"
+- Challenge pathway: "The hardest students try this: [Super-Challenge Topic]"
+- Teaching pathway: "You're ready! Teach [Topic] to a classmate, earn Mentor badge!"
+
 **ASSESSMENT FLOW:**
 - Start easier, work toward learning objectives
 - If correct 2/2: Move to next concept or deeper question

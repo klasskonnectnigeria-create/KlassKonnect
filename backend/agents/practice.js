@@ -110,6 +110,41 @@ CRITICAL GUIDELINES FOR AGE-APPROPRIATE PRACTICE:
 - Problem milestone: "ACHIEVEMENT UNLOCKED: Solved 100 problems! 🚀"
 - Concept mastery: "MASTERY BONUS: You can now teach this to other students!"
 
+**POINTS & REWARDS (PHASE 3):**
+- Per-problem points: Correct = +10 pts, Correct+fast = +15 pts, Correct+explain = +20 pts
+- Streak bonuses: 3-streak = +5 pts, 5-streak = +15 pts, 10-streak = +50 pts
+- Difficulty bonus: Hard problem correct = +25 pts, Medium = +15 pts, Easy = +10 pts
+- Speed rewards: Under 30sec = +5 bonus, Under 20sec = +10 bonus
+- Point narrative: "You earned 25 points! (20 base + 5 speed bonus)"
+
+**ACHIEVEMENT BADGES (PHASE 3):**
+- Accuracy badges: "💯 Perfection (10 correct in a row)", "🎯 Sharpshooter (95%+ accuracy)"
+- Speed badges: "⚡ Speed Demon (solved 10 in <5 min)", "🏃 Lightning Learner"
+- Consistency badges: "🔥 Streak Master (100-problem streak)", "🌟 Daily Driver (practiced 30 days)"
+- Challenge badges: "🏔️ Hard Mode Hero (5 hard problems)", "🧩 Puzzle Solver (mastered complex problems)"
+- Technique badges: "🧠 Explainer (showed work on 20 problems)", "✍️ Writer (detailed all steps)"
+
+**BADGE PROGRESSION (PHASE 3):**
+- Show progress: "Sharpshooter badge: 80% accuracy (need 95%) — You're close!"
+- Level up: "🎉 BADGE UNLOCKED: Speed Demon! You solved 10 in <5 minutes!"
+- Collection view: "Your badges (4): [icon] [icon] [icon] [icon]"
+- Rare badge teases: "🔓 Unlock Legendary badges by mastering 3 hard-problem sets!"
+- Social value: "Share your Speed Demon badge with classmates?"
+
+**CHALLENGE MODES (PHASE 3):**
+- Timed challenges: "Can you solve 5 in under 3 minutes? Earn ⚡ bonus!"
+- Accuracy challenges: "Get 10 in a row without mistakes—earn a badge!"
+- Teaching challenges: "Explain your work on 5 problems → earn Mentor badge!"
+- Problem creation: "Write your own hard problem → earn Creator badge!"
+- Combo challenges: "Combine speed + accuracy + explanation → earn Legendary!"
+
+**LEARNING CHOICE PATHS (PHASE 3):**
+- "Quick drill" (5-10 easy problems) → Fast wins, build confidence
+- "Master mode" (3-5 hard problems) → Deep learning, big points
+- "Speed run" (10-15 with timer) → Earn speed badge, accuracy bonus
+- "Teaching trail" (solve + explain each one) → Mentor badge, teacher points
+- "Creative quest" (invent problems, solve others' problems) → Creator badge
+
 **DIFFICULTY PROGRESSION:**
 - Track: Is student getting problems right? (Y=harder, N/partial=stay at level)
 - Signal when increasing: "You're ready for a tougher one now! 💪"
