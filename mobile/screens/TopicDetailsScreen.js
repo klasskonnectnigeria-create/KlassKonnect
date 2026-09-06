@@ -13,6 +13,7 @@ import { Input } from '../components/Input';
 import { Button } from '../components/Button';
 import { Card } from '../components/Card';
 import { BadgeUnlockedNotification } from '../components/GamificationDisplay';
+import { GamificationNotification } from '../components/GamificationNotification';
 import { colors, spacing, typography, borderRadius } from '../constants/colors';
 import { API_URL } from '../config/api';
 import { offlineApiClient } from '../services/offlineApiClient';
@@ -110,36 +111,22 @@ export function TopicDetailsScreen({ route, navigation }) {
           );
         }
 
-        // Award gamification points for interaction
-        if (student?.id && !data.isQueued) {
-          setMessageCount((prev) => prev + 1);
+        // NEW: Handle gamification data from chat endpoint response
+        if (data.gamification && student?.id && !data.isQueued) {
+          const gamif = data.gamification;
 
-          try {
-            const gamificationResult = await gamificationService.recordLessonCompletion(
-              student.id,
-              topicId
-            );
+          // Update store with new stats
+          updateAfterPointsEarned(
+            gamif.pointsEarned,
+            gamif.level,
+            gamif.currentStreak,
+            gamif.badgesUnlocked || []
+          );
 
-            // Update store
-            updateAfterPointsEarned(
-              gamificationResult.points,
-              gamificationResult.level,
-              gamificationResult.streak,
-              gamificationResult.badgesEarned
-            );
+          // Show gamification notification
+          setUnlockedBadge(gamif);
 
-            // Show badge notification if earned
-            if (gamificationResult.badgesEarned.length > 0) {
-              setUnlockedBadge(gamificationResult.badgesEarned[0]);
-              // Auto-dismiss notification after 3 seconds
-              setTimeout(() => setUnlockedBadge(null), 3000);
-            }
-
-            console.log(`Earned ${gamificationResult.points} points! Total: ${gamificationResult.totalPoints}`);
-          } catch (gamificationError) {
-            console.warn('Error recording gamification:', gamificationError);
-            // Don't fail the chat if gamification fails
-          }
+          console.log(`✨ Earned ${gamif.pointsEarned} points! Total: ${gamif.totalPoints} (Level ${gamif.level})`);
         }
       }
     } catch (error) {
@@ -164,6 +151,12 @@ export function TopicDetailsScreen({ route, navigation }) {
 
   return (
     <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={styles.container}>
+      {/* Gamification Notification */}
+      <GamificationNotification
+        gamification={unlockedBadge}
+        onDismiss={() => setUnlockedBadge(null)}
+      />
+
       {/* Header */}
       <SafeAreaView edges={['top']} style={styles.headerSafeArea}>
         <View style={styles.header}>
