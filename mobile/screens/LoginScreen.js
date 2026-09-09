@@ -118,7 +118,7 @@ export function LoginScreen({ navigation, onGoToSignup }) {
               </Text>
 
               <Text style={styles.tagline}>
-                LEARN YOUR WAY, IN YOUR CURRICULUM.
+                YOUR PERSONAL AI TUTOR
               </Text>
             </View>
 
@@ -296,10 +296,12 @@ const styles = StyleSheet.create({
     color: colors.primary // Konnect Blue
   },
 
-  // Official tagline: always uppercase, letterspaced, never below 9px (see CLAUDE.md).
+  // Official tagline: single-color (no two-tone split — "Your Personal AI Tutor" doesn't
+  // divide into two clauses the way the old tagline did), uppercase, letterspaced (see
+  // CLAUDE.md).
   tagline: {
     marginTop: spacing.sm,
-    color: colors.text.secondary,
+    color: colors.primaryDark, // Ink Navy
     fontSize: 11,
     lineHeight: 16,
     fontWeight: '600',

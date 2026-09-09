@@ -148,13 +148,12 @@ color, never outlined to fake it. Minimum sizes: mark 20px, compact lockup 120px
 lockup with tagline 220px wide. Clear space = half the bubble height on all sides, measured
 from the tail tip.
 
-**Tagline**: "LEARN YOUR WAY, IN YOUR CURRICULUM." — always uppercase, letterspaced 0.16em,
-never below 9px, never sentence case. **Two-tone, not single-color**: "LEARN YOUR WAY," in Ink
-Navy, "IN YOUR CURRICULUM." in Deep Yellow `#7F4F00` (the same text-safe shade of Signal
-Yellow noted above — one color, two names depending on context). The app's current
-implementation (`LoginScreen.js`) renders the whole tagline in one flat gray and doesn't split
-the two-tone color or use the 0.16em spacing value — not yet corrected to match this; see
-"Brand migration status" below.
+**Tagline**: "YOUR PERSONAL AI TUTOR" (updated 2026-09-09, replacing the earlier "LEARN YOUR
+WAY, IN YOUR CURRICULUM." — permanent change, everywhere the tagline appears). Uppercase,
+letterspaced, never below 9px. **Single color**, not two-tone: unlike the old tagline, this
+one doesn't split into two clauses, so there's no natural place to divide a two-color
+treatment — render it in one color (Ink Navy in the current `LoginScreen.js` implementation).
+Don't reintroduce a two-tone split for this text.
 
 **Hard rules**: no stretching or rotating the wordmark; never recolor "Klass" and "Konnect"
 separately from the pair; no photo behind the mark without a solid tile.
@@ -169,8 +168,10 @@ literally one of the 4 core hexes is commented "derived" in the file for design 
 hardcoded hex values that used to bypass the token file (`GamificationDisplay.js` ×6,
 `HomeScreen.js` ×2, `ThemesScreen.js` ×1, `TopicDetailsScreen.js` ×2, `app/(app)/_layout.js`
 ×1) all now reference tokens instead. `LoginScreen.js` renders a real two-tone wordmark
-("Klass" in Ink Navy, "Konnect" in Konnect Blue) and the tagline text (see below for what's
-still wrong about it). The app icon, Android adaptive icon, splash screen, and web favicon are
+("Klass" in Ink Navy, "Konnect" in Konnect Blue) and the current tagline ("YOUR PERSONAL AI
+TUTOR") in single-color Ink Navy, uppercase and letterspaced, matching the spec above (updated
+2026-09-09 along with the tagline text itself). The app icon, Android adaptive icon, splash
+screen, and web favicon are
 all wired in `mobile/app.json` and `mobile/assets/` from the real logo
 (`KlassKonnect_Logo_Assets_v2.zip`) — verified via actual `xcrun simctl` screenshots showing
 the K-mark on the home screen icon and Ink Navy on the splash background, not just source-file
@@ -178,9 +179,6 @@ inspection. `PHASE2_SUMMARY.md` has a dated note flagging its old-palette "Desig
 section as a historical build-log snapshot, not current brand.
 
 **Still open, not yet done:**
-- **Tagline color/spacing**: `LoginScreen.js`'s tagline renders as one flat gray, not the
-  two-tone Ink-Navy/Deep-Yellow split, and doesn't use the 0.16em letterspacing value — both
-  added to the spec above after the initial LoginScreen implementation.
 - **Typography**: Archivo/Plus Jakarta Sans aren't loaded or applied anywhere — the app still
   renders in the platform default system font. No font files, `expo-font` usage, or
   `fontFamily` references exist yet.
@@ -465,8 +463,10 @@ canonical K-in-bubble mark once the fuller `KK_ASSETS_CLAUDE.md` spec was found.
 final wired-in asset (`mobile/assets/icon.png`, commit `613fe30a`) was directly re-inspected
 during this session and confirmed correct: an Ink Navy speech-bubble shape with a white "K"
 knocked out and a Signal Yellow accent dot — no re-wiring needed. Typography (Archivo/Plus
-Jakarta Sans) and the two-tone tagline remain genuinely open, exactly as already documented
-above.
+Jakarta Sans) remains genuinely open, exactly as already documented above. The tagline itself
+changed the same day (see "Official KlassKonnect brand" above) — "YOUR PERSONAL AI TUTOR"
+replaced "LEARN YOUR WAY, IN YOUR CURRICULUM." everywhere, dropping the two-tone treatment
+since the new text doesn't split into two clauses; `LoginScreen.js` is updated to match.
 
 ---
 
@@ -577,9 +577,16 @@ above.
 - **JSS1 Fashion Design and Garment Making has a provenance gap of its own**: live in the DB
   from a prior session whose source file was never committed. A later session reconciled this
   by committing the file without re-importing — see `JSS1-Content-Completion-Status.md`.
-- **Brand migration — colors and logo are done; typography and tagline styling are not** —
-  see "Brand migration status" under "Brand & design system" above before starting any further
-  UI work. Remaining: load Archivo/Plus Jakarta Sans and apply them, fix `LoginScreen.js`'s
-  tagline to the two-tone Ink-Navy/Deep-Yellow + 0.16em spec, and review `SignupScreen.js`'s
-  branding copy. Subject-identity colors are documented but deliberately unbuilt — no feature
-  exists to attach them to.
+- **Brand migration — colors, logo, and tagline are done; typography is not** — see "Brand
+  migration status" under "Brand & design system" above before starting any further UI work.
+  Remaining: load Archivo/Plus Jakarta Sans and apply them, and review `SignupScreen.js`'s
+  "Join KlassKonnect today" branding copy against the current spec. Subject-identity colors
+  are documented but deliberately unbuilt — no feature exists to attach them to.
+- **`mobile/assets/splash.png` (the source asset file, not the compiled native splash) still
+  has the retired "LEARN YOUR WAY," / "IN YOUR CURRICULUM." tagline baked into it as pixels,
+  alongside a full logo+wordmark composition.** This does not currently render live anywhere —
+  verified via simulator screenshots that the actual compiled native splash screen only shows
+  a small 100×100 logo mark (see `SplashScreenLogo.imageset`), not this full image — so it's a
+  dormant, stale source file rather than a live user-facing bug. Still worth regenerating with
+  the new tagline (or removing the baked-in text entirely) so the source asset doesn't silently
+  contradict the live brand the next time someone opens it, but it's not blocking anything.
