@@ -28,12 +28,13 @@ export function TopicDetailsScreen({ route, navigation }) {
   const { updateAfterPointsEarned } = useGamificationStore();
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState('content'); // 'content', 'chat'
-  const [agentType, setAgentType] = useState('tutor'); // 'tutor', 'practice', 'assessment'
+  const [agentType, setAgentType] = useState('tutor'); // 'tutor', 'practice', 'assessment', 'exam_prep'
   const [message, setMessage] = useState('');
   const [chatMessages, setChatMessages] = useState([]);
   const [chatLoading, setChatLoading] = useState(false);
   const [unlockedBadge, setUnlockedBadge] = useState(null);
   const [messageCount, setMessageCount] = useState(0);
+  const isExamPrepEligible = student?.grade === 'SS3';
 
   useEffect(() => {
     loadTopicDetails();
@@ -281,7 +282,8 @@ export function TopicDetailsScreen({ route, navigation }) {
               {[
                 { type: 'tutor', icon: '🧑‍🏫', label: 'Tutor' },
                 { type: 'practice', icon: '✏️', label: 'Practice' },
-                { type: 'assessment', icon: '📋', label: 'Test' }
+                { type: 'assessment', icon: '📋', label: 'Test' },
+                ...(isExamPrepEligible ? [{ type: 'exam_prep', icon: '🎓', label: 'Exam Prep' }] : [])
               ].map(({ type, icon, label }) => (
                 <TouchableOpacity
                   key={type}
@@ -311,11 +313,13 @@ export function TopicDetailsScreen({ route, navigation }) {
                   {agentType === 'tutor' && '👋 Welcome to AI Tutor'}
                   {agentType === 'practice' && '✏️ Let\'s Practice'}
                   {agentType === 'assessment' && '📋 Test Your Knowledge'}
+                  {agentType === 'exam_prep' && '🎓 WAEC/UTME Exam Prep'}
                 </Text>
                 <Text style={[styles.emptyStateText, typography.body2]}>
                   {agentType === 'tutor' && `Ask me anything about ${topicName}. I'm here to help you learn!`}
                   {agentType === 'practice' && `Let's work through some problems about ${topicName} together!`}
                   {agentType === 'assessment' && `Answer these questions to test your understanding of ${topicName}.`}
+                  {agentType === 'exam_prep' && `Prepare for WAEC/UTME exams with past questions and strategies for ${topicName}.`}
                 </Text>
                 <View style={styles.suggestedQuestions}>
                   <Text style={[styles.suggestLabel, typography.body2]}>Try asking:</Text>
@@ -338,6 +342,13 @@ export function TopicDetailsScreen({ route, navigation }) {
                       <Text style={[styles.suggestion, typography.body2]}>• Start a quiz</Text>
                       <Text style={[styles.suggestion, typography.body2]}>• Test me on {topicName}</Text>
                       <Text style={[styles.suggestion, typography.body2]}>• Check my knowledge</Text>
+                    </>
+                  )}
+                  {agentType === 'exam_prep' && (
+                    <>
+                      <Text style={[styles.suggestion, typography.body2]}>• Show me past WAEC questions</Text>
+                      <Text style={[styles.suggestion, typography.body2]}>• High-frequency topics</Text>
+                      <Text style={[styles.suggestion, typography.body2]}>• Exam strategies for {topicName}</Text>
                     </>
                   )}
                 </View>

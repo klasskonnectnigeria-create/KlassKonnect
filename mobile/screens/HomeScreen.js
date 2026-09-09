@@ -178,6 +178,26 @@ export function HomeScreen({ onLogout }) {
       <StreakDisplay currentStreak={currentStreak} longestStreak={longestStreak} />
       {badges.length > 0 && <BadgesDisplay badges={badges} limit={6} />}
 
+      {/* WAEC/UTME Exam Prep (SS3 only) */}
+      {student?.grade === 'SS3' && (
+        <>
+          <Text style={[styles.sectionTitle, typography.subtitle1]}>
+            🎓 Exam Preparation
+          </Text>
+          <Card variant="elevated" style={styles.examPrepCard}>
+            <Text style={[styles.examPrepTitle, typography.subtitle2]}>
+              WAEC/UTME Exam Prep
+            </Text>
+            <Text style={[styles.examPrepDescription, typography.body2]}>
+              Prepare for WAEC and UTME exams with past questions, mock tests, study guides, and high-frequency topics.
+            </Text>
+            <Text style={[styles.examPrepHint, typography.caption]}>
+              💡 Tip: Select "Exam Prep" mode in any subject topic to access exam materials
+            </Text>
+          </Card>
+        </>
+      )}
+
       {/* Themes */}
       <Text style={[styles.sectionTitle, typography.subtitle1]}>
         📚 {student?.grade ? `${student.grade} Subjects` : 'Your Subjects'}
@@ -361,5 +381,23 @@ const styles = StyleSheet.create({
   },
   ctaText: {
     color: colors.text.secondary
+  },
+  examPrepCard: {
+    backgroundColor: '#E8F5E9',
+    borderColor: '#66BB6A',
+    marginBottom: spacing.lg
+  },
+  examPrepTitle: {
+    color: '#2E7D32',
+    fontWeight: '600',
+    marginBottom: spacing.xs
+  },
+  examPrepDescription: {
+    color: '#388E3C',
+    marginBottom: spacing.sm
+  },
+  examPrepHint: {
+    color: '#558B2F',
+    fontStyle: 'italic'
   }
 });
