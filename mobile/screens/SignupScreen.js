@@ -6,7 +6,7 @@ import { Button } from '../components/Button';
 import { colors, spacing, typography } from '../constants/colors';
 import { API_URL } from '../config/api';
 
-const GRADES = ['Primary 4', 'Primary 5', 'Primary 6', 'JSS1', 'JSS2', 'JSS3', 'SS1', 'SS2', 'SS3'];
+const GRADES = ['Primary 1', 'Primary 2', 'Primary 3', 'Primary 4', 'Primary 5', 'Primary 6', 'JSS1', 'JSS2', 'JSS3', 'SS1', 'SS2', 'SS3'];
 
 export function SignupScreen({ onSignupSuccess, onLogin }) {
   const [fullName, setFullName] = useState('');
