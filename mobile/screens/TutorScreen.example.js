@@ -20,7 +20,7 @@ import {
 } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import axios from 'axios';
-import GamificationNotification from '../components/GamificationNotification';
+import { GamificationNotification } from '../components/GamificationNotification';
 
 const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
 

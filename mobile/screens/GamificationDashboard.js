@@ -82,7 +82,7 @@ const StatCard = ({ icon, label, value, color = '#1B54F5' }) => (
   </View>
 );
 
-export default function GamificationDashboard({ token }) {
+export function GamificationDashboard({ token }) {
   const [profile, setProfile] = useState(null);
   const [levelProgress, setLevelProgress] = useState(null);
   const [loading, setLoading] = useState(true);

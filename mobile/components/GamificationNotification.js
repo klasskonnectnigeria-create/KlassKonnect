@@ -15,7 +15,7 @@ const { width, height } = Dimensions.get('window');
  * Displays achievement notifications for gamification events
  * Shows: points earned, streaks, level ups, badges
  */
-export default function GamificationNotification({ gamification, onDismiss }) {
+export function GamificationNotification({ gamification, onDismiss }) {
   const [animValue] = useState(new Animated.Value(0));
   const [visible, setVisible] = useState(!!gamification);
 
