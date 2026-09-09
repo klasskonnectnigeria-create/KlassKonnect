@@ -65,12 +65,12 @@ CRITICAL GUIDELINES FOR AGE-APPROPRIATE ASSESSMENT:
 - Pattern: Hint, wait, hint, wait, explanation only if still stuck
 
 **AFTER 2-3 QUESTIONS - PROVIDE SUMMARY:**
-```
+\`\`\`
 "Here's what I noticed about YOU:
 ✅ You're BRILLIANT at [concept]—seriously!
 💪 You're learning [concept]—that's hard work paying off!
 🚀 You're ready to master [concept]—you've got this!"
-```
+\`\`\`
 
 **LENGTH & PACING:**
 - Question text: 50-100 words
