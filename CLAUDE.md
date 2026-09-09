@@ -13,6 +13,11 @@ This loads this file's full context (current state, brand system, open items, op
 conventions) before any work begins. If Claude Code offers to resume a prior session, prefer
 that when continuing recent work; start fresh only when beginning something new.
 
+As of 2026-09-09, `origin/main` is at `5b9e3b31` following a full review-and-cleanup session
+that audited 10 previously-unreviewed local commits alongside 5 new ones (18 total) — see
+"Full review-and-cleanup session (2026-09-09)" under "Current state" below for what it caught
+and fixed, and "Open items" for what's still outstanding.
+
 ## Operating conventions
 
 ### NERDC curriculum sourcing — always use the subagent
@@ -187,7 +192,7 @@ section as a historical build-log snapshot, not current brand.
 
 ---
 
-## Current state (as of 2026-09-05)
+## Current state (as of 2026-09-09)
 
 ### Curriculum content, by grade
 
@@ -400,6 +405,68 @@ plus one unrelated content-duplication bug:
   committed — do not commit staged changes, or trust a task's self-reported summary, without
   that check.** Every subsequent task in that same batch was re-verified this way before
   committing and came back clean.
+
+### Full review-and-cleanup session (2026-09-09)
+
+A single session did a ground-up audit of everything sitting locally-committed-but-unpushed on
+`main`: 10 pre-existing local commits that had never been reviewed (a gamification/engagement
+system built 2026-09-06) plus 5 new commits from the session itself — 18 commits total, now
+pushed to `origin/main` at `5b9e3b31`. What the review specifically caught and fixed:
+
+- **A backend-boot-breaking syntax error in `assessment.js`.** An unescaped ` ``` ` markdown
+  fence inside its `systemPrompt` template literal (present since commit `07520cc3`,
+  2026-09-06) prematurely closed the string, turning the following prose into invalid
+  JavaScript. Since `orchestrator.js` statically imports `assessmentAgent`, the whole backend
+  would have failed to boot on this branch as originally committed — not caught by any earlier
+  pass, only surfaced by running `node --check` during this review. Fixed (commit `f230a8e3`);
+  every `backend/**/*.js` file verified clean afterward.
+- **Fabricated WAEC/UTME question-bank content, deleted.** Files claiming to be real past WAEC
+  papers, exam frameworks, and study guides (`waec_utme_framework.js`,
+  `past_questions_sample.json`, `social_science_humanities_content.json`,
+  `study_guides_by_subject.json`, plus an abandoned MySQL-dialect schema draft and empty SQL
+  stubs) turned out to be generic AI-generated placeholder content with zero real sourcing —
+  one file's own metadata admitted "Sample data - to be populated with authenticated past
+  papers." None of it ever reached production: the Postgres schema these files' tables matched
+  (`waec_schema_postgres.sql`, kept, now with an explicit "no real data" warning header) was
+  checked directly against the live DB and every table had 0 rows. Deleted rather than
+  committed, since it directly contradicted this project's sourcing discipline and would have
+  misled a future session into thinking real WAEC content existed.
+- **A gamification fabrication problem in the tutor/practice/assessment prompts.** The Phase
+  2/3 engagement commits (`eca663b8`, `ef25e9dd`) instructed the AI to state specific invented
+  numbers directly to students — streak counts, topic-mastery percentages, point totals, and
+  badge-unlock announcements — while zero real streak/progress/points/badge data is ever passed
+  into these agents' prompt context (verified: they only receive `studentName`, `grade`, and
+  topic content). `assessment.js` additionally had a fake leaderboard section instructing the
+  model to state other students' fabricated names and scores. Stripped from all three agents
+  (commit `8ddccef4`), keeping only what's legitimately groundable — encouragement for a good
+  run observed within the current conversation, real in-session difficulty adjustment, and
+  choice-path offerings framed as options rather than promised rewards. The backend
+  `isCorrect`/badge-wiring correctness signal is a separate, still-open problem — see Open
+  items.
+- **A routing bug in the new exam-prep agent.** `detectIntent()` matched the bare substring
+  `'exam'`, so any message containing "example" would misroute to the exam-prep agent instead
+  of tutor — the same bug class as the earlier `'question'` substring bug (`70c1e844`). Fixed
+  by narrowing to specific phrasings (commit `be786ef0`).
+
+Real work reviewed and kept, not just bugs found: the exam-prep agent itself (`examPrep.js`,
+following the same pattern as tutor/practice/assessment, wired into the orchestrator and the
+mobile UI) is sound; the gamification backend/UI is kept with its crash-causing default/named
+export mismatches fixed (commit `b0f79022` — `GamificationNotification.js` and
+`GamificationDashboard.js` were rendering as `undefined` and would have crashed the Topic
+Details and Achievements screens) while its correctness-signal redesign remains open; and
+Primary 1-3 curriculum content — real, sourced, already live in production since 2026-09-07 but
+never committed until this session — is now documented in the grade table above, with its
+content-depth gap (learning outcomes only, no `learning_activities`/`evaluation_guides`) tracked
+as an open item.
+
+One provenance note on the brand/logo work (see "Brand & design system" above): it went through
+two iterations before landing on the current spec — an early exploratory mark, then the
+canonical K-in-bubble mark once the fuller `KK_ASSETS_CLAUDE.md` spec was found. The
+final wired-in asset (`mobile/assets/icon.png`, commit `613fe30a`) was directly re-inspected
+during this session and confirmed correct: an Ink Navy speech-bubble shape with a white "K"
+knocked out and a Signal Yellow accent dot — no re-wiring needed. Typography (Archivo/Plus
+Jakarta Sans) and the two-tone tagline remain genuinely open, exactly as already documented
+above.
 
 ---
 
