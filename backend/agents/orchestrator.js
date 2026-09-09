@@ -1,6 +1,7 @@
 import { tutorAgent } from './tutor.js';
 import { assessmentAgent } from './assessment.js';
 import { practiceAgent } from './practice.js';
+import { examPrepAgent } from './examPrep.js';
 
 // Orchestrator - routes queries to appropriate agents based on intent
 export async function orchestrateQuery(context) {
@@ -19,6 +20,9 @@ export async function orchestrateQuery(context) {
       break;
     case 'practice':
       agentFunction = practiceAgent;
+      break;
+    case 'exam_prep':
+      agentFunction = examPrepAgent;
       break;
     case 'tutor':
     default:
@@ -46,6 +50,28 @@ export async function orchestrateQuery(context) {
 // Detect student's intent from message - improved detection
 function detectIntent(message) {
   const lowerMessage = message.toLowerCase().trim();
+
+  // Exam prep intent - WAEC, UTME, past questions, exam strategies
+  if (
+    lowerMessage.includes('waec') ||
+    lowerMessage.includes('utme') ||
+    lowerMessage.includes('past question') ||
+    lowerMessage.includes('past paper') ||
+    lowerMessage.includes('mock test') ||
+    lowerMessage.includes('exam strategy') ||
+    lowerMessage.includes('exam tips') ||
+    lowerMessage.includes('exam prep') ||
+    lowerMessage.includes('high-frequency') ||
+    lowerMessage.includes('exam preparation') ||
+    lowerMessage.includes('entrance exam') ||
+    lowerMessage.includes('for my exam') ||
+    lowerMessage.includes('for the exam') ||
+    lowerMessage.includes('before my exam') ||
+    lowerMessage.includes('exam questions') ||
+    lowerMessage.includes('exam practice')
+  ) {
+    return 'exam_prep';
+  }
 
   // Assessment intent - testing, checking understanding
   if (
@@ -102,7 +128,8 @@ function suggestNextStep(agentType) {
   const suggestions = {
     tutor: 'Next, would you like to practice some problems to apply what you learned?',
     assessment: 'Based on that, would you like me to teach more or try harder problems?',
-    practice: 'Great work! Ready for another problem or want to review the concept?'
+    practice: 'Great work! Ready for another problem or want to review the concept?',
+    exam_prep: 'Ready for another past question or want to explore high-frequency topics?'
   };
 
   return suggestions[agentType] || suggestions.tutor;
