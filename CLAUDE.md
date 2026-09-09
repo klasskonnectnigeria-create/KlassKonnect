@@ -405,14 +405,43 @@ plus one unrelated content-duplication bug:
 
 ## Open items
 
-- **Gamification rewards praise-language detection in AI responses, not actual answer
-  correctness — needs redesign to only fire from practice/assessment agents with an explicit
-  correctness signal, not by scanning tutor replies for encouraging phrases.** Relatedly,
-  `checkBadgeQualifications`/`awardBadge` (`backend/services/gamificationService.js`) are
-  never called from the live chat flow (`backend/routes/agents.js` only calls
-  `updateGamificationStats`/`getLevelProgress`/`getStudentGamificationProfile`) — badges can
-  currently never be earned through real usage. Fold this into the same redesign: fixing the
-  correctness signal will likely mean wiring badge-checking up properly at the same time.
+- **Gamification is disconnected from real state in two places — one is a flawed signal, the
+  other is model fabrication of specific claims to students.** (1) The backend `isCorrect`
+  heuristic (`backend/routes/agents.js`) detects praise language in AI responses, not actual
+  answer correctness — needs redesign to only fire from practice/assessment agents with an
+  explicit correctness signal, not by scanning tutor replies for encouraging phrases.
+  Relatedly, `checkBadgeQualifications`/`awardBadge`
+  (`backend/services/gamificationService.js`) are never called from the live chat flow
+  (`agents.js` only calls `updateGamificationStats`/`getLevelProgress`/
+  `getStudentGamificationProfile`) — badges can currently never be earned through real usage.
+  (2) **More severe**: the Phase 2/3 engagement prompt commits (`eca663b8`, `ef25e9dd`)
+  instruct the tutor/practice/assessment agents to state specific numbers and events directly
+  to students — streak counts ("You're on a 3-question streak!"), mastery percentages ("You've
+  learned 60% of this topic"), point totals ("Total learning points: 342"), and badge-unlock
+  announcements ("🎉 BADGE UNLOCKED: 'Curious Mind'!") — while zero real streak, mastery,
+  point, or badge data is ever passed into these agents' prompt context (verified: `tutorAgent`
+  etc. only receive `studentName`, `grade`, and topic content). The model has no grounding for
+  any of these numbers and fabricates them on demand; some invented badge tiers (Bronze/Silver/
+  Gold, Common→Rare→Epic→Legendary rarity) don't exist anywhere in the real `BADGES` config
+  either. This is model fabrication of specific claims to a student, not just a flawed
+  correctness signal — a more serious instance of the same "gamification state disconnected
+  from reality" problem, and directly against this project's own anti-fabrication principle
+  (see bug 5 above and the WAEC/UTME content cleanup). Fix all of this together: a real
+  correctness signal, real badge-award wiring, and prompt instructions that only ever narrate
+  gamification data actually passed into context — never invented numbers.
+- **Residual subject-bias in the tutor/practice/assessment prompt templates (lower priority,
+  not blocking).** These templates correctly use `${subject}`/`${studentName}` (no
+  reintroduction of the hardcoded-"mathematics" bug 1), but nearly every illustrative example
+  added across `07520cc3`/`ebeea438`/etc. is a math word problem (₦ prices, fractions,
+  distances), and `ebeea438` left the literal phrase "that's mathematician thinking!" in the
+  generic tutor template used for every subject. Not a functional bug, but a softer version of
+  the same failure mode — worth a pass to genericize the examples across subjects.
+- **Prompt bloat in tutor.js/practice.js/assessment.js (lower priority, not blocking).** Five
+  stacked commits (`07520cc3`, `ebeea438`, `eca663b8`, `ef25e9dd`, `5ee3d316`) grew each
+  agent's system prompt to 237-262 lines, sent in full on every chat message, with real overlap
+  between phases (praise-language guidance independently restated in Phase 1, Phase 2's
+  "surprise bonuses," and Phase 3's "badge announcements"). Ongoing latency/token-cost concern
+  worth a consolidation pass, separate from the correctness issues above.
 - **Primary 1-3 content is live but thin — learning outcomes only, no lesson content.**
   `import-primary-curriculum.js` only writes to the `content` table with
   `section_type = 'learning_outcome'` (verified directly against the live DB: every Primary
