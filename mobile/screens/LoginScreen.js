@@ -13,6 +13,7 @@ import {
 } from 'react-native';
 
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 import { useAuthStore } from '../store/authStore';
 import { Input } from '../components/Input';
@@ -131,7 +132,9 @@ export function LoginScreen({ navigation, onGoToSignup }) {
                 keyboardType="email-address"
                 autoCapitalize="none"
                 autoCorrect={false}
-                leftIcon={<Text style={{ fontSize: 18 }}>✉️</Text>}
+                leftIcon={
+                  <MaterialCommunityIcons name="email" size={20} color={colors.text.secondary} />
+                }
                 error={error && !email ? 'Email is required' : ''}
                 style={styles.input}
               />
@@ -144,8 +147,16 @@ export function LoginScreen({ navigation, onGoToSignup }) {
                 secureTextEntry={!showPassword}
                 autoCapitalize="none"
                 autoCorrect={false}
-                leftIcon={<Text style={{ fontSize: 18 }}>🔒</Text>}
-                rightIcon={<Text style={{ fontSize: 18 }}>{showPassword ? '🙈' : '👁️'}</Text>}
+                leftIcon={
+                  <MaterialCommunityIcons name="lock" size={20} color={colors.text.secondary} />
+                }
+                rightIcon={
+                  <MaterialCommunityIcons
+                    name={showPassword ? 'eye-off' : 'eye'}
+                    size={20}
+                    color={colors.text.secondary}
+                  />
+                }
                 onRightIconPress={() =>
                   setShowPassword(prev => !prev)
                 }
