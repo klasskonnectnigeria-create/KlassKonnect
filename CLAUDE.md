@@ -193,6 +193,9 @@ section as a historical build-log snapshot, not current brand.
 
 | Grade tier | Live subjects | Target | Status |
 |---|---|---|---|
+| Primary 1 | 6 | not yet reconciled | Live content, thin — learning outcomes only, no full lesson content (see below) |
+| Primary 2 | 4 | not yet reconciled | Live content, thin — learning outcomes only, no full lesson content (see below) |
+| Primary 3 | 5 | not yet reconciled | Live content, thin — learning outcomes only, no full lesson content (see below) |
 | Primary 4 | 15 | 16 (NESRI 2025) | Arabic Language unresolved (sole gap) |
 | Primary 5 | 15 | 16 (NESRI 2025) | Arabic Language unresolved (sole gap) |
 | Primary 6 | 15 | 16 (NESRI 2025) | Arabic Language unresolved (sole gap) |
@@ -220,6 +223,21 @@ Nigerian History/Basic Digital Literacy/Physical & Health Education entries.) Al
 converged on the identical outcome — 15 of 16, Arabic Language the sole gap — independently.
 See "Open items" below for why Arabic Language isn't just unsourced but genuinely unresourceable
 right now, and for a provenance caveat on some Primary 4/5 subjects.
+
+**Primary 1-3** are live with real, sourced content — imported 2026-09-07 via
+`backend/scripts/import-primary-curriculum.js` from `backend/scripts/curriculum-data/
+primary_1_curriculum_data.js`, `primary_1_social_studies_cca_phe.js`,
+`primary_2_curriculum_data.js`, and `primary_3_curriculum_data.js`, each citing "NERDC,
+SchemeofWork.com, SyllabusNG" and structured week-by-week the same way as the JSS1-3 sourcing
+sessions. Live subjects: Primary 1 — Mathematics, English Studies, Basic Science and
+Technology, Social Studies, Cultural and Creative Arts, Physical and Health Education (6);
+Primary 2 — Mathematics, English Studies, Basic Science and Technology, Social Studies (4);
+Primary 3 — Mathematics, English Studies, Basic Science and Technology, Social Studies, Civic
+Education (5). No NESRI 2025 (or other) target list has been reconciled against these three
+grades yet, unlike Primary 4-6/JSS1-3/SS1-3 — treat subject-count gaps as unknown, not
+targeted, until that reconciliation happens. The source files themselves were never committed
+until this session, another instance of the provenance-gap pattern already called out for
+Primary 4/5 and JSS1 Fashion Design below.
 
 **JSS1-3** target is a 21-subject list from the same NESRI 2025 press release PDF, which also
 carries a Junior Secondary School column in its Basic Education Subject List table. Expanding
@@ -387,6 +405,25 @@ plus one unrelated content-duplication bug:
 
 ## Open items
 
+- **Gamification rewards praise-language detection in AI responses, not actual answer
+  correctness — needs redesign to only fire from practice/assessment agents with an explicit
+  correctness signal, not by scanning tutor replies for encouraging phrases.** Relatedly,
+  `checkBadgeQualifications`/`awardBadge` (`backend/services/gamificationService.js`) are
+  never called from the live chat flow (`backend/routes/agents.js` only calls
+  `updateGamificationStats`/`getLevelProgress`/`getStudentGamificationProfile`) — badges can
+  currently never be earned through real usage. Fold this into the same redesign: fixing the
+  correctness signal will likely mean wiring badge-checking up properly at the same time.
+- **Primary 1-3 content is live but thin — learning outcomes only, no lesson content.**
+  `import-primary-curriculum.js` only writes to the `content` table with
+  `section_type = 'learning_outcome'` (verified directly against the live DB: every Primary
+  1-3 topic has exactly the learning-outcome strings and nothing else). It never writes to
+  `learning_activities` or `evaluation_guides`. Per the AI tutor content-grounding fix
+  documented above (bug 2, commit `70c1e844`), the chat endpoint pulls real teaching content
+  from `content`/`learning_activities`/`evaluation_guides` together — so the AI tutor is
+  running on materially thinner grounding for these three grades (topic titles + learning
+  outcomes only) than every other grade, which also has activities and evaluation guides.
+  Needs either a richer re-import from fuller source material, or an explicit acceptance that
+  Primary 1-3 tutoring will be shallower until that's done.
 - **Arabic Language is unresolved across Primary 4, 5, and 6** — the sole gap against each
   grade's 16-subject target, and genuinely unresourceable right now, not just unsourced.
   Exhausted at every grade: SchemeofWork.com (Federal/Lagos/Osun — no Primary Arabic content
