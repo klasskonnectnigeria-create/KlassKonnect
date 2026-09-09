@@ -56,6 +56,7 @@ export default function RootLayout() {
       } catch (error) {
         console.error('Error initializing app:', error);
       } finally {
+        clearTimeout(timeoutId);
         if (mounted) {
           await SplashScreen.hideAsync();
           setIsReady(true);
@@ -63,10 +64,12 @@ export default function RootLayout() {
       }
     };
 
-    // Safety timeout: show app after 20 seconds even if init isn't complete
-    // Investigation needed: critical path still taking ~10-15s (need to identify slow step)
+    // Safety timeout: show app after 20 seconds if initializeApp() is still hanging
+    // (e.g. a network call that never resolves). Cancelled in initializeApp()'s finally
+    // block as soon as init actually finishes, so this only ever fires on a real hang -
+    // normal init completes in well under a second.
     timeoutId = setTimeout(() => {
-      if (mounted && !isReady) {
+      if (mounted) {
         console.warn('App initialization timeout - showing UI anyway (critical path took >20s)');
         SplashScreen.hideAsync();
         setIsReady(true);
