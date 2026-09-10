@@ -166,8 +166,10 @@ transcribed into this CLAUDE.md until now (2026-09-10) — it previously existed
 in one commit message (`e9d0f0ce`, "Replace emoji icons on LoginScreen with proper vector
 icons"). That gap is exactly why enforcement stalled after `LoginScreen.js`: nothing in this
 file told a future session the rule existed, so `HomeScreen.js` (👋 📊 🎓 💡 📚 🚀) and
-`GamificationDisplay.js` (🔥 🏆 🎉) were never brought in line — see "Brand migration status"
-below for the full remaining-emoji inventory.
+`GamificationDisplay.js` (🔥 🏆 🎉) went untouched for a full session before this rule was ever
+written down. Both are now fixed (commit `535930c8`, 2026-09-10, verified after a real app
+restart) — see "Brand migration status" below for the full swap inventory — and the rule
+itself is explicit here going forward instead of living only in that one commit message.
 
 ### Brand migration status (updated 2026-09-05)
 
@@ -181,12 +183,20 @@ hardcoded hex values that used to bypass the token file (`GamificationDisplay.js
 ×1) all now reference tokens instead. `LoginScreen.js` renders a real two-tone wordmark
 ("Klass" in Ink Navy, "Konnect" in Konnect Blue) and the current tagline ("YOUR PERSONAL AI
 TUTOR") in single-color Ink Navy, uppercase and letterspaced, matching the spec above (updated
-2026-09-09 along with the tagline text itself). The app icon, Android adaptive icon, splash
+2026-09-09 along with the tagline text itself; independently re-verified 2026-09-10 by
+pixel-sampling a fresh `LoginScreen` screenshot, confirming the tagline renders Ink Navy
+throughout with no leftover two-tone split). The app icon, Android adaptive icon, splash
 screen, and web favicon are
 all wired in `mobile/app.json` and `mobile/assets/` from the real logo
 (`KlassKonnect_Logo_Assets_v2.zip`) — verified via actual `xcrun simctl` screenshots showing
-the K-mark on the home screen icon and Ink Navy on the splash background, not just source-file
-inspection. `PHASE2_SUMMARY.md` has a dated note flagging its old-palette "Design System"
+the K-mark on the home screen icon and, as of a 2026-09-10 re-render (commit `28466a06`,
+`mobile/assets/splash.png` and the `SplashScreenLogo.imageset`), a bare K-mark — Ink Navy
+background, white K in the speech-bubble mark, Signal Yellow accent dot, no wordmark or
+tagline — on the native splash screen. This replaced an earlier `splash.png` that still had
+the retired "LEARN YOUR WAY," / "IN YOUR CURRICULUM." tagline and a full logo+wordmark
+composition baked into its pixels (a dormant, non-rendering source-asset issue previously
+tracked in "Open items"); that item is now closed. `PHASE2_SUMMARY.md` has a dated note
+flagging its old-palette "Design System"
 section as a historical build-log snapshot, not current brand. **The K-mark image itself is
 only ever used in native chrome** — app icon, adaptive icon, splash screen, web favicon. It
 never appears inside the JS-rendered UI: `LoginScreen.js`'s "wordmark" is plain two-tone text
@@ -211,7 +221,9 @@ header — is an open question, not a decided scope; see below.
   `rocket-launch-outline` CTA title in `HomeScreen.js`; `fire` streak, `trophy-outline`
   best-streak badge, `party-popper` badge-unlock notification in `GamificationDisplay.js`).
   `GamificationDashboard.js`/`GamificationNotification.js` were already on vector icons
-  independently. One deliberately-untouched exception remains — see the badge-name item below.
+  independently. Verified live after a real app restart (not just Fast Refresh) — every
+  replaced icon renders correctly with no leftover emoji or broken icon reference. One
+  deliberately-untouched exception remains — see the badge-name item below.
 - **Badge names in `gamificationService.js`'s `BADGES` config have emoji baked directly into
   the name string** (e.g. `'🎓 Addition Master'`). `GamificationDisplay.js`'s `BadgesDisplay`
   extracts these via `badge.badge_name.split(' ')[0]` rather than a real icon field — its own
@@ -223,6 +235,18 @@ header — is an open question, not a decided scope; see below.
 - **Open question: should the K-mark appear anywhere in the JS-rendered UI** (e.g. a small
   header mark on Home or other authenticated screens), or stay native-chrome-only as it is
   today? No decision has been made either way — don't add or rule it out unilaterally.
+
+### Reference/marketing brand assets (not app-wired, 2026-09-10)
+
+`~/Desktop/klasskonnect-assets-current/` holds 4 regenerated reference PNGs for external use —
+docs, the website, marketing collateral — not wired into the app in any way:
+`lockup-primary-light.png`, `lockup-reversed-dark.png`, `lockup-stacked.png`, and
+`splash-full-reference.png`. They replace earlier versions of the same lockups/splash
+composition that still had the retired "LEARN YOUR WAY," / "IN YOUR CURRICULUM." tagline baked
+into their pixels; regenerated with the current "YOUR PERSONAL AI TUTOR" text. Confirmed no
+code anywhere in this repo references this path or any of these four filenames — a pure asset
+handoff with no wiring implications, nothing to change in the app. Point any future
+marketing/docs asset request at this folder first before regenerating from scratch.
 
 ---
 
@@ -613,22 +637,15 @@ since the new text doesn't split into two clauses; `LoginScreen.js` is updated t
 - **JSS1 Fashion Design and Garment Making has a provenance gap of its own**: live in the DB
   from a prior session whose source file was never committed. A later session reconciled this
   by committing the file without re-importing — see `JSS1-Content-Completion-Status.md`.
-- **Brand migration — colors, logo, and tagline are done; typography is not** — see "Brand
-  migration status" under "Brand & design system" above before starting any further UI work.
-  Remaining: load Archivo/Plus Jakarta Sans and apply them, and review `SignupScreen.js`'s
-  "Join KlassKonnect today" branding copy against the current spec. Subject-identity colors
-  are documented but deliberately unbuilt — no feature exists to attach them to. Also remaining:
-  the "no emoji" rule (now documented under "Official KlassKonnect brand" above) has been
-  applied to `LoginScreen.js`, `HomeScreen.js`, and `GamificationDisplay.js` (2026-09-10) —
-  except `GamificationDisplay.js`'s badge-name-derived icon, deliberately deferred pending a
-  backend data-model change, see "Brand migration status" — and whether the K-mark should ever
-  appear in the JS-rendered UI (today it's native-chrome-only) is an open question, not a
-  decision either way.
-- **`mobile/assets/splash.png` (the source asset file, not the compiled native splash) still
-  has the retired "LEARN YOUR WAY," / "IN YOUR CURRICULUM." tagline baked into it as pixels,
-  alongside a full logo+wordmark composition.** This does not currently render live anywhere —
-  verified via simulator screenshots that the actual compiled native splash screen only shows
-  a small 100×100 logo mark (see `SplashScreenLogo.imageset`), not this full image — so it's a
-  dormant, stale source file rather than a live user-facing bug. Still worth regenerating with
-  the new tagline (or removing the baked-in text entirely) so the source asset doesn't silently
-  contradict the live brand the next time someone opens it, but it's not blocking anything.
+- **Brand migration — colors, logo, tagline, and the no-emoji rollout (Piece 1) are done;
+  typography is not** — see "Brand migration status" under "Brand & design system" above
+  before starting any further UI work. Remaining: load Archivo/Plus Jakarta Sans and apply
+  them, and review `SignupScreen.js`'s "Join KlassKonnect today" branding copy against the
+  current spec. Subject-identity colors are documented but deliberately unbuilt — no feature
+  exists to attach them to. The "no emoji" rule (documented under "Official KlassKonnect
+  brand" above) has been applied to `LoginScreen.js`, `HomeScreen.js`, and
+  `GamificationDisplay.js` (2026-09-10, verified after a real app restart) — except
+  `GamificationDisplay.js`'s badge-name-derived icon, deliberately deferred pending a backend
+  data-model change, see "Brand migration status" — and whether the K-mark should ever appear
+  in the JS-rendered UI (today it's native-chrome-only) is an open question, not a decision
+  either way.
