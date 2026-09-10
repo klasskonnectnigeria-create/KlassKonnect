@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { View, StyleSheet, ScrollView, Text, TouchableOpacity, ActivityIndicator, Alert, Pressable } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import { useAuthStore } from '../store/authStore';
 import { useContentStore } from '../store/contentStore';
@@ -127,7 +128,8 @@ export function HomeScreen({ onLogout }) {
       <View style={styles.header}>
         <View style={styles.headerContent}>
           <Text style={[styles.greeting, typography.h2]}>
-            Hi, {student?.fullName}! 👋
+            Hi, {student?.fullName}!{' '}
+            <MaterialCommunityIcons name="hand-wave" size={26} color={colors.primary} />
           </Text>
           <Text style={[styles.headerSubtitle, typography.body2]}>
             {student?.grade}
@@ -135,7 +137,7 @@ export function HomeScreen({ onLogout }) {
         </View>
         <View style={styles.headerButtons}>
           <Pressable onPress={() => router.push('/(app)/leaderboard')} style={styles.leaderboardButton}>
-            <Text style={[styles.buttonText, typography.body2]}>🏆</Text>
+            <MaterialCommunityIcons name="trophy" size={25} color={colors.text.primary} />
           </Pressable>
           <Pressable onPress={handleLogout} style={styles.logoutButton}>
             <Text style={[styles.logoutText, typography.body2]}>Logout</Text>
@@ -144,9 +146,12 @@ export function HomeScreen({ onLogout }) {
       </View>
       {/* Progress Stats */}
       <Card variant="elevated" style={styles.statsCard}>
-        <Text style={[styles.statsTitle, typography.subtitle1]}>
-          📊 Your Progress
-        </Text>
+        <View style={styles.statsTitleRow}>
+          <MaterialCommunityIcons name="chart-bar" size={20} color={colors.primary} />
+          <Text style={[styles.statsTitle, typography.subtitle1]}>
+            Your Progress
+          </Text>
+        </View>
         <View style={styles.statsGrid}>
           <View style={styles.statItem}>
             <Text style={[styles.statValue, typography.h2]}>
@@ -181,9 +186,12 @@ export function HomeScreen({ onLogout }) {
       {/* WAEC/UTME Exam Prep (SS3 only) */}
       {student?.grade === 'SS3' && (
         <>
-          <Text style={[styles.sectionTitle, typography.subtitle1]}>
-            🎓 Exam Preparation
-          </Text>
+          <View style={styles.sectionTitleRow}>
+            <MaterialCommunityIcons name="school" size={20} color={colors.text.primary} />
+            <Text style={[styles.sectionTitle, typography.subtitle1]}>
+              Exam Preparation
+            </Text>
+          </View>
           <Card variant="elevated" style={styles.examPrepCard}>
             <Text style={[styles.examPrepTitle, typography.subtitle2]}>
               WAEC/UTME Exam Prep
@@ -192,16 +200,20 @@ export function HomeScreen({ onLogout }) {
               Prepare for WAEC and UTME exams with past questions, mock tests, study guides, and high-frequency topics.
             </Text>
             <Text style={[styles.examPrepHint, typography.caption]}>
-              💡 Tip: Select "Exam Prep" mode in any subject topic to access exam materials
+              <MaterialCommunityIcons name="lightbulb-on-outline" size={14} color="#558B2F" />{' '}
+              Tip: Select "Exam Prep" mode in any subject topic to access exam materials
             </Text>
           </Card>
         </>
       )}
 
       {/* Themes */}
-      <Text style={[styles.sectionTitle, typography.subtitle1]}>
-        📚 {student?.grade ? `${student.grade} Subjects` : 'Your Subjects'}
-      </Text>
+      <View style={styles.sectionTitleRow}>
+        <MaterialCommunityIcons name="book-open-variant" size={20} color={colors.text.primary} />
+        <Text style={[styles.sectionTitle, typography.subtitle1]}>
+          {student?.grade ? `${student.grade} Subjects` : 'Your Subjects'}
+        </Text>
+      </View>
 
       {themes.map((theme) => (
         <Card
@@ -224,9 +236,12 @@ export function HomeScreen({ onLogout }) {
 
       {/* Quick Start CTA */}
       <Card variant="elevated" style={styles.ctaCard}>
-        <Text style={[styles.ctaTitle, typography.subtitle2]}>
-          🚀 Need Help?
-        </Text>
+        <View style={styles.ctaTitleRow}>
+          <MaterialCommunityIcons name="rocket-launch-outline" size={20} color={colors.accent} />
+          <Text style={[styles.ctaTitle, typography.subtitle2]}>
+            Need Help?
+          </Text>
+        </View>
         <Text style={[styles.ctaText, typography.body2]}>
           Select a topic above to start learning with your personal AI tutor
         </Text>
@@ -294,9 +309,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center'
   },
-  buttonText: {
-    fontSize: 25
-  },
   logoutButton: {
     height: 58,
     paddingHorizontal: spacing.md,
@@ -315,9 +327,14 @@ const styles = StyleSheet.create({
     marginBottom: spacing.lg,
     backgroundColor: colors.primaryLight
   },
+  statsTitleRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: spacing.xs,
+    marginBottom: spacing.md
+  },
   statsTitle: {
     color: colors.primary,
-    marginBottom: spacing.md,
     fontWeight: '600'
   },
   statsGrid: {
@@ -346,11 +363,16 @@ const styles = StyleSheet.create({
   progressBar: {
     marginTop: spacing.md
   },
-  sectionTitle: {
-    color: colors.text.primary,
-    fontWeight: '600',
+  sectionTitleRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: spacing.xs,
     marginBottom: spacing.md,
     marginTop: spacing.md
+  },
+  sectionTitle: {
+    color: colors.text.primary,
+    fontWeight: '600'
   },
   themeCard: {
     marginBottom: spacing.md,
@@ -374,10 +396,15 @@ const styles = StyleSheet.create({
     backgroundColor: colors.secondaryLight,
     marginTop: spacing.lg
   },
+  ctaTitleRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: spacing.xs,
+    marginBottom: spacing.xs
+  },
   ctaTitle: {
     color: colors.accent,
-    fontWeight: '600',
-    marginBottom: spacing.xs
+    fontWeight: '600'
   },
   ctaText: {
     color: colors.text.secondary

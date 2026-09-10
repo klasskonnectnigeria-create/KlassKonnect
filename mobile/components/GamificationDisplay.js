@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { colors, spacing, typography, borderRadius } from '../constants/colors';
 
 export function PointsDisplay({ points, level }) {
@@ -38,7 +39,7 @@ export function StreakDisplay({ currentStreak, longestStreak }) {
   return (
     <View style={styles.streakContainer}>
       <View style={styles.streakBox}>
-        <Text style={styles.streakEmoji}>🔥</Text>
+        <MaterialCommunityIcons name="fire" size={32} color={colors.warning} />
         <View>
           <Text style={[styles.streakValue, typography.h3]}>{currentStreak}</Text>
           <Text style={[styles.streakLabel, typography.body2]}>Day Streak</Text>
@@ -47,7 +48,8 @@ export function StreakDisplay({ currentStreak, longestStreak }) {
       {longestStreak > 0 && longestStreak !== currentStreak && (
         <View style={styles.maxStreakBox}>
           <Text style={[styles.maxStreakValue, typography.body2]}>
-            Best: {longestStreak} 🏆
+            Best: {longestStreak}{' '}
+            <MaterialCommunityIcons name="trophy-outline" size={14} color={colors.accent} />
           </Text>
         </View>
       )}
@@ -90,7 +92,7 @@ export function BadgeUnlockedNotification({ badge }) {
   return (
     <View style={styles.notificationContainer}>
       <View style={styles.notificationContent}>
-        <Text style={styles.notificationEmoji}>🎉</Text>
+        <MaterialCommunityIcons name="party-popper" size={28} color={colors.primary} />
         <View style={styles.notificationText}>
           <Text style={[styles.notificationTitle, typography.subtitle2]}>
             Badge Unlocked!
@@ -174,9 +176,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     gap: spacing.md
   },
-  streakEmoji: {
-    fontSize: 32
-  },
   streakValue: {
     color: colors.primary,
     fontWeight: 'bold'
@@ -245,9 +244,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: spacing.md
-  },
-  notificationEmoji: {
-    fontSize: 28
   },
   notificationText: {
     flex: 1

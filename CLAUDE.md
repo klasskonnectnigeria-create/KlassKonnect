@@ -203,13 +203,23 @@ header — is an open question, not a decided scope; see below.
   speculatively just to use these colors.
 - **`SignupScreen.js`** has "Join KlassKonnect today" as ordinary body copy — not a tagline
   usage, but adjacent branding text nobody's reviewed against the current spec yet.
-- **Emoji cleanup only ever reached `LoginScreen.js`** (commit `e9d0f0ce`) plus, per that
-  commit's own note, `GamificationDashboard.js`/`GamificationNotification.js` (already on
-  vector icons independently). `HomeScreen.js` (👋 greeting, 📊 stats title, 🎓 exam-prep
-  heading, 💡 exam-prep tip, 📚 subjects heading, 🚀 CTA title, 🏆 leaderboard button) and the
-  separate `GamificationDisplay.js` (🔥 streak, 🏆 best-streak badge, 🎉 badge-unlock
-  notification) — a different component from `GamificationDashboard.js` despite the similar
-  name — still have every one of their original emoji. Not yet scoped into a fix.
+- **Emoji cleanup — `LoginScreen.js`, `HomeScreen.js`, and `GamificationDisplay.js` are now
+  done** (`e9d0f0ce` for Login; the 11 straightforward Home/GamificationDisplay swaps done
+  2026-09-10, all to `MaterialCommunityIcons` matching the library already used elsewhere:
+  `hand-wave` greeting, `trophy` leaderboard button, `chart-bar` stats title, `school` exam-prep
+  heading, `lightbulb-on-outline` exam-prep tip, `book-open-variant` subjects heading,
+  `rocket-launch-outline` CTA title in `HomeScreen.js`; `fire` streak, `trophy-outline`
+  best-streak badge, `party-popper` badge-unlock notification in `GamificationDisplay.js`).
+  `GamificationDashboard.js`/`GamificationNotification.js` were already on vector icons
+  independently. One deliberately-untouched exception remains — see the badge-name item below.
+- **Badge names in `gamificationService.js`'s `BADGES` config have emoji baked directly into
+  the name string** (e.g. `'🎓 Addition Master'`). `GamificationDisplay.js`'s `BadgesDisplay`
+  extracts these via `badge.badge_name.split(' ')[0]` rather than a real icon field — its own
+  `'🏆'` fallback (used only when a badge has no name) was left alone in the 2026-09-10 pass for
+  the same reason. Needs a backend data-model change (separate `icon` key from `name`, strip
+  emoji from stored names) plus a frontend update to use it — not a simple swap, since real
+  earned badges' data would need migrating. Deliberately deferred, not done as part of the
+  emoji-cleanup pass above.
 - **Open question: should the K-mark appear anywhere in the JS-rendered UI** (e.g. a small
   header mark on Home or other authenticated screens), or stay native-chrome-only as it is
   today? No decision has been made either way — don't add or rule it out unilaterally.
@@ -608,10 +618,11 @@ since the new text doesn't split into two clauses; `LoginScreen.js` is updated t
   Remaining: load Archivo/Plus Jakarta Sans and apply them, and review `SignupScreen.js`'s
   "Join KlassKonnect today" branding copy against the current spec. Subject-identity colors
   are documented but deliberately unbuilt — no feature exists to attach them to. Also remaining:
-  the "no emoji" rule (now documented under "Official KlassKonnect brand" above) was only ever
-  applied to `LoginScreen.js` — `HomeScreen.js` and `GamificationDisplay.js` still have their
-  original emoji, full inventory under "Brand migration status" — and whether the K-mark should
-  ever appear in the JS-rendered UI (today it's native-chrome-only) is an open question, not a
+  the "no emoji" rule (now documented under "Official KlassKonnect brand" above) has been
+  applied to `LoginScreen.js`, `HomeScreen.js`, and `GamificationDisplay.js` (2026-09-10) —
+  except `GamificationDisplay.js`'s badge-name-derived icon, deliberately deferred pending a
+  backend data-model change, see "Brand migration status" — and whether the K-mark should ever
+  appear in the JS-rendered UI (today it's native-chrome-only) is an open question, not a
   decision either way.
 - **`mobile/assets/splash.png` (the source asset file, not the compiled native splash) still
   has the retired "LEARN YOUR WAY," / "IN YOUR CURRICULUM." tagline baked into it as pixels,
