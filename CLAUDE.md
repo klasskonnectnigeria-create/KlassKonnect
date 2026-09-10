@@ -158,6 +158,17 @@ Don't reintroduce a two-tone split for this text.
 **Hard rules**: no stretching or rotating the wordmark; never recolor "Klass" and "Konnect"
 separately from the pair; no photo behind the mark without a solid tile.
 
+**No emoji in product UI or brand assets.** No literal emoji characters (✉️, 🔒, 👁️, 🔥, 🏆,
+🎉, etc.) in any user-facing screen, icon, or brand asset — use vector icons instead (this app
+already standardizes on `@expo/vector-icons`, e.g. `MaterialCommunityIcons`). This rule comes
+from `KK_ASSETS_CLAUDE.md` and predates this file's own brand write-up, but was never actually
+transcribed into this CLAUDE.md until now (2026-09-10) — it previously existed only as a line
+in one commit message (`e9d0f0ce`, "Replace emoji icons on LoginScreen with proper vector
+icons"). That gap is exactly why enforcement stalled after `LoginScreen.js`: nothing in this
+file told a future session the rule existed, so `HomeScreen.js` (👋 📊 🎓 💡 📚 🚀) and
+`GamificationDisplay.js` (🔥 🏆 🎉) were never brought in line — see "Brand migration status"
+below for the full remaining-emoji inventory.
+
 ### Brand migration status (updated 2026-09-05)
 
 **Colors and logo are done.** `mobile/constants/colors.js` (the real, in-use design-token
@@ -176,7 +187,12 @@ all wired in `mobile/app.json` and `mobile/assets/` from the real logo
 (`KlassKonnect_Logo_Assets_v2.zip`) — verified via actual `xcrun simctl` screenshots showing
 the K-mark on the home screen icon and Ink Navy on the splash background, not just source-file
 inspection. `PHASE2_SUMMARY.md` has a dated note flagging its old-palette "Design System"
-section as a historical build-log snapshot, not current brand.
+section as a historical build-log snapshot, not current brand. **The K-mark image itself is
+only ever used in native chrome** — app icon, adaptive icon, splash screen, web favicon. It
+never appears inside the JS-rendered UI: `LoginScreen.js`'s "wordmark" is plain two-tone text
+("Klass"/"Konnect"), not the bubble-mark graphic, and no other screen (`HomeScreen.js`
+included) renders it either. Whether it should appear anywhere in-app — e.g. a small mark in a
+header — is an open question, not a decided scope; see below.
 
 **Still open, not yet done:**
 - **Typography**: Archivo/Plus Jakarta Sans aren't loaded or applied anywhere — the app still
@@ -187,6 +203,16 @@ section as a historical build-log snapshot, not current brand.
   speculatively just to use these colors.
 - **`SignupScreen.js`** has "Join KlassKonnect today" as ordinary body copy — not a tagline
   usage, but adjacent branding text nobody's reviewed against the current spec yet.
+- **Emoji cleanup only ever reached `LoginScreen.js`** (commit `e9d0f0ce`) plus, per that
+  commit's own note, `GamificationDashboard.js`/`GamificationNotification.js` (already on
+  vector icons independently). `HomeScreen.js` (👋 greeting, 📊 stats title, 🎓 exam-prep
+  heading, 💡 exam-prep tip, 📚 subjects heading, 🚀 CTA title, 🏆 leaderboard button) and the
+  separate `GamificationDisplay.js` (🔥 streak, 🏆 best-streak badge, 🎉 badge-unlock
+  notification) — a different component from `GamificationDashboard.js` despite the similar
+  name — still have every one of their original emoji. Not yet scoped into a fix.
+- **Open question: should the K-mark appear anywhere in the JS-rendered UI** (e.g. a small
+  header mark on Home or other authenticated screens), or stay native-chrome-only as it is
+  today? No decision has been made either way — don't add or rule it out unilaterally.
 
 ---
 
@@ -581,7 +607,12 @@ since the new text doesn't split into two clauses; `LoginScreen.js` is updated t
   migration status" under "Brand & design system" above before starting any further UI work.
   Remaining: load Archivo/Plus Jakarta Sans and apply them, and review `SignupScreen.js`'s
   "Join KlassKonnect today" branding copy against the current spec. Subject-identity colors
-  are documented but deliberately unbuilt — no feature exists to attach them to.
+  are documented but deliberately unbuilt — no feature exists to attach them to. Also remaining:
+  the "no emoji" rule (now documented under "Official KlassKonnect brand" above) was only ever
+  applied to `LoginScreen.js` — `HomeScreen.js` and `GamificationDisplay.js` still have their
+  original emoji, full inventory under "Brand migration status" — and whether the K-mark should
+  ever appear in the JS-rendered UI (today it's native-chrome-only) is an open question, not a
+  decision either way.
 - **`mobile/assets/splash.png` (the source asset file, not the compiled native splash) still
   has the retired "LEARN YOUR WAY," / "IN YOUR CURRICULUM." tagline baked into it as pixels,
   alongside a full logo+wordmark composition.** This does not currently render live anywhere —
