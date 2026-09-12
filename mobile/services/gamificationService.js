@@ -15,13 +15,15 @@ const BADGES = {
   // Beginner badges
   BEGINNER: {
     type: 'beginner',
-    name: '🎓 Beginner',
+    name: 'Beginner',
+    icon: 'school-outline',
     description: 'Complete your first lesson',
     requirement: () => true // Awarded on first lesson
   },
   FIRST_TOPIC: {
     type: 'first_topic_completed',
-    name: '🚀 First Topic',
+    name: 'First Topic',
+    icon: 'rocket-launch-outline',
     description: 'Complete your first topic',
     requirement: () => true
   },
@@ -29,13 +31,15 @@ const BADGES = {
   // Practice badges
   PRACTITIONER_10: {
     type: 'practitioner_10',
-    name: '💪 Practitioner (10)',
+    name: 'Practitioner (10)',
+    icon: 'arm-flex-outline',
     description: 'Solve 10 practice problems',
     requirement: (points) => points >= 50 // 10 problems × 5 points
   },
   PRACTITIONER_50: {
     type: 'practitioner_50',
-    name: '💪 Practitioner (50)',
+    name: 'Practitioner (50)',
+    icon: 'arm-flex-outline',
     description: 'Solve 50 practice problems',
     requirement: (points) => points >= 250
   },
@@ -43,19 +47,22 @@ const BADGES = {
   // Streak badges
   CONSISTENT_3: {
     type: 'consistent_3',
-    name: '🔥 Consistent (3 days)',
+    name: 'Consistent (3 days)',
+    icon: 'fire',
     description: '3-day learning streak',
     requirement: (points, streak) => streak >= 3
   },
   CONSISTENT_7: {
     type: 'consistent_7',
-    name: '🔥 Consistent (7 days)',
+    name: 'Consistent (7 days)',
+    icon: 'fire',
     description: '7-day learning streak',
     requirement: (points, streak) => streak >= 7
   },
   DEDICATED_30: {
     type: 'dedicated_30',
-    name: '💎 Dedicated (30 days)',
+    name: 'Dedicated (30 days)',
+    icon: 'diamond-stone',
     description: '30-day learning streak',
     requirement: (points, streak) => streak >= 30
   },
@@ -63,7 +70,8 @@ const BADGES = {
   // Accuracy badges
   ACCURACY_EXPERT: {
     type: 'accuracy_expert',
-    name: '🎯 Accuracy Expert',
+    name: 'Accuracy Expert',
+    icon: 'target',
     description: '90%+ accuracy on any topic',
     requirement: () => true // Checked per-topic
   },
@@ -71,7 +79,8 @@ const BADGES = {
   // Speed badges
   SPEED_DEMON: {
     type: 'speed_demon',
-    name: '⚡ Speed Demon',
+    name: 'Speed Demon',
+    icon: 'lightning-bolt-outline',
     description: 'Solve a problem in under 2 minutes',
     requirement: () => true // Checked per-problem
   },
@@ -79,7 +88,8 @@ const BADGES = {
   // Topic mastery badges
   MASTER_BASIC: {
     type: 'master_basic',
-    name: '👑 Master (Basic)',
+    name: 'Master (Basic)',
+    icon: 'crown-outline',
     description: '90%+ on all topics in a theme',
     requirement: () => true // Checked per-theme
   }
@@ -203,7 +213,7 @@ class GamificationService {
       // Speed bonus celebration
       if (solvingTime && solvingTime < 120) {
         await notificationService.sendLocalNotification(
-          '⚡ Speed Bonus!',
+          'Speed Bonus!',
           `Solved in ${Math.round(solvingTime)} seconds! +3 points`,
           { type: 'speedBonus', time: solvingTime },
           0
@@ -236,7 +246,7 @@ class GamificationService {
       const badge = await awardBadge(
         studentId,
         badgeType,
-        `👑 Master Topic #${topicId}`,
+        `Master Topic #${topicId}`,
         `Achieved 90%+ mastery on topic ${topicId}`,
         { topicId }
       );
@@ -275,7 +285,7 @@ class GamificationService {
       const badge = await awardBadge(
         studentId,
         badgeType,
-        `👑 Master Theme #${themeId}`,
+        `Master Theme #${themeId}`,
         `Achieved 90%+ mastery on all topics in theme ${themeId}`,
         { themeId }
       );

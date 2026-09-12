@@ -537,14 +537,31 @@ export const getConversationHistory = async (studentId, topicId, limit = 50) => 
 export const saveConversationMessage = async (studentId, topicId, userMessage, aiResponse, agentType) => {
   const db = getDatabase();
   try {
-    await db.runAsync(
+    const result = await db.runAsync(
       `INSERT INTO conversation_logs (student_id, topic_id, user_message, ai_response, agent_type, created_at)
        VALUES (?, ?, ?, ?, ?, ?)`,
       [studentId, topicId, userMessage, aiResponse, agentType, new Date().toISOString()]
     );
     console.log(`Saved conversation message for student ${studentId} on topic ${topicId}`);
+    // Row id, so the caller can update this exact row with the real AI response later
+    // instead of inserting a second row for the same exchange.
+    return result.lastInsertRowId;
   } catch (error) {
     console.error('Error saving conversation message:', error);
+    throw error;
+  }
+};
+
+export const updateConversationMessage = async (id, aiResponse, agentType) => {
+  const db = getDatabase();
+  try {
+    await db.runAsync(
+      `UPDATE conversation_logs SET ai_response = ?, agent_type = ? WHERE id = ?`,
+      [aiResponse, agentType, id]
+    );
+    console.log(`Updated conversation message ${id} with AI response`);
+  } catch (error) {
+    console.error('Error updating conversation message:', error);
     throw error;
   }
 };
@@ -677,6 +694,39 @@ export const initializeGamificationStats = async (studentId) => {
     }
   } catch (error) {
     console.error('Error initializing gamification stats:', error);
+    throw error;
+  }
+};
+
+/**
+ * Overwrite the local gamification cache with an authoritative snapshot (typically
+ * the server's numbers - see offlineApiClient.refreshGamificationProfile). Unlike
+ * addPoints/updateStreak below, this does not add to whatever is already stored -
+ * it replaces it, since the server is the source of truth for these numbers and
+ * local SQLite is just a write-through cache of the last value it reported.
+ */
+export const setGamificationStats = async (studentId, { totalPoints, level, currentStreak, longestStreak }) => {
+  const db = getDatabase();
+  try {
+    const existing = await getGamificationStats(studentId);
+    const now = new Date().toISOString();
+
+    if (existing) {
+      await db.runAsync(
+        `UPDATE gamification_stats
+         SET total_points = ?, level = ?, current_streak = ?, longest_streak = ?, updated_at = ?
+         WHERE student_id = ?`,
+        [totalPoints, level, currentStreak, longestStreak, now, studentId]
+      );
+    } else {
+      await db.runAsync(
+        `INSERT INTO gamification_stats (student_id, total_points, level, current_streak, longest_streak, last_activity_date, created_at, updated_at)
+         VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
+        [studentId, totalPoints, level, currentStreak, longestStreak, now, now, now]
+      );
+    }
+  } catch (error) {
+    console.error('Error setting gamification stats:', error);
     throw error;
   }
 };

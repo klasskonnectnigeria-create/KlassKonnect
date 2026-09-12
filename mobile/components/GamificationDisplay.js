@@ -3,6 +3,36 @@ import { View, Text, StyleSheet } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { colors, spacing, typography, borderRadius } from '../constants/colors';
 
+// Maps a badge's `type` key to a MaterialCommunityIcons name. Covers both the mobile
+// (local SQLite) and server-side badge catalogs - see services/gamificationService.js
+// (mobile) and backend/services/gamificationService.js (server) for the source configs.
+// Badge names no longer carry an emoji prefix, so the icon must be looked up by type
+// rather than parsed out of the name string.
+const BADGE_ICONS = {
+  beginner: 'school-outline',
+  first_topic_completed: 'rocket-launch-outline',
+  practitioner_10: 'arm-flex-outline',
+  practitioner_50: 'arm-flex-outline',
+  consistent_3: 'fire',
+  consistent_7: 'fire',
+  dedicated_30: 'diamond-stone',
+  accuracy_expert: 'target',
+  speed_demon: 'lightning-bolt-outline',
+  master_basic: 'crown-outline',
+  addition_master: 'plus-box-multiple-outline',
+  fraction_expert: 'star-outline',
+  week_warrior: 'fire',
+  month_marathon: 'arm-flex-outline',
+  sharpshooter: 'target',
+  perfectionist: 'trophy-award',
+  peak_climber: 'image-filter-hdr',
+  insight_hunter: 'lightbulb-on-outline',
+  mentor: 'account-group-outline',
+  scholar: 'book-open-page-variant-outline'
+};
+
+const getBadgeIcon = (badgeType) => BADGE_ICONS[badgeType] || 'medal-outline';
+
 export function PointsDisplay({ points, level }) {
   const nextLevelPoints = (level * 500);
   const currentLevelPoints = ((level - 1) * 500);
@@ -67,9 +97,12 @@ export function BadgesDisplay({ badges = [], limit = 5 }) {
       <View style={styles.badgesList}>
         {displayBadges.map((badge, idx) => (
           <View key={idx} style={styles.badgeItem}>
-            <Text style={styles.badgeEmoji}>
-              {badge.badge_name ? badge.badge_name.split(' ')[0] : '🏆'}
-            </Text>
+            <MaterialCommunityIcons
+              name={getBadgeIcon(badge.badge_type)}
+              size={28}
+              color={colors.primary}
+              style={styles.badgeEmoji}
+            />
             <Text style={[styles.badgeName, typography.caption]} numberOfLines={1}>
               {badge.badge_name}
             </Text>

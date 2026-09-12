@@ -1,22 +1,29 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { colors, spacing, typography, borderRadius } from '../constants/colors';
 
 export function LeaderboardEntry({ entry, isCurrentUser = false }) {
-  const getMedalEmoji = (rank) => {
-    if (rank === 1) return '🥇';
-    if (rank === 2) return '🥈';
-    if (rank === 3) return '🥉';
-    return `#${rank}`;
+  // Medal colors for the top 3 ranks (no emoji - see root CLAUDE.md's "no emoji in
+  // product UI" brand rule). Anything outside the top 3 falls back to a plain rank number.
+  const medalColor = (rank) => {
+    if (rank === 1) return '#D4AF37'; // gold
+    if (rank === 2) return '#A8A9AD'; // silver
+    if (rank === 3) return '#CD7F32'; // bronze
+    return null;
   };
 
   return (
     <View style={[styles.container, isCurrentUser && styles.currentUserContainer]}>
       {/* Rank/Medal */}
       <View style={styles.rankSection}>
-        <Text style={[styles.medal, typography.subtitle2]}>
-          {getMedalEmoji(entry.rank)}
-        </Text>
+        {medalColor(entry.rank) ? (
+          <MaterialCommunityIcons name="medal" size={26} color={medalColor(entry.rank)} />
+        ) : (
+          <Text style={[styles.medal, typography.subtitle2]}>
+            {`#${entry.rank}`}
+          </Text>
+        )}
       </View>
 
       {/* Player Info */}
@@ -48,17 +55,19 @@ export function LeaderboardEntry({ entry, isCurrentUser = false }) {
         </View>
 
         {entry.currentStreak > 0 && (
-          <View style={styles.stat}>
+          <View style={[styles.stat, styles.statRow]}>
+            <MaterialCommunityIcons name="fire" size={16} color={colors.warning} />
             <Text style={[styles.statValue, typography.subtitle2]}>
-              🔥 {entry.currentStreak}
+              {entry.currentStreak}
             </Text>
           </View>
         )}
 
         {entry.badgeCount > 0 && (
-          <View style={styles.stat}>
+          <View style={[styles.stat, styles.statRow]}>
+            <MaterialCommunityIcons name="trophy-variant" size={16} color={colors.secondary} />
             <Text style={[styles.statValue, typography.subtitle2]}>
-              🎖️ {entry.badgeCount}
+              {entry.badgeCount}
             </Text>
           </View>
         )}
@@ -117,6 +126,11 @@ const styles = StyleSheet.create({
   stat: {
     alignItems: 'center',
     justifyContent: 'center'
+  },
+  statRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: spacing.xs
   },
   statValue: {
     color: colors.text.primary,

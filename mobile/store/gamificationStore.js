@@ -2,8 +2,11 @@ import { create } from 'zustand';
 import {
   getGamificationStats,
   getBadges,
-  getDailyActivityLog
+  getDailyActivityLog,
+  setGamificationStats,
+  awardBadge
 } from '../services/database';
+import { offlineApiClient } from '../services/offlineApiClient';
 
 export const useGamificationStore = create((set, get) => ({
   // State
@@ -25,11 +28,18 @@ export const useGamificationStore = create((set, get) => ({
   setIsLoading: (isLoading) => set({ isLoading }),
 
   // Load gamification data
-  loadGamificationData: async (studentId) => {
+  loadGamificationData: async (studentId, token) => {
     let mounted = true;
 
     try {
       if (mounted) set({ isLoading: true });
+
+      // Refresh the local cache from the server first - the server is the source
+      // of truth for points/level/streak/badges (see
+      // offlineApiClient.refreshGamificationProfile). Offline, or on a failed
+      // fetch, this is a no-op and the reads below just return the existing
+      // cache, which is the correct offline behavior.
+      await offlineApiClient.refreshGamificationProfile(studentId, token);
 
       // Load stats
       const stats = await getGamificationStats(studentId);
@@ -73,18 +83,57 @@ export const useGamificationStore = create((set, get) => ({
     };
   },
 
-  // Update after earning points
-  updateAfterPointsEarned: (points, level, streak, badgesEarned = []) => {
+  // Update after earning points from a real, server-computed chat response (see
+  // TopicDetailsScreen.js). Trusts the `level` the server already computed
+  // rather than recomputing one locally - the server's level thresholds
+  // (backend/services/gamificationService.js LEVELS) are not evenly spaced, so a
+  // local points/500 formula would disagree with it. Also writes the new totals
+  // and any newly-unlocked badges through to the local cache immediately (not
+  // just in-memory state), so this update survives a reload or going offline
+  // before the next full server refresh - the same write-through pattern
+  // offlineApiClient.refreshGamificationProfile uses on a full profile load.
+  updateAfterPointsEarned: async (studentId, points, level, streak, badgesEarned = []) => {
     const currentState = get();
     const newTotal = currentState.totalPoints + points;
-    const newLevel = Math.floor(newTotal / 500) + 1;
+    const newLevel = level != null ? level : currentState.level;
+    const newLongestStreak = Math.max(streak || 0, currentState.longestStreak || 0);
+
+    // Badges arrive here shaped like the server's camelCase profile
+    // ({type, name, description, earnedAt} - see backend awardBadge's return),
+    // but the rest of the app (BadgesDisplay, getBadgeByType, hasBadge) expects
+    // the local cache's snake_case row shape. Normalize once here rather than
+    // letting two shapes coexist in the same array.
+    const normalizedBadges = badgesEarned.map((b) => ({
+      badge_type: b.badge_type || b.type,
+      badge_name: b.badge_name || b.name,
+      badge_description: b.badge_description || b.description || '',
+      earned_date: b.earned_date || b.earnedAt || new Date().toISOString()
+    }));
 
     set({
       totalPoints: newTotal,
       level: newLevel,
       currentStreak: streak,
-      badges: [...currentState.badges, ...badgesEarned]
+      longestStreak: newLongestStreak,
+      badges: [...currentState.badges, ...normalizedBadges]
     });
+
+    if (!studentId) return;
+
+    try {
+      await setGamificationStats(studentId, {
+        totalPoints: newTotal,
+        level: newLevel,
+        currentStreak: streak,
+        longestStreak: newLongestStreak
+      });
+
+      for (const badge of normalizedBadges) {
+        await awardBadge(studentId, badge.badge_type, badge.badge_name, badge.badge_description, null);
+      }
+    } catch (error) {
+      console.error('Error caching gamification update:', error);
+    }
   },
 
   // Get badge by type

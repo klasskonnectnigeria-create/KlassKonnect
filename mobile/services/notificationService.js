@@ -144,7 +144,7 @@ class NotificationService {
       // Schedule one notification that repeats every day
       await Notifications.scheduleNotificationAsync({
         content: {
-          title: '📚 Time to study!',
+          title: 'Time to study!',
           body: 'Ready to earn points with KlassKonnect?',
           sound: true,
           badge: 1,
@@ -175,10 +175,10 @@ class NotificationService {
     }
 
     const messages = {
-      3: { title: '🔥 3-Day Streak!', body: 'You are consistent! Keep it up!' },
-      7: { title: '🔥 7-Day Streak!', body: 'A week of learning! Amazing!' },
-      14: { title: '🔥 14-Day Streak!', body: 'Two weeks strong! You are unstoppable!' },
-      30: { title: '💎 30-Day Streak!', body: 'One month of dedication! Legendary!' },
+      3: { title: '3-Day Streak!', body: 'You are consistent! Keep it up!' },
+      7: { title: '7-Day Streak!', body: 'A week of learning! Amazing!' },
+      14: { title: '14-Day Streak!', body: 'Two weeks strong! You are unstoppable!' },
+      30: { title: '30-Day Streak!', body: 'One month of dedication! Legendary!' },
     };
 
     const milestone = messages[streakDays];
@@ -200,7 +200,7 @@ class NotificationService {
     }
 
     await this.sendLocalNotification(
-      '🎉 Badge Unlocked!',
+      'Badge Unlocked!',
       `${badgeName} - ${badgeDescription}`,
       { type: 'achievement', badge: badgeName },
       0
@@ -215,7 +215,7 @@ class NotificationService {
     }
 
     await this.sendLocalNotification(
-      `🌟 +${points} Points!`,
+      `+${points} Points!`,
       `Total: ${totalPoints} • Level ${level}`,
       { type: 'points', points, totalPoints, level },
       0
@@ -226,7 +226,7 @@ class NotificationService {
   async notifyTopicCompletion(topicName, understanding) {
     if (understanding >= 90) {
       await this.sendLocalNotification(
-        '👑 Topic Mastered!',
+        'Topic Mastered!',
         `You achieved 90%+ mastery on ${topicName}!`,
         { type: 'achievement', topic: topicName },
         0
@@ -239,7 +239,7 @@ class NotificationService {
     if (currentStreak === 0) {
       // Streak was broken, send motivational reminder
       await this.sendLocalNotification(
-        '💪 Get Back on Track',
+        'Get Back on Track',
         'Start a new streak today. One lesson is all it takes!',
         { type: 'motivation', priority: 'high' },
         5

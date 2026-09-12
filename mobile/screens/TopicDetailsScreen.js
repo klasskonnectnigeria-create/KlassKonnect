@@ -4,6 +4,7 @@ import {
   KeyboardAvoidingView, Platform, FlatList
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import { useAuthStore } from '../store/authStore';
 import { useContentStore } from '../store/contentStore';
@@ -12,7 +13,6 @@ import { useGamificationStore } from '../store/gamificationStore';
 import { Input } from '../components/Input';
 import { Button } from '../components/Button';
 import { Card } from '../components/Card';
-import { BadgeUnlockedNotification } from '../components/GamificationDisplay';
 import { GamificationNotification } from '../components/GamificationNotification';
 import { colors, spacing, typography, borderRadius } from '../constants/colors';
 import { API_URL } from '../config/api';
@@ -38,7 +38,8 @@ export function TopicDetailsScreen({ route, navigation }) {
 
   useEffect(() => {
     loadTopicDetails();
-  }, [topicId]);
+    loadChatHistory();
+  }, [topicId, student?.id]);
 
   const loadTopicDetails = async () => {
     setLoading(true);
@@ -48,6 +49,37 @@ export function TopicDetailsScreen({ route, navigation }) {
       console.error('Error loading topic:', error);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const loadChatHistory = async () => {
+    if (!student?.id) return;
+    try {
+      const history = await offlineApiClient.getConversationHistory(student.id, topicId, token);
+      const hydrated = [];
+      (history || []).forEach((row, index) => {
+        if (row.user_message) {
+          hydrated.push({
+            id: `history-${index}-user`,
+            type: 'user',
+            content: row.user_message
+          });
+        }
+        // Older rows may carry an empty ai_response left over from a since-removed
+        // premature save (the exchange was written before the AI reply arrived) -
+        // skip those so we don't render a blank assistant bubble.
+        if (row.ai_response) {
+          hydrated.push({
+            id: `history-${index}-assistant`,
+            type: 'assistant',
+            content: row.ai_response,
+            agentType: row.agent_type
+          });
+        }
+      });
+      setChatMessages(hydrated);
+    } catch (error) {
+      console.error('Error loading chat history:', error);
     }
   };
 
@@ -66,18 +98,25 @@ export function TopicDetailsScreen({ route, navigation }) {
     setMessage('');
     setChatLoading(true);
 
-    try {
-      // Save user message to DB
-      if (student?.id) {
-        await offlineApiClient.saveConversation(
+    // Save the user's message right away (with an empty response for now) so it
+    // survives a crash before the reply arrives; filled in below once the real
+    // response is in, rather than inserting a second row for the same exchange.
+    let conversationRowId = null;
+    if (student?.id) {
+      try {
+        conversationRowId = await offlineApiClient.saveConversation(
           student.id,
           topicId,
           userMessage,
-          '', // Will be updated with AI response
+          '',
           agentType
         );
+      } catch (error) {
+        console.error('Error saving user message:', error);
       }
+    }
 
+    try {
       // Use offline-aware API client for chat
       const requestStart = Date.now();
       const data = await offlineApiClient.post(
@@ -85,7 +124,11 @@ export function TopicDetailsScreen({ route, navigation }) {
         {
           message: userMessage,
           topicId,
-          agentType
+          agentType,
+          // Carried through to the offline queue (if this request ends up queued) so
+          // syncManager can update this exact local row once the real response arrives,
+          // instead of the response being lost when the sync succeeds later.
+          conversationRowId
         },
         token
       );
@@ -101,15 +144,26 @@ export function TopicDetailsScreen({ route, navigation }) {
           isQueued: data.isQueued
         }]);
 
-        // Save AI response to DB if not queued
+        // Fill in the AI response on the row already saved above, instead of
+        // inserting a second row for the same exchange
         if (student?.id && !data.isQueued) {
-          await offlineApiClient.saveConversation(
-            student.id,
-            topicId,
-            userMessage,
-            data.response,
-            data.agentType || 'tutor'
-          );
+          if (conversationRowId != null) {
+            await offlineApiClient.updateConversation(
+              conversationRowId,
+              data.response,
+              data.agentType || 'tutor'
+            );
+          } else {
+            // Fallback: the initial save above failed or was skipped - save now
+            // so the exchange isn't lost entirely.
+            await offlineApiClient.saveConversation(
+              student.id,
+              topicId,
+              userMessage,
+              data.response,
+              data.agentType || 'tutor'
+            );
+          }
         }
 
         // NEW: Handle gamification data from chat endpoint response
@@ -117,7 +171,8 @@ export function TopicDetailsScreen({ route, navigation }) {
           const gamif = data.gamification;
 
           // Update store with new stats
-          updateAfterPointsEarned(
+          await updateAfterPointsEarned(
+            student.id,
             gamif.pointsEarned,
             gamif.level,
             gamif.currentStreak,
@@ -132,10 +187,16 @@ export function TopicDetailsScreen({ route, navigation }) {
       }
     } catch (error) {
       console.error('Error sending message:', error);
+      // isHttpError means the server was reached and rejected the request (bad
+      // input, auth failure, a real backend error) - not a connectivity problem,
+      // so don't tell the student to check their connection when that's not it.
+      const content = error?.isHttpError
+        ? "Something went wrong on our end and your message wasn't sent. Please try again."
+        : 'Error: Unable to send message. Please check your connection.';
       setChatMessages((prev) => [...prev, {
         id: Date.now(),
         type: 'assistant',
-        content: '❌ Error: Unable to send message. Please check your connection.'
+        content
       }]);
     } finally {
       setChatLoading(false);
@@ -171,7 +232,7 @@ export function TopicDetailsScreen({ route, navigation }) {
 
           {!isOnline && (
             <View style={styles.offlineBadge}>
-              <Text style={[styles.offlineBadgeText, typography.caption]}>📴</Text>
+              <MaterialCommunityIcons name="wifi-off" size={14} color={colors.text.inverse} />
             </View>
           )}
         </View>
@@ -188,7 +249,7 @@ export function TopicDetailsScreen({ route, navigation }) {
             typography.subtitle2,
             activeTab === 'content' && styles.activeTabLabel
           ]}>
-            📚 Content
+            Content
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
@@ -200,7 +261,7 @@ export function TopicDetailsScreen({ route, navigation }) {
             typography.subtitle2,
             activeTab === 'chat' && styles.activeTabLabel
           ]}>
-            💬 Chat
+            Chat
           </Text>
         </TouchableOpacity>
       </View>
@@ -227,7 +288,7 @@ export function TopicDetailsScreen({ route, navigation }) {
           {/* Knowledge */}
           {currentTopic?.content?.knowledge && (
             <Card>
-              <Text style={[styles.sectionTitle, typography.subtitle2]}>📖 Knowledge</Text>
+              <Text style={[styles.sectionTitle, typography.subtitle2]}>Knowledge</Text>
               <Text style={[styles.sectionContent, typography.body2]}>
                 {currentTopic.content.knowledge}
               </Text>
@@ -237,7 +298,7 @@ export function TopicDetailsScreen({ route, navigation }) {
           {/* Skills */}
           {currentTopic?.content?.skills && (
             <Card>
-              <Text style={[styles.sectionTitle, typography.subtitle2]}>💪 Skills</Text>
+              <Text style={[styles.sectionTitle, typography.subtitle2]}>Skills</Text>
               <Text style={[styles.sectionContent, typography.body2]}>
                 {currentTopic.content.skills}
               </Text>
@@ -247,7 +308,7 @@ export function TopicDetailsScreen({ route, navigation }) {
           {/* Learning Activities */}
           {currentTopic?.learningActivities?.length > 0 && (
             <Card>
-              <Text style={[styles.sectionTitle, typography.subtitle2]}>📝 Activities</Text>
+              <Text style={[styles.sectionTitle, typography.subtitle2]}>Activities</Text>
               {currentTopic.learningActivities.map((activity, idx) => (
                 <Text key={idx} style={[styles.activityItem, typography.body2]}>
                   • {activity.activity_description}
@@ -259,7 +320,7 @@ export function TopicDetailsScreen({ route, navigation }) {
           {/* Evaluation Guide */}
           {currentTopic?.evaluationGuide && (
             <Card>
-              <Text style={[styles.sectionTitle, typography.subtitle2]}>✅ You'll Be Able To</Text>
+              <Text style={[styles.sectionTitle, typography.subtitle2]}>You'll Be Able To</Text>
               <Text style={[styles.sectionContent, typography.body2]}>
                 {currentTopic.evaluationGuide}
               </Text>
@@ -271,19 +332,15 @@ export function TopicDetailsScreen({ route, navigation }) {
       {/* Chat Tab */}
       {activeTab === 'chat' && (
         <>
-          {unlockedBadge && (
-            <BadgeUnlockedNotification badge={unlockedBadge} />
-          )}
-
           {/* Agent Type Selector */}
           <View style={styles.agentSelector}>
             <Text style={[styles.agentLabel, typography.caption]}>Learning Mode:</Text>
             <View style={styles.agentButtonsRow}>
               {[
-                { type: 'tutor', icon: '🧑‍🏫', label: 'Tutor' },
-                { type: 'practice', icon: '✏️', label: 'Practice' },
-                { type: 'assessment', icon: '📋', label: 'Test' },
-                ...(isExamPrepEligible ? [{ type: 'exam_prep', icon: '🎓', label: 'Exam Prep' }] : [])
+                { type: 'tutor', icon: 'account-tie-voice-outline', label: 'Tutor' },
+                { type: 'practice', icon: 'pencil-outline', label: 'Practice' },
+                { type: 'assessment', icon: 'clipboard-check-outline', label: 'Test' },
+                ...(isExamPrepEligible ? [{ type: 'exam_prep', icon: 'school-outline', label: 'Exam Prep' }] : [])
               ].map(({ type, icon, label }) => (
                 <TouchableOpacity
                   key={type}
@@ -293,7 +350,12 @@ export function TopicDetailsScreen({ route, navigation }) {
                   ]}
                   onPress={() => setAgentType(type)}
                 >
-                  <Text style={[styles.agentButtonIcon]}>{icon}</Text>
+                  <MaterialCommunityIcons
+                    name={icon}
+                    size={20}
+                    color={agentType === type ? colors.text.inverse : colors.text.secondary}
+                    style={styles.agentButtonIcon}
+                  />
                   <Text style={[
                     styles.agentButtonLabel,
                     typography.caption,
@@ -310,10 +372,10 @@ export function TopicDetailsScreen({ route, navigation }) {
             {chatMessages.length === 0 && (
               <View style={styles.emptyState}>
                 <Text style={[styles.emptyStateTitle, typography.subtitle1]}>
-                  {agentType === 'tutor' && '👋 Welcome to AI Tutor'}
-                  {agentType === 'practice' && '✏️ Let\'s Practice'}
-                  {agentType === 'assessment' && '📋 Test Your Knowledge'}
-                  {agentType === 'exam_prep' && '🎓 WAEC/UTME Exam Prep'}
+                  {agentType === 'tutor' && 'Welcome to AI Tutor'}
+                  {agentType === 'practice' && "Let's Practice"}
+                  {agentType === 'assessment' && 'Test Your Knowledge'}
+                  {agentType === 'exam_prep' && 'WAEC/UTME Exam Prep'}
                 </Text>
                 <Text style={[styles.emptyStateText, typography.body2]}>
                   {agentType === 'tutor' && `Ask me anything about ${topicName}. I'm here to help you learn!`}
@@ -623,7 +685,6 @@ const styles = StyleSheet.create({
     borderColor: colors.primary
   },
   agentButtonIcon: {
-    fontSize: 18,
     marginBottom: spacing.xs
   },
   agentButtonLabel: {

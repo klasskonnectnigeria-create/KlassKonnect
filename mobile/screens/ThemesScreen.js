@@ -52,9 +52,9 @@ export function ThemesScreen({ route, navigation }) {
 
   const getStatusBadge = (topicId) => {
     const p = progress[topicId];
-    if (!p || p.status === 'not_started') return '🔒 Not Started';
-    if (p.status === 'in_progress') return '📖 In Progress';
-    return '✅ Completed';
+    if (!p || p.status === 'not_started') return 'Not Started';
+    if (p.status === 'in_progress') return 'In Progress';
+    return 'Completed';
   };
 
   const getStatusColor = (topicId) => {

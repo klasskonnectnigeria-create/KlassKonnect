@@ -85,7 +85,7 @@ export function GamificationNotification({ gamification, onDismiss }) {
             <View style={styles.section}>
               <View style={styles.header}>
                 <MaterialCommunityIcons name="star" size={24} color="#F5A524" />
-                <Text style={styles.title}>Level Up! 🎉</Text>
+                <Text style={styles.title}>Level Up!</Text>
               </View>
               <Text style={styles.subtitle}>
                 You've reached {gamification.levelProgress.currentLevelName}!
@@ -116,7 +116,7 @@ export function GamificationNotification({ gamification, onDismiss }) {
                 <Text style={styles.title}>Streak Milestone!</Text>
               </View>
               <Text style={styles.subtitle}>
-                You're on a {gamification.currentStreak}-day streak! Keep it up! 🔥
+                You're on a {gamification.currentStreak}-day streak! Keep it up!
               </Text>
             </View>
           )}

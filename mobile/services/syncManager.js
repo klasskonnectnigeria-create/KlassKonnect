@@ -9,11 +9,16 @@ import {
   saveTopics,
   getTopics,
   updateStudentProgress,
-  saveConversationMessage
+  updateConversationMessage
 } from './database';
 import { useOfflineStore } from '../store/offlineStore';
+import { API_URL } from '../config/api';
 
-const API_URL = process.env.EXPO_PUBLIC_API_URL || 'http://localhost:5000';
+// Was process.env.EXPO_PUBLIC_API_URL || 'http://localhost:5000' - EXPO_PUBLIC_API_URL
+// is no longer set in mobile/.env (deliberately, see its comment there), so this always
+// silently fell back to localhost, which doesn't exist on a real device. Every offline
+// sync (queued actions, themes/topics cache refresh) would fail on any real phone.
+// Now shares the same base URL as the rest of the app (mobile/config/api.js).
 
 class SyncManager {
   constructor() {
@@ -75,9 +80,28 @@ class SyncManager {
           }
 
           if (response.ok) {
+            // For a queued chat message, the real AI response only exists now - write it
+            // into the local conversation_logs row that was saved (with an empty response)
+            // when the message was first sent, so it shows up next time the chat history
+            // loads instead of being lost even though the sync itself succeeded.
+            if (action.endpoint === '/api/agents/chat' && body.conversationRowId != null) {
+              try {
+                const responseData = await response.json();
+                if (responseData && responseData.response) {
+                  await updateConversationMessage(
+                    body.conversationRowId,
+                    responseData.response,
+                    responseData.agentType || body.agentType || 'tutor'
+                  );
+                }
+              } catch (parseError) {
+                console.error(`Error saving synced chat response for action ${action.id}:`, parseError);
+              }
+            }
+
             await updateActionStatus(action.id, 'synced');
             successCount++;
-            console.log(`✓ Synced action ${action.id}: ${action.endpoint}`);
+            console.log(`Synced action ${action.id}: ${action.endpoint}`);
           } else {
             await updateActionStatus(action.id, 'failed');
             failureCount++;

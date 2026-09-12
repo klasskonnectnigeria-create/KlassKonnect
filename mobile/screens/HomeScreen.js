@@ -12,7 +12,6 @@ import { PointsDisplay, StreakDisplay, BadgesDisplay } from '../components/Gamif
 import { colors, spacing, typography } from '../constants/colors';
 import { API_URL } from '../config/api';
 import { gamificationService } from '../services/gamificationService';
-import { gamificationSyncService } from '../services/gamificationSyncService';
 
 export function HomeScreen({ onLogout }) {
   const router = useRouter();
@@ -64,16 +63,16 @@ export function HomeScreen({ onLogout }) {
 
         if (!mounted) return;
 
-        await loadGamificationData(student.id);
-
-        if (!mounted) return;
-
-        // Sync gamification stats to backend
-        try {
-          await gamificationSyncService.syncToBackend(student.id, token);
-        } catch (syncError) {
-          console.warn('Failed to sync gamification stats:', syncError);
-        }
+        // loadGamificationData refreshes the local cache from the server first
+        // (server is the source of truth for points/level/streak/badges - see
+        // store/gamificationStore.js) and reads it back, so there is nothing left
+        // to separately push to the backend here - that used to run in the
+        // opposite direction (push local numbers up), which only made sense back
+        // when points could be earned locally. They can't anymore (the local
+        // award methods in services/gamificationService.js are unused - all real
+        // points come from the AI chat flow, computed server-side), so pushing
+        // local numbers back up was just an unnecessary round-trip.
+        await loadGamificationData(student.id, token);
       } catch (error) {
         if (mounted && error.name !== 'AbortError') {
           console.error('Error loading data:', error);
@@ -136,7 +135,7 @@ export function HomeScreen({ onLogout }) {
           </Text>
         </View>
         <View style={styles.headerButtons}>
-          <Pressable onPress={() => router.push('/(app)/leaderboard')} style={styles.leaderboardButton}>
+          <Pressable onPress={() => router.push('/(app)/achievements')} style={styles.leaderboardButton}>
             <MaterialCommunityIcons name="trophy" size={25} color={colors.text.primary} />
           </Pressable>
           <Pressable onPress={handleLogout} style={styles.logoutButton}>

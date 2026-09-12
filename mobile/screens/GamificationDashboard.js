@@ -8,29 +8,38 @@ import {
   ActivityIndicator,
   Dimensions,
   TouchableOpacity,
-  Animated
+  Animated,
+  RefreshControl
 } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import axios from 'axios';
+import { API_URL as BASE_URL } from '../config/api';
+import { ProgressBar } from '../components/ProgressBar';
 
 const { width } = Dimensions.get('window');
 
-const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
+// Was `process.env.REACT_APP_API_URL || 'http://localhost:5000/api'` - REACT_APP_ is a
+// Create-React-App convention that Expo never sets, so this always silently fell back to
+// localhost, which doesn't exist on a real device. Now shares the same base URL as the
+// rest of the app (mobile/config/api.js) instead of hardcoding a second, wrong one.
+const API_URL = `${BASE_URL}/api`;
 
 // Level names and colors
+// icon: MaterialCommunityIcons name, not an emoji (see root CLAUDE.md's "no emoji in
+// product UI" brand rule).
 const LEVELS = {
-  1: { name: 'Starter', color: '#0B1B3F', emoji: '⭐' },
-  2: { name: 'Explorer', color: '#1B54F5', emoji: '🧭' },
-  3: { name: 'Challenger', color: '#F5A524', emoji: '⚡' },
-  4: { name: 'Expert', color: '#E4572E', emoji: '🎓' },
-  5: { name: 'Master', color: '#0E9F6E', emoji: '👑' }
+  1: { name: 'Starter', color: '#0B1B3F', icon: 'star-outline' },
+  2: { name: 'Explorer', color: '#1B54F5', icon: 'compass-outline' },
+  3: { name: 'Challenger', color: '#F5A524', icon: 'lightning-bolt-outline' },
+  4: { name: 'Expert', color: '#E4572E', icon: 'school-outline' },
+  5: { name: 'Master', color: '#0E9F6E', icon: 'crown-outline' }
 };
 
 const BadgeGrid = ({ badges }) => {
   if (!badges || badges.length === 0) {
     return (
       <View style={styles.noBadgesContainer}>
-        <Text style={styles.noBadgesText}>No badges yet. Keep learning! 🎯</Text>
+        <Text style={styles.noBadgesText}>No badges yet. Keep learning!</Text>
       </View>
     );
   }
@@ -85,6 +94,7 @@ const StatCard = ({ icon, label, value, color = '#1B54F5' }) => (
 export function GamificationDashboard({ token }) {
   const [profile, setProfile] = useState(null);
   const [levelProgress, setLevelProgress] = useState(null);
+  const [subjectProgress, setSubjectProgress] = useState([]);
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
 
@@ -111,6 +121,19 @@ export function GamificationDashboard({ token }) {
       Alert.alert('Error', 'Failed to load gamification data');
     } finally {
       setLoading(false);
+    }
+
+    // Fetched separately from the core profile/level data above - a failure
+    // here (e.g. the student has no progress yet) shouldn't block the rest of
+    // the screen from showing, so it degrades to an empty list rather than
+    // taking down the whole load.
+    try {
+      const subjectRes = await axios.get(`${API_URL}/progress/by-subject`, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      setSubjectProgress(subjectRes.data.subjects || []);
+    } catch (error) {
+      console.warn('Failed to fetch subject progress:', error);
     }
   };
 
@@ -153,7 +176,9 @@ export function GamificationDashboard({ token }) {
       {/* Level Card */}
       <View style={[styles.levelCard, { borderLeftColor: levelInfo.color }]}>
         <View style={styles.levelHeader}>
-          <Text style={styles.levelEmoji}>{levelInfo.emoji}</Text>
+          <View style={styles.levelIconWrap}>
+            <MaterialCommunityIcons name={levelInfo.icon} size={32} color={levelInfo.color} />
+          </View>
           <View style={styles.levelInfo}>
             <Text style={styles.levelName}>{levelInfo.name}</Text>
             <Text style={styles.levelNumber}>Level {level}</Text>
@@ -189,7 +214,7 @@ export function GamificationDashboard({ token }) {
         )}
         {levelProgress.maxLevel && (
           <Text style={styles.maxLevelText}>
-            🎉 You've reached Master level! Congratulations!
+            You've reached Master level! Congratulations!
           </Text>
         )}
       </View>
@@ -199,7 +224,7 @@ export function GamificationDashboard({ token }) {
         <StatCard
           icon="fire"
           label="Current Streak"
-          value={`${profile.currentStreak} 🔥`}
+          value={`${profile.currentStreak}`}
           color="#E4572E"
         />
         <StatCard
@@ -210,10 +235,46 @@ export function GamificationDashboard({ token }) {
         />
         <StatCard
           icon="medal"
-          label="Badges Earned"
-          value={`${profile.badgeCount}/12`}
+          label={`Badges Earned (${profile.badgeCount}/${profile.totalBadges})`}
+          value={`${profile.badgePercent}%`}
           color="#1B54F5"
         />
+      </View>
+
+      {/* Progress by Subject */}
+      <View style={styles.section}>
+        <View style={styles.sectionHeader}>
+          <MaterialCommunityIcons name="chart-donut" size={24} color="#1B54F5" />
+          <Text style={styles.sectionTitle}>Progress by Subject</Text>
+        </View>
+        {subjectProgress.length === 0 ? (
+          <View style={styles.noBadgesContainer}>
+            <Text style={styles.noBadgesText}>
+              No subject progress yet - start exploring a topic to begin tracking!
+            </Text>
+          </View>
+        ) : (
+          subjectProgress.map((subj) => {
+            const percent = subj.totalTopics > 0
+              ? (subj.completedTopics / subj.totalTopics) * 100
+              : 0;
+
+            return (
+              <View key={subj.themeId} style={styles.subjectCard}>
+                <Text style={styles.subjectName}>{subj.subject}</Text>
+                <ProgressBar
+                  progress={percent}
+                  label={`${subj.completedTopics} of ${subj.totalTopics} topics`}
+                />
+                {subj.avgUnderstanding > 0 && (
+                  <Text style={styles.subjectUnderstanding}>
+                    Avg. understanding: {Math.round(subj.avgUnderstanding)}%
+                  </Text>
+                )}
+              </View>
+            );
+          })
+        )}
       </View>
 
       {/* Badges Section */}
@@ -315,8 +376,13 @@ const styles = StyleSheet.create({
     marginBottom: 16
   },
 
-  levelEmoji: {
-    fontSize: 40,
+  levelIconWrap: {
+    width: 48,
+    height: 48,
+    borderRadius: 24,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#F2F1EC',
     marginRight: 12
   },
 
@@ -486,6 +552,26 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     color: '#0B1B3F',
     marginLeft: 8
+  },
+
+  subjectCard: {
+    backgroundColor: 'white',
+    borderRadius: 8,
+    padding: 12,
+    marginBottom: 8
+  },
+
+  subjectName: {
+    fontSize: 14,
+    fontWeight: '600',
+    color: '#1B54F5',
+    marginBottom: 8
+  },
+
+  subjectUnderstanding: {
+    fontSize: 12,
+    color: '#666',
+    marginTop: 6
   },
 
   badgeGrid: {

@@ -11,7 +11,6 @@ export default function AppLayout() {
       }}
     >
       <Stack.Screen name="home" />
-      <Stack.Screen name="leaderboard" />
       <Stack.Screen name="achievements" />
       <Stack.Screen
         name="themes"
