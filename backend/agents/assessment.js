@@ -1,5 +1,5 @@
 import { callClaude } from '../services/claudeClient.js';
-import { formatTopicContext } from './topicContext.js';
+import { formatTopicContext, extractCorrectness } from './topicContext.js';
 
 // Assessment Agent - Tests student understanding and identifies gaps
 export async function assessmentAgent(context) {
@@ -34,7 +34,7 @@ CRITICAL GUIDELINES FOR AGE-APPROPRIATE ASSESSMENT:
 - Wait for answer before continuing
 
 **FEEDBACK RULES - PHASE 1 ENGAGEMENT:**
-- Correct: "✅ YES! You didn't just answer right—you [specific thinking]. That's expert-level!"
+- Correct: "Yes! You didn't just answer right—you [specific thinking]. That's expert-level!"
 - Wrong: "Great try! Your brain is learning. Here's the key insight: [explanation]"
 - Effort: "I can see you're really thinking hard. That's exactly what grows the brain!"
 - Process: "I love how you [specific approach]. That's how real thinkers solve problems!"
@@ -48,7 +48,7 @@ CRITICAL GUIDELINES FOR AGE-APPROPRIATE ASSESSMENT:
 
 **CONFIDENCE BUILDING (PHASE 1):**
 - Start with what they know: "You're amazing at X. Let's use that to explore Y!"
-- Use incremental steps: "First part ✅. Second part is trickier—let's break it down!"
+- Use incremental steps: "First part done. Second part is trickier—let's break it down!"
 - Celebrate process over score: "Whether you get it right or wrong, I'm impressed by your thinking!"
 - Personal progress language: "Last time you were stuck here. Now you're closer. See the growth?"
 
@@ -67,9 +67,9 @@ CRITICAL GUIDELINES FOR AGE-APPROPRIATE ASSESSMENT:
 **AFTER 2-3 QUESTIONS - PROVIDE SUMMARY:**
 \`\`\`
 "Here's what I noticed about YOU:
-✅ You're BRILLIANT at [concept]—seriously!
-💪 You're learning [concept]—that's hard work paying off!
-🚀 You're ready to master [concept]—you've got this!"
+- You're BRILLIANT at [concept]—seriously!
+- You're learning [concept]—that's hard work paying off!
+- You're ready to master [concept]—you've got this!"
 \`\`\`
 
 **LENGTH & PACING:**
@@ -204,12 +204,24 @@ PRIVACY & SENSITIVITY IN ASSESSMENT:
 - DON'T use negative language ("You got it wrong", "That's incorrect")
 - DON'T exceed 150 words per response
 - DON'T dismiss gaps as permanent ("You're not good at this")
+- DON'T use any emoji characters anywhere in your response, ever. Use plain text and
+  markdown formatting (headers, bold, lists) only.
+
+**CORRECTNESS SIGNAL (REQUIRED, MACHINE-READ - NEVER MENTION THIS TO THE STUDENT):**
+End every single response with exactly one line, alone on its own line, in exactly this
+format (including the double brackets):
+[[CORRECTNESS: CORRECT]] - the student's most recent answer in this conversation was right
+[[CORRECTNESS: INCORRECT]] - their most recent answer was wrong or only partly right
+[[CORRECTNESS: NONE]] - this response isn't judging an answer at all (e.g. you're asking a
+  new question, giving a hint, or this is the first message in the conversation)
+This line is stripped before the student ever sees your response - it is read by the backend
+only. Never explain it, reference it, or let it influence your visible wording.
 
 REMEMBER: Assessment builds understanding, not anxiety. Be curious about student thinking, patient with mistakes, and encouraging about growth.`;
 
   try {
     const response = await callClaude(systemPrompt, message, studentId, topicId, 'assessment');
-    return response.content;
+    return extractCorrectness(response.content);
   } catch (error) {
     console.error('[assessmentAgent] Claude call failed, returning honest error to student', {
       endpoint: 'POST /api/agents/chat (assessment)',
@@ -220,6 +232,9 @@ REMEMBER: Assessment builds understanding, not anxiety. Be curious about student
       errorMessage: error.message,
       httpStatus: error.status ?? 'N/A'
     });
-    return `Sorry, something went wrong while checking your understanding right now. Please try again in a moment.`;
+    return {
+      content: `Sorry, something went wrong while checking your understanding right now. Please try again in a moment.`,
+      isCorrect: null
+    };
   }
 }

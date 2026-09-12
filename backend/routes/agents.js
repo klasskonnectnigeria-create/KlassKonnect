@@ -3,7 +3,7 @@ import { pool } from '../server.js';
 import { verifyToken } from '../middleware/auth.js';
 import { orchestrateQuery } from '../agents/orchestrator.js';
 import { getConversationContext, saveConversation, getTopicUnderstanding } from '../services/conversationManager.js';
-import { updateGamificationStats, getLevelProgress, getStudentGamificationProfile } from '../services/gamificationService.js';
+import { updateGamificationStats, getLevelProgress, getStudentGamificationProfile, checkBadgeQualifications } from '../services/gamificationService.js';
 
 const router = express.Router();
 
@@ -115,56 +115,69 @@ router.post('/chat', verifyToken, async (req, res) => {
       );
     }
 
-    // GAMIFICATION: Determine if response indicates correct answer and update stats
+    // GAMIFICATION: only runs when the agent actually judged a specific answer
+    // (practice/assessment agents set a real isCorrect via their [[CORRECTNESS: ...]]
+    // marker - see agents/topicContext.js's extractCorrectness). Tutor/exam-prep turns,
+    // and practice/assessment turns that were just presenting a new question or hint,
+    // report isCorrect: null and are correctly skipped here rather than being scored by
+    // scanning the AI's reply text for praise words.
     let gamificationData = null;
-    try {
-      // Heuristic: check if response contains positive feedback indicators
-      const isCorrect = response.content.includes('Excellent!') ||
-                       response.content.includes('You got it!') ||
-                       response.content.includes('That\'s right!') ||
-                       response.content.includes('Perfect!') ||
-                       response.content.includes('Correct!');
+    if (response.isCorrect === true || response.isCorrect === false) {
+      try {
+        const isCorrect = response.isCorrect;
 
-      // Calculate response time (from request to response)
-      const responseTime = Date.now() - req.startTime;
-      const responseTimeSeconds = Math.round(responseTime / 1000);
+        // Calculate response time (from request to response)
+        const responseTime = Date.now() - req.startTime;
+        const responseTimeSeconds = Math.round(responseTime / 1000);
 
-      // Update gamification stats
-      const statsUpdate = await updateGamificationStats(req.studentId, {
-        isCorrect,
-        timeSeconds: responseTimeSeconds,
-        topicId,
-        responseQuality: 'normal'
-      });
+        // Update gamification stats
+        const statsUpdate = await updateGamificationStats(req.studentId, {
+          isCorrect,
+          timeSeconds: responseTimeSeconds,
+          topicId,
+          responseQuality: 'normal'
+        });
 
-      // Get updated level progress for display
-      const levelProgress = await getLevelProgress(req.studentId);
+        // Check for newly-earned badges using real, just-computed stats. Only badges whose
+        // criteria we can honestly evaluate from real data are checked here (currently:
+        // Perfectionist, via the real correct-answer streak above). The remaining BADGES
+        // entries (accuracy%, day-streaks, timed-problem counts, mastered-topic counts)
+        // need dedicated tracking this endpoint doesn't compute yet - they are deliberately
+        // left unchecked rather than approximated, so a badge is never awarded on a guess.
+        const badgesUnlocked = await checkBadgeQualifications(req.studentId, {
+          perfectStreak: statsUpdate.currentStreak
+        });
 
-      // Get full profile for dashboard
-      const profile = await getStudentGamificationProfile(req.studentId);
+        // Get updated level progress for display
+        const levelProgress = await getLevelProgress(req.studentId);
 
-      gamificationData = {
-        pointsEarned: statsUpdate.pointsEarned,
-        totalPoints: statsUpdate.totalPoints,
-        level: statsUpdate.level,
-        levelName: statsUpdate.levelName,
-        currentStreak: statsUpdate.currentStreak,
-        levelProgress: {
-          currentLevel: levelProgress.currentLevel,
-          currentLevelName: levelProgress.currentLevelName,
-          nextLevelName: levelProgress.nextLevelName,
-          pointsToNextLevel: levelProgress.pointsToNextLevel,
-          progressPercent: levelProgress.progressPercent
-        },
-        profile: {
-          badgeCount: profile.badgeCount,
-          longestStreak: profile.longestStreak
-        }
-      };
-    } catch (gamificationError) {
-      // Log but don't block the response if gamification fails
-      console.error('Gamification update failed:', gamificationError);
-      gamificationData = null;
+        // Get full profile for dashboard
+        const profile = await getStudentGamificationProfile(req.studentId);
+
+        gamificationData = {
+          pointsEarned: statsUpdate.pointsEarned,
+          totalPoints: statsUpdate.totalPoints,
+          level: statsUpdate.level,
+          levelName: statsUpdate.levelName,
+          currentStreak: statsUpdate.currentStreak,
+          badgesUnlocked,
+          levelProgress: {
+            currentLevel: levelProgress.currentLevel,
+            currentLevelName: levelProgress.currentLevelName,
+            nextLevelName: levelProgress.nextLevelName,
+            pointsToNextLevel: levelProgress.pointsToNextLevel,
+            progressPercent: levelProgress.progressPercent
+          },
+          profile: {
+            badgeCount: profile.badgeCount,
+            longestStreak: profile.longestStreak
+          }
+        };
+      } catch (gamificationError) {
+        // Log but don't block the response if gamification fails
+        console.error('Gamification update failed:', gamificationError);
+        gamificationData = null;
+      }
     }
 
     res.json({

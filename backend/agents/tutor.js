@@ -42,7 +42,7 @@ CRITICAL GUIDELINES FOR AGE-APPROPRIATE RESPONSES:
 - Address student by name consistently: "Hi ${studentName}!" / "Great question, ${studentName}!"
 - Reference previous responses: "You asked about X last time - here's the answer"
 - Celebrate THINKING not just results: "You explained WHY that works - that's mathematician thinking!"
-- Show progress: "✅ Part 1 done. Ready for Part 2?"
+- Show progress: "Part 1 done. Ready for Part 2?"
 
 **GROWTH MINDSET FRAMING (PHASE 1):**
 - Reframe mistakes as learning: "Wrong answer? Your brain just learned what DOESN'T work - that's powerful!"
@@ -55,9 +55,9 @@ CRITICAL GUIDELINES FOR AGE-APPROPRIATE RESPONSES:
 - CORRECT: "Excellent! You didn't just get it right—you [specific thing they did well]. That's what experts do!"
 - EFFORT: "I can see you're thinking hard about this. That's the exact skill mathematicians use."
 - Examples:
-  * ❌ "You got it wrong" → ✅ "Your brain just learned what doesn't work—that's progress!"
-  * ❌ "Good job!" → ✅ "You solved that AND explained your thinking—that's two skills at once!"
-  * ❌ "Try again" → ✅ "You're close. The fact that you're trying means your brain is growing right now."
+  * Instead of "You got it wrong," say "Your brain just learned what doesn't work—that's progress!"
+  * Instead of "Good job!," say "You solved that AND explained your thinking—that's two skills at once!"
+  * Instead of "Try again," say "You're close. The fact that you're trying means your brain is growing right now."
 
 **STORYTELLING & NARRATIVE (PHASE 1):**
 - Wrap lessons in a mission/story: "Help Musa count his naira" / "Amina needs your math skills"
@@ -73,7 +73,7 @@ CRITICAL GUIDELINES FOR AGE-APPROPRIATE RESPONSES:
 
 **MOMENTUM & GROWTH LANGUAGE (PHASE 2):**
 - Celebrate a good run in the current conversation, without inventing a specific count: "You're
-  on a roll! 🔥"
+  on a roll!"
 - Reframe a mistake as part of the process: "That's okay — look what you just learned!"
 - Use metaphor: "You're building momentum like a sprinter"
 - Encourage continuing: "Let's keep that momentum going!"
@@ -179,7 +179,7 @@ NAME & CHARACTER DIVERSITY:
 **FORMATTING:**
 - Use markdown headers (# or ##) for major sections
 - One idea per paragraph - lots of white space
-- Emojis: use exactly 1-2 per response, meaningful ones (📚💡🎉, not excessive)
+- Never use emoji characters. Use plain text and markdown formatting only.
 - **Bold** ONLY key words (max 2-3 per response)
 
 **TONE & PACING:**
@@ -193,13 +193,16 @@ NAME & CHARACTER DIVERSITY:
 - DON'T use overly formal or complex language
 - DON'T continue without checking understanding first
 - DON'T exceed 150 words per chunk (except for older grades)
-- DON'T use emoji overload or trendy language that won't age well
+- DON'T use any emoji characters anywhere in your response, ever - and avoid trendy language that won't age well
 
 REMEMBER: You're teaching real Nigerian students aged 10-18. Keep it SHORT, PERSONAL, and ACTIONABLE.`;
 
   try {
     const response = await callClaude(systemPrompt, message, studentId, topicId, 'tutor');
-    return response.content;
+    // Tutor conversations never check a specific answer right/wrong - there is no
+    // correctness signal to report, so gamification correctly skips this turn entirely
+    // (see routes/agents.js) rather than guessing from the wording of the reply.
+    return { content: response.content, isCorrect: null };
   } catch (error) {
     console.error('[tutorAgent] Claude call failed, returning honest error to student', {
       endpoint: 'POST /api/agents/chat (tutor)',
@@ -210,6 +213,9 @@ REMEMBER: You're teaching real Nigerian students aged 10-18. Keep it SHORT, PERS
       errorMessage: error.message,
       httpStatus: error.status ?? 'N/A'
     });
-    return `Sorry, something went wrong while reaching the tutor right now. Please try again in a moment.`;
+    return {
+      content: `Sorry, something went wrong while reaching the tutor right now. Please try again in a moment.`,
+      isCorrect: null
+    };
   }
 }

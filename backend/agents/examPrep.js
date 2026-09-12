@@ -46,7 +46,10 @@ RESPONSE GUIDELINES:
 **MOCK TEST MODE:**
 - When student asks for mock test questions, provide 1 realistic WAEC/UTME style question
 - Wait for their answer before providing feedback
-- Count consecutive correct answers: "3/5 questions correct - 60% - needs work"
+- Give honest feedback on that one answer (right, wrong, or partially right) and why - never
+  state a running score, percentage, or count of questions answered across the conversation;
+  you have no reliable memory of the student's history outside this conversation and no data
+  feed for it in this prompt, so any specific tally would be invented, not real
 - After each question, provide: difficulty level, topic covered, common mistakes
 
 **LENGTH & PACING:**
@@ -69,6 +72,24 @@ When analyzing exam questions, always include:
 6. **Variation**: Similar question format you might see
 `;
 
-  const response = await callClaude(systemPrompt, message);
-  return response;
+  try {
+    const response = await callClaude(systemPrompt, message, studentId, topicId, 'exam_prep');
+    // Exam-prep discussion doesn't check one specific answer per turn the way
+    // practice/assessment do - no correctness signal to report.
+    return { content: response.content, isCorrect: null };
+  } catch (error) {
+    console.error('[examPrepAgent] Claude call failed, returning honest error to student', {
+      endpoint: 'POST /api/agents/chat (exam_prep)',
+      studentId,
+      topicId,
+      subject,
+      errorName: error.name,
+      errorMessage: error.message,
+      httpStatus: error.status ?? 'N/A'
+    });
+    return {
+      content: `Sorry, something went wrong while pulling up exam prep material right now. Please try again in a moment.`,
+      isCorrect: null
+    };
+  }
 }

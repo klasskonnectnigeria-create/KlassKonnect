@@ -34,13 +34,15 @@ const BADGES = {
   // Skill badges
   ADDITION_MASTER: {
     type: 'addition_master',
-    name: '🎓 Addition Master',
+    name: 'Addition Master',
+    icon: 'plus-box-multiple-outline',
     description: '5 correct addition answers in a row',
     criteria: { skill: 'addition', correctStreak: 5 }
   },
   FRACTION_EXPERT: {
     type: 'fraction_expert',
-    name: '🌟 Fraction Expert',
+    name: 'Fraction Expert',
+    icon: 'star-outline',
     description: 'Mastered fractions (topic completed)',
     criteria: { topic: 'fractions', status: 'completed' }
   },
@@ -48,13 +50,15 @@ const BADGES = {
   // Consistency badges
   WEEK_WARRIOR: {
     type: 'week_warrior',
-    name: '🔥 Week Warrior',
+    name: 'Week Warrior',
+    icon: 'fire',
     description: 'Studied 7 days in a row',
     criteria: { days: 7 }
   },
   MONTH_MARATHON: {
     type: 'month_marathon',
-    name: '💪 Month Marathon',
+    name: 'Month Marathon',
+    icon: 'arm-flex-outline',
     description: 'Studied 30 days in a row',
     criteria: { days: 30 }
   },
@@ -62,7 +66,8 @@ const BADGES = {
   // Speed badges
   SPEED_DEMON: {
     type: 'speed_demon',
-    name: '⚡ Speed Demon',
+    name: 'Speed Demon',
+    icon: 'lightning-bolt-outline',
     description: 'Solved 10 problems in under 5 minutes',
     criteria: { problems: 10, timeSeconds: 300 }
   },
@@ -70,13 +75,15 @@ const BADGES = {
   // Accuracy badges
   SHARPSHOOTER: {
     type: 'sharpshooter',
-    name: '🎯 Sharpshooter',
+    name: 'Sharpshooter',
+    icon: 'target',
     description: '95%+ accuracy across 20 problems',
     criteria: { accuracy: 95, problems: 20 }
   },
   PERFECTIONIST: {
     type: 'perfectionist',
-    name: '💯 Perfectionist',
+    name: 'Perfectionist',
+    icon: 'trophy-award',
     description: '15 correct answers in a row (no mistakes)',
     criteria: { perfectStreak: 15 }
   },
@@ -84,7 +91,8 @@ const BADGES = {
   // Challenge badges
   PEAK_CLIMBER: {
     type: 'peak_climber',
-    name: '🏔️ Peak Climber',
+    name: 'Peak Climber',
+    icon: 'image-filter-hdr',
     description: 'Solved 5 hard problems correctly',
     criteria: { hardProblems: 5 }
   },
@@ -92,7 +100,8 @@ const BADGES = {
   // Discovery badges
   INSIGHT_HUNTER: {
     type: 'insight_hunter',
-    name: '🧠 Insight Hunter',
+    name: 'Insight Hunter',
+    icon: 'lightbulb-on-outline',
     description: 'Spotted a pattern or connection',
     criteria: { connections: 1 }
   },
@@ -100,13 +109,15 @@ const BADGES = {
   // Social badges
   MENTOR: {
     type: 'mentor',
-    name: '👥 Mentor',
+    name: 'Mentor',
+    icon: 'account-group-outline',
     description: 'Helped a classmate or explained a concept',
     criteria: { helpCount: 1 }
   },
   SCHOLAR: {
     type: 'scholar',
-    name: '📚 Scholar',
+    name: 'Scholar',
+    icon: 'book-open-page-variant-outline',
     description: 'Mastered 3+ different topics',
     criteria: { masteredTopics: 3 }
   },
@@ -149,11 +160,11 @@ export async function updateGamificationStats(studentId, interaction) {
     } else {
       stats = statsResult.rows[0];
 
-      // Update streak
-      const today = new Date().toDateString();
-      const lastActivityDate = stats.last_activity_date ? new Date(stats.last_activity_date).toDateString() : null;
-      const isNewDay = today !== lastActivityDate;
-
+      // current_streak counts consecutive CORRECT ANSWERS, not consecutive days studied -
+      // it resets to 0 on any wrong answer, regardless of which day that happens on. This
+      // is why WEEK_WARRIOR/MONTH_MARATHON (real day-streak badges) aren't wired to it -
+      // see checkBadgeQualifications's caller in routes/agents.js for what's honestly
+      // computed here today.
       let newStreak = stats.current_streak;
       if (isCorrect) {
         newStreak = (newStreak || 0) + 1;
@@ -233,7 +244,16 @@ export async function awardBadge(studentId, badgeType) {
 
     return {
       badgeAwarded: true,
-      badge: result.rows[0]
+      // Shaped for the client (camelCase, includes the icon name) rather than the raw
+      // DB row - GamificationNotification.js and BadgesDisplay read `.name`/`.icon`.
+      badge: {
+        id: result.rows[0].id,
+        type: badgeConfig.type,
+        name: badgeConfig.name,
+        description: badgeConfig.description,
+        icon: badgeConfig.icon,
+        earnedAt: result.rows[0].earned_at
+      }
     };
   } catch (error) {
     console.error('Error awarding badge:', error);
@@ -313,6 +333,9 @@ export async function getStudentGamificationProfile(studentId) {
       longest_streak: 0
     };
 
+    const totalBadges = Object.keys(BADGES).length;
+    const badgeCount = badgesResult.rows.length;
+
     return {
       points: stats.total_points,
       level: stats.level,
@@ -324,7 +347,13 @@ export async function getStudentGamificationProfile(studentId) {
         name: row.badge_name,
         earnedAt: row.earned_at
       })),
-      badgeCount: badgesResult.rows.length
+      badgeCount,
+      // Total is the full defined badge catalog (see BADGES above), not just the
+      // ones currently reachable through live chat use - see checkBadgeQualifications
+      // for which of these are actually wired to real, honestly-computed criteria
+      // today. Shown as a completion percentage on the Achievements screen.
+      totalBadges,
+      badgePercent: totalBadges > 0 ? Math.round((badgeCount / totalBadges) * 100) : 0
     };
   } catch (error) {
     console.error('Error fetching gamification profile:', error);

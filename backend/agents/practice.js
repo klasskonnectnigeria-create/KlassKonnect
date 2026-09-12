@@ -1,5 +1,5 @@
 import { callClaude } from '../services/claudeClient.js';
-import { formatTopicContext } from './topicContext.js';
+import { formatTopicContext, extractCorrectness } from './topicContext.js';
 
 // Practice Agent - Generates exercises and provides feedback
 export async function practiceAgent(context) {
@@ -33,7 +33,7 @@ CRITICAL GUIDELINES FOR AGE-APPROPRIATE PRACTICE:
 - ONLY provide solution after they attempt it
 
 **FEEDBACK RULES - PHASE 1 ENGAGEMENT:**
-- Correct: "Excellent! 🎉 You didn't just solve it—you [specific thing they did]. That's mathematician thinking!"
+- Correct: "Excellent! You didn't just solve it—you [specific thing they did]. That's mathematician thinking!"
 - Wrong: "Great try! Your brain learned what doesn't work. Here's the insight: [explanation]"
 - Hint: "Hint: Think about [concept]. Your brain is growing right now. Try again!"
 - Effort: "I can see you're working hard. That's the exact skill that matters most."
@@ -55,7 +55,7 @@ CRITICAL GUIDELINES FOR AGE-APPROPRIATE PRACTICE:
 - Use student name: "Hi ${studentName}!"
 - Reference previous work: "Remember when you solved X? This uses the same skill!"
 - Celebrate growth: "You're getting faster at this. That's mathematician muscle memory!"
-- Show micro-progress: "✅ Problem 1 done. Ready for Problem 2?"
+- Show micro-progress: "Problem 1 done. Ready for Problem 2?"
 
 **STEP-BY-STEP SOLUTIONS:**
 - Number each step: Step 1, Step 2, etc.
@@ -172,7 +172,7 @@ INCLUSIVE FAMILY STRUCTURES:
 
 **DIFFICULTY PROGRESSION:**
 - Track: Is student getting problems right? (Y=harder, N/partial=stay at level)
-- Signal when increasing: "You're ready for a tougher one now! 💪"
+- Signal when increasing: "You're ready for a tougher one now!"
 - Signal when backing up: "Let's try something a bit easier first"
 
 **WHAT NOT TO DO:**
@@ -181,12 +181,24 @@ INCLUSIVE FAMILY STRUCTURES:
 - DON'T use overly complex language or abstract examples
 - DON'T exceed 200 words per response
 - DON'T be discouraging about wrong answers
+- DON'T use any emoji characters anywhere in your response, ever. Use plain text and
+  markdown formatting (headers, bold, lists) only.
+
+**CORRECTNESS SIGNAL (REQUIRED, MACHINE-READ - NEVER MENTION THIS TO THE STUDENT):**
+End every single response with exactly one line, alone on its own line, in exactly this
+format (including the double brackets):
+[[CORRECTNESS: CORRECT]] - the student's most recent answer in this conversation was right
+[[CORRECTNESS: INCORRECT]] - their most recent answer was wrong or only partly right
+[[CORRECTNESS: NONE]] - this response isn't judging an answer at all (e.g. you're presenting
+  a new problem, giving a hint, or this is the first message in the conversation)
+This line is stripped before the student ever sees your response - it is read by the backend
+only. Never explain it, reference it, or let it influence your visible wording.
 
 REMEMBER: Practice should build confidence and competence. Be encouraging, patient, and clear.`;
 
   try {
     const response = await callClaude(systemPrompt, message, studentId, topicId, 'practice');
-    return response.content;
+    return extractCorrectness(response.content);
   } catch (error) {
     console.error('[practiceAgent] Claude call failed, returning honest error to student', {
       endpoint: 'POST /api/agents/chat (practice)',
@@ -197,6 +209,9 @@ REMEMBER: Practice should build confidence and competence. Be encouraging, patie
       errorMessage: error.message,
       httpStatus: error.status ?? 'N/A'
     });
-    return `Sorry, something went wrong while generating your practice question right now. Please try again in a moment.`;
+    return {
+      content: `Sorry, something went wrong while generating your practice question right now. Please try again in a moment.`,
+      isCorrect: null
+    };
   }
 }

@@ -155,7 +155,7 @@ A fraction represents a **part of a whole**. It has two numbers:
 
 For example: 3/4 means we have 3 parts out of 4 equal parts.
 
-Think of a pizza 🍕:
+Think of a pizza:
 - If we divide it into 4 equal slices, and eat 3 of them
 - We've eaten 3/4 of the pizza!
 
@@ -175,7 +175,7 @@ You can convert an improper fraction to a **mixed number** (a whole number + a f
 
 Both forms are correct - it depends on the context!`,
 
-    'default': `I'm here to help you understand mathematics! 📚
+    'default': `I'm here to help you understand mathematics!
 
 You can ask me about:
 - Explaining concepts

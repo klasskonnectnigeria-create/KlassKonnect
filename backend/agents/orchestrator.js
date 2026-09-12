@@ -30,7 +30,9 @@ export async function orchestrateQuery(context) {
       agentType = 'tutor';
   }
 
-  // Call the selected agent with full context
+  // Call the selected agent with full context. Every agent now returns
+  // { content, isCorrect } - isCorrect is true/false only for practice/assessment turns
+  // that actually judged an answer, null otherwise (see each agent's own comments).
   const response = await agentFunction({
     message,
     topicContext,
@@ -41,8 +43,9 @@ export async function orchestrateQuery(context) {
   });
 
   return {
-    content: response,
+    content: response.content,
     agentType,
+    isCorrect: response.isCorrect,
     nextStep: suggestNextStep(agentType)
   };
 }
