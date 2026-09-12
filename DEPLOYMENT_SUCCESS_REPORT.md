@@ -1,5 +1,11 @@
 # 🎉 KlassKonnect Learning Platform - Deployment SUCCESS REPORT
 
+> **Note (2026-09-11):** Kept as a historical deployment record from 2026-08-20.
+> Gamification's correctness signal, badge wiring, and client/server architecture have since
+> been fixed, and the Leaderboard screen described in sibling reports from this era was later
+> removed in favor of an Achievements screen. See root `CLAUDE.md` and
+> `CEO_SUMMARY_2026-09-11.md` for current state.
+
 **Date:** 2026-08-20  
 **Status:** ✅ **ALL SYSTEMS GO - LEARNING PLATFORM LIVE**
 

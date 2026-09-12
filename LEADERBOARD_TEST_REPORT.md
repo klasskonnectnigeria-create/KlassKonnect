@@ -1,5 +1,12 @@
 # 🏆 Leaderboard Testing Report - Primary 4 Mathematics
 
+> **Note (2026-09-11):** The backend leaderboard APIs tested here still exist and work as
+> described, but the mobile Leaderboard screen that would have displayed this data was
+> removed from the app on this date (it never actually showed cross-student rankings) and
+> replaced with an Achievements screen. These backend endpoints are now unused, kept as
+> groundwork for a possible future ranking feature. See root `CLAUDE.md` and
+> `CEO_SUMMARY_2026-09-11.md` for current state.
+
 **Date:** 2026-08-20  
 **Test User:** Alice Johnson (Primary 4)  
 **Status:** ✅ **ALL LEADERBOARD APIS WORKING PERFECTLY**

@@ -1,5 +1,9 @@
 # KlassKonnect Learning Platform - Setup & Testing Guide
 
+> **Note (2026-09-11):** Kept as a historical setup/testing log. Gamification's correctness
+> signal, badge wiring, and client/server architecture have since been overhauled — see root
+> `CLAUDE.md` and `CEO_SUMMARY_2026-09-11.md` for current state.
+
 ## Summary of Fixes Applied
 
 ### ✅ Fix #1: Enhanced Seed Endpoint

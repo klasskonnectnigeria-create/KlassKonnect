@@ -1,5 +1,13 @@
 # KlassKonnect Deployment Guide
 
+> **Note (2026-09-11):** The mobile Leaderboard screen referenced in "Testing the
+> Leaderboard" below was removed from the app on this date — it never actually showed
+> cross-student ranking, only the current student's own stats — and replaced with an
+> Achievements screen showing Progress & Achievements as percentages. The backend
+> `/api/leaderboard/*` endpoints described here still exist and work, but nothing in the
+> mobile app calls them anymore. See root `CLAUDE.md` and `CEO_SUMMARY_2026-09-11.md` for
+> current state.
+
 Quick setup to get the leaderboard system live for testing.
 
 ## Backend Deployment (Railway)

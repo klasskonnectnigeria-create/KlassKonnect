@@ -216,22 +216,26 @@ header — is an open question, not a decided scope; see below.
 - **Emoji cleanup — `LoginScreen.js`, `HomeScreen.js`, and `GamificationDisplay.js` are now
   done** (`e9d0f0ce` for Login; the 11 straightforward Home/GamificationDisplay swaps done
   2026-09-10, all to `MaterialCommunityIcons` matching the library already used elsewhere:
-  `hand-wave` greeting, `trophy` leaderboard button, `chart-bar` stats title, `school` exam-prep
+  `hand-wave` greeting, `trophy` leaderboard button (this button now routes to Achievements — see "CEO-readiness fix pass" below), `chart-bar` stats title, `school` exam-prep
   heading, `lightbulb-on-outline` exam-prep tip, `book-open-variant` subjects heading,
   `rocket-launch-outline` CTA title in `HomeScreen.js`; `fire` streak, `trophy-outline`
   best-streak badge, `party-popper` badge-unlock notification in `GamificationDisplay.js`).
   `GamificationDashboard.js`/`GamificationNotification.js` were already on vector icons
   independently. Verified live after a real app restart (not just Fast Refresh) — every
-  replaced icon renders correctly with no leftover emoji or broken icon reference. One
-  deliberately-untouched exception remains — see the badge-name item below.
-- **Badge names in `gamificationService.js`'s `BADGES` config have emoji baked directly into
-  the name string** (e.g. `'🎓 Addition Master'`). `GamificationDisplay.js`'s `BadgesDisplay`
-  extracts these via `badge.badge_name.split(' ')[0]` rather than a real icon field — its own
-  `'🏆'` fallback (used only when a badge has no name) was left alone in the 2026-09-10 pass for
-  the same reason. Needs a backend data-model change (separate `icon` key from `name`, strip
-  emoji from stored names) plus a frontend update to use it — not a simple swap, since real
-  earned badges' data would need migrating. Deliberately deferred, not done as part of the
-  emoji-cleanup pass above.
+  replaced icon renders correctly with no leftover emoji or broken icon reference. The one
+  exception noted here previously — the badge-name-derived icon hack — is now fixed too; see
+  below.
+- **Badge names/icons are now properly separated (fixed 2026-09-11).** Both `BADGES`
+  configs (`backend/services/gamificationService.js` and the mobile local-cache copy in
+  `mobile/services/gamificationService.js`) now carry a dedicated `icon:` field (a
+  `MaterialCommunityIcons` name) alongside a clean, emoji-free `name:` string.
+  `GamificationDisplay.js`'s `BadgesDisplay` no longer extracts an icon by splitting the name
+  string — it uses a real `BADGE_ICONS` type-to-icon lookup (`getBadgeIcon(badgeType)`)
+  instead, so it's correct regardless of what the name reads. Two dynamically-generated badge
+  names (`Master Topic #N`, `Master Theme #N`) that were still storing an emoji prefix
+  inconsistent with the clean names returned elsewhere in the same file were fixed to match.
+  Previously-earned badges' stored data is unaffected either way, since the icon is now
+  resolved from `badge_type`, not parsed from `badge_name`.
 - **Open question: should the K-mark appear anywhere in the JS-rendered UI** (e.g. a small
   header mark on Home or other authenticated screens), or stay native-chrome-only as it is
   today? No decision has been made either way — don't add or rule it out unilaterally.
@@ -250,7 +254,7 @@ marketing/docs asset request at this folder first before regenerating from scrat
 
 ---
 
-## Current state (as of 2026-09-09)
+## Current state (as of 2026-09-11)
 
 ### Curriculum content, by grade
 
@@ -528,34 +532,92 @@ changed the same day (see "Official KlassKonnect brand" above) — "YOUR PERSONA
 replaced "LEARN YOUR WAY, IN YOUR CURRICULUM." everywhere, dropping the two-tone treatment
 since the new text doesn't split into two clauses; `LoginScreen.js` is updated to match.
 
+### CEO-readiness fix pass and Leaderboard-to-Achievements rebuild (2026-09-11)
+
+A full "does this hold up to real users" pass, driven by "ensure the app performs with 100%
+efficiency and intelligence, fix anything that would hurt credibility or reputation," followed
+by a scoped feature change once the fixes landed. Every touched backend file re-verified with
+`node --check`, every touched mobile file with a full JS/JSX parse.
+
+- **Conversation history now loads on reopening a topic** — messages were being saved to the
+  real conversation log but the chat screen never read it back.
+- **A message can no longer be lost if the app crashes mid-send** — save-then-update instead of
+  save-only-after-reply, including through the offline sync queue.
+- **Correctness signal, badge wiring, and the dual gamification (server vs. local) architecture
+  are fixed** — see the top of "Open items" below for the full detail; this is the single
+  biggest architectural fix of the session.
+- **Fixed a genuinely broken Exam Prep path** (`examPrep.js` was calling the Claude client with
+  the wrong arguments and returning the whole response object instead of its text) and removed
+  an instruction that told the AI to fabricate specific stats it had no way of knowing.
+- **Fixed a false "Badge Unlocked!" popup on every single chat message** — the chat screen was
+  passing its entire gamification response into a component built to display one badge; the
+  already-correct `GamificationNotification` component (handling points/level/streak/badges
+  together) was left as the single notification path, and the broken duplicate removed.
+  Relatedly, `awardBadge`'s return value is now client-shaped (`badge.name`, not `badge_name`)
+  so the badge that does get awarded actually displays.
+- **The Achievements screen (`GamificationDashboard.js`) was unreachable from anywhere in the
+  app** (confirmed via grep — zero navigation references anywhere) and, had it been reached,
+  would have crashed: it uses `<RefreshControl>` inside its `ScrollView` but never imported it.
+  Both fixed as part of the rebuild below.
+- **Emoji cleanup completed everywhere** — every remaining literal emoji across the mobile app
+  (chat screen, tab labels, section headers, error messages, agent-mode selector, welcome
+  messages, the leaderboard, themes list, gamification dashboard, badge displays, push
+  notifications — roughly 35 instances across 11 files) replaced with proper
+  `MaterialCommunityIcons`, not just deleted, so the visual signal isn't lost. Verified with a
+  full regex sweep at the end: zero emoji remain in any user-facing screen, component, or
+  service. Badge names/icons separated as part of this (see "Brand migration status" above).
+- **Cleanup**: deleted `mobile/config/api.jsAPI_URL` (a stray malformed-filename duplicate,
+  confirmed unused) and replaced the stale personal-LAN-IP value in `mobile/.env` (unused dead
+  config) with an explanatory comment.
+- **Leaderboard removed; Progress & Achievements now shown as percentages, per explicit
+  product decision.** Investigation found `LeaderboardScreen.js` never actually showed
+  cross-student ranking — it only displayed the current student's own stats under a misleading
+  name — while a real, fully-built ranking system (`backend/routes/leaderboard.js`'s
+  `/global`/`/grade/:grade`/`/weekly`/`/rank`/`/badges/:studentId` endpoints,
+  `mobile/store/leaderboardStore.js`, `mobile/components/LeaderboardEntry.js`) sat completely
+  orphaned with zero callers anywhere. Decision made: remove the mislabeled screen entirely
+  (`mobile/screens/LeaderboardScreen.js`, `mobile/app/(app)/leaderboard.js`, its `Stack.Screen`
+  entry) and wire up the already-built-but-unreachable `GamificationDashboard.js` as the single
+  Achievements destination (`HomeScreen.js`'s trophy button now routes to
+  `/(app)/achievements`). Both Progress and Achievements are now expressed as percentages: the
+  existing per-subject topic-completion percentage (carried over from the deleted screen, now
+  under a new "Progress by Subject" section) and a newly-added badge-completion percentage
+  (`badgePercent` — badges earned ÷ total badges defined, computed server-side in
+  `getStudentGamificationProfile` off the real `BADGES` catalogue, not hardcoded). The
+  orphaned real-ranking system (`leaderboardStore.js`, `LeaderboardEntry.js`, the backend
+  `leaderboard.js` routes) was deliberately left in place, not deleted — legitimate groundwork
+  for a real cross-student ranking feature, distinct from the removed sync service (which was
+  actively wrong architecture, not just unused). The subject-progress fetch is intentionally
+  its own try/catch, separate from the required profile/level-progress fetch, so a failure
+  there degrades gracefully instead of blocking the whole Achievements screen.
+
 ---
 
 ## Open items
 
-- **Gamification is disconnected from real state in two places — one is a flawed signal, the
-  other is model fabrication of specific claims to students.** (1) The backend `isCorrect`
-  heuristic (`backend/routes/agents.js`) detects praise language in AI responses, not actual
-  answer correctness — needs redesign to only fire from practice/assessment agents with an
-  explicit correctness signal, not by scanning tutor replies for encouraging phrases.
-  Relatedly, `checkBadgeQualifications`/`awardBadge`
-  (`backend/services/gamificationService.js`) are never called from the live chat flow
-  (`agents.js` only calls `updateGamificationStats`/`getLevelProgress`/
-  `getStudentGamificationProfile`) — badges can currently never be earned through real usage.
-  (2) **More severe**: the Phase 2/3 engagement prompt commits (`eca663b8`, `ef25e9dd`)
-  instruct the tutor/practice/assessment agents to state specific numbers and events directly
-  to students — streak counts ("You're on a 3-question streak!"), mastery percentages ("You've
-  learned 60% of this topic"), point totals ("Total learning points: 342"), and badge-unlock
-  announcements ("🎉 BADGE UNLOCKED: 'Curious Mind'!") — while zero real streak, mastery,
-  point, or badge data is ever passed into these agents' prompt context (verified: `tutorAgent`
-  etc. only receive `studentName`, `grade`, and topic content). The model has no grounding for
-  any of these numbers and fabricates them on demand; some invented badge tiers (Bronze/Silver/
-  Gold, Common→Rare→Epic→Legendary rarity) don't exist anywhere in the real `BADGES` config
-  either. This is model fabrication of specific claims to a student, not just a flawed
-  correctness signal — a more serious instance of the same "gamification state disconnected
-  from reality" problem, and directly against this project's own anti-fabrication principle
-  (see bug 5 above and the WAEC/UTME content cleanup). Fix all of this together: a real
-  correctness signal, real badge-award wiring, and prompt instructions that only ever narrate
-  gamification data actually passed into context — never invented numbers.
+- **Gamification's correctness signal, badge wiring, and client/server architecture are
+  now fixed (2026-09-11); one real gap remains.** The old `isCorrect` heuristic (praise-
+  language detection in AI replies) has been replaced with an explicit, machine-readable
+  correctness signal the AI is instructed to emit and the backend parses — verified against
+  correct/incorrect/no-verdict/malformed test cases before wiring it into gamification. Real
+  badge-earning is wired into the live chat flow for the one badge (Perfectionist, 15-correct
+  streak) whose criteria the app actually tracks; the model-fabrication issue (invented
+  streak/mastery/point/badge numbers stated to students, fake badge tiers) was independently
+  fixed earlier, in the 2026-09-09 session below (commit `8ddccef4`) — stripped from all three
+  agent prompts, keeping only what's groundable from real conversation context.
+  Separately, the app had two disconnected gamification systems — the server computing one set
+  of numbers, a local-SQLite copy computing its own via dead, unreachable award logic — which
+  could disagree across screens. Fixed: the server is now the single source of truth for
+  points/level/streak/badges; local storage is a write-through cache refreshed from
+  `/api/gamification/profile` on load and updated in place the moment new points/badges are
+  reported, never recomputed locally. The old push-direction sync (`gamificationSyncService.js`,
+  syncing local numbers *up* to the server) was dead weight once the pull direction was fixed
+  and has been removed.
+  **What's still genuinely open**: the other 9 of 10 defined badges (day-streaks, accuracy%,
+  timed-problem counts, mastered-topic counts) are still not wired — the app doesn't track the
+  underlying data yet (streak-of-correct-answers across sessions, per-problem timing, etc.), and
+  awarding them on a guess would repeat the fabrication problem this project explicitly avoids.
+  Wiring each one needs the actual tracking built first, badge by badge.
 - **Residual subject-bias in the tutor/practice/assessment prompt templates (lower priority,
   not blocking).** These templates correctly use `${subject}`/`${studentName}` (no
   reintroduction of the hardcoded-"mathematics" bug 1), but nearly every illustrative example

@@ -1,5 +1,12 @@
 # KlassKonnect Leaderboard System - Final Session Report
 
+> **Note (2026-09-11):** The Leaderboard screen and system this report describes was removed
+> from the app on this date — investigation found it never actually showed cross-student
+> ranking, only the current student's own stats. It was replaced with an Achievements screen
+> showing Progress & Achievements as percentages; the backend leaderboard endpoints built here
+> are kept, unused, as groundwork for a possible future ranking feature. See root `CLAUDE.md`
+> and `CEO_SUMMARY_2026-09-11.md` for current state.
+
 **Date:** August 15-16, 2026  
 **Status:** ✅ **PRODUCTION READY** (Backend)  
 **Session Duration:** ~2 hours

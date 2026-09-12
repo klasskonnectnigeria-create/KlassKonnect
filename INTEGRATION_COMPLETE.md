@@ -1,4 +1,12 @@
 # Gamification Integration Complete ✅
+
+> **Note (2026-09-11):** The mobile Leaderboard screen this document describes was removed on
+> this date and replaced with an Achievements screen (`GamificationDashboard` — which was
+> actually unreachable via any in-app navigation until this date, despite this report's
+> "FULL SYSTEM DEPLOYED" status). Gamification's correctness signal and real badge-earning
+> were also fixed around the same time, since badges could not previously be earned through
+> real usage. See root `CLAUDE.md` and `CEO_SUMMARY_2026-09-11.md` for current, accurate
+> state.
 **Date:** September 6, 2026  
 **Status:** FULL SYSTEM DEPLOYED  
 **Commits:** 6 (Phases 1-3 + Backend + Frontend)

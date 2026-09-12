@@ -1,5 +1,12 @@
 # KlassKonnect Session Summary — August 15, 2026
 
+> **Note (2026-09-11):** The Leaderboard screen and system this session built was removed
+> from the app on 2026-09-11 — it never actually showed cross-student ranking, only the
+> current student's own stats. It was replaced with an Achievements screen showing Progress &
+> Achievements as percentages; the backend leaderboard endpoints built here are kept, unused,
+> as groundwork for a possible future ranking feature. See root `CLAUDE.md` and
+> `CEO_SUMMARY_2026-09-11.md` for current state.
+
 ## 🎯 Session Overview
 
 **Goal:** Build and deploy a complete leaderboard system for KlassKonnect (AI tutor app for Nigerian students with offline storage, gamification, and push notifications).

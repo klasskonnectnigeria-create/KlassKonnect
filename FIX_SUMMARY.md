@@ -1,5 +1,9 @@
 # KlassKonnect Learning Platform - Required Fixes Summary
 
+> **Note (2026-09-11):** Kept as a historical fix log. Gamification's correctness signal,
+> badge wiring, and client/server architecture have since been overhauled — see root
+> `CLAUDE.md` and `CEO_SUMMARY_2026-09-11.md` for current state.
+
 ## 🎯 Issues Fixed
 
 ### ✅ ISSUE #1: Missing Test Data (Themes & Topics)

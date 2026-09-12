@@ -1,5 +1,13 @@
 # Gamification Backend Integration Guide
 
+> **Note (2026-09-11):** The API shapes below are still accurate, but this guide predates a
+> later fix pass: the `isCorrect` field it documents used to be driven by a flawed
+> praise-language heuristic (now a real correctness signal), and badge-awarding was not
+> actually reachable from the live chat flow at the time this was written (now wired for the
+> one badge whose criteria the app tracks). The mobile Leaderboard screen this system fed into
+> was separately removed in favor of an Achievements screen. See root `CLAUDE.md` and
+> `CEO_SUMMARY_2026-09-11.md` for current state.
+
 **Status:** Backend implementation complete ✅  
 **Date:** September 6, 2026  
 **Implementation:** gamificationService.js + gamification.js routes
