@@ -3,6 +3,7 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import { pool } from '../server.js';
 import { verifyToken } from '../middleware/auth.js';
+import { isProduction } from '../utils/env.js';
 
 const router = express.Router();
 
@@ -119,12 +120,17 @@ router.post('/forgot-password', async (req, res) => {
       [token, expires, result.rows[0].id]
     );
 
-    // Development only — replace with email delivery before production.
-    console.log('🔐 PASSWORD RESET TOKEN:', token);
+    // TODO before real launch: send this token via email instead of just
+    // logging it. Until email delivery is wired up, a developer has to read
+    // the token from the server logs to reset a real user's password - it is
+    // deliberately never returned in the API response, since doing so would
+    // let anyone reset any account's password just by knowing their email.
+    if (!isProduction()) {
+      console.log('🔐 PASSWORD RESET TOKEN (dev only, never sent to the client):', token);
+    }
 
     res.json({
-      message: 'Password reset request created.',
-      developmentToken: token
+      message: 'Password reset request created. Check your email for next steps.'
     });
   } catch (error) {
     console.error('Forgot password error:', error);
@@ -190,6 +196,12 @@ router.post('/reset-password', async (req, res) => {
 
 // Quick test login (development only - no password required)
 router.post('/test-login', async (req, res) => {
+  // Unauthenticated login-as-anyone-by-email, meant for local/dev testing only.
+  // Must never be reachable in production - it's a complete auth bypass.
+  if (isProduction()) {
+    return res.status(404).json({ error: 'Not found' });
+  }
+
   try {
     const { email } = req.body || {};
     const testEmail = email || 'test@example.com';

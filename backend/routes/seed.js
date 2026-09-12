@@ -1,11 +1,19 @@
 import express from 'express';
 import { pool } from '../server.js';
 import { curriculumData } from '../scripts/parsePdf.js';
+import { isProduction } from '../utils/env.js';
 
 const router = express.Router();
 
-// Comprehensive seed endpoint that includes themes, topics, and test data
+// Comprehensive seed endpoint that includes themes, topics, and test data.
+// Meant for local/dev setup only - must never be reachable in production,
+// where it would let anyone inject fake student accounts into the real
+// database with no authentication at all.
 router.post('/seed-test-data', async (req, res) => {
+  if (isProduction()) {
+    return res.status(404).json({ error: 'Not found' });
+  }
+
   const client = await pool.connect();
   try {
     await client.query('BEGIN');
